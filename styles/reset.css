@@ -10,12 +10,14 @@
   /* font: inherit; */
 }
 
-html {
+/* html {
   color-scheme: dark light;
-}
+} */
 
 body {
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
 }
 
 img,
