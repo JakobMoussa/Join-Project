@@ -1,0 +1,138 @@
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  padding: 16px;
+}
+
+.input-board-header {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.input-board-header:focus {
+  border: 1px solid #29abe2;
+  outline: none;
+}
+
+.input-board-header::placeholder {
+  color: #d1d1d1;
+}
+.input-board-header::-webkit-input-placeholder {
+  color: #d1d1d1;
+}
+.input-board-header:-ms-input-placeholder {
+  color: #d1d1d1;
+}
+.input-board-header::-ms-input-placeholder {
+  color: #d1d1d1;
+}
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #2a3647;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.add-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* __________________________________________________________ */
+
+.board {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  min-width: 0;
+  margin: 16px;
+  border-radius: 8px;
+}
+
+.column-header {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  color: #42526e;
+  margin-bottom: 16px;
+}
+
+.column-header img {
+  width: 24px;
+  height: 24px;
+}
+
+.task {
+  background: white;
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.tag {
+  display: inline-block;
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 4px 10px;
+  margin-bottom: 16px;
+}
+
+.user-story {
+  background-color: #0057ff;
+  color: white;
+}
+
+.tech-task {
+  background-color: #00cfa5;
+  color: white;
+}
+
+.progress-bar {
+  background: #e0e0e0;
+  border-radius: 4px;
+  height: 6px;
+  margin: 8px 0;
+}
+
+.progress {
+  background: #3b82f6;
+  height: 6px;
+  border-radius: 4px;
+}
+
+.avatars span {
+  display: inline-block;
+  background: #ccc;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.empty {
+  text-align: center;
+  color: #a8a8a8;
+  border: 2px dotted #a8a8a8;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  padding: 10px;
+}
