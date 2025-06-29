@@ -1,0 +1,161 @@
+#right-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* _______________________________________________________________ */
+
+#content-wrapper {
+  flex: 1;
+  padding-top: 120px;
+  background-color: #f6f7f8;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 92px;
+}
+
+/* ------------------------------ header title ------------------------------ */
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 60px;
+}
+
+.header-title h1 {
+  font-size: 3rem;
+}
+
+.header-title h2 {
+  font-size: 1.2rem;
+  font-weight: 100;
+  color: #555;
+  margin: 0;
+}
+
+.divider {
+  width: 3px;
+  height: 3rem;
+  background-color: #29abe2;
+  border-radius: 10px;
+}
+
+/* ------------------------------ dashboard ------------------------------ */
+
+.dashboard-summary {
+  display: flex;
+  align-items: center;
+}
+
+.metric-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.metric-icon {
+  background-color: #2a3647;
+  padding: 20px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.metric-urgent-icon {
+  background-color: #ff3d00;
+  padding: 20px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.metric-icon img,
+.metric-urgent-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.metric-urgent-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider-urgent {
+  width: 2px;
+  height: 5rem;
+  background-color: #d1d1d1;
+  border-radius: 10px;
+  margin: 0 32px;
+}
+
+.metric-count {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: block;
+}
+
+.metric-label {
+  color: #666;
+  font-size: 0.9rem;
+  display: block;
+}
+
+.metric-bottom-row {
+  flex-direction: column;
+}
+
+.greeting h2 {
+  font-size: 2.5rem;
+  font-weight: 100;
+  color: #333;
+  margin-left: 92px;
+}
+
+/* ------------------------------ grid strucutre ------------------------------ */
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 168px);
+  gap: 24px;
+}
+
+.div1 {
+  grid-column: span 3 / span 3;
+}
+
+.div2 {
+  grid-column: span 3 / span 3;
+  grid-column-start: 4;
+}
+
+.div3 {
+  grid-column: span 6 / span 6;
+  grid-row-start: 2;
+}
+
+.div4 {
+  grid-column: span 2 / span 2;
+  grid-row-start: 3;
+}
+
+.div5 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 3;
+  grid-row-start: 3;
+}
+
+.div6 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 5;
+  grid-row-start: 3;
+}
