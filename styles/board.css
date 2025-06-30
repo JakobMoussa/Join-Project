@@ -7,35 +7,58 @@
   padding: 16px;
 }
 
-.input-board-header {
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  outline: none;
+.search-field-wrapper {
+  position: relative;
+  display: inline-flex;
+  margin-right: 16px;
 }
 
-.input-board-header:focus {
+.search-field {
+  border-radius: 10px;
+  border: 1px solid #a8a8a8;
+  outline: none;
+  padding: 10px 14px;
+}
+
+.search-devider {
+  position: absolute;
+  right: 58px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  border-left: 1px solid #d1d1d1;
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.search-field:focus {
   border: 1px solid #29abe2;
   outline: none;
 }
 
-.input-board-header::placeholder {
+.search-field::placeholder {
   color: #d1d1d1;
 }
-.input-board-header::-webkit-input-placeholder {
+.search-field::-webkit-input-placeholder {
   color: #d1d1d1;
 }
-.input-board-header:-ms-input-placeholder {
+.search-field:-ms-input-placeholder {
   color: #d1d1d1;
 }
-.input-board-header::-ms-input-placeholder {
+.search-field::-ms-input-placeholder {
   color: #d1d1d1;
 }
 
 .add-btn {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 10px 16px;
   background-color: #2a3647;
   color: white;
   font-weight: 700;
@@ -75,6 +98,9 @@
 .column-header img {
   width: 24px;
   height: 24px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 .task {
@@ -89,8 +115,8 @@
   display: inline-block;
   border-radius: 8px;
   font-size: 12px;
-  padding: 4px 10px;
-  margin-bottom: 16px;
+  padding: 6px 16px;
+  margin-bottom: 20px;
 }
 
 .user-story {
@@ -103,11 +129,23 @@
   color: white;
 }
 
+.task-descr {
+  color: #a8a8a8;
+  margin: 10px 0 20px 0;
+}
+
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 .progress-bar {
-  background: #e0e0e0;
+  flex: 1;
+  background: #f4f4f4;
   border-radius: 4px;
   height: 6px;
-  margin: 8px 0;
 }
 
 .progress {
@@ -116,16 +154,28 @@
   border-radius: 4px;
 }
 
+.subtask {
+  font-size: 0.75rem;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .avatars span {
-  display: inline-block;
-  background: #ccc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #9327ff;
+  border: 1px solid #fff;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
+  width: 32px;
+  height: 32px;
   font-size: 12px;
-  margin-right: 4px;
+  color: #fff;
+  margin-right: -6px;
 }
 
 .empty {
