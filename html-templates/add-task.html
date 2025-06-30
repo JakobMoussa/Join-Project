@@ -1,0 +1,110 @@
+<div class="create-task-container" onload="initAddTaskPage()">
+    <h2 class="header-task">Add Task</h2>
+    <form class="tasks-form-container" action="" onsubmit="preventFromSubmit(event)">
+        <div class="addTask-Container">
+            <div class="task-container">
+                <label for="titleInput" class="task-name">
+                    Title<span class="star-important">*</span>
+                </label>
+                <input type="text" class="input-task" id="titleInput" placeholder="Enter a title">
+                <span id="titleError" class="error-message" hidden>This field is required</span>
+            </div>
+            <div class="task-container">
+                <label for="description-input" class="task-name">Description</label>
+                <textarea name="" id="" class="textarea-description"></textarea>
+            </div>
+            <div class="task-container">
+                <label for="date" class="task-name">
+                    Due date<span class="star-important">*</span>
+                </label>
+                <input type="date" class="input-task" id="date">
+                <span id="titleError" class="error-message" hidden>This field is required</span>
+            </div>
+        </div>
+        <div class="divider-vertical"></div>
+        <div class="addTask-Container">
+            <div class="task-container">
+                <span class="task-name">Priority</span>
+                <div class="priority-btn-container">
+                    <button class="btn-priority" onclick="activePriority(0)" id="urgent">
+                        Urgent
+                        <div class="urgent-priority-icon" id="urgent-btn-icon"></div>
+                    </button>
+                    <button class="btn-priority active-medium-btn" onclick="activePriority(1)" id="medium">
+                        Medium
+                        <div class="medium-priority-icon active-medium-icon" id="medium-btn-icon"></div>
+                    </button>
+                    <button class="btn-priority" onclick="activePriority(2)" id="low">
+                        Low
+                        <div class="low-priority-icon" id="low-btn-icon"></div>
+                    </button>
+                </div>
+            </div>
+            <div class="task-container">
+                <span class="task-name">Assigned to:</span>
+                <div class="dropdown-container">
+                    <input type="text" id="assignedInputSearch" placeholder="Select contacts to assign"
+                        class="input-assaign">
+                    <button class="btn-dropdown" id="assaign-btn" onclick="toggleAssignedDropdown()">
+                        <img src="../assets/icons/arrow_drop_down.svg" alt="">
+                    </button>
+                </div>
+                <div class="dropdown">
+                    <div class="assigned-dropdown d-none" id="assigned-dropdown">
+                    </div>
+                </div>
+                <div class="assigned-icons-container" id="icons-container">                    
+                </div>
+            </div>
+            <div>
+                <p class="task-name">
+                    Category<span class="star-important">*</span>
+                </p>
+                <div class="task-container" id="category-container">
+                    <div class="dropdown-container">
+                        <span id="select-category">Select Task category</span>
+                        <button class="btn-dropdown" id="category-btn" onclick="toggleCategoryDropdown()">
+                            <img src="../assets/icons/arrow_drop_down.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="dropdown">
+                        <div class="category-dropdown d-none" id="category-dropdown">
+                            <div class="single-user-container" onclick="selectCategory(event)">
+                                <span class="user-name">Technical Task</span>
+                            </div>
+                            <div class="single-user-container" onclick="selectCategory(event)">
+                                <span class="user-name">User Story</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="task-container">
+                <span class="task-name">Subtask</span>
+                <div class="dropdown-container">
+                    <input type="text" id="subtask-input" placeholder="Add new subtask" maxlength="32">
+                    <button class="btn-dropdown" id="subtask-btn" onclick="addSubtask()">
+                        <img src="../assets/icons/add.svg" alt="">
+                    </button>
+                </div>
+                <div class="sub-container">
+                    <ul class="sub-list" id="sub-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="task-controls">
+        <p><span class="star-important">*</span>This field is required</p>
+        <div class="task-control-btns">
+            <button class="btn-clear">
+                Clear
+                <div class="clear-icon"></div>
+            </button>
+            <button class="btn-create">
+                Create Task
+                <img src="../assets/icons/check.svg" alt="">
+            </button>
+        </div>
+    </div>
+</div>

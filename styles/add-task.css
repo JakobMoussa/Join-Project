@@ -1,3 +1,16 @@
+:root {
+    --orange: #FF7A00;
+    --dark-violet: #9327FF;
+    --violet-blue: #6E52FF;
+    --purple: #FC71FF;
+    --honey: #FFBB2B;
+    --turquoise: #1FD7C1;
+}
+
+.rotate-180deg {
+    transform: rotate(180deg);
+}
+
 main {
     display: flex;
     flex-direction: row;
@@ -40,8 +53,9 @@ main {
 .task-name {
     font-weight: 400;
     color: #2A3647;
-    margin-bottom: 8px;
+    margin-bottom: 8px !important; 
     font-size: 18px;
+    margin-bottom: 8px;
 }
 
 .input-task {
@@ -80,6 +94,7 @@ main {
     height: 40px;
     width: 100%;
     padding: 0 16px 0 16px;
+    display: flex;
     border: 1px solid #D1D1D1;
     border-radius: 8px;
     background-color: white;
@@ -126,10 +141,69 @@ main {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    transition: box-shadow 0.2s ease;
 }
 
 .btn-priority:hover {
     box-shadow: 0px 6px 4px rgb(0, 0, 0, 0.2);
+}
+
+.urgent-priority-icon {
+    height: 20px;
+    width: 20px;
+    background-image: url(../assets/icons/prio_urgent_icon.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.medium-priority-icon {
+    height: 20px;
+    width: 20px;
+    background-image: url(../assets/icons/medium_orange_icon.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.low-priority-icon {
+    height: 20px;
+    width: 20px;
+    background-image: url(../assets/icons/low_green_icon.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.active-urgent-btn {
+    background-color: #FF3D00;
+    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
+    color: white;
+}
+
+.active-medium-btn {
+    background-color: #FFA800;
+    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
+    color: white;
+}
+
+.active-low-btn {
+    background-color: #7AE229;
+    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
+    color: white;
+}
+
+.active-urgent-icon {
+    background-image: url(../assets/icons/prio_arrows_white_icon.svg);
+}
+
+.active-medium-icon {
+    background-image: url(../assets/icons/medium_white_icon.svg);
+}
+
+.active-low-icon {
+    background-image: url(../assets/icons/prio_arrows_white_icon.svg);
+    transform: rotate(180deg);
 }
 
 .icon-priority {
@@ -191,13 +265,13 @@ main {
 }
 
 .btn-clear:hover .clear-icon {
-    background-image: url(../assets/icon/cancel_light_blue.svg);
+    background-image: url(../assets/icons/cancel_light_blue.svg);
 }
 
 .clear-icon {
     height: 16px;
     width: 16px;
-    background-image: url(../assets/icon/cancel.svg);
+    background-image: url(../assets/icons/cancel.svg);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -232,11 +306,26 @@ main {
 }
 
 .assigned-dropdown {
+    z-index: 2;
     position: absolute;
     max-height: 200px;
     width: 364px;
     background-color: white;
     overflow-y: scroll;
+}
+
+.assigned-icons-container {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.category-dropdown {
+    z-index: 1;
+    position: absolute;
+    height: auto;
+    width: 364px;
+    background-color: white;
 }
 
 .single-user-container {
@@ -258,7 +347,6 @@ main {
     border-radius: 50%;
     font-size: 10px;
     color: white;
-    background-color: #4589FF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -273,8 +361,146 @@ main {
     height: 20px;
     background-color: transparent;
     border: none;
-    background-image: url(../assets/icon/check_icon_empty.svg);
+    background-image: url(../assets/icons/check_icon_empty.svg);
     background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
+}
+
+.bg-check {
+    background-image: url(../assets/icons/check_icon.svg);
+}
+
+.sub-container {
+    height: 64px;
+    overflow-y: auto;
+}
+
+.sub-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style-position: inside;
+    border-radius: 8px;
+    padding: 8px 16px 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sub-item:hover {
+    background-color: #D1D1D1;
+    border: none;
+}
+
+.sub-item span {
+    margin-right: 8px;
+}
+
+.sub-item input {
+    border-color: transparent;
+    color: #2A3647;
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.sub-item input:disabled {
+    background-color: transparent;
+}
+
+.sub-btn-container {
+    display: flex;
+    gap: 4px;
+}
+
+.sub-btn-edit {
+    height: 20px;
+    width: 20px;
+    background-image: url(../assets/icons/edit.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.sub-btn-edit:hover {
+    transform: scale(1.2);
+}
+
+.sub-btn-delete {
+    height: 20px;
+    width: 20px;
+    background-image: url(../assets/icons/delete.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.sub-btn-delete:hover {
+    transform: scale(1.2);
+}
+
+.sub-item-editing {
+    display: flex;
+    flex-direction: row;
+    padding: 8px 16px 8px 16px;
+    background-color: white;
+    font-size: 14px;
+    border-bottom: 2px solid #29abe2;
+}
+
+.sub-item-editing input {
+    flex-grow: 1;
+    border: none;
+    outline: transparent;
+}
+
+.sub-item-editing input:focus {
+    border: none;
+}
+
+.sub-btn-conf {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-image: url(../assets/icons/check_darkblue_icon.svg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.sub-btn-conf:hover {
+    transform: scale(1.2);
+    background-color: #D1D1D1;
+}
+
+.sub-btn-editing-delete {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-image: url(../assets/icons/delete.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.sub-btn-editing-delete:hover {
+    transform: scale(1.2);
+    background-color: #D1D1D1;
+}
+
+.boxshadow {
+    filter: drop-shadow(0 0 4px rgb(0, 0, 0, 0.1));
 }
