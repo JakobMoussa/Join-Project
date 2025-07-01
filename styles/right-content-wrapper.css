@@ -1,0 +1,21 @@
+body {
+  display: flex;
+}
+
+#right-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#content-wrapper {
+  flex: 1;
+  padding-top: 120px;
+  background-color: #f6f7f8;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 92px;
+}
