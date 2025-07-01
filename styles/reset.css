@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf");
+  font-style: normal;
+}
+
 *,
 *::before,
 *::after {
@@ -5,20 +11,13 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
-  /* font: inherit; */
+  margin: 0;
+  padding: 0;
 }
 
-/* html {
-  color-scheme: dark light;
-} */
-
 body {
-  font-family: Arial, sans-serif;
-  display: flex;
   height: 100vh;
 }
 

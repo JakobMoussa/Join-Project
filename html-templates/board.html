@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/siderbar.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/right-content-wrapper.css">
+    <link rel="stylesheet" href="../styles/board.css">
+
+    <script src="./script.js"></script>
+</head>
+
+<body>
+    <section id="sidebar"></section>
+
+    <main id="right-content-wrapper">
+        <section id="navbar"></section>
+        <section id="content-wrapper">
+
+            <header class="board-header">
+                <h1>Board</h1>
+                <div>
+                    <div class="search-field-wrapper">
+                        <input type="text" placeholder="Find Task" class="search-field">
+                        <span class="search-devider"></span>
+                        <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
+                    </div>
+                    <button class="add-btn">
+                        Add task
+                        <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
+                    </button>
+                </div>
+            </header>
+
+            <section>
+                <div class="board">
+                    <div class="column">
+                        <div class="column-header">
+                            <h3>To do</h3>
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button">
+                        </div>
+                        <div class="empty">No tasks To do</div>
+                    </div>
+
+                    <div class="column">
+                        <div class="column-header">
+                            <h3>In progress</h3>
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button">
+                        </div>
+                        <div class="task">
+                            <span class="tag user-story">User Story</span>
+                            <h4>Kochwelt Page & Recipe Recommender</h4>
+                            <p class="task-descr">Build start page with recipe recommendation...</p>
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 50%;"></div>
+                                </div>
+                                <span class="subtask">1/2 Subtasks</span>
+                            </div>
+                            <div class="task-footer">
+                                <div class="avatars">
+                                    <span>AM</span><span>EM</span><span>MB</span>
+                                </div>
+                                <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="column-header">
+                            <h3>Await feedback</h3>
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button">
+                        </div>
+                        <div class="task">
+                            <span class="tag tech-task">Technical Task</span>
+                            <h4>HTML Base Template Creation</h4>
+                            <p class="task-descr">Create reusable HTML base templates...</p>
+                            <div class="task-footer">
+                                <div class="avatars">
+                                    <span>DE</span><span>BZ</span><span>AS</span>
+                                </div>
+                                <img src="../assets/icons/prio-low.svg" alt="Prio low">
+                            </div>
+                        </div>
+                        <div class="task">
+                            <span class="tag user-story">User Story</span>
+                            <h4>Daily Kochwelt Recipe</h4>
+                            <p class="task-descr">Implement daily recipe and portion calculator...</p>
+                            <div class="task-footer">
+                                <div class="avatars">
+                                    <span>EF</span><span>AS</span><span>TW</span>
+                                </div>
+                                <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="column-header">
+                            <h3>Done</h3>
+                        </div>
+
+                        <div class="task">
+                            <span class="tag tech-task">Technical Task</span>
+                            <h4>CSS Architecture Planning</h4>
+                            <p class="task-descr">Define CSS naming conventions and structure...</p>
+
+
+                            <div class="progress-wrapper">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 100%;"></div>
+                                </div>
+                                <span class="subtask">2/2 Subtasks</span>
+                            </div>
+
+
+
+
+
+
+                            <div class="task-footer">
+                                <div class="avatars">
+                                    <span>SM</span><span>BZ</span>
+                                </div>
+                                <img src="../assets/icons/prio-high.svg" alt="Prio high">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>
