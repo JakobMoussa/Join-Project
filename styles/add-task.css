@@ -11,11 +11,6 @@
     transform: rotate(180deg);
 }
 
-main {
-    display: flex;
-    flex-direction: row;
-}
-
 .placeholder-sidebar {
     width: 232px;
     height: 100vh;
@@ -53,7 +48,7 @@ main {
 .task-name {
     font-weight: 400;
     color: #2A3647;
-    margin-bottom: 8px !important; 
+    margin-bottom: 8px !important;
     font-size: 18px;
     margin-bottom: 8px;
 }
@@ -307,6 +302,9 @@ main {
 
 .assigned-dropdown {
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
     position: absolute;
     max-height: 200px;
     width: 364px;
@@ -315,6 +313,7 @@ main {
 }
 
 .assigned-icons-container {
+    cursor: pointer;
     margin-top: 8px;
     display: flex;
     gap: 8px;
@@ -341,6 +340,27 @@ main {
     background-color: #F4F4F4;
 }
 
+.single-user-container_select {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #2A3647;
+    color: white;
+}
+
+.single-user-container_select:hover {
+    background-color: #091931;
+}
+
+.single-user-container_select .btn-check {
+    background-image: url(../assets/icons/check_icon_white.svg);
+    height: 16px;
+    width: 16px;
+}
+
 .user-icon {
     height: 32px;
     width: 32px;
@@ -357,8 +377,8 @@ main {
 }
 
 .btn-check {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     background-color: transparent;
     border: none;
     background-image: url(../assets/icons/check_icon_empty.svg);

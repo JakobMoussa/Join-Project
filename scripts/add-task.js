@@ -137,17 +137,22 @@ function selectCategory(e) {
 
 function toggleAssignedDropdown() {
   const assignedDropdown = document.getElementById('assigned-dropdown');
-  loadUsers(assignedDropdown);
   const btn = document.getElementById('assaign-btn');
+  loadUsers();
   assignedDropdown.classList.toggle('d-none');
   btn.classList.toggle('rotate-180deg');
 }
 
-function loadUsers(target) {
-  target.innerHTML = "";
+function loadUsers() {
+  const assignedDropdown = document.getElementById('assigned-dropdown');
+  assignedDropdown.innerHTML = "";
   users.forEach((user) => {
     let initials = initialsFromName(user.name);
-    target.innerHTML += singleUserContainer(initials, user.name, user.color);
+    if (user.assigned) {
+      assignedDropdown.innerHTML += singleUserContainer("single-user-container_select", initials, user.name, user.color);
+    } else {
+      assignedDropdown.innerHTML += singleUserContainer("single-user-container", initials, user.name, user.color);
+    }
   });
 }
 
@@ -158,15 +163,17 @@ function initialsFromName(user) {
   return initials
 }
 
-function assignedUser(name, color) {
+function assignedUser(name) {
   let index = searchUserIndex(name);
   if (users[index].assigned === false) {
     users[index].assigned = true;
-  } else return
-  
-  const container = document.getElementById('icons-container');
-  let initials = initialsFromName(name);
-  container.innerHTML += userIcon(color, initials);
+    loadUsers();
+    loadAssignedUserIcons();
+  } else {
+    users[index].assigned = false;
+    loadUsers();
+    loadAssignedUserIcons();
+  }
 }
 
 function searchUserIndex(name) {
@@ -175,4 +182,15 @@ function searchUserIndex(name) {
       return index;
     }
   }
-};
+}
+
+function loadAssignedUserIcons() {
+  const container = document.getElementById('icons-container');
+  container.innerHTML = "";
+  users.forEach((user) => {
+    if (user.assigned) {
+      let initials = initialsFromName(user.name);
+      container.innerHTML += userIcon(user.color, initials, user.name);
+    }
+  })
+}
