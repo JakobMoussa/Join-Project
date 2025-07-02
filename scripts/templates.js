@@ -25,9 +25,9 @@ function subListItemEdit(task, id) {
     `
 }
 
-function singleUserContainer(initials, name = "XX", color = "red") {
+function singleUserContainer(style, initials, name = "XX", color = "red") {
     return `
-        <div class="single-user-container" onclick="assignedUser('${name}', '${color}')">
+        <div class="${style}" onclick="assignedUser('${name}')">
             <div class="user-icon" style="background-color: ${color};">${initials}</div>
             <span class="user-name">${name}</span>
             <button class="btn-check"></button>
@@ -35,8 +35,8 @@ function singleUserContainer(initials, name = "XX", color = "red") {
     `
 }
 
-function userIcon(color = "red", initials = "XX") {
+function userIcon(color = "red", initials = "xx", name = "xx") {
     return `
-        <div class="user-icon" style="background-color: ${color}">${initials}</div>
+        <div class="user-icon" onclick="assignedUser('${name}')" style="background-color: ${color}">${initials}</div>
     `
 }
