@@ -7,6 +7,11 @@
     --turquoise: #1FD7C1;
 }
 
+button div {
+    user-select: none;
+    pointer-events: none;
+}
+
 .rotate-180deg {
     transform: rotate(180deg);
 }
@@ -18,11 +23,12 @@
 }
 
 .create-task-container {
-    margin: 64px;
+    margin: 64px 0 32px 64px;
 }
 
 .header-task {
-    margin-bottom: 48px;
+    margin-bottom: 32px;
+    font-size: 40px;
 }
 
 .tasks-form-container {
@@ -392,7 +398,7 @@
 }
 
 .sub-container {
-    height: 64px;
+    height: 96px;
     overflow-y: auto;
 }
 
@@ -460,6 +466,7 @@
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.2s ease;
+    user-select: none;
 }
 
 .sub-btn-delete:hover {
