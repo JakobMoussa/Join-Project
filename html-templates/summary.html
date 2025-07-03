@@ -1,73 +1,146 @@
-<div class="main-outer-wrapper">
-    <div class="main-wrapper">
+<!DOCTYPE html>
+<html lang="en">
 
-        <div class="header-title">
-            <h1>Join 360</h1>
-            <span class="divider"></span>
-            <h2>Key Metrics at a Glance</h2>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
 
-        <section class="dashboard-summary">
-            <div class="parent">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/siderbar.css">
+    <link rel="stylesheet" href="../styles/summary.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/right-content-wrapper.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+</head>
 
-                <div class="div1 metric-item">
-                    <div class="metric-icon">
-                        <img src="../assets/icons/pencil.svg" alt="pencil">
+<body>
+    <div class="sidebar-wrapper">
+        <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+        <nav class="nav-wrapper">
+            <ul>
+
+                <li class="nav-link selected">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/summary.svg" alt="summary">
                     </div>
-                    <div>
-                        <span class="metric-count">1</span>
-                        <span class="metric-label">To-do</span>
+                    <a href="summary.html">Summary</a>
+                </li>
+
+                <li class="nav-link">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/add-task.svg" alt="add-task">
                     </div>
+                    <a href="add-task.html">Add Task</a>
+                </li>
+
+                <li class="nav-link" id="add-task-btn">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/board.svg" alt="board">
+                    </div>
+                    <a href="board.html">Board</a>
+                </li>
+                <li class="nav-link">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/contacts.svg" alt="contacts">
+                    </div>
+                    <a href="contacts.html">Contacts</a>
+                </li>
+            </ul>
+            <ul class="bottom-links">
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="legal-notice.html">Legal Notice</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="right-content-wrapper">
+        <section id="navbar">
+            <nav class="navbar">
+                <h2>
+                    Kanban Project Management Tool
+                </h2>
+                <div class="nav-imgs">
+                    <img src="../assets/icons/help.svg" alt="help-symbol">
+                    <img class="profile-picture" src="../assets/icons/G.svg" alt="profile-picture">
+                </div>
+            </nav>
+        </section>
+
+        <section id="content-wrapper">
+            <div class="main-wrapper">
+
+                <div class="header-title">
+                    <h1>Join 360</h1>
+                    <span class="divider"></span>
+                    <h2>Key Metrics at a Glance</h2>
                 </div>
 
-                <div class="div2 metric-item">
-                    <div class="metric-icon">
-                        <img src="../assets/icons/checkmark.svg" alt="checkmark">
-                    </div>
-                    <div>
-                        <span class="metric-count">1</span>
-                        <span class="metric-label">Done</span>
-                    </div>
-                </div>
+                <section class="dashboard-summary">
+                    <div class="parent">
 
-                <div class="div3 metric-item">
-                    <div class="metric-urgent-wrapper">
-                        <div class="metric-urgent-icon">
-                            <img src="../assets/icons/urgent.svg" alt="urgent">
+                        <div class="div1 metric-item">
+                            <div class="metric-icon">
+                                <img src="../assets/icons/pencil.svg" alt="pencil">
+                            </div>
+                            <div>
+                                <span class="metric-count">1</span>
+                                <span class="metric-label">To-do</span>
+                            </div>
                         </div>
-                        <div>
-                            <span class="metric-count">1</span>
-                            <span class="metric-label">Urgent</span>
+
+                        <div class="div2 metric-item">
+                            <div class="metric-icon">
+                                <img src="../assets/icons/checkmark.svg" alt="checkmark">
+                            </div>
+                            <div>
+                                <span class="metric-count">1</span>
+                                <span class="metric-label">Done</span>
+                            </div>
+                        </div>
+
+                        <div class="div3 metric-item">
+                            <div class="metric-urgent-wrapper">
+                                <div class="metric-urgent-icon">
+                                    <img src="../assets/icons/urgent.svg" alt="urgent">
+                                </div>
+                                <div>
+                                    <span class="metric-count">1</span>
+                                    <span class="metric-label">Urgent</span>
+                                </div>
+                            </div>
+                            <span class="divider-urgent"></span>
+                            <div class=" deadline">
+                                <span class="metric-date">October 16, 2022</span>
+                                <span class="metric-label">Upcoming Deadline</span>
+                            </div>
+
+                        </div>
+
+                        <div class="div4 metric-item metric-bottom-row">
+                            <span class="metric-count">5</span>
+                            <span class="metric-label">Tasks in Board</span>
+                        </div>
+
+                        <div class="div5 metric-item metric-bottom-row">
+                            <span class="metric-count">2</span>
+                            <span class="metric-label">Tasks in Progress</span>
+                        </div>
+
+                        <div class="div6 metric-item metric-bottom-row">
+                            <span class="metric-count">2</span>
+                            <span class="metric-label">Awaiting Feedback</span>
                         </div>
                     </div>
-                    <span class="divider-urgent"></span>
-                    <div class=" deadline">
-                        <span class="metric-date">October 16, 2022</span>
-                        <span class="metric-label">Upcoming Deadline</span>
+
+                    <div class="greeting">
+                        <h2>Good morning</h2>
                     </div>
 
-                </div>
-
-                <div class="div4 metric-item metric-bottom-row">
-                    <span class="metric-count">5</span>
-                    <span class="metric-label">Tasks in Board</span>
-                </div>
-
-                <div class="div5 metric-item metric-bottom-row">
-                    <span class="metric-count">2</span>
-                    <span class="metric-label">Tasks in Progress</span>
-                </div>
-
-                <div class="div6 metric-item metric-bottom-row">
-                    <span class="metric-count">2</span>
-                    <span class="metric-label">Awaiting Feedback</span>
-                </div>
-            </div>
-
-            <div class="greeting">
-                <h2>Good morning</h2>
+                </section>
             </div>
 
         </section>
-    </div>
-</div>
+    </main>
+
+</html>

@@ -1,533 +1,533 @@
 :root {
-    --orange: #FF7A00;
-    --dark-violet: #9327FF;
-    --violet-blue: #6E52FF;
-    --purple: #FC71FF;
-    --honey: #FFBB2B;
-    --turquoise: #1FD7C1;
+  --orange: #ff7a00;
+  --dark-violet: #9327ff;
+  --violet-blue: #6e52ff;
+  --purple: #fc71ff;
+  --honey: #ffbb2b;
+  --turquoise: #1fd7c1;
 }
 
 button div {
-    user-select: none;
-    pointer-events: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .rotate-180deg {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .placeholder-sidebar {
-    width: 232px;
-    height: 100vh;
-    background-color: #2A3647;
+  width: 232px;
+  height: 100vh;
+  background-color: #2a3647;
 }
 
 .create-task-container {
-    margin: 64px 0 32px 64px;
+  margin: 64px 0 32px 64px;
 }
 
 .header-task {
-    margin-bottom: 32px;
-    font-size: 40px;
+  margin-bottom: 32px;
+  font-size: 40px;
 }
 
 .tasks-form-container {
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    gap: 32px;
-    margin-bottom: 32px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  margin-bottom: 32px;
 }
 
 .addTask-Container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .task-container {
-    display: flex;
-    flex-direction: column;
-    width: 364px;
+  display: flex;
+  flex-direction: column;
+  width: 364px;
 }
 
 .task-name {
-    font-weight: 400;
-    color: #2A3647;
-    margin-bottom: 8px !important;
-    font-size: 18px;
-    margin-bottom: 8px;
+  font-weight: 400;
+  color: #2a3647;
+  margin-bottom: 8px !important;
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
 .input-task {
-    padding: 0 16px 0 16px;
-    height: 40px;
-    width: 100%;
-    border: 1px solid #D1D1D1;
-    border-radius: 8px;
-    background-color: white;
-    cursor: pointer;
+  padding: 0 16px 0 16px;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
 }
 
 .input-task:focus {
-    outline: 1px solid #FF8190;
+  outline: 1px solid #ff8190;
 }
 
 .input-task::placeholder {
-    color: #D1D1D1;
+  color: #d1d1d1;
 }
 
 .textarea-description {
-    padding: 16px;
-    height: 120px;
-    width: 100%;
-    border: 1px solid #D1D1D1;
-    border-radius: 8px;
-    background-color: white;
-    cursor: pointer;
+  padding: 16px;
+  height: 120px;
+  width: 100%;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
 }
 
 .star-important {
-    color: #FF8190;
+  color: #ff8190;
 }
 
 .dropdown-container {
-    height: 40px;
-    width: 100%;
-    padding: 0 16px 0 16px;
-    display: flex;
-    border: 1px solid #D1D1D1;
-    border-radius: 8px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+  height: 40px;
+  width: 100%;
+  padding: 0 16px 0 16px;
+  display: flex;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .dropdown-container:hover {
-    border: 1px solid #9c9c9c;
+  border: 1px solid #9c9c9c;
 }
 
 .dropdown-container input {
-    flex-grow: 1;
-    border: none;
+  flex-grow: 1;
+  border: none;
 }
 
 .dropdown-container input:focus {
-    outline: none;
+  outline: none;
 }
 
 .dropdown-container input::placeholder {
-    color: #D1D1D1;
+  color: #d1d1d1;
 }
 
 .priority-btn-container {
-    display: flex;
-    gap: 14px;
+  display: flex;
+  gap: 14px;
 }
 
 .btn-priority {
-    height: 48px;
-    width: auto;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    gap: 6px;
-    font-size: 18px;
-    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: box-shadow 0.2s ease;
+  height: 48px;
+  width: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  gap: 6px;
+  font-size: 18px;
+  box-shadow: 0px 0px 6px rgb(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
 }
 
 .btn-priority:hover {
-    box-shadow: 0px 6px 4px rgb(0, 0, 0, 0.2);
+  box-shadow: 0px 6px 4px rgb(0, 0, 0, 0.2);
 }
 
 .urgent-priority-icon {
-    height: 20px;
-    width: 20px;
-    background-image: url(../assets/icons/prio_urgent_icon.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  height: 20px;
+  width: 20px;
+  background-image: url(../assets/icons/prio_urgent_icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .medium-priority-icon {
-    height: 20px;
-    width: 20px;
-    background-image: url(../assets/icons/medium_orange_icon.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  height: 20px;
+  width: 20px;
+  background-image: url(../assets/icons/medium_orange_icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .low-priority-icon {
-    height: 20px;
-    width: 20px;
-    background-image: url(../assets/icons/low_green_icon.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  height: 20px;
+  width: 20px;
+  background-image: url(../assets/icons/low_green_icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .active-urgent-btn {
-    background-color: #FF3D00;
-    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
-    color: white;
+  background-color: #ff3d00;
+  box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
+  color: white;
 }
 
 .active-medium-btn {
-    background-color: #FFA800;
-    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
-    color: white;
+  background-color: #ffa800;
+  box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
+  color: white;
 }
 
 .active-low-btn {
-    background-color: #7AE229;
-    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
-    color: white;
+  background-color: #7ae229;
+  box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
+  color: white;
 }
 
 .active-urgent-icon {
-    background-image: url(../assets/icons/prio_arrows_white_icon.svg);
+  background-image: url(../assets/icons/prio_arrows_white_icon.svg);
 }
 
 .active-medium-icon {
-    background-image: url(../assets/icons/medium_white_icon.svg);
+  background-image: url(../assets/icons/medium_white_icon.svg);
 }
 
 .active-low-icon {
-    background-image: url(../assets/icons/prio_arrows_white_icon.svg);
-    transform: rotate(180deg);
+  background-image: url(../assets/icons/prio_arrows_white_icon.svg);
+  transform: rotate(180deg);
 }
 
 .icon-priority {
-    height: 16px;
-    width: 16px;
+  height: 16px;
+  width: 16px;
 }
 
 .btn-dropdown {
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    box-sizing: content-box;
-    height: 16px;
-    width: 16px;
-    border-radius: 16px;
-    cursor: pointer;
-    background-color: rgb(0, 0, 0, 0);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-sizing: content-box;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  background-color: rgb(0, 0, 0, 0);
 }
 
 .btn-dropdown:hover {
-    background-color: rgb(0, 0, 0, 0.1);
+  background-color: rgb(0, 0, 0, 0.1);
 }
 
 .divider-vertical {
-    height: auto;
-    width: 2px;
-    border-radius: 1px;
-    background-color: #D1D1D1;
+  height: auto;
+  width: 2px;
+  border-radius: 1px;
+  background-color: #d1d1d1;
 }
 
 .task-controls {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .task-control-btns {
-    display: flex;
-    gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 
 .btn-clear {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4px;
-    box-sizing: content-box;
-    padding: 8px;
-    border: 1px solid #2A3647;
-    border-radius: 8px;
-    cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  box-sizing: content-box;
+  padding: 8px;
+  border: 1px solid #2a3647;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .btn-clear:hover {
-    color: #4589FF;
-    border: 1px solid #4589FF;
+  color: #4589ff;
+  border: 1px solid #4589ff;
 }
 
 .btn-clear:hover .clear-icon {
-    background-image: url(../assets/icons/cancel_light_blue.svg);
+  background-image: url(../assets/icons/cancel_light_blue.svg);
 }
 
 .clear-icon {
-    height: 16px;
-    width: 16px;
-    background-image: url(../assets/icons/cancel.svg);
-    background-position: center;
-    background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+  background-image: url(../assets/icons/cancel.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .btn-create {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    box-sizing: content-box;
-    padding: 8px;
-    color: white;
-    background-color: #2A3647;
-    border: none;
-    border-radius: 8px;
-    font-weight: 800px;
-    cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  box-sizing: content-box;
+  padding: 8px;
+  color: white;
+  background-color: #2a3647;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800px;
+  cursor: ;
 }
 
 .btn-create:hover {
-    background-color: #4589FF;
+  background-color: #4589ff;
 }
 
 .btn-create img {
-    height: 16px;
-    width: 16px;
+  height: 16px;
+  width: 16px;
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .assigned-dropdown {
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    position: absolute;
-    max-height: 200px;
-    width: 364px;
-    background-color: white;
-    overflow-y: scroll;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: absolute;
+  max-height: 200px;
+  width: 364px;
+  background-color: white;
+  overflow-y: scroll;
 }
 
 .assigned-icons-container {
-    cursor: pointer;
-    margin-top: 8px;
-    display: flex;
-    gap: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
 }
 
 .category-dropdown {
-    z-index: 1;
-    position: absolute;
-    height: auto;
-    width: 364px;
-    background-color: white;
+  z-index: 1;
+  position: absolute;
+  height: auto;
+  width: 364px;
+  background-color: white;
 }
 
 .single-user-container {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 8px 16px 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .single-user-container:hover {
-    background-color: #F4F4F4;
+  background-color: #f4f4f4;
 }
 
 .single-user-container_select {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 8px 16px 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #2A3647;
-    color: white;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #2a3647;
+  color: white;
 }
 
 .single-user-container_select:hover {
-    background-color: #091931;
+  background-color: #091931;
 }
 
 .single-user-container_select .btn-check {
-    background-image: url(../assets/icons/check_icon_white.svg);
-    height: 16px;
-    width: 16px;
+  background-image: url(../assets/icons/check_icon_white.svg);
+  height: 16px;
+  width: 16px;
 }
 
 .user-icon {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    font-size: 10px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  font-size: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .user-name {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .btn-check {
-    width: 18px;
-    height: 18px;
-    background-color: transparent;
-    border: none;
-    background-image: url(../assets/icons/check_icon_empty.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    cursor: pointer;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border: none;
+  background-image: url(../assets/icons/check_icon_empty.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .bg-check {
-    background-image: url(../assets/icons/check_icon.svg);
+  background-image: url(../assets/icons/check_icon.svg);
 }
 
 .sub-container {
-    height: 96px;
-    overflow-y: auto;
+  height: 96px;
+  overflow-y: auto;
 }
 
 .sub-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    list-style-position: inside;
-    border-radius: 8px;
-    padding: 8px 16px 8px 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style-position: inside;
+  border-radius: 8px;
+  padding: 8px 16px 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .sub-item:hover {
-    background-color: #D1D1D1;
-    border: none;
+  background-color: #d1d1d1;
+  border: none;
 }
 
 .sub-item span {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 .sub-item input {
-    border-color: transparent;
-    color: #2A3647;
-    flex-grow: 1;
-    cursor: pointer;
+  border-color: transparent;
+  color: #2a3647;
+  flex-grow: 1;
+  cursor: pointer;
 }
 
 .sub-item input:disabled {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .sub-btn-container {
-    display: flex;
-    gap: 4px;
+  display: flex;
+  gap: 4px;
 }
 
 .sub-btn-edit {
-    height: 20px;
-    width: 20px;
-    background-image: url(../assets/icons/edit.svg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  height: 20px;
+  width: 20px;
+  background-image: url(../assets/icons/edit.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .sub-btn-edit:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .sub-btn-delete {
-    height: 20px;
-    width: 20px;
-    background-image: url(../assets/icons/delete.svg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    user-select: none;
+  height: 20px;
+  width: 20px;
+  background-image: url(../assets/icons/delete.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  user-select: none;
 }
 
 .sub-btn-delete:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .sub-item-editing {
-    display: flex;
-    flex-direction: row;
-    padding: 8px 16px 8px 16px;
-    background-color: white;
-    font-size: 14px;
-    border-bottom: 2px solid #29abe2;
+  display: flex;
+  flex-direction: row;
+  padding: 8px 16px 8px 16px;
+  background-color: white;
+  font-size: 14px;
+  border-bottom: 2px solid #29abe2;
 }
 
 .sub-item-editing input {
-    flex-grow: 1;
-    border: none;
-    outline: transparent;
+  flex-grow: 1;
+  border: none;
+  outline: transparent;
 }
 
 .sub-item-editing input:focus {
-    border: none;
+  border: none;
 }
 
 .sub-btn-conf {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-image: url(../assets/icons/check_darkblue_icon.svg);
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-image: url(../assets/icons/check_darkblue_icon.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .sub-btn-conf:hover {
-    transform: scale(1.2);
-    background-color: #D1D1D1;
+  transform: scale(1.2);
+  background-color: #d1d1d1;
 }
 
 .sub-btn-editing-delete {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-image: url(../assets/icons/delete.svg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-image: url(../assets/icons/delete.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .sub-btn-editing-delete:hover {
-    transform: scale(1.2);
-    background-color: #D1D1D1;
+  transform: scale(1.2);
+  background-color: #d1d1d1;
 }
 
 .boxshadow {
-    filter: drop-shadow(0 0 4px rgb(0, 0, 0, 0.1));
+  filter: drop-shadow(0 0 4px rgb(0, 0, 0, 0.1));
 }

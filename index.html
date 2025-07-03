@@ -4,28 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/styles/login.css">
+    <link rel="stylesheet" href="/styles/reset.css">
 
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../styles/siderbar.css">
-    <link rel="stylesheet" href="../styles/summary.css">
-    <link rel="stylesheet" href="../styles/navbar.css">
-    <link rel="stylesheet" href="../styles/reset.css">
-    <link rel="stylesheet" href="./styles/add-task.css">
-
-    <!-- <link rel="stylesheet" href="./html-templates/siderbar.html"> -->
-     <script src="./scripts/templates.js"></script>
-    <script src="./scripts/add-task.js"></script>
-    <script src="./script.js"></script>
 </head>
 
 <body>
-    <section id="sidebar"></section>
 
-    <main id="right-content-wrapper">
-        <section id="navbar"></section>
-        <section id="content-wrapper"></section>
+    <header class="header">
+        <div class="logo">
+            <img src="/Assets/icons/join-logo.svg" alt="join-logo" class="join-logo">
+        </div>
+        <div class="signup">
+            <span>Not a Join user?</span>
+            <a href="./html-templates/signup.html" class="signup-btn">Sign up</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="login-container">
+            <h1 class="login-title">Log in</h1>
+            <div class="underline"></div>
+
+            <form class="login-form">
+                <div class="input-group">
+                    <input type="email" placeholder="Email" required />
+                    <i class="envelope">
+                        <img src="/Assets/icons/email-icon.png" alt="envelope-icon" class="envelope-icon">
+                    </i>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" placeholder="Password" required />
+                    <i class="lock">
+                        <img src="/Assets/icons/lock-icon.png" alt="lock-icon" class="lock-icon">
+                    </i>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn primary">Log in</button>
+                    <button type="button" class="btn secondary">Guest Log in</button>
+                </div>
+            </form>
+        </div>
     </main>
+
+    <footer>
+        <div class="Legal-texts">
+            <span class="Privacy-text">Privacy Policy</span>
+            <span class="Privacy-text">Legal notice</span>
+        </div>
+    </footer>
 
 </body>
 

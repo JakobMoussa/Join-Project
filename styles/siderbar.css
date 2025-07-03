@@ -36,6 +36,10 @@
   padding: 10px 58px;
 }
 
+.nav-link:hover {
+  background-color: rgba(101, 99, 99, 0.132);
+}
+
 .nav-link.selected {
   background-color: #091931;
 }
