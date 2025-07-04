@@ -39,6 +39,15 @@ let users = [
   }
 ];
 
+let test = [];
+
+async function init() {
+  let usersObj = await loadData("users");
+  for (const key in usersObj) {
+    test.push(usersObj[key]);   
+  }
+}
+
 function createSubObj(id, value) {
   return {
     "id": id,
@@ -194,3 +203,45 @@ function loadAssignedUserIcons() {
     }
   })
 }
+
+function createTask(titel, description, date, priority, category, status) {
+  return {
+    "title": titel,
+    "description": description,
+    "date": date,
+    "priority": priority,
+    "assigned": [],
+    "category": category,
+    "status": status
+  }
+}
+
+function createUser(name, email, color, assigned = "_empty") {
+  return {
+    "name": name,
+    "email": email,
+    "color": color,
+    "assigned": [assigned]
+  }
+}
+
+users = [
+  {
+    "name": "Max",
+    "email": "Max@Gmail.com",
+    "color": "red",
+    "assigned": []
+  },
+  {
+    "name": "Moritz",
+    "email": "Moritz@Gmail.com",
+    "color": "blue",
+    "assigned": []
+  },
+  {
+    "name": "Anna",
+    "email": "Anna@Gmail.com",
+    "color": "green",
+    "assigned": []
+  }
+];
