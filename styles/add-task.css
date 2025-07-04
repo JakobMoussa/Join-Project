@@ -420,6 +420,7 @@ button div {
 
 .sub-item span {
   margin-right: 8px;
+  user-select: none;
 }
 
 .sub-item input {
