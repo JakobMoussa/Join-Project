@@ -215,33 +215,3 @@ function createTask(titel, description, date, priority, category, status) {
     "status": status
   }
 }
-
-function createUser(name, email, color, assigned = "_empty") {
-  return {
-    "name": name,
-    "email": email,
-    "color": color,
-    "assigned": [assigned]
-  }
-}
-
-users = [
-  {
-    "name": "Max",
-    "email": "Max@Gmail.com",
-    "color": "red",
-    "assigned": []
-  },
-  {
-    "name": "Moritz",
-    "email": "Moritz@Gmail.com",
-    "color": "blue",
-    "assigned": []
-  },
-  {
-    "name": "Anna",
-    "email": "Anna@Gmail.com",
-    "color": "green",
-    "assigned": []
-  }
-];
