@@ -39,6 +39,15 @@ let users = [
   }
 ];
 
+let test = [];
+
+async function init() {
+  let usersObj = await loadData("users");
+  for (const key in usersObj) {
+    test.push(usersObj[key]);   
+  }
+}
+
 function createSubObj(id, value) {
   return {
     "id": id,
@@ -193,4 +202,16 @@ function loadAssignedUserIcons() {
       container.innerHTML += userIcon(user.color, initials, user.name);
     }
   })
+}
+
+function createTask(titel, description, date, priority, category, status) {
+  return {
+    "title": titel,
+    "description": description,
+    "date": date,
+    "priority": priority,
+    "assigned": [],
+    "category": category,
+    "status": status
+  }
 }
