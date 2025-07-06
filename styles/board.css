@@ -4,7 +4,11 @@
   align-items: center;
   flex: 1;
   width: 100%;
-  padding: 16px;
+  /* padding: 16px; */
+}
+
+.board-header h1 {
+  font-size: 3rem;
 }
 
 .search-field-wrapper {
@@ -109,6 +113,7 @@
   padding: 16px;
   margin-bottom: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .tag {
