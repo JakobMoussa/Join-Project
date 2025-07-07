@@ -26,3 +26,25 @@
 //   await fetchAndInsertHtml("navbar", "./html-templates/navbar.html");
 //   await fetchAndInsertHtml("content-wrapper", "./html-templates/summary.html");
 // });
+
+function openOverlay() {
+  document.getElementById("overlay").classList.remove("hidden");
+  setTimeout(() => {
+    toggleAnimation();
+  }, 10);
+}
+
+function closeOverlay() {
+  toggleAnimation();
+  setTimeout(() => {
+    document.getElementById("overlay").classList.add("hidden");
+  }, 250);
+}
+
+function toggleAnimation() {
+  document.getElementById("overlay-wrapper").classList.toggle("transit");
+}
+
+function onclickProtection(event) {
+  event.stopPropagation();
+}

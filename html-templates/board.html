@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../styles/board.css">
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
 
-    <!-- <script src="./script.js"></script> -->
+
     <!-- <script src="../scripts/sidebar.js"></script> -->
 </head>
 
@@ -60,6 +60,7 @@
     </div>
 
     <main id="right-content-wrapper">
+
         <section id="navbar">
             <nav class="navbar">
                 <h2>
@@ -74,22 +75,22 @@
 
         <section id="content-wrapper">
 
-            <header class="board-header">
-                <h1>Board</h1>
-                <div>
-                    <div class="search-field-wrapper">
-                        <input type="text" placeholder="Find Task" class="search-field">
-                        <span class="search-devider"></span>
-                        <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
+            <div class="board-wrapper">
+                <header class="board-header">
+                    <h1>Board</h1>
+                    <div>
+                        <div class="search-field-wrapper">
+                            <input type="text" placeholder="Find Task" class="search-field">
+                            <span class="search-devider"></span>
+                            <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
+                        </div>
+                        <button class="add-btn">
+                            Add task
+                            <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
+                        </button>
                     </div>
-                    <button class="add-btn">
-                        Add task
-                        <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
-                    </button>
-                </div>
-            </header>
+                </header>
 
-            <section>
                 <div class="board">
                     <div class="column">
                         <div class="column-header">
@@ -104,7 +105,7 @@
                             <h3>In progress</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="task">
+                        <div class="task" onclick="openOverlay()">
                             <span class="tag user-story">User Story</span>
                             <h4>Kochwelt Page & Recipe Recommender</h4>
                             <p class="task-descr">Build start page with recipe recommendation...</p>
@@ -115,8 +116,9 @@
                                 <span class="subtask">1/2 Subtasks</span>
                             </div>
                             <div class="task-footer">
-                                <div class="avatars">
-                                    <span>AM</span><span>EM</span><span>MB</span>
+                                <div>
+                                    <span class="avatar">AM</span><span class="avatar">EM</span><span
+                                        class="avatar">MB</span>
                                 </div>
                                 <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
                             </div>
@@ -128,24 +130,26 @@
                             <h3>Await feedback</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="task">
+                        <div class="task" onclick="openOverlay()">
                             <span class="tag tech-task">Technical Task</span>
                             <h4>HTML Base Template Creation</h4>
                             <p class="task-descr">Create reusable HTML base templates...</p>
                             <div class="task-footer">
-                                <div class="avatars">
-                                    <span>DE</span><span>BZ</span><span>AS</span>
+                                <div>
+                                    <span class="avatar">DE</span><span class="avatar">BZ</span><span
+                                        class="avatar">AS</span>
                                 </div>
                                 <img src="../assets/icons/prio-low.svg" alt="Prio low">
                             </div>
                         </div>
-                        <div class="task">
+                        <div class="task" onclick="openOverlay()">
                             <span class="tag user-story">User Story</span>
                             <h4>Daily Kochwelt Recipe</h4>
                             <p class="task-descr">Implement daily recipe and portion calculator...</p>
                             <div class="task-footer">
-                                <div class="avatars">
-                                    <span>EF</span><span>AS</span><span>TW</span>
+                                <div>
+                                    <span class="avatar">EF</span><span class="avatar">AS</span><span
+                                        class="avatar">TW</span>
                                 </div>
                                 <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
                             </div>
@@ -157,7 +161,7 @@
                             <h3>Done</h3>
                         </div>
 
-                        <div class="task">
+                        <div class="task" onclick="openOverlay()">
                             <span class="tag tech-task">Technical Task</span>
                             <h4>CSS Architecture Planning</h4>
                             <p class="task-descr">Define CSS naming conventions and structure...</p>
@@ -171,19 +175,95 @@
                             </div>
 
                             <div class="task-footer">
-                                <div class="avatars">
-                                    <span>SM</span><span>BZ</span>
+                                <div>
+                                    <span class="avatar">SM</span><span class="avatar">BZ</span>
                                 </div>
                                 <img src="../assets/icons/prio-high.svg" alt="Prio high">
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </section>
+                </div>
+            </div>
         </section>
     </main>
 
+    <div id="overlay" class="overlay hidden" onclick="closeOverlay()">
+
+        <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+
+            <div class="overlay-header mb-20">
+                <span class="tag-overlay user-story">User Story</span>
+                <button onclick="closeOverlay()">
+                    <img src="../assets/icons/close.svg" alt="Close">
+                </button>
+            </div>
+
+            <h1 class="mb-20">Kochwelt Page & Recipe Recommender</h1>
+            <p class="mb-20">Build start page with recipe recommendation.</p>
+
+            <div class="flex mb-20">
+                <div>
+                    <div class="section-title mb-20">Due date:</div>
+                    <div class="section-title">Priority:</div>
+                </div>
+                <div>
+                    <div class="mb-20">10/05/2023</div>
+                    <div class="overlay-prio"><span>Medium</span><img src="../assets/icons/prio-mid.svg"
+                            alt="Prio medium">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title mb-14">Assigned to:</div>
+                <ul class="assigned-list mb-20">
+                    <li class="assigned-person mb-14">
+                        <span class="avatar">EM</span>
+                        <span>Emmanuel Mauer</span>
+                    </li>
+                    <li class="assigned-person mb-14">
+                        <span class="avatar">MB</span>
+                        <span>Marcel Bauer</span>
+                    </li>
+                    <li class="assigned-person">
+                        <span class="avatar">AM</span>
+                        <span>Anton Mayer</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="section-title mb-14">Subtasks</div>
+                <ul class="subtasks mb-20">
+                    <li class="subtask-item mb-14">
+                        <input type="checkbox" id="subtask-1">
+                        <label for="subtask-1">Implement Recipe Recommendation</label>
+                    </li>
+                    <li class="subtask-item">
+                        <input type="checkbox" id="subtask-2">
+                        <label for="subtask-2">Start Page Layout</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="overlay-footer">
+                <button class="overlay-delete">
+                    <img src="../assets/icons/delete.svg" alt="Delete">
+                    <span>Delete</span>
+                </button>
+                <span class="overlay-devider"></span>
+                <button class="overlay-edit">
+                    <img src="../assets/icons/edit.svg" alt="Edit">
+                    <span>Edit</span>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../script.js"></script>
 </body>
 
 </html>
