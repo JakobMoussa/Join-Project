@@ -1,50 +1,10 @@
 let subtask = [];
-
-let users = [
-  {
-    "name": "Anton Mayer",
-    "email": "antom@gmail.com",
-    "color": "#FF7A00",
-    "assigned": false
-  },
-  {
-    "name": "Anja Schulz",
-    "email": "schulz@hotmail.com",
-    "color": "#9327FF",
-    "assigned": false
-  },
-  {
-    "name": "Benedikt Ziegler",
-    "email": "benedikt@gmail.com",
-    "color": "#6E52FF",
-    "assigned": false
-  },
-  {
-    "name": "David Eisenberg",
-    "email": "davidberg@gmail.com",
-    "color": "#FC71FF",
-    "assigned": false
-  },
-  {
-    "name": "Eva Fischer",
-    "email": "eva@gmail.com",
-    "color": "#FFBB2B",
-    "assigned": false
-  },
-  {
-    "name": "Emmanuel Mauer",
-    "email": "emmanuelma@gmail.com",
-    "color": "#1FD7C1",
-    "assigned": false
-  }
-];
-
-let test = [];
+let users = [];
 
 async function init() {
   let usersObj = await loadData("users");
   for (const key in usersObj) {
-    test.push(usersObj[key]);   
+    users.push(usersObj[key]);   
   }
 }
 
