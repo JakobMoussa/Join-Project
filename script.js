@@ -47,7 +47,7 @@ function onclickProtection(event) {
 
 async function addTask(htmlPage) {
   try {
-    toggleAddTask();
+    openAddTask();
     const container = document.getElementById('add-task-form');
     const html = await loadHTML(htmlPage);
     let start = html.indexOf('<form class="tasks-form-container"');
@@ -65,7 +65,22 @@ async function loadHTML(link) {
   return html;
 }
 
-function toggleAddTask() {
+function openAddTask() {
   const addTask = document.getElementById('add-task-board');
+  const container = document.getElementById('add-task-container');
   addTask.classList.toggle("d-none");
+  setTimeout(() => {
+    addTask.classList.toggle('transparent-background');
+    container.classList.toggle("transit");
+  }, 10);
+}
+
+function closeAddTask() {
+  const addTask = document.getElementById('add-task-board');
+  const container = document.getElementById('add-task-container');
+  addTask.classList.toggle('transparent-background');
+  container.classList.toggle("transit");
+  setTimeout(() => {
+    addTask.classList.toggle("d-none");
+  }, 250);
 }

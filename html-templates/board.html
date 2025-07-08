@@ -192,9 +192,9 @@
         </section>
     </main>
 
-    <div class="add-task-board d-none" id="add-task-board">
-        <div class="add-task-container">
-            <h1>Add Task <button class="close-task" onclick="toggleAddTask()"></button></h1>
+    <div class="add-task-board d-none" id="add-task-board" onclick="closeAddTask()">
+        <div class="add-task-container center_element transit" id="add-task-container" onclick="onclickProtection(event)">
+            <h1>Add Task <button class="close-task" onclick="closeAddTask()"></button></h1>
             <div class="add-task-form" id="add-task-form"></div>
             <div class="task-controls">
                 <p><span class="star-important">*</span>This field is required</p>
