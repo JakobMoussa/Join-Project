@@ -225,12 +225,12 @@ Overlay
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   max-width: 470px;
   height: auto;
   background-color: #fff;
   border-radius: 30px;
   padding: 48px 40px;
+  transform: translate(-50%, -50%);
   transition: all 250ms ease-in-out;
 }
 
@@ -344,4 +344,14 @@ Overlay
 
 .section-title {
   color: #2a3647;
+}
+
+/* Overlay Fade-In/Fade-Out */
+.overlay {
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.visible {
+  opacity: 1;
 }
