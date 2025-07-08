@@ -222,18 +222,26 @@ Overlay
   display: flex;
   justify-content: center;
   align-items: center;
+  /* fade-in / fade-out effect */
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.visible {
+  opacity: 1;
 }
 
 .overlay-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   max-width: 470px;
   height: auto;
   background-color: #fff;
   border-radius: 30px;
   padding: 48px 40px;
+  /* translate(-50%, -50%) is for centering the overlay-wrapper in the correct position */
+  transform: translate(-50%, -50%);
   transition: all 250ms ease-in-out;
 }
 

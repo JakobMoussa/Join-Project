@@ -13,21 +13,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function openOverlay() {
-  document.getElementById("overlay").classList.remove("hidden");
-  setTimeout(() => {
-    toggleAnimation();
-  }, 10);
+  const overlay = document.querySelectorAll(".overlay");
+  overlay.forEach((element) => {
+    element.classList.remove("hidden");
+    setTimeout(() => {
+      element.classList.add("visible");
+      toggleAnimation();
+    }, 1);
+  });
 }
 
 function closeOverlay() {
-  toggleAnimation();
-  setTimeout(() => {
-    document.getElementById("overlay").classList.add("hidden");
-  }, 250);
+  const overlay = document.querySelectorAll(".overlay");
+  overlay.forEach((element) => {
+    element.classList.remove("visible");
+    toggleAnimation();
+    setTimeout(() => {
+      element.classList.add("hidden");
+    }, 250);
+  });
 }
 
 function toggleAnimation() {
-  document.getElementById("overlay-wrapper").classList.toggle("transit");
+  const overlayWrapper = document.querySelectorAll(".overlay-wrapper");
+  overlayWrapper.forEach((element) => {
+    element.classList.toggle("transit");
+  });
 }
 
 function onclickProtection(event) {
