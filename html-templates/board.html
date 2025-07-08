@@ -13,12 +13,16 @@
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/board.css">
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
-
+    <link rel="stylesheet" href="../styles/add-task.css">
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/templates.js"></script>
+    <script src="../scripts/add-task.js"></script>
+    <script src="../script.js"></script>
 
     <!-- <script src="../scripts/sidebar.js"></script> -->
 </head>
 
-<body>
+<body onload="init()">
     <div class="sidebar-wrapper">
         <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
         <nav class="nav-wrapper">
@@ -84,7 +88,7 @@
                             <span class="search-devider"></span>
                             <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
                         </div>
-                        <button class="add-btn">
+                        <button class="add-btn" id="add-task-btn" onclick="addTask('../html-templates/add-task.html')">
                             Add task
                             <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
                         </button>
@@ -187,6 +191,13 @@
             </div>
         </section>
     </main>
+
+    <div class="add-task-board d-none" id="add-task-board">
+        <div class="add-task-container">
+            <h1>Add Task <button class="close-task" onclick="toggleAddTask()"></button></h1>
+            <div class="add-task-form" id="add-task-form"></div>
+        </div>
+    </div>
 
     <div id="overlay" class="overlay hidden" onclick="closeOverlay()">
 
