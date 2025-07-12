@@ -34,3 +34,15 @@ function generateUserID(name) {
   let id = string.charAt(0).toLowerCase() + string.slice(1);
   return id
 }
+
+async function createTask(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  let responseToJson = await response.json();
+  return responseToJson;
+}
