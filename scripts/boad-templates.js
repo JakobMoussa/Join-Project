@@ -26,6 +26,12 @@ function createProgressTemplate(subtasks, numerus, subtaskDone) {
   `;
 }
 
+<<<<<<< HEAD
 function createPersonTemplate(username) {
   return `<span class="avatar">${username}</span>`;
 }
+=======
+function createPersonTemplate(userObj, username) {
+  return `<span class="avatar" style="background: ${userObj.color};">${username}</span>`;
+}
+>>>>>>> c8caca961755ab40cfd200d93b89f57c13db19fa
