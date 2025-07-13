@@ -23,6 +23,7 @@ button div {
 }
 
 .create-task-container {
+  width: max-content;
   margin: 64px 0 32px 64px;
 }
 
@@ -253,9 +254,9 @@ button div {
 }
 
 .task-controls {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
 }
 
 .task-control-btns {
