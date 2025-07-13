@@ -51,7 +51,8 @@ function checkForAssignment(assigned) {
     let personHTML = "";
     assigned.forEach((userObj) => {
       let username = createUsernameAbbreviation(userObj);
-      personHTML += createPersonTemplate(username);
+      personHTML += createPersonTemplate(userObj, username);
+      console.log(personHTML);
     });
     return personHTML;
   } else {
