@@ -142,7 +142,7 @@ function assignedUser(name) {
     users[index].assigned = true;
     loadUsers();
     loadAssignedUserIcons();
-    assignedUserArr.push(users[index]); 
+    assignedUserArr.push(users[index]);
   } else {
     users[index].assigned = false;
     loadUsers();
