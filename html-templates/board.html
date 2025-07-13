@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
     <link rel="stylesheet" href="../styles/add-task.css">
     <script src="../scripts/api.js"></script>
+    <script src="../scripts/board.js"></script>
     <script src="../scripts/templates.js"></script>
+    <script src="../scripts/boad-templates.js"></script>
     <script src="../scripts/add-task.js"></script>
     <script src="../script.js"></script>
-
-    <!-- <script src="../scripts/sidebar.js"></script> -->
 </head>
 
 <body onload="init()">
@@ -96,20 +96,22 @@
                 </header>
 
                 <div class="board">
-                    <div class="column">
+                    <div class="column" data-task="to-do">
                         <div class="column-header">
                             <h3>To do</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="empty">No tasks To do</div>
+
+                        <!-- <div class="empty">No tasks To do</div> -->
+
                     </div>
 
-                    <div class="column">
+                    <div class="column" data-task="in-progress">
                         <div class="column-header">
                             <h3>In progress</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="task" onclick="openOverlay()">
+                        <!-- <div class="task" onclick="openOverlay()">
                             <span class="tag user-story">User Story</span>
                             <h4>Kochwelt Page & Recipe Recommender</h4>
                             <p class="task-descr">Build start page with recipe recommendation...</p>
@@ -126,16 +128,16 @@
                                 </div>
                                 <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
-                    <div class="column">
+                    <div class="column" data-task="await-feedback">
                         <div class="column-header">
                             <h3>Await feedback</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="task" onclick="openOverlay()">
-                            <span class="tag tech-task">Technical Task</span>
+                        <!-- <div class="task" onclick="openOverlay()">
+                            <span class="tag technical-task">Technical Task</span>
                             <h4>HTML Base Template Creation</h4>
                             <p class="task-descr">Create reusable HTML base templates...</p>
                             <div class="task-footer">
@@ -157,16 +159,16 @@
                                 </div>
                                 <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
-                    <div class="column">
+                    <div class="column" data-task="done">
                         <div class="column-header">
                             <h3>Done</h3>
                         </div>
 
-                        <div class="task" onclick="openOverlay()">
-                            <span class="tag tech-task">Technical Task</span>
+                        <!-- <div class="task" onclick="openOverlay()">
+                            <span class="tag technical-task">Technical Task</span>
                             <h4>CSS Architecture Planning</h4>
                             <p class="task-descr">Define CSS naming conventions and structure...</p>
 
@@ -184,7 +186,7 @@
                                 </div>
                                 <img src="../assets/icons/prio-high.svg" alt="Prio high">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
@@ -193,7 +195,8 @@
     </main>
 
     <div class="add-task-board d-none" id="add-task-board" onclick="closeAddTask()">
-        <div class="add-task-container center_element transit" id="add-task-container" onclick="onclickProtection(event)">
+        <div class="add-task-container center_element transit" id="add-task-container"
+            onclick="onclickProtection(event)">
             <h1>Add Task <button class="close-task" onclick="closeAddTask()"></button></h1>
             <div class="add-task-form" id="add-task-form"></div>
             <div class="task-controls">
@@ -213,9 +216,7 @@
     </div>
 
     <div id="overlay" class="overlay hidden" onclick="closeOverlay()">
-
         <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
-
             <div class="overlay-header mb-20">
                 <span class="tag-overlay user-story">User Story</span>
                 <button onclick="closeOverlay()">
@@ -282,9 +283,7 @@
                     <span>Edit</span>
                 </button>
             </div>
-
         </div>
-
     </div>
 
     <script src="../script.js"></script>
