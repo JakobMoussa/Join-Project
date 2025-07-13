@@ -3,7 +3,12 @@ let users = [];
 let selectedPriority = "medium";
 let assignedUserArr = [];
 
-async function init() {
+async function initAddTaskPage() {
+  await loadUsersTask();
+  loadTaskFormTemplate("firstTaskContainer", "secondTaskContainer");
+}
+
+async function loadUsersTask() {
   let usersObj = await loadData("users");
   for (const key in usersObj) {
     users.push(usersObj[key]);
@@ -20,6 +25,20 @@ function createSubObj(id, value) {
 
 function preventFromSubmit(event) {
   event.preventDefault();
+}
+
+function loadTaskFormTemplate(firstTarget, secondTarget) {
+  let firstContainer = document.getElementById(firstTarget);
+  let secondContainer = document.getElementById(secondTarget);
+  firstContainer.innerHTML = "";
+  secondContainer.innerHTML = "";
+  firstContainer.innerHTML += titleTaskTpl();
+  firstContainer.innerHTML += descriptionTaskTpl();
+  firstContainer.innerHTML += dateTaskTpl();
+  secondContainer.innerHTML += prioTaskTpl();
+  secondContainer.innerHTML += assignedTaskTpl();
+  secondContainer.innerHTML += categoryTaskTpl();
+  secondContainer.innerHTML += subtaskTpl();
 }
 
 function toggleCategoryDropdown() {
@@ -134,8 +153,6 @@ function initialsFromName(user) {
   let initials = "";
   const array = user.split(" ");
   initials += array[0].charAt(0) + array[1].charAt(0);
-  // console.log(user);
-  // console.log(array);
   return initials;
 }
 

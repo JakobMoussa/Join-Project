@@ -22,7 +22,7 @@
     <script src="../script.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="">
     <div class="sidebar-wrapper">
         <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
         <nav class="nav-wrapper">
@@ -195,10 +195,13 @@
     </main>
 
     <div class="add-task-board d-none" id="add-task-board" onclick="closeAddTask()">
-        <div class="add-task-container center_element transit" id="add-task-container"
-            onclick="onclickProtection(event)">
-            <h1>Add Task <button class="close-task" onclick="closeAddTask()"></button></h1>
-            <div class="add-task-form" id="add-task-form"></div>
+        <div class="task-overlay center_element transit" id="task-overlay" onclick="onclickProtection(event)">
+            <h1>Add Task <button class="close-task" onclick="closeAddTask();"></button></h1>
+            <form class="board-tasks-container" onsubmit="preventFromSubmit(event)">
+                <div class="addTask-Container" id="firstBoardAddTask"></div>
+                <div class="divider-vertical"></div>
+                <div class="addTask-Container" id="secondBoardAddTask"></div>
+            </form>
             <div class="task-controls">
                 <p><span class="star-important">*</span>This field is required</p>
                 <div class="task-control-btns">
