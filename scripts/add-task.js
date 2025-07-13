@@ -1,18 +1,21 @@
 let subtask = [];
 let users = [];
+let selectedPriority = "medium";
+let taskAssigned = [];
+let taskCategory = null;
 
 async function init() {
   let usersObj = await loadData("users");
   for (const key in usersObj) {
-    users.push(usersObj[key]);   
+    users.push(usersObj[key]);
   }
 }
 
 function createSubObj(id, value) {
   return {
-    "id": id,
-    "value": value,
-    "edit": false
+    id: id,
+    value: value,
+    edit: false,
   };
 }
 
@@ -21,12 +24,12 @@ function preventFromSubmit(event) {
 }
 
 function toggleCategoryDropdown() {
-  const categoryDropdown = document.getElementById('category-dropdown');
-  const btn = document.getElementById('category-btn');
-  const categoryContainer = document.getElementById('category-container');
-  categoryDropdown.classList.toggle('d-none');
-  btn.classList.toggle('rotate-180deg');
-  categoryContainer.classList.toggle('boxshadow');
+  const categoryDropdown = document.getElementById("category-dropdown");
+  const btn = document.getElementById("category-btn");
+  const categoryContainer = document.getElementById("category-container");
+  categoryDropdown.classList.toggle("d-none");
+  btn.classList.toggle("rotate-180deg");
+  categoryContainer.classList.toggle("boxshadow");
 }
 
 function activePriority(index) {
@@ -41,6 +44,7 @@ function activePriority(index) {
 function prioBtnActive(btn, icon, priority) {
   btn.classList.add(`active-${priority}-btn`);
   icon.classList.add(`active-${priority}-icon`);
+  selectedPriority = priority;
 }
 
 function prioBtnOff(btn, icon, priority) {
@@ -49,8 +53,8 @@ function prioBtnOff(btn, icon, priority) {
 }
 
 function addSubtask() {
-  const inputElement = document.getElementById('subtask-input');
-  const subList = document.getElementById('sub-list');
+  const inputElement = document.getElementById("subtask-input");
+  const subList = document.getElementById("sub-list");
   if (inputElement.value.length == 0) return;
   let id = getNextFreeId();
   subtask.push(createSubObj(id, inputElement.value));
@@ -60,27 +64,27 @@ function addSubtask() {
 
 function getNextFreeId() {
   let i = 0;
-  while (subtask.some(item => item.id === i)) {
+  while (subtask.some((item) => item.id === i)) {
     i++;
   }
   return i;
 }
 
 function removeSubItem(value) {
-  const newArr = subtask.filter(element => element.id != value);
+  const newArr = subtask.filter((element) => element.id != value);
   subtask = newArr;
   reloadSubTask();
 }
 
 function reloadSubTask() {
-  const subList = document.getElementById('sub-list');
+  const subList = document.getElementById("sub-list");
   subList.innerHTML = "";
   subtask.forEach((element) => {
     if (element.edit == false) {
       subList.innerHTML += subListItem(element.value, element.id);
     } else {
       subList.innerHTML += subListItemEdit(element.value, element.id);
-    };
+    }
   });
 }
 
@@ -92,28 +96,29 @@ function editSubItem(id, editMode) {
       if (input.value.length > 0) {
         subtask[index].value = input.value;
       }
-      break
+      break;
     }
   }
   reloadSubTask();
 }
 
 function selectCategory(e) {
-  const selectCategory = document.getElementById('select-category');
+  const selectCategory = document.getElementById("select-category");
   selectCategory.innerHTML = e.target.innerHTML;
-  toggleCategoryDropdown()
+  taskCategory = e.target.innerHTML;
+  toggleCategoryDropdown();
 }
 
 function toggleAssignedDropdown() {
-  const assignedDropdown = document.getElementById('assigned-dropdown');
-  const btn = document.getElementById('assaign-btn');
+  const assignedDropdown = document.getElementById("assigned-dropdown");
+  const btn = document.getElementById("assaign-btn");
   loadUsers();
-  assignedDropdown.classList.toggle('d-none');
-  btn.classList.toggle('rotate-180deg');
+  assignedDropdown.classList.toggle("d-none");
+  btn.classList.toggle("rotate-180deg");
 }
 
 function loadUsers() {
-  const assignedDropdown = document.getElementById('assigned-dropdown');
+  const assignedDropdown = document.getElementById("assigned-dropdown");
   assignedDropdown.innerHTML = "";
   users.forEach((user) => {
     let initials = initialsFromName(user.name);
@@ -129,7 +134,9 @@ function initialsFromName(user) {
   let initials = "";
   const array = user.split(" ");
   initials += array[0].charAt(0) + array[1].charAt(0);
-  return initials
+  // console.log(user);
+  // console.log(array);
+  return initials;
 }
 
 function assignedUser(name) {
@@ -154,24 +161,39 @@ function searchUserIndex(name) {
 }
 
 function loadAssignedUserIcons() {
-  const container = document.getElementById('icons-container');
+  const container = document.getElementById("icons-container");
   container.innerHTML = "";
   users.forEach((user) => {
     if (user.assigned) {
       let initials = initialsFromName(user.name);
       container.innerHTML += userIcon(user.color, initials, user.name);
     }
-  })
+  });
 }
 
-function createTask(titel, description, date, priority, category, status) {
-  return {
-    "title": titel,
-    "description": description,
-    "date": date,
-    "priority": priority,
-    "assigned": [],
-    "category": category,
-    "status": status
-  }
+// -----------------------------------------------
+
+function createTaskObject() {
+  let taskTitle = document.getElementById("titleInput").value;
+  let taskDescription = document.querySelector(".textarea-description").value;
+  let taskDate = document.getElementById("date").value;
+  let taskPriority = selectedPriority;
+  users.forEach((user) => {
+    if (user.assigned) {
+      taskAssigned.push(user);
+    }
+  });
+
+  let task = {
+    title: taskTitle,
+    description: taskDescription,
+    date: taskDate,
+    priority: taskPriority,
+    assigned: taskAssigned,
+    category: taskCategory,
+    subtasks: subtask,
+    status: "in-progress",
+  };
+
+  createTask("tasks/", task);
 }
