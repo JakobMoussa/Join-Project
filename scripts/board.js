@@ -1,36 +1,19 @@
-function renderBoardddd(tasks) {
-  let column = document.querySelectorAll(".column");
-  // column.forEach((x) => {
-  //   if (x.classList.contains("to-do")) {
-  //     console.log(x.classList.contains("to-do"));
-  //   }
-  // });
-
-  // remove placeholde element if there is any
-  let emptyPlaceholder = column[0].querySelectorAll(".empty");
-  if (emptyPlaceholder.length > 0) {
-    emptyPlaceholder[0].classList.add("hidden");
-  }
-  // add tasks to column
-  column[0].appendChild;
-}
-
-//  ------------------------------------------
-//  ------------------------------------------
-//  ------------------------------------------
-
 function renderBoard(tasks) {
-  for (let task in tasks) {
-    let column = document.querySelector(`.column[data-task="${tasks[task].status}"]`);
-    if (column) {
-      let taskTemplate = createTaskTemplate(task, tasks[task], tasks[task].substasks);
-      column.innerHTML += taskTemplate;
+  if (tasks) {
+    for (let task in tasks) {
+      let column = document.querySelector(`.column[data-task="${tasks[task].status}"]`);
+      if (column) {
+        let taskTemplate = createTaskTemplate(task, tasks[task]);
+        column.innerHTML += taskTemplate;
+      }
     }
+  } else {
+    return createTaskPlaceholder();
   }
 }
 
 function createCategoryClass(category) {
-  // from e.g. "Technical Task" to "technical-class" for CSS class
+  // from e.g. "Technical Task" to "technical-task" for CSS class
   return category.toLowerCase().split(" ").join("-");
 }
 
@@ -52,7 +35,6 @@ function checkForAssignment(assigned) {
     assigned.forEach((userObj) => {
       let username = createUsernameAbbreviation(userObj);
       personHTML += createPersonTemplate(userObj, username);
-      // console.log(personHTML);
     });
     return personHTML;
   } else {
@@ -68,13 +50,23 @@ function createUsernameAbbreviation(user) {
   }
 }
 
+function addPlaceholdersToEmptyColumns() {
+  const columns = document.querySelectorAll(".column");
+  columns.forEach((column) => {
+    if (!column.querySelector(".task")) {
+      column.innerHTML += createTaskPlaceholder();
+    }
+  });
+}
+
 function rederSelectedTask() {
-  console.log("henlo");
+  return;
 }
 
 async function initBoard() {
   let boardData = await loadData("tasks/");
   renderBoard(boardData);
+  addPlaceholdersToEmptyColumns();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

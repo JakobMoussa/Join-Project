@@ -1,5 +1,5 @@
 function subListItem(task, id) {
-    return `
+  return `
         <li class="sub-item">
             <span>•</span>
             <input type="text" value="${task}" id="sub-input-${id}" disabled>
@@ -9,11 +9,11 @@ function subListItem(task, id) {
                 <button class="sub-btn-delete" onclick="removeSubItem(${id})"></button>
             </div>
         </li>
-    `
+    `;
 }
 
 function subListItemEdit(task, id) {
-    return `
+  return `
         <li class="sub-item-editing">
             <input type="text" id="sub-input-${id}" value="${task}">
             <div class="sub-btn-container">
@@ -22,28 +22,27 @@ function subListItemEdit(task, id) {
                 <button class="sub-btn-conf" onclick="editSubItem(${id}, false)"></button>
             </div>
         </li>
-    `
+    `;
 }
 
 function singleUserContainer(style, initials, name = "XX", color = "red") {
-    return `
+  return `
         <div class="${style}" onclick="assignedUser('${name}')">
             <div class="user-icon" style="background-color: ${color};">${initials}</div>
             <span class="user-name">${name}</span>
             <button class="btn-check"></button>
         </div>
-    `
+    `;
 }
 
 function userIcon(color = "red", initials = "xx", name = "xx") {
-    return `
+  return `
         <div class="user-icon" onclick="assignedUser('${name}')" style="background-color: ${color}">${initials}</div>
-    `
+    `;
 }
 
-
 function titleTaskTpl(title = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="titleInput" class="task-name">
                 Title<span class="red-font">*</span>
@@ -51,20 +50,20 @@ function titleTaskTpl(title = "") {
             <input type="text" class="input-task" id="titleInput" placeholder="Enter a title" value="${title}">
             <span id="titleError" class="error-message"></span>
         </div>
-    `
+    `;
 }
 
 function descriptionTaskTpl(description = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="description-input" class="task-name">Description</label>
             <textarea name="" id="description" class="textarea-description">${description}</textarea>
         </div>
-    `
+    `;
 }
 
 function dateTaskTpl(date = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="date" class="task-name">
                 Due date<span class="red-font">*</span>
@@ -72,11 +71,11 @@ function dateTaskTpl(date = "") {
             <input type="date" class="input-task" id="date" value="${date}">
             <span id="dateError" class="error-message"></span>
         </div>
-    `
+    `;
 }
 
 function prioTaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Priority</span>
             <div class="priority-btn-container">
@@ -94,11 +93,11 @@ function prioTaskTpl() {
                 </button>
             </div>
         </div>
-    `
+    `;
 }
 
 function assignedTaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Assigned to:</span>
             <div class="dropdown-container">
@@ -115,11 +114,11 @@ function assignedTaskTpl() {
             <div class="assigned-icons-container" id="icons-container">
             </div>
         </div>
-    `    
+    `;
 }
 
 function categoryTaskTpl() {
-    return `
+  return `
         <div class="task-container" id="category-container">
             <span class="task-name">
                 Category<span class="red-font">*</span>
@@ -143,11 +142,11 @@ function categoryTaskTpl() {
             </div>
             <span id="categoryError" class="error-message"></span>
         </div>
-    `    
+    `;
 }
 
 function subtaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Subtask</span>
             <div class="dropdown-container">
@@ -161,5 +160,41 @@ function subtaskTpl() {
                 </ul>
             </div>
         </div>
-    `    
+    `;
+}
+
+function createTaskTemplate(key, values) {
+  return `
+    <div class="task" onclick="openOverlay('${key}')">
+        <span class="tag ${createCategoryClass(values.category)}">${values.category}</span>
+        <h4>${values.title}</h4>
+        <p class="task-descr">${values.description}</p>
+        ${checkForSubtask(values.subtask)}
+        <div class="task-footer">
+            <div>
+              ${checkForAssignment(values.assigned)}
+            </div>
+            <img src="../assets/icons/prio-${values.priority}.svg" alt="Prio ${values.priority}">
+        </div>
+    </div>
+  `;
+}
+
+function createProgressTemplate(subtasks, numerus, subtaskDone) {
+  return `
+    <div class="progress-wrapper">
+        <div class="progress-bar">
+            <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
+        </div>
+        <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
+    </div>
+  `;
+}
+
+function createPersonTemplate(userObj, username) {
+  return `<span class="avatar" style="background: ${userObj.color};">${username}</span>`;
+}
+
+function createTaskPlaceholder() {
+  return `<div class="empty">No tasks To do</div>`;
 }
