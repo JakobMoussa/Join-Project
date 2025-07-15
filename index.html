@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="icon" type="image/x-icon" href="../assets/icons/flavicon.png" />
     <link rel="stylesheet" href="/styles/login.css">
     <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -14,48 +16,61 @@
 
     <header class="header">
         <div class="logo">
-            <img src="/Assets/icons/join-logo.svg" alt="join-logo" class="join-logo">
+          <img src="../assets/icons/join-logo.svg" alt="join-logo" class="join-logo">
         </div>
         <div class="signup">
-            <span>Not a Join user?</span>
-            <a href="./html-templates/signup.html" class="signup-btn">Sign up</a>
+          <span>Not a Join user?</span>
+          <a href="signup.html" class="signup-btn">Sign up</a>
         </div>
     </header>
-
-    <main class="main">
+    
+      <main class="main">
         <div class="login-container">
-            <h1 class="login-title">Log in</h1>
-            <div class="underline"></div>
+          <h1 class="login-title">Log in</h1>
+          <div class="underline"></div>
+    
+          <form class="login-form"onsubmit="handleLogin(event)">
+            <div class="input-group">
+              <input type="email" id="email" placeholder="Email" required onblur="checkEmailExists()"  src="../assets/icons/mail.svg"/>
+              <i class="envelope">
+                <img src="../assets/icons/mail.svg" alt="envelope-icon" class="envelope-icon">
+              </i>
 
-            <form class="login-form">
-                <div class="input-group">
-                    <input type="email" placeholder="Email" required />
-                    <i class="envelope">
-                        <img src="/Assets/icons/email-icon.png" alt="envelope-icon" class="envelope-icon">
-                    </i>
-                </div>
+            </div>
+            <div class="error-message" id="email-error"></div>
+            <div class="success-message" id="email-success"></div>
+    
+            <div class="input-group">
+              <input type="password" id="password" placeholder="Password" required />
+              <i class="lock">
+                <img src="../assets/icons/lock.svg" alt="lock-icon" class="lock-icon" style="display: inline;">
+              </i>
+              <i class="eye" id="toggle-password" style="display: none;">
+                <img src="../assets/icons/eye-icon.svg" alt="toggle password" class="eye-icon">
+              </i>
+              <div class="error-message" id="password-error"></div>
+            </div>
 
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required />
-                    <i class="lock">
-                        <img src="/Assets/icons/lock-icon.png" alt="lock-icon" class="lock-icon">
-                    </i>
-                </div>
-
-                <div class="button-group">
-                    <button type="submit" class="btn primary">Log in</button>
-                    <button type="button" class="btn secondary">Guest Log in</button>
-                </div>
-            </form>
+            <div class="checking-status">
+              <span id="checking-text" style="display: none;">Checking email...</span>
+              <div class="loading-spinner" id="loading-spinner"></div>
+            </div>
+    
+            <div class="button-group">
+              <button type="submit" class="btn primary" id="login-btn">Log in</button>
+              <button type="button" class="btn secondary" onclick="guestLogin()">Guest Log in</button>
+            </div>
+          </form>
         </div>
-    </main>
-
-    <footer>
+      </main>
+    
+      <footer>
         <div class="Legal-texts">
-            <span class="Privacy-text">Privacy Policy</span>
-            <span class="Privacy-text">Legal notice</span>
+          <span class="Privacy-text">Privacy Policy</span>
+          <span class="Privacy-text">Legal notice</span>
         </div>
-    </footer>
+      </footer>
+      <script src="../scripts/login.js"></script>
 
 </body>
 

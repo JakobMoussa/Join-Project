@@ -18,6 +18,7 @@
     <script src="../scripts/templates.js"></script>
     <script src="../scripts/add-task.js"></script>
     <script src="../script.js"></script>
+    <script src="../scripts/drag-and-drop.js"></script>
 
     <!-- <script src="../scripts/sidebar.js"></script> -->
 </head>
@@ -104,12 +105,12 @@
                         <div class="empty">No tasks To do</div>
                     </div>
 
-                    <div class="column">
+                    <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>In progress</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="task" onclick="openOverlay()">
+                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-1">
                             <span class="tag user-story">User Story</span>
                             <h4>Kochwelt Page & Recipe Recommender</h4>
                             <p class="task-descr">Build start page with recipe recommendation...</p>
@@ -129,12 +130,12 @@
                         </div>
                     </div>
 
-                    <div class="column">
+                    <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Await feedback</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="task" onclick="openOverlay()">
+                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-2">
                             <span class="tag tech-task">Technical Task</span>
                             <h4>HTML Base Template Creation</h4>
                             <p class="task-descr">Create reusable HTML base templates...</p>
@@ -146,7 +147,7 @@
                                 <img src="../assets/icons/prio-low.svg" alt="Prio low">
                             </div>
                         </div>
-                        <div class="task" onclick="openOverlay()">
+                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-3">
                             <span class="tag user-story">User Story</span>
                             <h4>Daily Kochwelt Recipe</h4>
                             <p class="task-descr">Implement daily recipe and portion calculator...</p>
@@ -160,12 +161,12 @@
                         </div>
                     </div>
 
-                    <div class="column">
+                    <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Done</h3>
                         </div>
 
-                        <div class="task" onclick="openOverlay()">
+                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-4">
                             <span class="tag tech-task">Technical Task</span>
                             <h4>CSS Architecture Planning</h4>
                             <p class="task-descr">Define CSS naming conventions and structure...</p>
