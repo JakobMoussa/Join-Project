@@ -41,6 +41,23 @@
   padding: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+}
+
+.metric-item:hover {
+  background-color: #2a3647;
+  color: white;
+  transform: scale(1.05);
+}
+
+.metric-item:hover .metric-icon {
+  background-color: white;
+}
+
+.metric-item:hover .metric-label {
+  color: white;
 }
 
 .metric-icon {
@@ -113,9 +130,35 @@
   grid-column: span 3 / span 3;
 }
 
+.div1 .metric-icon {
+  height: 64px;
+  width: 64px;
+  background-image: url(../assets/icons/pencil.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+
+.div1:hover .metric-icon {
+  background-image: url(../assets/icons/pencil_blue.svg);
+}
+
 .div2 {
   grid-column: span 3 / span 3;
   grid-column-start: 4;
+}
+
+.div2 .metric-icon {
+  height: 64px;
+  width: 64px;
+  background-image: url(../assets/icons/checkmark.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+
+.div2:hover .metric-icon {
+  background-image: url(../assets/icons/checkmark_blue.svg);
 }
 
 .div3 {
