@@ -119,7 +119,7 @@ function assignedTaskTpl() {
 
 function categoryTaskTpl() {
   return `
-        < div class="task-container" id = "category-container" >
+        <div class="task-container" id = "category-container">
             <span class="task-name">
                 Category<span class="red-font">*</span>
             </span>
@@ -141,13 +141,13 @@ function categoryTaskTpl() {
                 </div>
             </div>
             <span id="categoryError" class="error-message"></span>
-        </div >
+        </div>
         `
 }
 
 function subtaskTpl() {
   return `
-        < div class="task-container" >
+        <div class="task-container">
             <span class="task-name">Subtask</span>
             <div class="dropdown-container">
                 <input type="text" id="subtask-input" placeholder="Add new subtask" maxlength="32">
@@ -159,13 +159,13 @@ function subtaskTpl() {
                 <ul class="sub-list" id="sub-list">
                 </ul>
             </div>
-        </div >
+        </div>
         `
 }
 
 function createTaskTemplate(key, values) {
   return `
-        < div class="task" onclick = "openOverlay('${key}')" >
+        <div class="task" onclick = "openOverlay('${key}')">
         <span class="tag ${createCategoryClass(values.category)}">${values.category}</span>
         <h4>${values.title}</h4>
         <p class="task-descr">${values.description}</p>
@@ -176,25 +176,25 @@ function createTaskTemplate(key, values) {
         </div>
         <img src="../assets/icons/prio-${values.priority}.svg" alt="Prio ${values.priority}">
     </div>
-    </div >
-        `;
+    </div>
+        `
 }
 
 function createProgressTemplate(subtasks, numerus, subtaskDone) {
   return `
-        < div class="progress-wrapper" >
+        <div class="progress-wrapper">
         <div class="progress-bar">
             <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
         </div>
         <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
-    </div >
+    </div>
         `
 }
 
 function createPersonTemplate(userObj, username) {
-  return `< span class="avatar" style = "background: ${userObj.color};" > ${ username }</span > `;
+  return `<span class="avatar" style = "background: ${userObj.color};" > ${ username }</span> `;
 }
 
 function createTaskPlaceholder() {
-  return `< div class="empty" > No tasks To do</div > `;
+  return `<div class="empty" > No tasks To do</div> `;
 }

@@ -6,7 +6,6 @@ let assignedUserArr = [];
 async function initAddTaskPage() {
   await loadUsersTask();
   loadTaskFormTemplate("firstTaskContainer", "secondTaskContainer");
-  console.log(subtaskTemplate);  
 }
 
 async function loadUsersTask() {
