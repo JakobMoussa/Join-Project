@@ -80,15 +80,15 @@ function prioTaskTpl() {
         <div class="task-container">
             <span class="task-name">Priority</span>
             <div class="priority-btn-container">
-                <button class="btn-priority" onclick="activePriority(0)" id="urgent">
+                <button class="btn-priority" onclick="activePriority('urgent')" id="urgent">
                     Urgent
                     <div class="urgent-priority-icon" id="urgent-btn-icon"></div>
                 </button>
-                <button class="btn-priority active-medium-btn" onclick="activePriority(1)" id="medium">
+                <button class="btn-priority" onclick="activePriority('medium')" id="medium">
                     Medium
-                    <div class="medium-priority-icon active-medium-icon" id="medium-btn-icon"></div>
+                    <div class="medium-priority-icon" id="medium-btn-icon"></div>
                 </button>
-                <button class="btn-priority" onclick="activePriority(2)" id="low">
+                <button class="btn-priority" onclick="activePriority('low')" id="low">
                     Low
                     <div class="low-priority-icon" id="low-btn-icon"></div>
                 </button>
@@ -115,7 +115,7 @@ function assignedTaskTpl() {
             <div class="assigned-icons-container" id="icons-container">
             </div>
         </div>
-    `    
+    `
 }
 
 function categoryTaskTpl() {
@@ -143,7 +143,7 @@ function categoryTaskTpl() {
             </div>
             <span id="categoryError" class="error-message"></span>
         </div>
-    `    
+    `
 }
 
 function subtaskTpl() {
@@ -161,5 +161,5 @@ function subtaskTpl() {
                 </ul>
             </div>
         </div>
-    `    
+    `
 }
