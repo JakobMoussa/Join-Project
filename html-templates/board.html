@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
     <link rel="stylesheet" href="../styles/add-task.css">
     <script src="../scripts/api.js"></script>
+    <script src="../scripts/board.js"></script>
     <script src="../scripts/templates.js"></script>
     <script src="../scripts/add-task.js"></script>
     <script src="../script.js"></script>
@@ -23,7 +24,7 @@
     <!-- <script src="../scripts/sidebar.js"></script> -->
 </head>
 
-<body onload="init()">
+<body onload="">
     <div class="sidebar-wrapper">
         <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
         <nav class="nav-wrapper">
@@ -97,36 +98,20 @@
                 </header>
 
                 <div class="board">
-                    <div class="column">
+                    <div class="column" data-task="to-do">
                         <div class="column-header">
                             <h3>To do</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="empty">No tasks To do</div>
+
+                        <!-- <div class="empty">No tasks To do</div> -->
+
                     </div>
 
                     <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>In progress</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
-                        </div>
-                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-1">
-                            <span class="tag user-story">User Story</span>
-                            <h4>Kochwelt Page & Recipe Recommender</h4>
-                            <p class="task-descr">Build start page with recipe recommendation...</p>
-                            <div class="progress-wrapper">
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 50%;"></div>
-                                </div>
-                                <span class="subtask">1/2 Subtasks</span>
-                            </div>
-                            <div class="task-footer">
-                                <div>
-                                    <span class="avatar">AM</span><span class="avatar">EM</span><span
-                                        class="avatar">MB</span>
-                                </div>
-                                <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
-                            </div>
                         </div>
                     </div>
 
@@ -135,56 +120,11 @@
                             <h3>Await feedback</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
-                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-2">
-                            <span class="tag tech-task">Technical Task</span>
-                            <h4>HTML Base Template Creation</h4>
-                            <p class="task-descr">Create reusable HTML base templates...</p>
-                            <div class="task-footer">
-                                <div>
-                                    <span class="avatar">DE</span><span class="avatar">BZ</span><span
-                                        class="avatar">AS</span>
-                                </div>
-                                <img src="../assets/icons/prio-low.svg" alt="Prio low">
-                            </div>
-                        </div>
-                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-3">
-                            <span class="tag user-story">User Story</span>
-                            <h4>Daily Kochwelt Recipe</h4>
-                            <p class="task-descr">Implement daily recipe and portion calculator...</p>
-                            <div class="task-footer">
-                                <div>
-                                    <span class="avatar">EF</span><span class="avatar">AS</span><span
-                                        class="avatar">TW</span>
-                                </div>
-                                <img src="../assets/icons/prio-mid.svg" alt="Prio medium">
-                            </div>
-                        </div>
                     </div>
 
                     <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Done</h3>
-                        </div>
-
-                        <div class="task" onclick="openOverlay()" draggable="true" ondragstart="drag(event)" id="task-4">
-                            <span class="tag tech-task">Technical Task</span>
-                            <h4>CSS Architecture Planning</h4>
-                            <p class="task-descr">Define CSS naming conventions and structure...</p>
-
-
-                            <div class="progress-wrapper">
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 100%;"></div>
-                                </div>
-                                <span class="subtask">2/2 Subtasks</span>
-                            </div>
-
-                            <div class="task-footer">
-                                <div>
-                                    <span class="avatar">SM</span><span class="avatar">BZ</span>
-                                </div>
-                                <img src="../assets/icons/prio-high.svg" alt="Prio high">
-                            </div>
                         </div>
                     </div>
 
@@ -194,9 +134,13 @@
     </main>
 
     <div class="add-task-board d-none" id="add-task-board" onclick="closeAddTask()">
-        <div class="add-task-container center_element transit" id="add-task-container" onclick="onclickProtection(event)">
-            <h1>Add Task <button class="close-task" onclick="closeAddTask()"></button></h1>
-            <div class="add-task-form" id="add-task-form"></div>
+        <div class="task-overlay center_element transit" id="task-overlay" onclick="onclickProtection(event)">
+            <h1>Add Task <button class="close-task" onclick="closeAddTask();"></button></h1>
+            <form class="board-tasks-container" onsubmit="preventFromSubmit(event)">
+                <div class="addTask-Container" id="firstBoardAddTask"></div>
+                <div class="divider-vertical"></div>
+                <div class="addTask-Container" id="secondBoardAddTask"></div>
+            </form>
             <div class="task-controls">
                 <p><span class="star-important">*</span>This field is required</p>
                 <div class="task-control-btns">
@@ -214,9 +158,7 @@
     </div>
 
     <div id="overlay" class="overlay hidden" onclick="closeOverlay()">
-
         <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
-
             <div class="overlay-header mb-20">
                 <span class="tag-overlay user-story">User Story</span>
                 <button onclick="closeOverlay()">
@@ -234,7 +176,7 @@
                 </div>
                 <div>
                     <div class="mb-20">10/05/2023</div>
-                    <div class="overlay-prio"><span>Medium</span><img src="../assets/icons/prio-mid.svg"
+                    <div class="overlay-prio"><span>Medium</span><img src="../assets/icons/prio-medium.svg"
                             alt="Prio medium">
                     </div>
                 </div>
@@ -283,9 +225,7 @@
                     <span>Edit</span>
                 </button>
             </div>
-
         </div>
-
     </div>
 
     <script src="../script.js"></script>

@@ -9,8 +9,7 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-});
+document.addEventListener("DOMContentLoaded", async () => {});
 
 function openOverlay() {
   const overlay = document.querySelectorAll(".overlay");
@@ -45,18 +44,10 @@ function onclickProtection(event) {
   event.stopPropagation();
 }
 
-async function addTask(htmlPage) {
-  try {
-    openAddTask();
-    const container = document.getElementById('add-task-form');
-    const html = await loadHTML(htmlPage);
-    let start = html.indexOf('<form class="tasks-form-container"');
-    let end = html.indexOf('<div class="task-controls">');
-    const addTaskTemplate = html.slice(start, end)
-    container.innerHTML = addTaskTemplate;
-  } catch (error) {
-    console.error(error);
-  }
+async function addTask() {
+  openAddTask();
+  loadUsersTask();
+  loadTaskFormTemplate("firstBoardAddTask", "secondBoardAddTask");
 }
 
 async function loadHTML(link) {
@@ -66,19 +57,19 @@ async function loadHTML(link) {
 }
 
 function openAddTask() {
-  const addTask = document.getElementById('add-task-board');
-  const container = document.getElementById('add-task-container');
+  const addTask = document.getElementById("add-task-board");
+  const container = document.getElementById("task-overlay");
   addTask.classList.toggle("d-none");
   setTimeout(() => {
-    addTask.classList.toggle('transparent-background');
+    addTask.classList.toggle("transparent-background");
     container.classList.toggle("transit");
   }, 10);
 }
 
 function closeAddTask() {
-  const addTask = document.getElementById('add-task-board');
-  const container = document.getElementById('add-task-container');
-  addTask.classList.toggle('transparent-background');
+  const addTask = document.getElementById("add-task-board");
+  const container = document.getElementById("task-overlay");
+  addTask.classList.toggle("transparent-background");
   container.classList.toggle("transit");
   setTimeout(() => {
     addTask.classList.toggle("d-none");
