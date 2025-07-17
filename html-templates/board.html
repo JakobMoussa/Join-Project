@@ -19,6 +19,9 @@
     <script src="../scripts/templates.js"></script>
     <script src="../scripts/add-task.js"></script>
     <script src="../script.js"></script>
+    <script src="../scripts/drag-and-drop.js"></script>
+
+    <!-- <script src="../scripts/sidebar.js"></script> -->
 </head>
 
 <body onload="">
@@ -105,21 +108,21 @@
 
                     </div>
 
-                    <div class="column" data-task="in-progress">
+                    <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>In progress</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
                     </div>
 
-                    <div class="column" data-task="await-feedback">
+                    <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Await feedback</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button">
                         </div>
                     </div>
 
-                    <div class="column" data-task="done">
+                    <div class="column" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Done</h3>
                         </div>

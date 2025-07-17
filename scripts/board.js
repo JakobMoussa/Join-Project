@@ -142,6 +142,8 @@ async function deleteTask(path) {
 
 async function initBoard() {
   let boardData = await loadData("tasks/");
+  console.log(boardData);
+  
   renderBoard(boardData);
 }
 

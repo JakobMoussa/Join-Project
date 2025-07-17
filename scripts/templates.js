@@ -79,15 +79,15 @@ function prioTaskTpl() {
         <div class="task-container">
             <span class="task-name">Priority</span>
             <div class="priority-btn-container">
-                <button class="btn-priority" onclick="activePriority(0)" id="urgent">
+                <button class="btn-priority" onclick="activePriority('urgent')" id="urgent">
                     Urgent
                     <div class="urgent-priority-icon" id="urgent-btn-icon"></div>
                 </button>
-                <button class="btn-priority active-medium-btn" onclick="activePriority(1)" id="medium">
+                <button class="btn-priority" onclick="activePriority('medium')" id="medium">
                     Medium
-                    <div class="medium-priority-icon active-medium-icon" id="medium-btn-icon"></div>
+                    <div class="medium-priority-icon" id="medium-btn-icon"></div>
                 </button>
-                <button class="btn-priority" onclick="activePriority(2)" id="low">
+                <button class="btn-priority" onclick="activePriority('low')" id="low">
                     Low
                     <div class="low-priority-icon" id="low-btn-icon"></div>
                 </button>
@@ -119,7 +119,7 @@ function assignedTaskTpl() {
 
 function categoryTaskTpl() {
   return `
-        <div class="task-container" id="category-container">
+        <div class="task-container" id = "category-container">
             <span class="task-name">
                 Category<span class="red-font">*</span>
             </span>
@@ -142,7 +142,7 @@ function categoryTaskTpl() {
             </div>
             <span id="categoryError" class="error-message"></span>
         </div>
-    `;
+        `;
 }
 
 function subtaskTpl() {
@@ -160,7 +160,7 @@ function subtaskTpl() {
                 </ul>
             </div>
         </div>
-    `;
+        `;
 }
 
 function createTaskTemplate(id, task) {
@@ -177,26 +177,26 @@ function createTaskTemplate(id, task) {
             <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
         </div>
     </div>
-  `;
+        `;
 }
 
 function createProgressTemplate(subtasks, numerus, subtaskDone) {
   return `
-    <div class="progress-wrapper">
+        <div class="progress-wrapper">
         <div class="progress-bar">
             <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
         </div>
         <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
     </div>
-  `;
+        `;
 }
 
 function createPersonTemplate(userObj, username) {
-  return `<span class="avatar" style="background: ${userObj.color};">${username}</span>`;
+  return `<span class="avatar" style = "background: ${userObj.color};" > ${username}</span> `;
 }
 
 function createTaskPlaceholder() {
-  return `<div class="empty">No tasks To do</div>`;
+  return `<div class="empty" > No tasks To do</div> `;
 }
 
 // -----------------------------------------------------------------------
