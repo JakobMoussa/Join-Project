@@ -235,7 +235,7 @@ Overlay
   position: absolute;
   top: 50%;
   left: 50%;
-  max-width: 470px;
+  width: 420px;
   height: auto;
   background-color: #fff;
   border-radius: 30px;
@@ -254,7 +254,7 @@ Overlay
 }
 
 .overlay button {
-  background: none;
+  background-color: transparent;
   border: none;
   padding: 0;
   margin: 0;
@@ -356,6 +356,23 @@ Overlay
 
 .section-title {
   color: #2a3647;
+}
+
+/* -------------------------------------------
+Overlay - Detailed Task view 
+---------------------------------------------- */
+
+.btn-subtask {
+  background-image: url(../assets/icons/check_icon_empty.svg);
+  height: 16px;
+  width: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.btn-subtask.checked {
+  background-image: url(../assets/icons/check_icon.svg);
 }
 
 /* -------------------------------------------

@@ -163,18 +163,18 @@ function subtaskTpl() {
     `;
 }
 
-function createTaskTemplate(key, values) {
+function createTaskTemplate(id, task) {
   return `
-    <div class="task" onclick="openOverlay('${key}')">
-        <span class="tag ${createCategoryClass(values.category)}">${values.category}</span>
-        <h4>${values.title}</h4>
-        <p class="task-descr">${values.description}</p>
-        ${checkForSubtask(values.subtask)}
+    <div class="task" onclick="renderSelectedTask('${id}')">
+        <span class="tag ${createCategoryClass(task.category)}">${task.category}</span>
+        <h4>${task.title}</h4>
+        <p class="task-descr">${task.description}</p>
+        ${checkForSubtask(task.subtask)}
         <div class="task-footer">
             <div>
-              ${checkForAssignment(values.assigned)}
+              ${checkForAssignment(task.assigned)}
             </div>
-            <img src="../assets/icons/prio-${values.priority}.svg" alt="Prio ${values.priority}">
+            <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
         </div>
     </div>
   `;
@@ -197,4 +197,98 @@ function createPersonTemplate(userObj, username) {
 
 function createTaskPlaceholder() {
   return `<div class="empty">No tasks To do</div>`;
+}
+
+// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
+
+function createDetailedTaskTemplate(taskId, task) {
+  return `
+    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+        <div class="overlay-header mb-20">
+            <span class="tag-overlay ${createCategoryClass(task.category)}">${task.category}</span>
+            <button onclick="closeOverlay()">
+                <img src="../assets/icons/close.svg" alt="Close">
+            </button>
+        </div>
+
+        <h1 class="mb-20">${task.title}</h1>
+        <p class="mb-20">${task.description}</p>
+
+        <div class="flex mb-20">
+            <div>
+                <div class="section-title mb-20">Due date:</div>
+                <div class="section-title">Priority:</div>
+            </div>
+            <div>
+                <div class="mb-20">${task.date}</div>
+                <div class="overlay-prio"><span>${task.priority}</span><img src="../assets/icons/prio-${task.priority}.svg"
+                        alt="Prio ${task.priority}">
+                </div>
+            </div>
+        </div>
+
+        ${checkForAssignmentDetailView(task.assigned)}
+
+        ${checkForSubtasksDetailView(taskId, task.subtask)}
+
+        <div class="overlay-footer">
+            <button class="overlay-delete" onclick="deleteTask('tasks/${taskId}')">
+                <img src="../assets/icons/delete.svg" alt="Delete">
+                <span>Delete</span>
+            </button>
+            <span class="overlay-devider"></span>
+            <button class="overlay-edit">
+                <img src="../assets/icons/edit.svg" alt="Edit">
+                <span>Edit</span>
+            </button>
+        </div>
+    </div>
+  `;
+}
+
+// -----------------------------------------------------------------------
+
+function createPersonTemplateDetailView(userObj) {
+  return `
+    <div>
+        <div class="section-title mb-14">Assigned to:</div>
+        <ul class="assigned-list mb-20">
+            ${createPersonList(userObj)}
+        </ul>
+    </div>
+  `;
+}
+
+function createPersonListItem(userObj, username) {
+  return `
+    <li class="assigned-person mb-14">
+        <span class="avatar" style="background: ${userObj.color};">${username}</span>
+        <span>${userObj.name}</span>
+    </li>
+  `;
+}
+
+// -----------------------------------------------------------------------
+
+function createSubtaskTemplate(taskId, subtaskArr) {
+  return `
+    <div>
+        <div class="section-title mb-14">Subtasks</div>
+        <ul class="subtasks mb-20">
+            ${createSubtaskList(taskId, subtaskArr)}
+        </ul>
+    </div>
+  `;
+}
+
+function createSubtaskListItem(taskId, subtaskObj) {
+  const checkedClass = subtaskObj.edit ? " checked" : "";
+  return `
+    <li class="subtask-item mb-14" data-id="${subtaskObj.id}">
+      <button class="btn-subtask ${checkedClass}" data-id="${subtaskObj.id}" onclick="checkInOutSubtask('${taskId}', '${subtaskObj.id}')"></button>
+      <label>${subtaskObj.value}</label>
+    </li>
+  `;
 }
