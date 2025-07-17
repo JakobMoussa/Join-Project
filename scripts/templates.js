@@ -165,7 +165,7 @@ function subtaskTpl() {
 
 function createTaskTemplate(key, values) {
   return `
-    <div class="task" onclick="openOverlay('${key}')">
+    <div class="task" onclick="openOverlay('${key}')" ondragover="allowDrop(event)" ondrop="drop(event)">
         <span class="tag ${createCategoryClass(values.category)}">${values.category}</span>
         <h4>${values.title}</h4>
         <p class="task-descr">${values.description}</p>
