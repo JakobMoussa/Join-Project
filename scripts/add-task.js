@@ -6,6 +6,7 @@ let assignedUserArr = [];
 async function initAddTaskPage() {
   await loadUsersTask();
   loadTaskFormTemplate("firstTaskContainer", "secondTaskContainer");
+  activePriority("medium");
 }
 
 async function loadUsersTask() {
@@ -50,13 +51,13 @@ function toggleCategoryDropdown() {
   categoryContainer.classList.toggle("boxshadow");
 }
 
-function activePriority(index) {
+function activePriority(prio) {
   const priorities = ["urgent", "medium", "low"];
-  selectedPriority = priorities[index];
+  selectedPriority = prio;
   priorities.forEach((priority) => {
     const btn = document.getElementById(priority);
     const icon = document.getElementById(`${priority}-btn-icon`);
-    priority == priorities[index] ? prioBtnActive(btn, icon, priority) : prioBtnOff(btn, icon, priority);
+    priority == selectedPriority ? prioBtnActive(btn, icon, priority) : prioBtnOff(btn, icon, priority);
   });
 }
 

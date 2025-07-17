@@ -42,3 +42,17 @@ async function createTask(path = "", data = {}) {
   let responseToJson = await response.json();
   return responseToJson;
 }
+
+async function putData(path = "", data = {}) {
+  await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+}
+
+async function deleteData(path = "") {
+  await fetch(BASE_URL + path + ".json", {
+    method: "DELETE",
+  });
+}

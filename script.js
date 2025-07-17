@@ -75,3 +75,11 @@ function closeAddTask() {
     addTask.classList.toggle("d-none");
   }, 250);
 }
+
+// function onover() {
+//   console.log("On");  
+// }
+
+// function onout() {
+//   console.log("Out");  
+// }
