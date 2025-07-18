@@ -133,7 +133,11 @@ async function checkInOutSubtask(taskId, subtaskId) {
 async function deleteTask(path) {
   await deleteData(path);
   closeOverlay();
-  initBoard();
+  try {
+    await initBoard();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // -----------------------------------------------------------------------
@@ -151,18 +155,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function editTask(taskId) {
   const task = await loadData(`tasks/${taskId}`);
-  const overlayWrapper = document.getElementById("overlay-wrapper");
-  overlayWrapper.innerHTML = "";
-  overlayWrapper.innerHTML += editTaskTpl();
   resetTaskData();
+  prepareOverlay(taskId);
   await loadUsersTask();
   importEditElements(task);
   activePriority(task.priority);
   changeCategorie(task);
   loadSubTasks(task.subtask);
-  task.assigned.forEach((user) => {
-    assignedUser(user.name);
-  });
+  renderAssignedUsers(task);
+}
+
+function prepareOverlay(taskId) {
+  const overlayWrapper = document.getElementById("overlay-wrapper");
+  overlayWrapper.innerHTML = "";
+  overlayWrapper.innerHTML += editTaskTpl();
   overlayWrapper.innerHTML += okBtn(taskId);
 }
 
@@ -198,9 +204,15 @@ function loadSubTasks(arr) {
   });
 }
 
-function saveEditedTask(id) {
-  if (!id) return
-  let path = "tasks/" + id
+function renderAssignedUsers(task) {
+  task.assigned.forEach((user) => {
+    assignedUser(user.name);
+  });
+}
+
+async function saveEditedTask(taskId) {
+  if (!taskId) return
+  let path = "tasks/" + taskId
   let title = document.getElementById("titleInput");
   let description = document.getElementById("description");
   let date = document.getElementById("date");
@@ -208,5 +220,20 @@ function saveEditedTask(id) {
   let validateTask = isTaskDataValid(title, date, selectCategory);
   if (validateTask) return;
   let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask);
-  putData(path, task);
+  await putData(path, task);
+  await initBoard();
+  await renderOpenTask(taskId)
+  exitEditMode();
+}
+
+async function renderOpenTask(taskId) {
+  const overlayRef = document.getElementById("overlay");
+  const task = await loadData(`tasks/${taskId}`);
+  overlayRef.innerHTML = "";
+  overlayRef.innerHTML += createDetailedTaskTemplate(taskId, task);
+}
+
+function exitEditMode() {
+  const overlayWrapper = document.getElementById("overlay-wrapper");
+  overlayWrapper.classList.remove("transit");
 }
