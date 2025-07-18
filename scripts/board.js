@@ -148,3 +148,65 @@ async function initBoard() {
 document.addEventListener("DOMContentLoaded", () => {
   initBoard();
 });
+
+async function editTask(taskId) {
+  const task = await loadData(`tasks/${taskId}`);
+  const overlayWrapper = document.getElementById("overlay-wrapper");
+  overlayWrapper.innerHTML = "";
+  overlayWrapper.innerHTML += editTaskTpl();
+  resetTaskData();
+  await loadUsersTask();
+  importEditElements(task);
+  activePriority(task.priority);
+  changeCategorie(task);
+  loadSubTasks(task.subtask);
+  task.assigned.forEach((user) => {
+    assignedUser(user.name);
+  });
+  overlayWrapper.innerHTML += okBtn(taskId);
+}
+
+function resetTaskData() {
+  subtask = [];
+  users = [];
+  assignedUserArr = [];
+}
+
+function importEditElements(task) {
+  const editTaskContainer = document.querySelector(".editTask-container");
+  editTaskContainer.innerHTML += titleTaskTpl(task.title);
+  editTaskContainer.innerHTML += descriptionTaskTpl(task.description);
+  editTaskContainer.innerHTML += dateTaskTpl(task.date);
+  editTaskContainer.innerHTML += prioTaskTpl();
+  editTaskContainer.innerHTML += assignedTaskTpl();
+  editTaskContainer.innerHTML += categoryTaskTpl();
+  editTaskContainer.innerHTML += subtaskTpl();
+}
+
+function changeCategorie(task) {
+  let selectCategory = document.getElementById("select-category");
+  selectCategory.innerHTML = task.category;
+}
+
+function loadSubTasks(arr) {
+  const subList = document.getElementById("sub-list");
+  if (!arr) return;
+  arr.forEach((task) => {
+    subtask.push(task);
+    task.edit = false;
+    subList.innerHTML += subListItem(task.value, task.id);
+  });
+}
+
+function saveEditedTask(id) {
+  if (!id) return
+  let path = "tasks/" + id
+  let title = document.getElementById("titleInput");
+  let description = document.getElementById("description");
+  let date = document.getElementById("date");
+  let selectCategory = document.getElementById("select-category");
+  let validateTask = isTaskDataValid(title, date, selectCategory);
+  if (validateTask) return;
+  let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask);
+  putData(path, task);
+}

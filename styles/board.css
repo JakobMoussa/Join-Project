@@ -235,7 +235,7 @@ Overlay
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 420px;
+  min-width: 420px;
   height: auto;
   background-color: #fff;
   border-radius: 30px;
@@ -253,7 +253,27 @@ Overlay
   display: none;
 }
 
-.overlay button {
+/* 
+Die allgemeine Regel ".overlay button" setzt alle Buttons innerhalb des Overlays auf einen neutralen, transparenten Stil zurück. 
+Das führt jedoch dazu, dass speziell gestylte Buttons (z. B. mit Hintergrundfarbe) ihr gewünschtes Aussehen verlieren.
+
+Daher wurde eine separate Klasse "btn-transparent" erstellt, 
+um gezielt nur Buttons transparent zu stylen, ohne andere globale Button-Styles zu beeinflussen.
+*/
+
+/* .overlay button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+} */
+
+.btn-transparent {
   background-color: transparent;
   border: none;
   padding: 0;
@@ -446,4 +466,23 @@ Add-Task
 
 .transit {
   transform: translate(calc(-50% + 100vw), -50%);
+}
+
+/* -------------------------------------------
+Edit-Task
+---------------------------------------------- */
+
+.editTask-container {
+  overflow-y: auto;
+  width: 396px;
+  max-height: 664px;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.close-edit-conatiner {
+  display: flex;
+  flex-direction: row-reverse;
 }

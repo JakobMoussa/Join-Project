@@ -41,6 +41,7 @@ button div {
 }
 
 .addTask-Container {
+  width: 364px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -49,7 +50,7 @@ button div {
 .task-container {
   display: flex;
   flex-direction: column;
-  width: 364px;
+  width: auto;
 }
 
 .task-name {
@@ -193,21 +194,21 @@ button div {
 }
 
 .active-urgent-btn {
-  background-color: #ff3d00;
+  background-color: #ff3d00 !important;
   box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
-  color: white;
+  color: white !important;
 }
 
 .active-medium-btn {
-  background-color: #ffa800;
+  background-color: #ffa800 !important;
   box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
-  color: white;
+  color: white !important;
 }
 
 .active-low-btn {
-  background-color: #7ae229;
+  background-color: #7ae229 !important;
   box-shadow: 0px 0px 6px rgb(0, 0, 0, 0) !important;
-  color: white;
+  color: white !important;
 }
 
 .active-urgent-icon {
@@ -345,7 +346,7 @@ button div {
   z-index: 1;
   position: absolute;
   height: auto;
-  width: 364px;
+  width: 100%;
   background-color: white;
 }
 
@@ -414,7 +415,7 @@ button div {
 }
 
 .sub-container {
-  height: 96px;
+  max-height: 96px;
   overflow-y: auto;
 }
 

@@ -93,7 +93,7 @@
                         <button class="add-btn" id="add-task-btn" onclick="addTask('../html-templates/add-task.html')">
                             Add task
                             <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
-                        </button>
+                        </button>                        
                     </div>
                 </header>
 
@@ -135,7 +135,7 @@
 
     <div class="add-task-board d-none" id="add-task-board" onclick="closeAddTask()">
         <div class="task-overlay center_element transit" id="task-overlay" onclick="onclickProtection(event)">
-            <h1>Add Task <button class="close-task" onclick="closeAddTask();"></button></h1>
+            <h1>Add Task <button class="close-task" onclick="closeAddTask()"></button></h1>
             <form class="board-tasks-container" onsubmit="preventFromSubmit(event)">
                 <div class="addTask-Container" id="firstBoardAddTask"></div>
                 <div class="divider-vertical"></div>
