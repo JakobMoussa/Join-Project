@@ -223,17 +223,12 @@ async function saveEditedTask(taskId) {
   await putData(path, task);
   await initBoard();
   await renderOpenTask(taskId)
-  exitEditMode();
 }
 
 async function renderOpenTask(taskId) {
   const overlayRef = document.getElementById("overlay");
   const task = await loadData(`tasks/${taskId}`);
   overlayRef.innerHTML = "";
-  overlayRef.innerHTML += createDetailedTaskTemplate(taskId, task);
-}
-
-function exitEditMode() {
-  const overlayWrapper = document.getElementById("overlay-wrapper");
-  overlayWrapper.classList.remove("transit");
+  let taskTemplate = createDetailedTaskTemplate(taskId, task).replace("transit", "");
+  overlayRef.innerHTML += taskTemplate;
 }
