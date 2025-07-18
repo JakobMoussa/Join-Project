@@ -188,11 +188,6 @@ function createTaskTemplate(id, task) {
         <h4>${task.title}</h4>
         <p class="task-descr">${task.description}</p>
         ${checkForSubtask(task.subtask)}
-    <div class="task" onclick="openOverlay('${key}')" ondragover="allowDrop(event)" ondrop="drop(event)">
-        <span class="tag ${createCategoryClass(values.category)}">${values.category}</span>
-        <h4>${values.title}</h4>
-        <p class="task-descr">${values.description}</p>
-        ${checkForSubtask(values.subtask)}
         <div class="task-footer">
             <div>
               ${checkForAssignment(task.assigned)}
