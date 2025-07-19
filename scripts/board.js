@@ -187,6 +187,7 @@ function importEditElements(task) {
   editTaskContainer.innerHTML += assignedTaskTpl();
   editTaskContainer.innerHTML += categoryTaskTpl();
   editTaskContainer.innerHTML += subtaskTpl();
+  taskStatus = task.status;
 }
 
 function changeCategorie(task) {
@@ -219,7 +220,8 @@ async function saveEditedTask(taskId) {
   let selectCategory = document.getElementById("select-category");
   let validateTask = isTaskDataValid(title, date, selectCategory);
   if (validateTask) return;
-  let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask);
+
+  let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask, taskStatus);
   await putData(path, task);
   await initBoard();
   await renderOpenTask(taskId)
@@ -231,4 +233,28 @@ async function renderOpenTask(taskId) {
   overlayRef.innerHTML = "";
   let taskTemplate = createDetailedTaskTemplate(taskId, task).replace("transit", "");
   overlayRef.innerHTML += taskTemplate;
+}
+
+async function renderTaskFromBoard() {
+  let validate = validateTaskFromBoard();  
+  if (validate) return;
+  let createTask = await createTaskForm();
+  closeAddTask();
+  clearTaskFormContainers();
+  await initBoard();
+}
+
+function clearTaskFormContainers() {
+  let firstBoardAddTask = document.getElementById('firstBoardAddTask');
+  let secondBoardAddTask = document.getElementById('secondBoardAddTask');
+  firstBoardAddTask.innerHTML = "";
+  secondBoardAddTask.innerHTML = "";
+}
+
+function validateTaskFromBoard() {
+  let title = document.getElementById("titleInput");
+  let date = document.getElementById("date");
+  let selectCategory = document.getElementById("select-category");
+  let validateTask = isTaskDataValid(title, date, selectCategory);
+  return validateTask;
 }
