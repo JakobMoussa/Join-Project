@@ -258,3 +258,39 @@ function validateTaskFromBoard() {
   let validateTask = isTaskDataValid(title, date, selectCategory);
   return validateTask;
 }
+
+
+  /*  Drag & Drop function */
+
+  function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+
+    const taskId = ev.dataTransfer.getData("text");
+    const taskElement = document.getElementById(taskId);
+
+    const targetColumn = ev.target.closest('.column');
+    if (targetColumn) {
+        targetColumn.appendChild(taskElement);
+
+        const newStatus = targetColumn.getAttribute("data-task");
+        updateTaskStatus(taskId, newStatus);
+    }
+}
+
+function updateTaskStatus(taskId, newStatus) {
+    const task = tasks.find(t => t.id === taskId);
+    if (task) {
+        task.status = newStatus;
+        saveTasksToBackend(); 
+    }
+}
+
+  /*  -------------  */
