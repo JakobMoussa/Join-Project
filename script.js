@@ -9,7 +9,7 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {});
+document.addEventListener("DOMContentLoaded", async () => { });
 
 function openOverlay() {
   const overlay = document.querySelectorAll(".overlay");
@@ -44,10 +44,16 @@ function onclickProtection(event) {
   event.stopPropagation();
 }
 
-async function addTask() {
+async function addTask(status) {  
+  updateTaskStatus(status);
   openAddTask();
-  loadUsersTask();
+  await loadUsersTask();
   loadTaskFormTemplate("firstBoardAddTask", "secondBoardAddTask");
+}
+
+function updateTaskStatus(status) {
+  if (!status) return;
+  taskStatus = status;
 }
 
 async function loadHTML(link) {
@@ -67,6 +73,7 @@ function openAddTask() {
 }
 
 function closeAddTask() {
+  clearTaskFormContainers();
   const addTask = document.getElementById("add-task-board");
   const container = document.getElementById("task-overlay");
   addTask.classList.toggle("transparent-background");
@@ -75,11 +82,3 @@ function closeAddTask() {
     addTask.classList.toggle("d-none");
   }, 250);
 }
-
-// function onover() {
-//   console.log("On");  
-// }
-
-// function onout() {
-//   console.log("Out");  
-// }

@@ -90,7 +90,7 @@
                             <span class="search-devider"></span>
                             <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
                         </div>
-                        <button class="add-btn" id="add-task-btn" onclick="addTask('../html-templates/add-task.html')">
+                        <button class="add-btn" id="add-task-btn" onclick="addTask('to-do')">
                             Add task
                             <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
                         </button>
@@ -98,10 +98,10 @@
                 </header>
 
                 <div class="board">
-                    <div class="column" data-task="to-do">
+                    <div class="column" data-task="to-do" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>To do</h3>
-                            <img src="../assets/icons/plus_button.svg" alt="plus-button">
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button" onclick="addTask('to-do')">
                         </div>
 
                         <!-- <div class="empty">No tasks To do</div> -->
@@ -111,14 +111,14 @@
                     <div class="column" data-task="in-progress" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>In progress</h3>
-                            <img src="../assets/icons/plus_button.svg" alt="plus-button">
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button" onclick="addTask('in-progress')">
                         </div>
                     </div>
 
                     <div class="column" data-task="await-feedback" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Await feedback</h3>
-                            <img src="../assets/icons/plus_button.svg" alt="plus-button">
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button" onclick="addTask('await-feedback')">
                         </div>
                     </div>
                     
@@ -135,7 +135,7 @@
 
     <div class="add-task-board d-none" id="add-task-board" onclick="closeAddTask()">
         <div class="task-overlay center_element transit" id="task-overlay" onclick="onclickProtection(event)">
-            <h1>Add Task <button class="close-task" onclick="closeAddTask();"></button></h1>
+            <h1>Add Task <button class="close-task" onclick="closeAddTask()"></button></h1>
             <form class="board-tasks-container" onsubmit="preventFromSubmit(event)">
                 <div class="addTask-Container" id="firstBoardAddTask"></div>
                 <div class="divider-vertical"></div>
@@ -148,7 +148,7 @@
                         Clear
                         <div class="clear-icon"></div>
                     </button>
-                    <button class="btn-create">
+                    <button class="btn-create" onclick="renderTaskFromBoard()">
                         Create Task
                         <img src="../assets/icons/check.svg" alt="">
                     </button>

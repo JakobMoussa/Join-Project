@@ -133,7 +133,11 @@ async function checkInOutSubtask(taskId, subtaskId) {
 async function deleteTask(path) {
   await deleteData(path);
   closeOverlay();
-  initBoard();
+  try {
+    await initBoard();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // -----------------------------------------------------------------------
@@ -148,3 +152,109 @@ async function initBoard() {
 document.addEventListener("DOMContentLoaded", () => {
   initBoard();
 });
+
+async function editTask(taskId) {
+  const task = await loadData(`tasks/${taskId}`);
+  resetTaskData();
+  prepareOverlay(taskId);
+  await loadUsersTask();
+  importEditElements(task);
+  activePriority(task.priority);
+  changeCategorie(task);
+  loadSubTasks(task.subtask);
+  renderAssignedUsers(task);
+}
+
+function prepareOverlay(taskId) {
+  const overlayWrapper = document.getElementById("overlay-wrapper");
+  overlayWrapper.innerHTML = "";
+  overlayWrapper.innerHTML += editTaskTpl();
+  overlayWrapper.innerHTML += okBtn(taskId);
+}
+
+function resetTaskData() {
+  subtask = [];
+  users = [];
+  assignedUserArr = [];
+}
+
+function importEditElements(task) {
+  const editTaskContainer = document.querySelector(".editTask-container");
+  editTaskContainer.innerHTML += titleTaskTpl(task.title);
+  editTaskContainer.innerHTML += descriptionTaskTpl(task.description);
+  editTaskContainer.innerHTML += dateTaskTpl(task.date);
+  editTaskContainer.innerHTML += prioTaskTpl();
+  editTaskContainer.innerHTML += assignedTaskTpl();
+  editTaskContainer.innerHTML += categoryTaskTpl();
+  editTaskContainer.innerHTML += subtaskTpl();
+  taskStatus = task.status;
+}
+
+function changeCategorie(task) {
+  let selectCategory = document.getElementById("select-category");
+  selectCategory.innerHTML = task.category;
+}
+
+function loadSubTasks(arr) {
+  const subList = document.getElementById("sub-list");
+  if (!arr) return;
+  arr.forEach((task) => {
+    subtask.push(task);
+    task.edit = false;
+    subList.innerHTML += subListItem(task.value, task.id);
+  });
+}
+
+function renderAssignedUsers(task) {
+  task.assigned.forEach((user) => {
+    assignedUser(user.name);
+  });
+}
+
+async function saveEditedTask(taskId) {
+  if (!taskId) return
+  let path = "tasks/" + taskId
+  let title = document.getElementById("titleInput");
+  let description = document.getElementById("description");
+  let date = document.getElementById("date");
+  let selectCategory = document.getElementById("select-category");
+  let validateTask = isTaskDataValid(title, date, selectCategory);
+  if (validateTask) return;
+
+  let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask, taskStatus);
+  await putData(path, task);
+  await initBoard();
+  await renderOpenTask(taskId)
+}
+
+async function renderOpenTask(taskId) {
+  const overlayRef = document.getElementById("overlay");
+  const task = await loadData(`tasks/${taskId}`);
+  overlayRef.innerHTML = "";
+  let taskTemplate = createDetailedTaskTemplate(taskId, task).replace("transit", "");
+  overlayRef.innerHTML += taskTemplate;
+}
+
+async function renderTaskFromBoard() {
+  let validate = validateTaskFromBoard();  
+  if (validate) return;
+  let createTask = await createTaskForm();
+  closeAddTask();
+  clearTaskFormContainers();
+  await initBoard();
+}
+
+function clearTaskFormContainers() {
+  let firstBoardAddTask = document.getElementById('firstBoardAddTask');
+  let secondBoardAddTask = document.getElementById('secondBoardAddTask');
+  firstBoardAddTask.innerHTML = "";
+  secondBoardAddTask.innerHTML = "";
+}
+
+function validateTaskFromBoard() {
+  let title = document.getElementById("titleInput");
+  let date = document.getElementById("date");
+  let selectCategory = document.getElementById("select-category");
+  let validateTask = isTaskDataValid(title, date, selectCategory);
+  return validateTask;
+}
