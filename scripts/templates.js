@@ -183,7 +183,7 @@ function okBtn(taskId) {
 
 function createTaskTemplate(id, task) {
   return `
-    <div class="task" data-id="${id}" onclick="renderSelectedTask('${id}')">
+    <div class="task" data-id="${id}" id="${id}" draggable="true" ondragstart="drag(event)" onclick="renderSelectedTask('${id}')">
         <span class="tag ${createCategoryClass(task.category)}">${task.category}</span>
         <h4>${task.title}</h4>
         <p class="task-descr">${task.description}</p>
@@ -303,3 +303,5 @@ function createSubtaskListItem(taskId, subtaskObj) {
     </li>
   `;
 }
+
+// ---------------------Contact-Overlay- ---------------------------------------

@@ -72,9 +72,29 @@
         <section id="contact-wrapper">
 
             <div class="contacts-bar">
-                <button class="add-contact-btn">
+                <button class="add-contact-btn" onclick="openAddContentOverlay()">
                     Add new contact <img src="/assets/icons/add-person-icon.png" class="add-person-icon"></img>
                 </button>
+                <div id="add-contact-oberlay" class="overlay hidden" onclick="closeAddContactOverlay()">
+                    <div class="overlay-content" onclick="event.stopPropagation()">
+                        <h2>Add New Contact</h2>
+                        <form ansubmit="submitConactForm(event)">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" required>
+
+                            <button type="submit">Save Contact</button>
+                            <button type="button" onclick="closeAddContactOverlay()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+
 
                 <div class="contact-group">
                     <div class="group-letter">A</div>
