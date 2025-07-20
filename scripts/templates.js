@@ -1,5 +1,5 @@
 function subListItem(task, id) {
-    return `
+  return `
         <li class="sub-item">
             <span>•</span>
             <input type="text" value="${task}" id="sub-input-${id}" disabled>
@@ -9,11 +9,11 @@ function subListItem(task, id) {
                 <button class="sub-btn-delete" onclick="removeSubItem(${id})"></button>
             </div>
         </li>
-    `
+    `;
 }
 
 function subListItemEdit(task, id) {
-    return `
+  return `
         <li class="sub-item-editing">
             <input type="text" id="sub-input-${id}" value="${task}">
             <div class="sub-btn-container">
@@ -22,27 +22,27 @@ function subListItemEdit(task, id) {
                 <button class="sub-btn-conf" onclick="editSubItem(${id}, false)"></button>
             </div>
         </li>
-    `
+    `;
 }
 
 function singleUserContainer(style, initials, name = "XX", color = "red") {
-    return `
+  return `
         <div class="${style}" onclick="assignedUser('${name}')">
             <div class="user-icon" style="background-color: ${color};">${initials}</div>
             <span class="user-name">${name}</span>
             <button class="btn-check"></button>
         </div>
-    `
+    `;
 }
 
 function userIcon(color = "red", initials = "xx", name = "xx") {
-    return `
+  return `
         <div class="user-icon" onclick="assignedUser('${name}')" style="background-color: ${color}">${initials}</div>
-    `
+    `;
 }
 
 function titleTaskTpl(title = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="titleInput" class="task-name">
                 Title<span class="red-font">*</span>
@@ -50,20 +50,20 @@ function titleTaskTpl(title = "") {
             <input type="text" class="input-task" id="titleInput" placeholder="Enter a title" value="${title}">
             <span id="titleError" class="error-message"></span>
         </div>
-    `
+    `;
 }
 
 function descriptionTaskTpl(description = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="description-input" class="task-name">Description</label>
             <textarea name="" id="description" class="textarea-description">${description}</textarea>
         </div>
-    `
+    `;
 }
 
 function dateTaskTpl(date = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="date" class="task-name">
                 Due date<span class="red-font">*</span>
@@ -71,11 +71,11 @@ function dateTaskTpl(date = "") {
             <input type="date" class="input-task" id="date" value="${date}">
             <span id="dateError" class="error-message"></span>
         </div>
-    `
+    `;
 }
 
 function prioTaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Priority</span>
             <div class="priority-btn-container">
@@ -93,11 +93,11 @@ function prioTaskTpl() {
                 </button>
             </div>
         </div>
-    `
+    `;
 }
 
 function assignedTaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Assigned to:</span>
             <div class="dropdown-container">
@@ -114,11 +114,11 @@ function assignedTaskTpl() {
             <div class="assigned-icons-container" id="icons-container">
             </div>
         </div>
-    `
+    `;
 }
 
 function categoryTaskTpl() {
-    return `
+  return `
         <div class="task-container" id = "category-container">
             <span class="task-name">
                 Category<span class="red-font">*</span>
@@ -142,11 +142,11 @@ function categoryTaskTpl() {
             </div>
             <span id="categoryError" class="error-message"></span>
         </div>
-        `
+        `;
 }
 
 function subtaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Subtask</span>
             <div class="dropdown-container">
@@ -160,30 +160,30 @@ function subtaskTpl() {
                 </ul>
             </div>
         </div>
-        `
+        `;
 }
 
 function editTaskTpl() {
-    return `
+  return `
         <div class="close-edit-conatiner">
             <button class="close-task" onclick="closeOverlay()"></button>
         </div>
         <div class="editTask-container"></div>        
-    `
+    `;
 }
 
 function okBtn(taskId) {
-    return `
+  return `
         <button class="btn-create" onclick="saveEditedTask('${taskId}')">
             Ok
             <img src="../assets/icons/check.svg" alt="">
         </button>
-    `
+    `;
 }
 
 function createTaskTemplate(id, task) {
-    return `
-    <div class="task" onclick="renderSelectedTask('${id}')">
+  return `
+    <div class="task" data-id="${id}" onclick="renderSelectedTask('${id}')">
         <span class="tag ${createCategoryClass(task.category)}">${task.category}</span>
         <h4>${task.title}</h4>
         <p class="task-descr">${task.description}</p>
@@ -195,34 +195,30 @@ function createTaskTemplate(id, task) {
             <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
         </div>
     </div>
-        `
+  `;
 }
 
 function createProgressTemplate(subtasks, numerus, subtaskDone) {
-    return `
+  return `
         <div class="progress-wrapper">
         <div class="progress-bar">
             <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
         </div>
         <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
     </div>
-        `
+  `;
 }
 
 function createPersonTemplate(userObj, username) {
-    return `<span class="avatar" style = "background: ${userObj.color};" > ${username}</span> `;
+  return `<span class="avatar" style="background: ${userObj.color};" > ${username}</span>`;
 }
 
 function createTaskPlaceholder() {
-    return `<div class="empty" > No tasks To do</div> `;
+  return `<div class="empty"> No tasks To do</div>`;
 }
 
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-
 function createDetailedTaskTemplate(taskId, task) {
-    return `
+  return `
     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
         <div class="overlay-header mb-20">
             <span class="tag-overlay ${createCategoryClass(task.category)}">${task.category}</span>
@@ -241,8 +237,9 @@ function createDetailedTaskTemplate(taskId, task) {
             </div>
             <div>
                 <div class="mb-20">${task.date}</div>
-                <div class="overlay-prio"><span>${task.priority}</span><img src="../assets/icons/prio-${task.priority}.svg"
-                        alt="Prio ${task.priority}">
+                <div class="overlay-prio">
+                    <span class="capitalize">${task.priority}</span>
+                    <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
                 </div>
             </div>
         </div>
@@ -263,50 +260,46 @@ function createDetailedTaskTemplate(taskId, task) {
             </button>
         </div>
     </div>
-  `
+  `;
 }
 
-// -----------------------------------------------------------------------
-
 function createPersonTemplateDetailView(userObj) {
-    return `
+  return `
     <div>
         <div class="section-title mb-14">Assigned to:</div>
         <ul class="assigned-list mb-20">
             ${createPersonList(userObj)}
         </ul>
     </div>
-  `
+  `;
 }
 
 function createPersonListItem(userObj, username) {
-    return `
+  return `
     <li class="assigned-person mb-14">
         <span class="avatar" style="background: ${userObj.color};">${username}</span>
         <span>${userObj.name}</span>
     </li>
-  `
+  `;
 }
 
-// -----------------------------------------------------------------------
-
 function createSubtaskTemplate(taskId, subtaskArr) {
-    return `
+  return `
     <div>
         <div class="section-title mb-14">Subtasks</div>
         <ul class="subtasks mb-20">
             ${createSubtaskList(taskId, subtaskArr)}
         </ul>
     </div>
-  `
+  `;
 }
 
 function createSubtaskListItem(taskId, subtaskObj) {
-    const checkedClass = subtaskObj.edit ? " checked" : "";
-    return `
+  const checkedClass = subtaskObj.edit ? " checked" : "";
+  return `
     <li class="subtask-item mb-14" data-id="${subtaskObj.id}">
       <button class="btn-subtask btn-transparent ${checkedClass}" data-id="${subtaskObj.id}" onclick="checkInOutSubtask('${taskId}', '${subtaskObj.id}')"></button>
       <label>${subtaskObj.value}</label>
     </li>
-  `
+  `;
 }

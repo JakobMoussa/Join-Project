@@ -66,10 +66,6 @@ function addPlaceholdersToEmptyColumns() {
   });
 }
 
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-
 async function renderSelectedTask(taskId) {
   const overlayRef = document.getElementById("overlay");
   const task = await loadData(`tasks/${taskId}`);
@@ -78,8 +74,6 @@ async function renderSelectedTask(taskId) {
   overlayRef.innerHTML += createDetailedTaskTemplate(taskId, task);
   openOverlay();
 }
-
-// -----------------------------------------------------------------------
 
 function checkForAssignmentDetailView(assignedUserArr) {
   if (assignedUserArr) {
@@ -97,8 +91,6 @@ function createPersonList(assignedUserArr) {
   });
   return html;
 }
-
-// -----------------------------------------------------------------------
 
 function checkForSubtasksDetailView(taskId, subtaskArr) {
   if (subtaskArr) {
@@ -128,8 +120,6 @@ async function checkInOutSubtask(taskId, subtaskId) {
   }
 }
 
-// -----------------------------------------------------------------------
-
 async function deleteTask(path) {
   await deleteData(path);
   closeOverlay();
@@ -140,13 +130,43 @@ async function deleteTask(path) {
   }
 }
 
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
+async function searchTasks() {
+  const tasks = await loadData("/tasks");
+  const searchInput = document.getElementById("search-input").value.toLowerCase();
+  const tasksObjLength = Object.keys(tasks).length;
+
+  for (let task in tasks) {
+    const taskElement = document.querySelector(`.task[data-id="${task}"]`);
+    if (taskElement) {
+      const isVisible = tasks[task].title.toLowerCase().includes(searchInput) || tasks[task].description.toLowerCase().includes(searchInput);
+      taskElement.classList.toggle("hidden", !isVisible);
+    }
+  }
+
+  document.querySelectorAll(".empty").forEach((element) => element.classList.add("hidden"));
+
+  const taskElements = document.querySelectorAll(".task.hidden");
+  checkIfNoResults(tasksObjLength, taskElements);
+
+  if (!searchInput) {
+    document.querySelectorAll(".empty").forEach((element) => element.classList.remove("hidden"));
+  }
+}
+
+function checkIfNoResults(totalTaskCount, hiddenTaskElements) {
+  let noResultsRef = document.querySelector(".no-results");
+
+  if (totalTaskCount === hiddenTaskElements.length) {
+    noResultsRef.classList.remove("hidden");
+  } else {
+    noResultsRef.classList.add("hidden");
+  }
+}
 
 async function initBoard() {
-  let boardData = await loadData("tasks/");
-  renderBoard(boardData);
+  let taskObj = await loadData("tasks/");
+  document.getElementById("search-input").value = "";
+  renderBoard(taskObj);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -212,8 +232,8 @@ function renderAssignedUsers(task) {
 }
 
 async function saveEditedTask(taskId) {
-  if (!taskId) return
-  let path = "tasks/" + taskId
+  if (!taskId) return;
+  let path = "tasks/" + taskId;
   let title = document.getElementById("titleInput");
   let description = document.getElementById("description");
   let date = document.getElementById("date");
@@ -224,7 +244,7 @@ async function saveEditedTask(taskId) {
   let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask, taskStatus);
   await putData(path, task);
   await initBoard();
-  await renderOpenTask(taskId)
+  await renderOpenTask(taskId);
 }
 
 async function renderOpenTask(taskId) {
@@ -236,7 +256,7 @@ async function renderOpenTask(taskId) {
 }
 
 async function renderTaskFromBoard() {
-  let validate = validateTaskFromBoard();  
+  let validate = validateTaskFromBoard();
   if (validate) return;
   let createTask = await createTaskForm();
   closeAddTask();
@@ -245,8 +265,8 @@ async function renderTaskFromBoard() {
 }
 
 function clearTaskFormContainers() {
-  let firstBoardAddTask = document.getElementById('firstBoardAddTask');
-  let secondBoardAddTask = document.getElementById('secondBoardAddTask');
+  let firstBoardAddTask = document.getElementById("firstBoardAddTask");
+  let secondBoardAddTask = document.getElementById("secondBoardAddTask");
   firstBoardAddTask.innerHTML = "";
   secondBoardAddTask.innerHTML = "";
 }

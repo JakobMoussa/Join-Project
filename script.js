@@ -9,7 +9,7 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => { });
+document.addEventListener("DOMContentLoaded", async () => {});
 
 function openOverlay() {
   const overlay = document.querySelectorAll(".overlay");
@@ -44,7 +44,7 @@ function onclickProtection(event) {
   event.stopPropagation();
 }
 
-async function addTask(status) {  
+async function addTask(status) {
   updateTaskStatus(status);
   openAddTask();
   await loadUsersTask();
