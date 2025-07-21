@@ -18,12 +18,16 @@ function countTasks(tasks) {
 function checkForUrgentTasks(tasks, taskRef, deadlineRef) {
   let urgentTask = Object.values(tasks).filter((task) => task.priority === "urgent");
   let sortedTaskObj = urgentTask.sort((a, b) => new Date(a.date) - new Date(b.date));
-  let dateString = sortedTaskObj[0].date;
-  let dateObj = new Date(dateString);
   let dateFormat = { year: "numeric", month: "long", day: "numeric" };
 
   taskRef.innerText = urgentTask.length;
-  deadlineRef.innerText = dateObj.toLocaleDateString("en-US", dateFormat);
+
+  if (sortedTaskObj.length > 0 && sortedTaskObj[0].date) {
+    let dateObj = new Date(sortedTaskObj[0].date);
+    deadlineRef.innerText = dateObj.toLocaleDateString("en-US", dateFormat);
+  } else {
+    deadlineRef.innerText = "-";
+  }
 }
 
 async function initSummary() {
