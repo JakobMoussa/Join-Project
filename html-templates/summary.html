@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/summary.css">
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
-    <script src="../script.js"></script>
+    <script src="/script.js"></script>
+    <script src="/scripts/api.js"></script>
+    <script src="/scripts/summary.js"></script>
 </head>
 
 <body>
@@ -81,58 +83,58 @@
                 <section class="dashboard-summary">
                     <div class="parent">
 
-                        <div class="div1 metric-item">
+                        <a href="board.html" class="div1 metric-item">
                             <div class="metric-icon"></div>
                             <div>
-                                <span class="metric-count">1</span>
+                                <span class="metric-count" data-task="to-do"></span>
                                 <span class="metric-label">To-do</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="div2 metric-item">
+                        <a href="board.html" class="div2 metric-item">
                             <div class="metric-icon"></div>
                             <div>
-                                <span class="metric-count">1</span>
+                                <span class="metric-count" data-task="done"></span>
                                 <span class="metric-label">Done</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="div3 metric-item">
+                        <a href="board.html" class="div3 metric-item">
                             <div class="metric-urgent-wrapper">
                                 <div class="metric-urgent-icon">
                                     <img src="../assets/icons/urgent.svg" alt="urgent">
                                 </div>
                                 <div>
-                                    <span class="metric-count">1</span>
+                                    <span class="metric-count" data-task="urgent"></span>
                                     <span class="metric-label">Urgent</span>
                                 </div>
                             </div>
                             <span class="divider-urgent"></span>
                             <div class=" deadline">
-                                <span class="metric-date">October 16, 2022</span>
+                                <span class="metric-date" data-task="task-deadline"></span>
                                 <span class="metric-label">Upcoming Deadline</span>
                             </div>
+                        </a>
 
-                        </div>
-
-                        <div class="div4 metric-item metric-bottom-row">
-                            <span class="metric-count">5</span>
+                        <a href="board.html" class="div4 metric-item metric-bottom-row">
+                            <span class="metric-count" data-task="total-tasks"></span>
                             <span class="metric-label">Tasks in Board</span>
-                        </div>
+                        </a>
 
-                        <div class="div5 metric-item metric-bottom-row">
-                            <span class="metric-count">2</span>
+                        <a href="board.html" class="div5 metric-item metric-bottom-row">
+                            <span class="metric-count" data-task="in-progress"></span>
                             <span class="metric-label">Tasks in Progress</span>
-                        </div>
+                        </a>
 
-                        <div class="div6 metric-item metric-bottom-row">
-                            <span class="metric-count">2</span>
+                        <a href="board.html" class="div6 metric-item metric-bottom-row">
+                            <span class="metric-count" data-task="await-feedback"></span>
                             <span class="metric-label">Awaiting Feedback</span>
-                        </div>
+                        </a>
+
                     </div>
 
                     <div class="greeting">
-                        <h2>Good morning</h2>
+                        <h2>Good morning!</h2>
                     </div>
 
                 </section>

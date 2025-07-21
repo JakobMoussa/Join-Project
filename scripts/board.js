@@ -142,9 +142,7 @@ async function searchTasks() {
       taskElement.classList.toggle("hidden", !isVisible);
     }
   }
-
   document.querySelectorAll(".empty").forEach((element) => element.classList.add("hidden"));
-
   const taskElements = document.querySelectorAll(".task.hidden");
   checkIfNoResults(tasksObjLength, taskElements);
 
