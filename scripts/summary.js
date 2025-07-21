@@ -16,7 +16,7 @@ function countTasks(tasks) {
 }
 
 function checkForUrgentTasks(tasks, taskRef, deadlineRef) {
-  let urgentTask = Object.values(tasks).filter((task) => task.priority === "urgent");
+  let urgentTask = Object.values(tasks).filter((task) => task.priority === "urgent" && task.status !== "done");
   let sortedTaskObj = urgentTask.sort((a, b) => new Date(a.date) - new Date(b.date));
   let dateFormat = { year: "numeric", month: "long", day: "numeric" };
 
