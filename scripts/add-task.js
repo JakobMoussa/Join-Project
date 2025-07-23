@@ -210,6 +210,12 @@ async function createTaskForm() {
   await createTask("tasks", task);
 }
 
+function runInitIfValid() {
+  let validateTask = isTaskDataValid();
+  if (!validateTask) return;
+  initAddTaskPage();
+}
+
 function isTaskDataValid() {
   let isValid = true;
   const formIds = getFormElementsIds();
