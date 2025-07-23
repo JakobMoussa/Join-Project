@@ -9,14 +9,18 @@
     <link rel="icon" type="image/x-icon" href="../assets/icons/flavicon.png" />
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/siderbar.css">
-    <link rel="stylesheet" href="/styles/contacts.css">
-    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="../styles/contacts.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
-    <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <!-- <link rel="stylesheet" href="../styles/board.css"> -->
+
+    <script src="../script.js"></script>
+    <script src="../scripts/templates.js"></script>
+    <script src="../script.js"></script>
 </head>
 
 <body>
-
     <div class="sidebar-wrapper">
         <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
         <nav class="nav-wrapper">
@@ -72,27 +76,12 @@
         <section id="contact-wrapper">
 
             <div class="contacts-bar">
-                <button class="add-contact-btn" onclick="openAddContentOverlay()">
+                <button class="add-contact-btn" onclick="openAddContactOverlay()">
                     Add new contact <img src="/assets/icons/add-person-icon.png" class="add-person-icon"></img>
                 </button>
-                <div id="add-contact-oberlay" class="overlay hidden" onclick="closeAddContactOverlay()">
-                    <div class="overlay-content" onclick="event.stopPropagation()">
-                        <h2>Add New Contact</h2>
-                        <form ansubmit="submitConactForm(event)">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" required>
+        
 
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
-
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" required>
-
-                            <button type="submit">Save Contact</button>
-                            <button type="button" onclick="closeAddContactOverlay()">Cancel</button>
-                        </form>
-                    </div>
-                </div>
+                 <!-- <div id="overlay" class="overlay hidden" onclick="closeOverlay()"></div> -->
 
 
 
