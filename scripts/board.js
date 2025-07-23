@@ -66,10 +66,6 @@ function addPlaceholdersToEmptyColumns() {
   });
 }
 
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-
 async function renderSelectedTask(taskId) {
   const overlayRef = document.getElementById("overlay");
   const task = await loadData(`tasks/${taskId}`);
@@ -78,8 +74,6 @@ async function renderSelectedTask(taskId) {
   overlayRef.innerHTML += createDetailedTaskTemplate(taskId, task);
   openOverlay();
 }
-
-// -----------------------------------------------------------------------
 
 function checkForAssignmentDetailView(assignedUserArr) {
   if (assignedUserArr) {
@@ -97,8 +91,6 @@ function createPersonList(assignedUserArr) {
   });
   return html;
 }
-
-// -----------------------------------------------------------------------
 
 function checkForSubtasksDetailView(taskId, subtaskArr) {
   if (subtaskArr) {
@@ -128,8 +120,6 @@ async function checkInOutSubtask(taskId, subtaskId) {
   }
 }
 
-// -----------------------------------------------------------------------
-
 async function deleteTask(path) {
   await deleteData(path);
   closeOverlay();
@@ -140,13 +130,41 @@ async function deleteTask(path) {
   }
 }
 
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
+async function searchTasks() {
+  const tasks = await loadData("/tasks");
+  const searchInput = document.getElementById("search-input").value.toLowerCase();
+  const tasksObjLength = Object.keys(tasks).length;
+
+  for (let task in tasks) {
+    const taskElement = document.querySelector(`.task[data-id="${task}"]`);
+    if (taskElement) {
+      const isVisible = tasks[task].title.toLowerCase().includes(searchInput) || tasks[task].description.toLowerCase().includes(searchInput);
+      taskElement.classList.toggle("hidden", !isVisible);
+    }
+  }
+  document.querySelectorAll(".empty").forEach((element) => element.classList.add("hidden"));
+  const taskElements = document.querySelectorAll(".task.hidden");
+  checkIfNoResults(tasksObjLength, taskElements);
+
+  if (!searchInput) {
+    document.querySelectorAll(".empty").forEach((element) => element.classList.remove("hidden"));
+  }
+}
+
+function checkIfNoResults(totalTaskCount, hiddenTaskElements) {
+  let noResultsRef = document.querySelector(".no-results");
+
+  if (totalTaskCount === hiddenTaskElements.length) {
+    noResultsRef.classList.remove("hidden");
+  } else {
+    noResultsRef.classList.add("hidden");
+  }
+}
 
 async function initBoard() {
-  let boardData = await loadData("tasks/");
-  renderBoard(boardData);
+  let taskObj = await loadData("tasks/");
+  document.getElementById("search-input").value = "";
+  renderBoard(taskObj);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -206,25 +224,22 @@ function loadSubTasks(arr) {
 }
 
 function renderAssignedUsers(task) {
+  if (!task.assigned) return;
   task.assigned.forEach((user) => {
     assignedUser(user.name);
   });
 }
 
 async function saveEditedTask(taskId) {
-  if (!taskId) return
-  let path = "tasks/" + taskId
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("description");
-  let date = document.getElementById("date");
-  let selectCategory = document.getElementById("select-category");
-  let validateTask = isTaskDataValid(title, date, selectCategory);
-  if (validateTask) return;
-
-  let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask, taskStatus);
+  if (!taskId) return;
+  let path = "tasks/" + taskId;
+  let validateTask = isTaskDataValid();
+  if (!validateTask) return;
+  let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus);
   await putData(path, task);
   await initBoard();
-  await renderOpenTask(taskId)
+  await renderOpenTask(taskId);
+  resetTaskData();
 }
 
 async function renderOpenTask(taskId) {
@@ -236,61 +251,52 @@ async function renderOpenTask(taskId) {
 }
 
 async function renderTaskFromBoard() {
-  let validate = validateTaskFromBoard();  
-  if (validate) return;
-  let createTask = await createTaskForm();
+  let validate = isTaskDataValid();
+  if (!validate) return;
+  await createTaskForm();
   closeAddTask();
   clearTaskFormContainers();
   await initBoard();
 }
 
 function clearTaskFormContainers() {
-  let firstBoardAddTask = document.getElementById('firstBoardAddTask');
-  let secondBoardAddTask = document.getElementById('secondBoardAddTask');
+  let firstBoardAddTask = document.getElementById("firstBoardAddTask");
+  let secondBoardAddTask = document.getElementById("secondBoardAddTask");
   firstBoardAddTask.innerHTML = "";
   secondBoardAddTask.innerHTML = "";
 }
 
-function validateTaskFromBoard() {
-  let title = document.getElementById("titleInput");
-  let date = document.getElementById("date");
-  let selectCategory = document.getElementById("select-category");
-  let validateTask = isTaskDataValid(title, date, selectCategory);
-  return validateTask;
-}
+/*  Drag & Drop function */
 
-
-  /*  Drag & Drop function */
-
-  function allowDrop(ev) {
-    ev.preventDefault();
+function allowDrop(ev) {
+  ev.preventDefault();
 }
 
 function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData("text", ev.target.id);
 }
 
 function drop(ev) {
-    ev.preventDefault();
+  ev.preventDefault();
 
-    const taskId = ev.dataTransfer.getData("text");
-    const taskElement = document.getElementById(taskId);
+  const taskId = ev.dataTransfer.getData("text");
+  const taskElement = document.getElementById(taskId);
 
-    const targetColumn = ev.target.closest('.column');
-    if (targetColumn) {
-        targetColumn.appendChild(taskElement);
+  const targetColumn = ev.target.closest(".column");
+  if (targetColumn) {
+    targetColumn.appendChild(taskElement);
 
-        const newStatus = targetColumn.getAttribute("data-task");
-        updateTaskStatus(taskId, newStatus);
-    }
+    const newStatus = targetColumn.getAttribute("data-task");
+    updateTaskStatus(taskId, newStatus);
+  }
 }
 
 function updateTaskStatus(taskId, newStatus) {
-    const task = tasks.find(t => t.id === taskId);
-    if (task) {
-        task.status = newStatus;
-        saveTasksToBackend(); 
-    }
+  const task = tasks.find((t) => t.id === taskId);
+  if (task) {
+    task.status = newStatus;
+    saveTasksToBackend();
+  }
 }
 
-  /*  -------------  */
+/*  -------------  */

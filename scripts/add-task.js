@@ -4,6 +4,7 @@ let selectedPriority = "medium";
 let assignedUserArr = [];
 let taskStatus = "to-do";
 
+
 async function initAddTaskPage() {
   await loadUsersTask();
   loadTaskFormTemplate("firstTaskContainer", "secondTaskContainer");
@@ -203,33 +204,65 @@ function removeUserFromArray(name) {
 }
 
 async function createTaskForm() {
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("description");
-  let date = document.getElementById("date");
-  let selectCategory = document.getElementById("select-category");
-
-  let validateTask = isTaskDataValid(title, date, selectCategory);
-  if (validateTask) return;
-  let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask, taskStatus);  
+  let validateTask = isTaskDataValid();
+  if (!validateTask) return;
+  let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus); 
   await createTask("tasks", task);
 }
 
-function isTaskDataValid(title, date, selectCategory) {
-  let openCategory = document.getElementById("open-category-dropdown");
-  let findError = false;
-  if (title.value.trim().length <= 0) {
-    showError(title, "title");
-    findError = true;
+function runInitIfValid() {
+  let validateTask = isTaskDataValid();
+  if (!validateTask) return;
+  initAddTaskPage();
+}
+
+function isTaskDataValid() {
+  let isValid = true;
+  const formIds = getFormElementsIds();
+  if (formIds.title.value.trim().length <= 0) {
+    showError(formIds.title, "title");
+    isValid = false;
   }
-  if (selectCategory.innerHTML == "Select Task category") {
-    showError(openCategory, "category");
-    findError = true;
+  if (formIds.category.span.innerHTML == "Select Task category") {
+    showError(formIds.category.dropdown, "category");
+    isValid = false;
   }
-  if (!date.value.trim()) {
-    showError(date, "date");
-    findError = true;
+  if (!formIds.date.value) {
+    showError(formIds.date, "date");
+    isValid = false;
   }
-  return findError;
+  return isValid;
+}
+
+function getFormElementsIds() {
+  const titelId = document.getElementById("titleInput");
+  const dateId = document.getElementById("date");
+  const categoryId = document.getElementById("select-category");
+  const descriptionId = document.getElementById("description");
+  const categoryDropdown = document.getElementById("open-category-dropdown");
+  let formIds = {
+    title: titelId,
+    date: dateId,
+    category: {
+      span: categoryId,
+      dropdown: categoryDropdown
+    },
+    description: descriptionId
+  }
+  return formIds
+}
+
+function taskObjTemplate(priority = "medium", users, subtask, status = "to-do") {
+  return {
+    title: document.getElementById("titleInput").value,
+    description: document.getElementById("description").value,
+    date: document.getElementById("date").value,
+    priority: priority,
+    assigned: users,
+    category: document.getElementById("select-category").innerHTML,
+    subtask: subtask,
+    status: status,
+  };
 }
 
 function clearInputError(target, error) {
@@ -246,19 +279,6 @@ function showError(target, name) {
   target.addEventListener("click", () => {
     clearInputError(target, error);
   });
-}
-
-function taskObjTemplate(titel, description, date, priority, users, category, subtask, status = "to-do") {
-  return {
-    title: titel,
-    description: description,
-    date: date,
-    priority: priority,
-    assigned: users,
-    category: category,
-    subtask: subtask,
-    status: status,
-  };
 }
 
 function onFocusOut(e) {

@@ -85,7 +85,8 @@
                     <h1>Board</h1>
                     <div>
                         <div class="search-field-wrapper">
-                            <input type="text" placeholder="Find Task" class="search-field">
+                            <input type="search" placeholder="Find Task" id="search-input" class="search-field"
+                                oninput="searchTasks()">
                             <span class="search-devider"></span>
                             <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
                         </div>
@@ -110,17 +111,19 @@
                     <div class="column" data-task="in-progress" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>In progress</h3>
-                            <img src="../assets/icons/plus_button.svg" alt="plus-button" onclick="addTask('in-progress')">
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button"
+                                onclick="addTask('in-progress')">
                         </div>
                     </div>
 
                     <div class="column" data-task="await-feedback" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Await feedback</h3>
-                            <img src="../assets/icons/plus_button.svg" alt="plus-button" onclick="addTask('await-feedback')">
+                            <img src="../assets/icons/plus_button.svg" alt="plus-button"
+                                onclick="addTask('await-feedback')">
                         </div>
                     </div>
-                    
+
                     <div class="column" data-task="done" ondragover="allowDrop(event)" ondrop="drop(event)">
                         <div class="column-header">
                             <h3>Done</h3>
@@ -128,13 +131,15 @@
                     </div>
 
                 </div>
+
+                <div class="no-results hidden">No tasks found</div>
             </div>
         </section>
     </main>
 
     <div class="add-task-board d-none" id="add-task-board" onclick="closeAddTask()">
         <div class="task-overlay center_element transit" id="task-overlay" onclick="onclickProtection(event)">
-            <h1>Add Task <button class="close-task" onclick="closeAddTask()"></button></h1>
+            <h1>Add Task <button class="close-task" onclick="closeAddTask(); resetTaskData()"></button></h1>
             <form class="board-tasks-container" onsubmit="preventFromSubmit(event)">
                 <div class="addTask-Container" id="firstBoardAddTask"></div>
                 <div class="divider-vertical"></div>
