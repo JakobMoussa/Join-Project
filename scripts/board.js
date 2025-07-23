@@ -224,6 +224,7 @@ function loadSubTasks(arr) {
 }
 
 function renderAssignedUsers(task) {
+  if (!task.assigned) return;
   task.assigned.forEach((user) => {
     assignedUser(user.name);
   });
@@ -232,17 +233,13 @@ function renderAssignedUsers(task) {
 async function saveEditedTask(taskId) {
   if (!taskId) return;
   let path = "tasks/" + taskId;
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("description");
-  let date = document.getElementById("date");
-  let selectCategory = document.getElementById("select-category");
-  let validateTask = isTaskDataValid(title, date, selectCategory);
-  if (validateTask) return;
-
-  let task = taskObjTemplate(title.value, description.value, date.value, selectedPriority, assignedUserArr, selectCategory.innerHTML, subtask, taskStatus);
+  let validateTask = isTaskDataValid();
+  if (!validateTask) return;
+  let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus);
   await putData(path, task);
   await initBoard();
   await renderOpenTask(taskId);
+  resetTaskData();
 }
 
 async function renderOpenTask(taskId) {
@@ -254,9 +251,9 @@ async function renderOpenTask(taskId) {
 }
 
 async function renderTaskFromBoard() {
-  let validate = validateTaskFromBoard();
-  if (validate) return;
-  let createTask = await createTaskForm();
+  let validate = isTaskDataValid();
+  if (!validate) return;
+  await createTaskForm();
   closeAddTask();
   clearTaskFormContainers();
   await initBoard();
@@ -267,14 +264,6 @@ function clearTaskFormContainers() {
   let secondBoardAddTask = document.getElementById("secondBoardAddTask");
   firstBoardAddTask.innerHTML = "";
   secondBoardAddTask.innerHTML = "";
-}
-
-function validateTaskFromBoard() {
-  let title = document.getElementById("titleInput");
-  let date = document.getElementById("date");
-  let selectCategory = document.getElementById("select-category");
-  let validateTask = isTaskDataValid(title, date, selectCategory);
-  return validateTask;
 }
 
 /*  Drag & Drop function */

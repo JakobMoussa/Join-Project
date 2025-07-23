@@ -166,7 +166,7 @@ function subtaskTpl() {
 function editTaskTpl() {
   return `
         <div class="close-edit-conatiner">
-            <button class="close-task" onclick="closeOverlay()"></button>
+            <button class="close-task" onclick="closeOverlay(); resetTaskData()"></button>
         </div>
         <div class="editTask-container"></div>        
     `;
@@ -174,7 +174,7 @@ function editTaskTpl() {
 
 function okBtn(taskId) {
   return `
-        <button class="btn-create" onclick="saveEditedTask('${taskId}')">
+        <button class="btn-create" onclick="saveEditedTask('${taskId}'); resetTaskData()">
             Ok
             <img src="../assets/icons/check.svg" alt="">
         </button>
