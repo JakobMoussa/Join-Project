@@ -139,9 +139,258 @@
   font-size: 30px;
 }
 
-.divider {
-  width: 4px;
-  height: 67px;
-  background-color: #29abe2;
-  border-radius: 2px;
+ /* Overlay Style */
+
+.overlay-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+}
+
+/* .overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 250ms ease;
+} */
+
+.visible {
+  opacity: 1;
+}
+
+.overlay-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 420px;
+  height: auto;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 48px 40px;
+  transform: translate(-50%, -50%);
+  transition: all 250ms ease-in-out;
+}
+
+.transit {
+  transform: translate(calc(-50% + 100vw), -50%);
+}
+
+.hidden {
+  display: none;
+}
+
+ /* Overlay Style ---------------------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-family: sans-serif;
+  transition: opacity 250ms ease;
+}
+
+.modal {
+  display: flex;
+  width: 1212px;
+  height: 592px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.modal-left {
+  background: #1f2e45;
+  color: white;
+  padding: 40px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-left .logo {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.modal-left .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #00b2ff;
+  border-radius: 50%;
+  margin-left: 2px;
+}
+
+.modal-left h2 {
+  font-size: 54px;
+  margin-bottom: 10px;
+}
+
+.modal-left p {
+  font-size: 20px;
+  color: #b0c4d0;
+}
+
+.modal-right {
+  background: white;
+  padding: 40px;
+  width: 60%;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.avatar-placeholder {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 160px;
+  left: 30px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.input-group {
+  position: relative;
+  width: 65%;
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 14px 16px 44px; /* Platz links fürs Icon */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.person-icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.email-icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.phone-icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+
+.buttons {
+  display: flex;
+  margin-top: 35px;
+  margin-right: 66px;
+  gap: 30px;
+}
+
+.cancel, .create {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cancel {
+  background: transparent;;
+  color: #333;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  border-color: #00b2ff;
+  color: #00b2ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1f2e45;
+  color: white;
+  border: none;
+  font-size: 18px;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.create:hover {
+  background-color: #00b2ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-icon {
+  background-color: #00b2ff;
+  transition: box-shadow 0.3s ease; 
+}
+
+.contact-logo {
+  width: 100px;
+  height: 90px;
+  margin-bottom: 12px;
+}
+
+.add-contact-txt {
+  font-size: 30px;
+}
+
+.underline {
+    width: 80px;
+    height: 3px;
+    background-color: #29abe2;
+    margin-top: 10px;
+    border-radius: 2px;
 }

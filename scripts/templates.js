@@ -314,3 +314,43 @@ function createSubtaskListItem(taskId, subtaskObj) {
 
 // ---------------------Contact-Overlay- ---------------------------------------
 
+function getContactOverlayTemplate() {
+    return `.        
+  <div class="overlay" id="overlay-wrapper" class="overlay-wrapper">
+    <div class="modal">
+        <div class="modal-left">
+            <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+            <h2>Add contact</h2>
+            <p>Tasks are better with a team!</p>
+            <div class="underline"></div>
+        </div>
+      <div class="modal-right">
+        <button class="close-btn">&times;</button>
+        <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
+        <form class="contact-form">
+
+          <div class="input-group">
+            <input type="text" placeholder="Name" required  />
+            <img class="person-icon" src="../assets/icons/person.svg">
+          </div>
+            <div class="input-group">
+                <input type="email" placeholder="Email" required />
+                <img class="email-icon" src="../assets/icons/mail.svg">
+            </div>
+            <div class="input-group">
+                <input type="tel" placeholder="Phone" required />
+                <img class="phone-icon" src="../assets/icons/call.svg">
+            </div>
+          <div class="buttons">
+            <button type="button" class="cancel">Cancel X</button>
+            <button type="submit" class="create">Create contact
+                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+`;
+}
+
