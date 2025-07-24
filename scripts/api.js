@@ -1,5 +1,4 @@
 let BASE_URL = "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app/";
-// const BASE_URL = "https://api-test-31660-default-rtdb.europe-west1.firebasedatabase.app/";
 
 function createUser(name = "Unknown User", email = "unknown@example.com", phone, color = "#FF0000", assigned = false, password = false) {
   return {
@@ -8,7 +7,7 @@ function createUser(name = "Unknown User", email = "unknown@example.com", phone,
     color: color,
     assigned: assigned,
     phone: phone,
-    password: password
+    password: password,
   };
 }
 
@@ -17,16 +16,16 @@ async function postUser(name, email, phone, color, assigned, password) {
   let validate = validateUser(user);
   if (!validate) {
     console.error("user obj not correct!");
-    return
+    return;
   }
-  let path = "users/"
+  let path = "users/";
   await postData(path, user);
 }
 
 function validateUser(user) {
-  if (typeof user.name !== 'string' || user.name.trim() === "") return false;
-  if (typeof user.email !== 'string' || user.email.trim() === "") return false;
-  if (typeof user.phone !== 'string' || user.phone.trim() === "") return false;
+  if (typeof user.name !== "string" || user.name.trim() === "") return false;
+  if (typeof user.email !== "string" || user.email.trim() === "") return false;
+  if (typeof user.phone !== "string" || user.phone.trim() === "") return false;
   return true;
 }
 
@@ -39,8 +38,8 @@ async function loadData(link) {
 async function postData(path, data = {}) {
   if (!path) {
     console.error("path not defined!");
-    return
-  };
+    return;
+  }
   let response = await fetch(BASE_URL + path + ".json", {
     method: "POST",
     header: {
@@ -55,8 +54,8 @@ async function postData(path, data = {}) {
 async function putData(path, data = {}) {
   if (!path) {
     console.error("path not defined!");
-    return
-  };
+    return;
+  }
   await fetch(BASE_URL + path + ".json", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
