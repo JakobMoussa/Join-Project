@@ -86,20 +86,6 @@ function closeAddTask() {
 // ----------------Contact Overlay function---------------------
 
 function openAddContactOverlay() {
-  // const wrapper = document.createElement('div');
-  // wrapper.innerHTML = getContactOverlayTemplate();
-  // const overlay = wrapper.firstElementChild;
-  // const modal = overlay.querySelector('.modal');
-  // document.body.appendChild(overlay);
-  // overlay.addEventListener('click', () => overlay.remove());
-  // modal.addEventListener('click', (e) => e.stopPropagation());
-  // overlay.querySelector('.close-btn').onclick = () => overlay.remove();
-  // overlay.querySelector('.cancel').onclick = () => overlay.remove();
-  // overlay.querySelector('.contact-form').onsubmit = (e) => {
-  //   e.preventDefault();
-  //   alert("Kontakt erstellt!");
-  //   overlay.remove();
-  // };
   const overlayRef = document.getElementById("overlay");
   overlayRef.innerHTML = "";
   overlayRef.innerHTML += getContactOverlayTemplate();
