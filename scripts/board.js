@@ -309,9 +309,9 @@ async function dropHandler(ev, category) {
 
   if (targetColumn) {
     targetColumn.appendChild(taskElement);
+    adjustPlaceholders();
     await putData("tasks/" + taskId, taskObj);
   }
-  adjustPlaceholders();
 }
 
 function adjustPlaceholders() {
