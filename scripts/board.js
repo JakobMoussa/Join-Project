@@ -1,9 +1,8 @@
+let currentDragElement = null;
+
 function renderBoard(tasks) {
-  const columns = document.querySelectorAll(".column");
-  columns.forEach((column) => {
-    column.querySelectorAll(".task").forEach((task) => task.remove());
-    column.querySelectorAll(".empty").forEach((empty) => empty.remove());
-  });
+  removeTasks();
+  removePlaceholder();
 
   if (tasks) {
     for (let task in tasks) {
@@ -13,11 +12,29 @@ function renderBoard(tasks) {
         column.innerHTML += taskTemplate;
       }
     }
-  } else {
-    return createTaskPlaceholder();
   }
   addPlaceholdersToEmptyColumns();
 }
+
+function removeTasks() {
+  const columns = document.querySelectorAll(".column");
+  columns.forEach((column) => {
+    column.querySelectorAll(".task").forEach((task) => task.remove());
+  });
+}
+
+function removePlaceholder() {
+  const columns = document.querySelectorAll(".column");
+  columns.forEach((column) => {
+    column.querySelectorAll(".empty").forEach((empty) => empty.remove());
+  });
+}
+
+const columns = document.querySelectorAll(".column");
+columns.forEach((column) => {
+  column.querySelectorAll(".task").forEach((task) => task.remove());
+  column.querySelectorAll(".empty").forEach((empty) => empty.remove());
+});
 
 function createCategoryClass(category) {
   // from e.g. "Technical Task" to "technical-task" for CSS class
@@ -60,8 +77,12 @@ function createUsernameAbbreviation(userObj) {
 function addPlaceholdersToEmptyColumns() {
   const columns = document.querySelectorAll(".column");
   columns.forEach((column) => {
-    if (!column.querySelector(".task")) {
-      column.innerHTML += createTaskPlaceholder();
+    if (!column.querySelector(".task") && !column.querySelector(".empty")) {
+      if (column.dataset.task === "done") {
+        column.innerHTML += createTaskPlaceholderDone();
+      } else {
+        column.innerHTML += createTaskPlaceholder();
+      }
     }
   });
 }
@@ -268,35 +289,32 @@ function clearTaskFormContainers() {
 
 /*  Drag & Drop function */
 
-function allowDrop(ev) {
+function dragstartHandler(ev, id) {
+  // ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData("text", id);
+}
+
+function dragoverHandler(ev) {
   ev.preventDefault();
 }
 
-function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
+async function dropHandler(ev, category) {
   ev.preventDefault();
-
   const taskId = ev.dataTransfer.getData("text");
   const taskElement = document.getElementById(taskId);
+  // const targetColumn = ev.target.closest(".column");
+  const targetColumn = document.querySelector(`.column[data-task="${category}"]`);
+  let taskObj = await loadData("tasks/" + taskId);
+  taskObj.status = category;
 
-  const targetColumn = ev.target.closest(".column");
   if (targetColumn) {
     targetColumn.appendChild(taskElement);
-
-    const newStatus = targetColumn.getAttribute("data-task");
-    updateTaskStatus(taskId, newStatus);
+    await putData("tasks/" + taskId, taskObj);
   }
+  adjustPlaceholders();
 }
 
-function updateTaskStatus(taskId, newStatus) {
-  const task = tasks.find((t) => t.id === taskId);
-  if (task) {
-    task.status = newStatus;
-    saveTasksToBackend();
-  }
+function adjustPlaceholders() {
+  removePlaceholder();
+  addPlaceholdersToEmptyColumns();
 }
-
-/*  -------------  */
