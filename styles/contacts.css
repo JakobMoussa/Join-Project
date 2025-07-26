@@ -139,7 +139,7 @@
   font-size: 30px;
 }
 
- /* Overlay Style */
+/* Overlay Style */
 
 .overlay-content {
   background: white;
@@ -149,64 +149,6 @@
   max-width: 90%;
 }
 
-/* .overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 11;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 250ms ease;
-} */
-
-.visible {
-  opacity: 1;
-}
-
-.overlay-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 420px;
-  height: auto;
-  background-color: #fff;
-  border-radius: 30px;
-  padding: 48px 40px;
-  transform: translate(-50%, -50%);
-  transition: all 250ms ease-in-out;
-}
-
-.transit {
-  transform: translate(calc(-50% + 100vw), -50%);
-}
-
-.hidden {
-  display: none;
-}
-
- /* Overlay Style ---------------------- */
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  font-family: sans-serif;
-  transition: opacity 250ms ease;
-}
-
 .modal {
   display: flex;
   width: 1212px;
@@ -214,7 +156,7 @@
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .modal-left {
@@ -269,7 +211,6 @@
 }
 
 .avatar-placeholder {
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -329,7 +270,6 @@
   pointer-events: none;
 }
 
-
 .buttons {
   display: flex;
   margin-top: 35px;
@@ -337,7 +277,8 @@
   gap: 30px;
 }
 
-.cancel, .create {
+.cancel,
+.create {
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 14px;
@@ -345,7 +286,7 @@
 }
 
 .cancel {
-  background: transparent;;
+  background: transparent;
   color: #333;
   transition: box-shadow 0.3s ease;
   cursor: pointer;
@@ -376,7 +317,7 @@
 
 .cancel-icon {
   background-color: #00b2ff;
-  transition: box-shadow 0.3s ease; 
+  transition: box-shadow 0.3s ease;
 }
 
 .contact-logo {
@@ -390,9 +331,9 @@
 }
 
 .underline {
-    width: 80px;
-    height: 3px;
-    background-color: #29abe2;
-    margin-top: 10px;
-    border-radius: 2px;
+  width: 80px;
+  height: 3px;
+  background-color: #29abe2;
+  margin-top: 10px;
+  border-radius: 2px;
 }

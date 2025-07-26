@@ -207,7 +207,7 @@ async function createTaskForm() {
   let validateTask = isTaskDataValid();
   if (!validateTask) return;
   let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus); 
-  await createTask("tasks", task);
+  await postData("tasks", task);
 }
 
 function runInitIfValid() {

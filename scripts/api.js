@@ -1,13 +1,32 @@
 let BASE_URL = "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app/";
-// const BASE_URL = "https://api-test-31660-default-rtdb.europe-west1.firebasedatabase.app/";
 
-function createUser(name = "Unknown User", email = "unknown@example.com", color = "#FF0000", assigned = "_empty") {
+function createUser(name = "Unknown User", email = "unknown@example.com", phone, color = "#FF0000", assigned = false, password = false) {
   return {
     name: name,
     email: email,
     color: color,
-    assigned: [assigned],
+    assigned: assigned,
+    phone: phone,
+    password: password,
   };
+}
+
+async function postUser(name, email, phone, color, assigned, password) {
+  let user = createUser(name, email, phone.trim(), color, assigned, password);
+  let validate = validateUser(user);
+  if (!validate) {
+    console.error("user obj not correct!");
+    return;
+  }
+  let path = "users/";
+  await postData(path, user);
+}
+
+function validateUser(user) {
+  if (typeof user.name !== "string" || user.name.trim() === "") return false;
+  if (typeof user.email !== "string" || user.email.trim() === "") return false;
+  if (typeof user.phone !== "string" || user.phone.trim() === "") return false;
+  return true;
 }
 
 async function loadData(link) {
@@ -16,22 +35,11 @@ async function loadData(link) {
   return responseToJson;
 }
 
-async function putUser(id, user) {
-  let Link = `users/${id}`;
-  let response = await fetch(BASE_URL + Link + ".json", {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user),
-  });
-}
-
-function generateUserID(name) {
-  let string = name.replace(" ", "");
-  let id = string.charAt(0).toLowerCase() + string.slice(1);
-  return id;
-}
-
-async function createTask(path = "", data = {}) {
+async function postData(path, data = {}) {
+  if (!path) {
+    console.error("path not defined!");
+    return;
+  }
   let response = await fetch(BASE_URL + path + ".json", {
     method: "POST",
     header: {
@@ -43,7 +51,11 @@ async function createTask(path = "", data = {}) {
   return responseToJson;
 }
 
-async function putData(path = "", data = {}) {
+async function putData(path, data = {}) {
+  if (!path) {
+    console.error("path not defined!");
+    return;
+  }
   await fetch(BASE_URL + path + ".json", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
