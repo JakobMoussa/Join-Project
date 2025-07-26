@@ -196,6 +196,8 @@
 .overlay {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
@@ -290,7 +292,7 @@
 
 .input-group input {
   width: 100%;
-  padding: 16px 14px 16px 44px; /* Platz links fürs Icon */
+  padding: 16px 14px 16px 44px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;

@@ -308,7 +308,7 @@ function createSubtaskListItem(taskId, subtaskObj) {
 
 function getContactOverlayTemplate() {
     return `.        
-  <div class="overlay" id="overlay-wrapper" class="overlay-wrapper">
+  <div class="overlay" id="overlay-wrapper">
     <div class="modal">
         <div class="modal-left">
             <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
