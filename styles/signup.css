@@ -1,183 +1,182 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #f4f5f7;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 32px;
-    background-color: #f4f5f7;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    font-size: 32px;
-    font-weight: bold;
-    color: #2a3e52;
-  }
-
-  .join-logo {
-    padding: 30px;
-    width: 150px;
-    height: 150px;
-  }
-  .titel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .arrow-icon {
-    position: absolute;
-    left: 10px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-
-  .main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f5f7;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-  .signup-container {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    width: 400px;
-    height: 450px;
-    text-align: center;
-  }
 
-  .login-title {
-    margin: 6px;
-    align-items: center;
-    font-size: 36px;
-    font-weight: bold;
-  }
-  
-  .underline {
-    width: 85px;
-    height: 4px;
-    background-color: #29abe2;
-    margin: 0 auto 32px;
-    border-radius: 2px;
-  }
-  
-  .login-form .input-group {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .input-group input {
-    width: 75%;
-    padding: 10px 30px 10px 14px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    background-color: #f9f9f9;
-    outline: none;
-  }
-  
-  .input-group i {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #aaa;
-  }
+.error-signup {
+  height: 12px;
+  color: #e74c3c;
+  font-size: 11px;
+  margin-top: 3px;
+  margin-bottom: 8px;
+  text-align: left;
+  padding-left: 16px;
+}
 
-  .envelope-icon {
-    padding-right: 30px;
-    width: 20px;
-    height: 20px;
-    
-  }
+.password-margin {
+  margin-bottom: 23px;
+}
 
-  .person-icon {
-    padding-right: 30px;
-    width: 17px;
-    height: 17px;
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 32px;
+  background-color: #f4f5f7;
+}
 
-  .lock-icon {
-    padding-right: 29px;
-    width: 22px;
-    height: 22px;
-  }
-  .eye-icon{
-    width: 22px;
-    height: 22px;
-    padding-right: 26px;
-  }
-  
-   .checkbox-container {
-    padding: 0px 10px 18px;
-  }
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #2a3e52;
+}
 
-  .primary {
-    background-color: #2a3e52;
-    color: white;
-    border: none;
-  }
+.join-logo {
+  padding: 30px;
+  width: 150px;
+  height: 150px;
+}
 
-  #vehicle1 {
-    cursor: pointer;
-  }
+.titel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .primary:hover {
-    background-color: #28abe2;
-  }
+.arrow-icon {
+  position: absolute;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
 
-  .privacy-text{
-    display: inline-block;
-    color: #28abe2;
-  }
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
 
-  .privacy-text:hover {
-    text-decoration:underline;
-  }
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  width: 400px;
+  text-align: center;
+}
 
-  .btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-  }
+.login-title {
+  margin: 6px;
+  align-items: center;
+  font-size: 36px;
+  font-weight: bold;
+}
 
-  .btn:hover {
-    box-shadow:  5px 10px;
-  }
+.underline {
+  width: 85px;
+  height: 4px;
+  background-color: #29abe2;
+  margin: 0 auto 32px;
+  border-radius: 2px;
+}
+
+.login-form .input-group {
+  position: relative;
+}
+
+.input-group input {
+  padding: 10px 30px 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  outline: none;
+}
+
+.input-group i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+
+.envelope-icon {
+  width: 20px;
+  height: 20px;
+
+}
+
+.signup-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.checkbox-container {
+  padding: 0px 10px 18px;
+}
+
+.primary {
+  background-color: #2a3e52;
+  color: white;
+  border: none;
+}
+
+#vehicle1 {
+  cursor: pointer;
+}
+
+.primary:hover {
+  background-color: #28abe2;
+}
+
+.privacy-text {
+  display: inline-block;
+  color: #28abe2;
+}
+
+.privacy-text:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  box-shadow: 5px 10px;
+}
 
 /* footer */
 
 .Legal-texts {
-    padding: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    color: #7073758d;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  color: #7073758d;
 }
 
 .Legal-texts :hover {
-    color: #28abe2;
-    font-weight: 600;
+  color: #28abe2;
+  font-weight: 600;
 }
 
 /* ------------------- */
-  

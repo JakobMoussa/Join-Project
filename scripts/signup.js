@@ -1,91 +1,108 @@
+function formFields() {
+  return {
+    name: document.querySelector('[data-field="name"]'),
+    email: document.querySelector('[data-field="email"]'),
+    password: document.querySelector('[data-field="password"]'),
+    confirmPassword: document.querySelector('[data-field="confirmPassword"]')
+  };
+}
 
-// Firebase SDKs importieren
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+function errorFields() {
+  return {
+    name: document.querySelector('[data-field="errorName"]'),
+    email: document.querySelector('[data-field="errorEmail"]'),
+    password: document.querySelector('[data-field="errorPassword"]'),
+  }
+}
 
-// Deine Firebase-Konfiguration
-const firebaseConfig = {
-  apiKey: "AIzaSyC9j02JWuw06euMMvOiGk3z3xDkiQ_sw84",
-  authDomain: "join-52020.firebaseapp.com",
-  databaseURL: "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "join-52020",
-  storageBucket: "join-52020.firebasestorage.app",
-  messagingSenderId: "26851051506",
-  appId: "1:26851051506:web:7dac5a272e7c31d65e8d6b"
-};
+function validateEmail(email) {
+  let errorElements = errorFields();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email) || !email) {
+    errorElements.email.innerHTML = 'Please enter a valid email address';
+    isEmailValid = false;
+    return false
+  }
+  return true
+}
 
-// Firebase initialisieren
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Warten bis das DOM geladen ist
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.login-form');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const inputs = form.querySelectorAll('input');
-    const name = inputs[0].value.trim();
-    const email = inputs[1].value.trim();
-    const password = inputs[2].value;
-    const confirmPassword = inputs[3].value;
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
+async function checkEmailExists(email) {
+  let errorElements = errorFields();
+  const users = await loadData("users/");
+  for (const key in users) {
+    if (email == users[key].email) {
+      errorElements.email.innerHTML = "Email exists";
+      return false
     }
+  }
+  return true;
+}
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+function comparePasswords(password, confirmPassword) {
+  let errorElements = errorFields();
+  const identical = password.value.trim() === confirmPassword.value.trim();
+  console.log(password.value + confirmPassword.value);
+  if (!identical) {
+    errorElements.password.innerHTML = "Passwords are not identical";
+    return false;
+  }
+  if (password.value.length < 3) {
+    errorElements.password.innerHTML = "Passwords length is to short";
+    return false;
+  }
+  return identical;
+}
 
-      await setDoc(doc(db, "users", user.uid), {
-        name: name,
-        email: email,
-        createdAt: new Date()
-      });
+async function addUser() {
+  const inputs = formFields();
+  let signUp = await checkFormFields();
+  if (!signUp) return;
+  postUser(
+    inputs.name.value,
+    inputs.email.value,
+    inputs.password.value
+  );
+}
 
-      alert("Registration successful!");
-      window.location.href = "../html-templates/summary.html";
+function checkName(userName) {
+  let errorElements = errorFields();
+  let validate = userName.trim() <= 0 || !userName.trim() ? false : true;
+  if (!validate) {
+    errorElements.name.innerHTML = "Please enter your name";
+  }
+  return validate;
+}
 
-    } catch (error) {
-      console.error("Registration error:", error.message);
-      alert("Fehler: " + error.message);
-    }
+async function checkFormFields() {
+  let inputs = formFields();
+  let nameIsValid = checkName(inputs.name.value);
+  let emailIsValid = validateEmail(inputs.email.value);
+  let emailAvailable = false;
+  if (emailIsValid) {
+    emailAvailable = await checkEmailExists(inputs.email.value);
+  }
+  let passwordsMatch = comparePasswords(inputs.password, inputs.confirmPassword);
+  if (!nameIsValid || !emailIsValid || !emailAvailable || !passwordsMatch) return false;
+  return true
+}
 
-  });
-});
+function toggleLockIcon(e, lockId, eyeId) {
+  const lock = document.getElementById(lockId);
+  const eye = document.getElementById(eyeId);
+  const hasValue = e.target.value.trim().length > 0;
+  lock.style.display = hasValue ? 'none' : 'inline';
+  eye.style.display = hasValue ? 'inline' : 'none';
+  if (!hasValue) {
+    e.target.type = 'password';
+    eye.src = '../assets/icons/eye-icon.svg';
+  }
+}
 
-const passwordFields = document.querySelectorAll('.password-field');
-
-passwordFields.forEach((field) => {
-  const inputGroup = field.closest('.input-group');
-  const eyeIcon = inputGroup.querySelector('.eye');
-  const eyeImg = eyeIcon.querySelector('img');
-  const lockIcon = inputGroup.querySelector('.lock');
-
-  field.addEventListener('input', () => {
-    const hasValue = field.value.trim().length > 0;
-
-    eyeIcon.style.display = hasValue ? 'inline' : 'none';
-
-    lockIcon.style.display = hasValue ? 'none' : 'inline';
-
-    if (!hasValue) {
-      field.type = 'password';
-      eyeImg.src = '../assets/icons/eye-icon.svg';
-    }
-  });
-
-  eyeIcon.addEventListener('click', () => {
-    const isPassword = field.type === 'password';
-    field.type = isPassword ? 'text' : 'password';
-    eyeImg.src = isPassword
-      ? '../assets/icons/eye-slash.svg'
-      : '../assets/icons/eye-icon.svg';
-  });
-});
-
+function toggleInputType(e, data) {
+  const input = document.querySelector(`[data-field="${data}"]`);
+  const isPassword = input.type === 'password';
+  input.type = isPassword ? 'text' : 'password';
+  e.target.src = isPassword
+    ? '../assets/icons/eye-slash.svg'
+    : '../assets/icons/eye-icon.svg';
+}

@@ -12,8 +12,10 @@ function createUser(name = "Unknown User", email = "unknown@example.com", phone,
   };
 }
 
-async function postUser(name, email, phone, color, assigned, password) {
+async function postUser(name, email, password, phone = "XXXXXXXXXXXX", color = "blue", assigned) {
   let user = createUser(name, email, phone.trim(), color, assigned, password);
+  console.log(user);
+  
   let validate = validateUser(user);
   if (!validate) {
     console.error("user obj not correct!");
