@@ -182,8 +182,9 @@ function okBtn(taskId) {
 }
 
 function createTaskTemplate(id, task) {
+  console.log(task.category);
   return `
-    <div class="task" data-id="${id}" id="${id}" draggable="true" ondragstart="drag(event)" onclick="renderSelectedTask('${id}')">
+    <div class="task" data-id="${id}" id="${id}" draggable="true" ondragstart="dragstartHandler(event, '${id}')" onclick="renderSelectedTask('${id}')">
         <span class="tag ${createCategoryClass(task.category)}">${task.category}</span>
         <h4>${task.title}</h4>
         <p class="task-descr">${task.description}</p>
@@ -214,12 +215,18 @@ function createPersonTemplate(userObj, username) {
 }
 
 function createTaskPlaceholder() {
-  return `<div class="empty"> No tasks To do</div>`;
+  return `<div class="empty">No tasks To do</div>`;
 }
+
+function createTaskPlaceholderDone() {
+  return `<div class="empty">No tasks done</div>`;
+}
+
+// --------------------- Task-Overlay ---------------------------------------
 
 function createDetailedTaskTemplate(taskId, task) {
   return `
-    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+    <div id="overlay-wrapper" class="overlay-wrapper overlay-content transit" onclick="onclickProtection(event)">
         <div class="overlay-header mb-20">
             <span class="tag-overlay ${createCategoryClass(task.category)}">${task.category}</span>
             <button class="btn-transparent" onclick="closeOverlay()">
@@ -304,45 +311,43 @@ function createSubtaskListItem(taskId, subtaskObj) {
   `;
 }
 
-// ---------------------Contact-Overlay- ---------------------------------------
+// --------------------- Contact-Overlay ---------------------------------------
 
 function getContactOverlayTemplate() {
-    return `.        
-  <div class="overlay" id="overlay-wrapper" class="overlay-wrapper">
-    <div class="modal">
-        <div class="modal-left">
-            <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
-            <h2>Add contact</h2>
-            <p>Tasks are better with a team!</p>
-            <div class="underline"></div>
+  return `
+    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+        <div class="modal">
+            <div class="modal-left">
+                <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+                <h2>Add contact</h2>
+                <p>Tasks are better with a team!</p>
+                <div class="underline"></div>
+            </div>
+            <div class="modal-right">
+                <button class="close-btn">&times;</button>
+                <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
+                <form class="contact-form">
+                    <div class="input-group">
+                        <input type="text" placeholder="Name" required />
+                        <img class="person-icon" src="../assets/icons/person.svg">
+                    </div>
+                    <div class="input-group">
+                        <input type="email" placeholder="Email" required />
+                        <img class="email-icon" src="../assets/icons/mail.svg">
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" placeholder="Phone" required />
+                        <img class="phone-icon" src="../assets/icons/call.svg">
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="cancel">Cancel X</button>
+                        <button type="submit" class="create">Create contact
+                            <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-      <div class="modal-right">
-        <button class="close-btn">&times;</button>
-        <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
-        <form class="contact-form">
-
-          <div class="input-group">
-            <input type="text" placeholder="Name" required  />
-            <img class="person-icon" src="../assets/icons/person.svg">
-          </div>
-            <div class="input-group">
-                <input type="email" placeholder="Email" required />
-                <img class="email-icon" src="../assets/icons/mail.svg">
-            </div>
-            <div class="input-group">
-                <input type="tel" placeholder="Phone" required />
-                <img class="phone-icon" src="../assets/icons/call.svg">
-            </div>
-          <div class="buttons">
-            <button type="button" class="cancel">Cancel X</button>
-            <button type="submit" class="create">Create contact
-                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
-  </div>
-`;
+  `;
 }
-
