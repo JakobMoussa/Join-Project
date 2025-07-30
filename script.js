@@ -90,4 +90,38 @@ function openAddContactOverlay() {
   overlayRef.innerHTML = "";
   overlayRef.innerHTML += getContactOverlayTemplate();
   openOverlay();
+
+  initContactForm();
+
 }
+
+//---------Call up user information------------------------
+
+
+ document.addEventListener("DOMContentLoaded", async () => {
+        const users = await loadData("users"); // Holt alle User-Daten aus Firebase
+
+        document.querySelectorAll(".contact").forEach(contactEl => {
+            contactEl.addEventListener("click", () => {
+                const name = contactEl.querySelector(".name").textContent.trim();
+                const email = contactEl.querySelector(".email").textContent.trim();
+
+                // Sucht passenden User aus Firebase (per Email oder Name)
+                const userKey = Object.keys(users).find(key => 
+                    users[key].email === email || users[key].name === name
+                );
+
+                if (userKey) {
+                    const user = users[userKey];
+                    renderUserInfo(user);
+                } else {
+                    console.warn("User not found in Firebase");
+                }
+            });
+        });
+    });
+
+
+
+
+
