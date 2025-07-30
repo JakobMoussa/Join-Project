@@ -92,10 +92,6 @@ body {
   border-radius: 2px;
 }
 
-.login-form .input-group {
-  position: relative;
-}
-
 .input-group input {
   padding: 10px 30px 10px 14px;
   border: 1px solid #ccc;
@@ -138,8 +134,9 @@ body {
   cursor: pointer;
 }
 
-.primary:hover {
-  background-color: #28abe2;
+.primary:hover:not(:disabled) {
+  /* background-color: #28abe2; */
+  border: 2px solid #28abe2;
 }
 
 .privacy-text {
@@ -160,7 +157,7 @@ body {
 }
 
 .btn:hover {
-  box-shadow: 5px 10px;
+  /* box-shadow: 5px 10px; */
 }
 
 /* footer */

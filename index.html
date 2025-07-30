@@ -2,65 +2,65 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="icon" type="image/x-icon" href="../assets/icons/flavicon.png" />
-    <link rel="stylesheet" href="/styles/login.css">
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="icon" type="image/x-icon" href="../assets/icons/flavicon.png" />
+  <link rel="stylesheet" href="./styles/add-task.css">
+  <link rel="stylesheet" href="./styles/login.css">
+  <link rel="stylesheet" href="./styles/signup.css">
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./scripts/api.js"></script>
+  <script src="./scripts/add-task.js"></script>
+  <script src="./scripts/signup.js"></script>
+  <script src="./scripts/login.js"></script>
 </head>
 
 <body>
-    <header class="header">
-        <div class="logo">
-          <img src="../assets/icons/join-logo.svg" alt="join-logo" class="join-logo">
+  <header class="header">
+    <div class="logo">
+      <img src="../assets/icons/join-logo.svg" alt="join-logo" class="join-logo">
+    </div>
+    <div class="signup">
+      <span>Not a Join user?</span>
+      <a href="signup.html" class="signup-btn">Sign up</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="login-container">
+      <h1 class="login-title">Log in</h1>
+      <div class="underline"></div>
+      <form class="login-form" onsubmit="preventFromSubmit(event)">
+        <div class="input-container password-margin">
+          <input type="email" placeholder="Email" name="email" data-field="email" oninput="activateLogin()">
+          <img src="../assets/icons/mail.svg" alt="envelope-icon" class="signup-icon">
         </div>
-        <div class="signup">
-          <span>Not a Join user?</span>
-          <a href="signup.html" class="signup-btn">Sign up</a>
+        <div class="error-message" id="email-error"></div>
+        <div class="success-message" id="email-success"></div>
+        <div class="input-container">
+          <input type="password" class="password-field" name="password" placeholder="Password" data-field="password"
+            oninput="toggleLockIcon(event, 'firstLock', 'firstEye'); activateLogin()">
+          <img src="../assets/icons/lock.svg" alt="lock-icon" class="signup-icon" id="firstLock">
+          <img src="../assets/icons/eye-icon.svg" alt="lock-icon" class="signup-icon" style="display: none;"
+            id="firstEye" onclick="toggleInputType(event, 'password')">
         </div>
-    </header>
-    
-      <main class="main">
-        <div class="login-container">
-          <h1 class="login-title">Log in</h1>
-          <div class="underline"></div>
-    
-          <form class="login-form" onsubmit="preventFromSubmit(event)">
-            <div class="input-group">
-              <input type="email" id="email" placeholder="Email" required onblur=""  src="../assets/icons/mail.svg"/>
-              <i class="envelope">
-                <img src="../assets/icons/mail.svg" alt="envelope-icon" class="envelope-icon">
-              </i>
-            </div>
-            <div class="error-message" id="email-error"></div>
-            <div class="success-message" id="email-success"></div>    
-            <div class="input-group">
-              <input type="password" id="password" placeholder="Password" required />
-              <i class="lock">
-                <img src="../assets/icons/lock.svg" alt="lock-icon" class="lock-icon" style="display: inline;">
-              </i>
-              <i class="eye" id="toggle-password" style="display: none;">
-                <img src="../assets/icons/eye-icon.svg" alt="toggle password" class="eye-icon">
-              </i>
-              <div class="error-message" id="password-error"></div>
-            </div>    
-            <div class="button-group">
-              <button type="submit" class="btn primary" id="login-btn">Log in</button>
-              <button type="button" class="btn secondary" onclick="guestLogin()">Guest Log in</button>
-            </div>
-          </form>
+        <p class="error-signup" data-field="errorPassword"></p>
+        <div class="button-group">
+          <button type="submit" class="btn primary" id="login-btn" onclick="handleLogin()" disabled>Log in</button>
+          <button type="button" class="btn secondary" onclick="guestLogin()">Guest Log in</button>
         </div>
-      </main>
-    
-      <footer>
-        <div class="Legal-texts">
-          <span class="Privacy-text">Privacy Policy</span>
-          <span class="Privacy-text">Legal notice</span>
-        </div>
-      </footer>
-      <script src="../scripts/login.js"></script>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="Legal-texts">
+      <span class="Privacy-text">Privacy Policy</span>
+      <span class="Privacy-text">Legal notice</span>
+    </div>
+  </footer>
 </body>
 
 </html>

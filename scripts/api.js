@@ -6,15 +6,13 @@ function createUser(name = "Unknown User", email = "unknown@example.com", phone,
     email: email,
     color: color,
     assigned: assigned,
-    phone: phone,
-    password: password,
+    phone: phone.toString(),
+    password: password.toString(),
   };
 }
 
 async function postUser(name, email, password, phone = "XXXXXXXXXXXX", color = "blue", assigned) {
   let user = createUser(name, email, phone.trim(), color, assigned, password);
-  console.log(user);
-  
   let validate = validateUser(user);
   if (!validate) {
     console.error("user obj not correct!");

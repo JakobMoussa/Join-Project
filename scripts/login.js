@@ -1,39 +1,11 @@
-const passwordInput = document.getElementById('password');
-const togglePassword = document.getElementById('toggle-password');
-const eyeImg = togglePassword.querySelector('img');
-const lockIcon = document.querySelector('.lock');
-
-const emailForm = {
-    input: document.getElementById('email'),
-    error: document.getElementById('email-error'),
-    success: document.getElementById('email-success'),
-    checkingText: document.getElementById('checking-text'),
-    button: document.getElementById('login-btn'),
-    value: document.getElementById('email').value.trim()
-};
-
-let emailCheckTimeout;
-let isEmailValid = false;
-
 function resetSignup() {
     emailForm.error.style.display = 'none';
     emailForm.success.style.display = 'none';
     emailForm.input.classList.remove('error', 'success');
 }
 
-togglePassword.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-
-    eyeImg.src = isPassword
-        ? '../assets/icons/eye-slash.svg'
-        : '../assets/icons/eye-icon.svg';
-});
-
-
 function updateLoginButton() {
     const passwordInput = document.getElementById('password');
-
     if (isEmailValid && passwordInput.value.trim()) {
         emailForm.button.disabled = false;
         emailForm.button.style.opacity = '1';
@@ -43,47 +15,74 @@ function updateLoginButton() {
     }
 }
 
-function handleLogin(event) {
-    // const password = document.getElementById('password').value.trim();
-    // const passwordError = document.getElementById('password-error');
+async function handleLogin() {
+    const users = await loadData("users/");
+    let validLogin = isValidLogin(users);
+    if (validLogin) {
+        window.location.href = `./html-templates/summary.html?msg=${validLogin}`;
+    } else {
+        failLogin();
+    }
+}
 
-    // passwordError.style.display = 'none';
-    // document.getElementById('password').classList.remove('error');
+function failLogin() {
+    const errorElements = errorFields();
+    const container = document.querySelectorAll(".input-container");
+    errorElements.password.innerHTML = "Check your email and Password. Please try again.";
+    container.forEach(element => {
+        addRedOutline(element);
+    });
+}
 
-    // if (!isEmailValid) {
-    //     alert('Please enter a valid registered email address.');
-    //     return;
-    // }
-
-    // if (!password) {
-    //     passwordError.textContent = 'Please enter your password';
-    //     passwordError.style.display = 'block';
-    //     document.getElementById('password').classList.add('error');
-    //     return;
-    // }
+function isValidLogin(users) {
+    const inputs = formFields();
+    for (const key in users) {
+        if (users[key].email == inputs.email.value &&
+            users[key].password == inputs.password.value) {
+            return key
+        }
+    }
+    return false
 }
 
 function guestLogin() {
-    alert('Logging in as guest...');
+    console.log("Guest");
 }
 
-function redirectToSignup() {
-    alert('Redirecting to sign up page...');
+function activateLogin() {
+    const inputs = formFields();
+    let email = validateEmail(inputs.email.value.trim());
+    let password = checkPasswordLength(inputs.password.value.trim());
+    updateLoginButton(email, password);
 }
 
-function showPrivacyPolicy() {
-    alert('Privacy Policy clicked');
+function checkPasswordLength(password) {
+    if (password.length > 0) return true
+    return false
 }
 
-function showLegalNotice() {
-    alert('Legal Notice clicked');
+function updateLoginButton(email, password) {
+    let loginBtn = document.getElementById("login-btn");
+    if (email && password) {
+        loginBtn.disabled = false;
+    } else loginBtn.disabled = true;
 }
 
-// Behalten!
-passwordInput.addEventListener('input', () => {
-    const hasValue = passwordInput.value.trim().length > 0;
-    // Auge zeigen, wenn etwas eingegeben wurde
-    togglePassword.style.display = hasValue ? 'inline' : 'none';
-    // Lock ausblenden, wenn Auge sichtbar ist
-    lockIcon.style.display = hasValue ? 'none' : 'inline';
+document.addEventListener("DOMContentLoaded", () => {
+    const inputs = formFields();
+    for (const key in inputs) {
+        if (inputs[key] == null) continue
+        inputs[key].addEventListener("click", () => {
+            removeLoginErrors();
+        })
+    }
 });
+
+function removeLoginErrors() {
+    const container = document.querySelectorAll(".input-container");
+    const errors = errorFields();
+    container.forEach(element => {
+        element.classList.remove("light-red-outline");
+    });
+    errors.password.innerHTML = "";
+}

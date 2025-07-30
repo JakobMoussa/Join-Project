@@ -74,6 +74,7 @@ button div {
 
 .input-task:focus {
   outline: transparent;
+  border-color: #29abe2;
 }
 
 .input-task::placeholder {
@@ -133,7 +134,7 @@ button div {
 }
 
 .input-container input:focus {
-  outline: none;
+  outline: none;  
 }
 
 .input-container input::placeholder {

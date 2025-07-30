@@ -206,7 +206,7 @@ function removeUserFromArray(name) {
 async function createTaskForm() {
   let validateTask = isTaskDataValid();
   if (!validateTask) return;
-  let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus); 
+  let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus);
   await postData("tasks", task);
 }
 
@@ -271,10 +271,14 @@ function clearInputError(target, error) {
   error.innerHTML = "";
 }
 
-function showError(target, name) {
-  let error = document.getElementById(`${name}Error`);
+function addErrorClasses(target) {
   target.classList.add("light-red-outline");
   target.classList.remove("blue-outline");
+}
+
+function showError(target, name) {
+  let error = document.getElementById(`${name}Error`);
+  addErrorClasses(target);
   error.innerHTML = "This field is required";
   target.addEventListener("click", () => {
     clearInputError(target, error);
