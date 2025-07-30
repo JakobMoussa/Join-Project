@@ -100,7 +100,7 @@ function assignedTaskTpl() {
   return `
         <div class="task-container">
             <span class="task-name">Assigned to:</span>
-            <div class="dropdown-container">
+            <div class="input-container">
                 <input type="text" id="assignedInputSearch" placeholder="Select contacts to assign"
                     class="input-assaign">
                 <button class="btn-dropdown" id="assaign-btn" onclick="toggleAssignedDropdown()">
@@ -123,7 +123,7 @@ function categoryTaskTpl() {
             <span class="task-name">
                 Category<span class="red-font">*</span>
             </span>
-            <div class="dropdown-container" onclick="toggleCategoryDropdown()"
+            <div class="input-container" onclick="toggleCategoryDropdown()"
                 id="open-category-dropdown">
                 <span id="select-category">Select Task category</span>
                 <button class="btn-dropdown" id="category-btn">
@@ -149,7 +149,7 @@ function subtaskTpl() {
   return `
         <div class="task-container">
             <span class="task-name">Subtask</span>
-            <div class="dropdown-container">
+            <div class="input-container">
                 <input type="text" id="subtask-input" placeholder="Add new subtask" maxlength="32">
                 <button class="btn-dropdown" id="subtask-btn" onclick="addSubtask()">
                     <img src="../assets/icons/add_blue.svg" alt="">

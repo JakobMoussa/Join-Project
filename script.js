@@ -49,6 +49,7 @@ async function addTask(status) {
   openAddTask();
   await loadUsersTask();
   loadTaskFormTemplate("firstBoardAddTask", "secondBoardAddTask");
+  activePriority("medium");
 }
 
 function updateTaskStatus(status) {
