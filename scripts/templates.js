@@ -324,23 +324,23 @@ function getContactOverlayTemplate() {
                 <div class="underline"></div>
             </div>
             <div class="modal-right">
-                <button class="close-btn">&times;</button>
+                <button onclick="closeOverlay()" class="close-btn">&times;</button>
                 <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
                 <form class="contact-form">
                     <div class="input-group">
-                        <input type="text" placeholder="Name" required />
+                        <input type="text" id="contact-name" placeholder="Name" required />
                         <img class="person-icon" src="../assets/icons/person.svg">
                     </div>
                     <div class="input-group">
-                        <input type="email" placeholder="Email" required />
+                        <input type="email" id="contact-email" placeholder="Email" required />
                         <img class="email-icon" src="../assets/icons/mail.svg">
                     </div>
                     <div class="input-group">
-                        <input type="tel" placeholder="Phone" required />
+                        <input type="tel" id="contact-phone" placeholder="Phone" required />
                         <img class="phone-icon" src="../assets/icons/call.svg">
                     </div>
                     <div class="buttons">
-                        <button type="button" class="cancel">Cancel X</button>
+                        <button type="button" class="cancel" onclick="closeOverlay()">Cancel X</button>
                         <button type="submit" class="create">Create contact
                             <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
                         </button>
@@ -350,4 +350,46 @@ function getContactOverlayTemplate() {
         </div>
     </div>
   `;
+}
+
+
+    function renderUserInfo(user) {
+        const container = document.querySelector(".users-information");
+        container.innerHTML = `
+            <div class="user-details">
+                <div class="user-name-container">
+                    <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}</div>
+                       <div class="user-name">
+                            <h3>${user.name}</h3>
+                            <div class="edit-delete-buttons">
+                                <p class="edit-field">
+                                <img src="/assets/icons/edit.svg" alt="Edit-icon" class="edit-icon">Edit</p>
+                                <p class="edit-field">
+                                <img src="/assets/icons/delete.svg" alt="Delete-icon" class="Delete-icon">Delete</p>
+                            </div>
+                        </div>
+                </div>
+                <p class="information-field">Contact Information</p>
+                <div class="users-field">
+                    <img><p class="ptage">Email</p></img>
+                    <p class="user-email">${user.email}</p>
+                    <p class="ptage">Phone</p>
+                    <p>${user.phone}</p>
+                </div>
+            </div>
+        `;
+    }
+
+
+function createContactElement(user) {
+    const div = document.createElement("div");
+    div.classList.add("contact");
+    div.innerHTML = `
+        <div class="avatar" style="background-color: ${user.color};">${user.avatar || user.Avatar}</div>
+        <div class="info">
+            <div class="name">${user.name}</div>
+            <div class="email">${user.email}</div>
+        </div>
+    `;
+    return div;
 }
