@@ -24,10 +24,16 @@
 .profile-picture {
   width: 40px;
   height: 40px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #29abe2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   border: 2px solid #000;
   padding: 12px;
   margin-left: 20px;
   margin-right: 30px;
-  background: #fff;
+  text-transform: uppercase;
 }

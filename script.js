@@ -9,7 +9,7 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {});
+document.addEventListener("DOMContentLoaded", async () => { });
 
 function openOverlay() {
   const overlay = document.querySelectorAll(".overlay");
@@ -91,4 +91,40 @@ function openAddContactOverlay() {
   overlayRef.innerHTML = "";
   overlayRef.innerHTML += getContactOverlayTemplate();
   openOverlay();
+}
+
+async function renderUserIcon() {
+  const element = document.querySelector(".profile-picture");
+  const name = loadUrlParams();  
+  if (!name) name = "Guest";
+  element.innerHTML = createAvater(name);
+}
+
+function loadUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const msg = urlParams.get('msg');
+  return msg
+}
+
+function createAvater(name) {
+  let myArr = name.split(" ");
+  let avatar = "";
+  myArr.forEach(element => {
+    avatar += element.charAt(0);
+  });
+  return avatar
+}
+
+function updateNavLinksWithUserKey() {
+  const name = loadUrlParams();
+  const links = document.querySelectorAll('[data-task="navLink"]');
+  links.forEach(element => {
+    let newLink = element.href + `?msg=${encodeURIComponent(name)}`;
+    element.href = newLink;
+  });
+}
+
+function initializeNavbar() {
+  renderUserIcon();
+  updateNavLinksWithUserKey();
 }

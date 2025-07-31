@@ -17,9 +17,9 @@ function updateLoginButton() {
 
 async function handleLogin() {
     const users = await loadData("users/");
-    let validLogin = isValidLogin(users);
-    if (validLogin) {
-        window.location.href = `./html-templates/summary.html?msg=${validLogin}`;
+    let userName = isValidLogin(users);
+    if (userName) {    
+        window.location.href = `./html-templates/summary.html?msg=${userName}`;
     } else {
         failLogin();
     }
@@ -39,14 +39,14 @@ function isValidLogin(users) {
     for (const key in users) {
         if (users[key].email == inputs.email.value &&
             users[key].password == inputs.password.value) {
-            return key
+            return users[key].name
         }
     }
     return false
 }
 
 function guestLogin() {
-    console.log("Guest");
+    window.location.href = `./html-templates/summary.html?msg=Guest`;
 }
 
 function activateLogin() {
@@ -68,6 +68,15 @@ function updateLoginButton(email, password) {
     } else loginBtn.disabled = true;
 }
 
+function removeLoginErrors() {
+    const container = document.querySelectorAll(".input-container");
+    const errors = errorFields();
+    container.forEach(element => {
+        element.classList.remove("light-red-outline");
+    });
+    errors.password.innerHTML = "";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const inputs = formFields();
     for (const key in inputs) {
@@ -77,12 +86,3 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 });
-
-function removeLoginErrors() {
-    const container = document.querySelectorAll(".input-container");
-    const errors = errorFields();
-    container.forEach(element => {
-        element.classList.remove("light-red-outline");
-    });
-    errors.password.innerHTML = "";
-}
