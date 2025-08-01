@@ -128,6 +128,7 @@ body {
   background-color: #2a3e52;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 #vehicle1 {
@@ -135,8 +136,9 @@ body {
 }
 
 .primary:hover:not(:disabled) {
-  /* background-color: #28abe2; */
-  border: 2px solid #28abe2;
+  background-color: #28abe2;
+  /* outline: 2px solid #28abe2; */
+  cursor: pointer;
 }
 
 .privacy-text {
@@ -146,6 +148,7 @@ body {
 
 .privacy-text:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .btn {
@@ -158,6 +161,14 @@ body {
 
 .btn:hover {
   /* box-shadow: 5px 10px; */
+}
+
+.signup-success {
+  text-align: center;
+  width: auto;
+  padding: 32px;
+  background-color: #2a3647;
+  color: white;
 }
 
 /* footer */

@@ -36,6 +36,7 @@ function failLogin() {
 
 function isValidLogin(users) {
     const inputs = formFields();
+    let validate = false;
     for (const key in users) {
         if (users[key].email == inputs.email.value &&
             users[key].password == inputs.password.value) {

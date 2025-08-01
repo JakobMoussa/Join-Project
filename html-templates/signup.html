@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/signup.css">
     <link rel="stylesheet" href="../styles/add-task.css">
+    <link rel="stylesheet" href="../styles/board.css">
     <script src="../scripts/api.js"></script>
     <script src="../scripts/add-task.js"></script>
     <script src="../scripts/signup.js"></script>
+    <script src="../script.js"></script>
 </head>
 
 <body>
@@ -55,7 +57,7 @@
                 <p class="error-signup" data-field="errorPassword"></p>
                 <div class="checkbox-container">
                     <input type="checkbox" id="privacyCheckbox" name="vehicle1">
-                    <label for="vehicle1"> I accept <p class="privacy-text">the Privacy</p></label>
+                    <label for="vehicle1"> I accept <btn class="privacy-text" onclick="openPrivacy()">the Privacy</btn></label>
                 </div>
                 <div class="button-group">
                     <button class="btn primary">Sign in</button>
@@ -63,6 +65,11 @@
             </form>
         </div>
     </main>
+    <div id="overlay" class="overlay hidden">
+        <div class="overlay-wrapper signup-success transit">
+            <h2>Login war erfolgreich!</h2>
+        </div>
+    </div>
     <footer>
         <div class="Legal-texts">
             <span class="Privacy-text">Privacy Policy</span>

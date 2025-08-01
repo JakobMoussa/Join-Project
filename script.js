@@ -99,32 +99,32 @@ function openAddContactOverlay() {
 //---------Call up user information------------------------
 
 
- document.addEventListener("DOMContentLoaded", async () => {
-        const users = await loadData("users"); // Holt alle User-Daten aus Firebase
+document.addEventListener("DOMContentLoaded", async () => {
+  const users = await loadData("users"); // Holt alle User-Daten aus Firebase
 
-        document.querySelectorAll(".contact").forEach(contactEl => {
-            contactEl.addEventListener("click", () => {
-                const name = contactEl.querySelector(".name").textContent.trim();
-                const email = contactEl.querySelector(".email").textContent.trim();
+  document.querySelectorAll(".contact").forEach(contactEl => {
+    contactEl.addEventListener("click", () => {
+      const name = contactEl.querySelector(".name").textContent.trim();
+      const email = contactEl.querySelector(".email").textContent.trim();
 
-                // Sucht passenden User aus Firebase (per Email oder Name)
-                const userKey = Object.keys(users).find(key => 
-                    users[key].email === email || users[key].name === name
-                );
+      // Sucht passenden User aus Firebase (per Email oder Name)
+      const userKey = Object.keys(users).find(key =>
+        users[key].email === email || users[key].name === name
+      );
 
-                if (userKey) {
-                    const user = users[userKey];
-                    renderUserInfo(user);
-                } else {
-                    console.warn("User not found in Firebase");
-                }
-            });
-        });
+      if (userKey) {
+        const user = users[userKey];
+        renderUserInfo(user);
+      } else {
+        console.warn("User not found in Firebase");
+      }
     });
+  });
+});
 
 async function renderUserIcon() {
   const element = document.querySelector(".profile-picture");
-  const name = loadUrlParams();  
+  let name = loadUrlParams();
   if (!name) name = "Guest";
   element.innerHTML = createAvater(name);
 }
@@ -145,12 +145,26 @@ function createAvater(name) {
 }
 
 function updateNavLinksWithUserKey() {
-  const name = loadUrlParams();
+  let name = loadUrlParams();
+  if (!name) name = "Guest";
   const links = document.querySelectorAll('[data-task="navLink"]');
   links.forEach(element => {
     let newLink = element.href + `?msg=${encodeURIComponent(name)}`;
     element.href = newLink;
   });
+}
+
+function isPrivacyMessage() {
+  let msg = loadUrlParams();  
+  if (msg === "privacy") adjustLayoutForPrivacyView(); 
+}
+
+function adjustLayoutForPrivacyView() {
+  const ul = document.querySelector(".nav-wrapper").children[0];
+  const navImg = document.querySelector(".nav-imgs");
+  navImg.innerHTML = "";
+  ul.innerHTML = "";
+  ul.innerHTML += navLink("login", "../index.html", "Log in");    
 }
 
 function initializeNavbar() {

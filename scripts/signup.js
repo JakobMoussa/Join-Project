@@ -56,11 +56,30 @@ async function addUser() {
   const inputs = formFields();
   let signUp = await checkFormFields();
   if (!signUp) return;
-  postUser(
+  await postUser(
     inputs.name.value,
     inputs.email.value,
     inputs.password.value
   );
+  showSignupSuccess();
+}
+
+function showSignupSuccess() {
+  openOverlay();
+  setTimeout(() => {
+    closeOverlay();
+    openLogin();
+  }, 2000);
+}
+
+function openLogin() {
+  setTimeout(() => {
+    window.location.href = "../index.html";
+  }, 250);
+}
+
+function openPrivacy() {
+  window.location.href = "../html-templates/privacy-policy.html?msg=privacy";
 }
 
 function checkName(userName) {
