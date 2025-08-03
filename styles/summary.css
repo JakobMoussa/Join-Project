@@ -110,11 +110,20 @@
   flex-direction: column;
 }
 
-.greeting h2 {
-  font-size: 2.5rem;
-  font-weight: 100;
-  color: #333;
+.greeting {
   margin-left: 92px;
+}
+
+.greeting h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.greeting p {
+  color: #29abe2;
+  font-weight: 600;
+  font-size: 3rem;
 }
 
 /* ------------------------------ grid strucutre ------------------------------ */

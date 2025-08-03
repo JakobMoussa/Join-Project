@@ -1,91 +1,177 @@
+function formFields() {
+  return {
+    name: document.querySelector('[data-field="name"]'),
+    email: document.querySelector('[data-field="email"]'),
+    password: document.querySelector('[data-field="password"]'),
+    confirmPassword: document.querySelector('[data-field="confirmPassword"]')
+  };
+}
 
-// Firebase SDKs importieren
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+function errorFields() {
+  return {
+    name: document.querySelector('[data-field="errorName"]'),
+    email: document.querySelector('[data-field="errorEmail"]'),
+    password: document.querySelector('[data-field="errorPassword"]'),
+  }
+}
 
-// Deine Firebase-Konfiguration
-const firebaseConfig = {
-  apiKey: "AIzaSyC9j02JWuw06euMMvOiGk3z3xDkiQ_sw84",
-  authDomain: "join-52020.firebaseapp.com",
-  databaseURL: "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "join-52020",
-  storageBucket: "join-52020.firebasestorage.app",
-  messagingSenderId: "26851051506",
-  appId: "1:26851051506:web:7dac5a272e7c31d65e8d6b"
-};
-
-// Firebase initialisieren
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Warten bis das DOM geladen ist
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.login-form');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const inputs = form.querySelectorAll('input');
-    const name = inputs[0].value.trim();
-    const email = inputs[1].value.trim();
-    const password = inputs[2].value;
-    const confirmPassword = inputs[3].value;
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
+async function checkEmailExists(email) {
+  const inputContainer = document.querySelectorAll(".input-container");
+  let errorElements = errorFields();
+  const users = await loadData("users/");
+  for (const key in users) {
+    if (email == users[key].email) {
+      errorElements.email.innerHTML = "Email exists";
+      addRedOutline(inputContainer[1])
+      return false
     }
+  }
+  return true;
+}
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+function addRedOutline(target) {
+  target.classList.add("light-red-outline");
+}
 
-      await setDoc(doc(db, "users", user.uid), {
-        name: name,
-        email: email,
-        createdAt: new Date()
-      });
+function comparePasswords(password, confirmPassword) {
+  const inputContainer = document.querySelectorAll(".input-container");
+  let errorElements = errorFields();
+  const identical = password.value.trim() === confirmPassword.value.trim();
+  if (!identical) {
+    errorElements.password.innerHTML = "Passwords are not identical";
+    addRedOutline(inputContainer[2])
+    addRedOutline(inputContainer[3])
+    return false;
+  }
+  if (password.value.length < 3) {
+    errorElements.password.innerHTML = "Passwords length is to short";
+    addRedOutline(inputContainer[2])
+    addRedOutline(inputContainer[3])
+    return false;
+  }
+  return identical;
+}
 
-      alert("Registration successful!");
-      window.location.href = "../html-templates/summary.html";
+async function addUser() {
+  const inputs = formFields();
+  let signUp = await checkFormFields();
+  if (!signUp) return;
+  await postUser(
+    inputs.name.value,
+    inputs.email.value,
+    inputs.password.value
+  );
+  showSignupSuccess();
+}
 
-    } catch (error) {
-      console.error("Registration error:", error.message);
-      alert("Fehler: " + error.message);
-    }
+function showSignupSuccess() {
+  openOverlay();
+  setTimeout(() => {
+    closeOverlay();
+    openLogin();
+  }, 2000);
+}
 
-  });
-});
+function openLogin() {
+  setTimeout(() => {
+    window.location.href = "../index.html";
+  }, 250);
+}
 
-const passwordFields = document.querySelectorAll('.password-field');
+function openPrivacy() {
+  window.location.href = "../html-templates/privacy-policy.html?msg=privacy";
+}
 
-passwordFields.forEach((field) => {
-  const inputGroup = field.closest('.input-group');
-  const eyeIcon = inputGroup.querySelector('.eye');
-  const eyeImg = eyeIcon.querySelector('img');
-  const lockIcon = inputGroup.querySelector('.lock');
+function checkName(userName) {
+  const inputContainer = document.querySelectorAll(".input-container");
+  let errorElements = errorFields();
+  let validate = userName.trim() <= 0 || !userName.trim() ? false : true;
+  if (!validate) {
+    errorElements.name.innerHTML = "Please enter your name";
+    addRedOutline(inputContainer[0])
+  }
+  return validate;
+}
 
-  field.addEventListener('input', () => {
-    const hasValue = field.value.trim().length > 0;
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email) || !email) {
+    return false
+  }
+  return true
+}
 
-    eyeIcon.style.display = hasValue ? 'inline' : 'none';
+function errorEmail() {
+  const inputContainer = document.querySelectorAll(".input-container");
+  let errorElements = errorFields();
+  errorElements.email.innerHTML = 'Please enter a valid email address';
+  addRedOutline(inputContainer[1])
+}
 
-    lockIcon.style.display = hasValue ? 'none' : 'inline';
+async function checkFormFields() {
+  let inputs = formFields();
+  let nameIsValid = checkName(inputs.name.value);
+  let emailIsValid = validateEmail(inputs.email.value);
+  let emailAvailable = false;
+  if (!emailIsValid) errorEmail();
+  if (emailIsValid) {
+    emailAvailable = await checkEmailExists(inputs.email.value);
+  }
+  let passwordsMatch = comparePasswords(inputs.password, inputs.confirmPassword);
+  let checkbox = checkPrivacy();
+  if (!nameIsValid || !emailIsValid || !emailAvailable || !passwordsMatch || !checkbox) return false;
+  return true
+}
 
-    if (!hasValue) {
-      field.type = 'password';
-      eyeImg.src = '../assets/icons/eye-icon.svg';
-    }
-  });
+function checkPrivacy() {
+  const checkbox = document.getElementById("privacyCheckbox");
+  return checkbox.checked
+}
 
-  eyeIcon.addEventListener('click', () => {
-    const isPassword = field.type === 'password';
-    field.type = isPassword ? 'text' : 'password';
-    eyeImg.src = isPassword
-      ? '../assets/icons/eye-slash.svg'
-      : '../assets/icons/eye-icon.svg';
-  });
-});
+function toggleLockIcon(e, lockId, eyeId) {
+  const lock = document.getElementById(lockId);
+  const eye = document.getElementById(eyeId);
+  const hasValue = e.target.value.trim().length > 0;
+  lock.style.display = hasValue ? 'none' : 'inline';
+  eye.style.display = hasValue ? 'inline' : 'none';
+  if (!hasValue) {
+    e.target.type = 'password';
+    eye.src = '../assets/icons/eye-icon.svg';
+  }
+}
 
+function toggleInputType(e, data) {
+  const input = document.querySelector(`[data-field="${data}"]`);
+  const isPassword = input.type === 'password';
+  input.type = isPassword ? 'text' : 'password';
+  e.target.src = isPassword
+    ? '../assets/icons/eye-slash.svg'
+    : '../assets/icons/eye-icon.svg';
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = formFields();
+  const error = errorFields();
+  const inputContainer = document.querySelectorAll(".input-container");
+  addEventToInputs(inputs, error, inputContainer);
+})
+
+function addEventToInputs(inputs, error, inputContainer) {
+  for (const key in inputs) {
+    if (!inputs[key]) return;
+    inputs[key].addEventListener("click", () => {
+      let name = inputs[key].getAttribute("name");
+      if (name == "name") removeErrorReport(error.name, inputContainer[0]);
+      if (name == "email") removeErrorReport(error.email, inputContainer[1]);
+      if (name == "password" || name == "confirmPassword") {
+        removeErrorReport(error.password, inputContainer[2])
+        removeErrorReport(error.password, inputContainer[3])
+      };
+    });
+  }
+}
+
+function removeErrorReport(error, inputContainer) {
+  error.innerHTML = "";
+  inputContainer.classList.remove("light-red-outline");
+}

@@ -17,10 +17,12 @@
 
     <script src="../script.js"></script>
     <script src="../scripts/templates.js"></script>
-    <script src="../script.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/contact.js"></script>
+ 
 </head>
 
-<body>
+<body onload="initializeNavbar()">
     <div class="sidebar-wrapper">
         <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
         <nav class="nav-wrapper">
@@ -30,32 +32,32 @@
                     <div class="img-wrapper">
                         <img src="../assets/icons/summary.svg" alt="summary">
                     </div>
-                    <a href="summary.html">Summary</a>
+                    <a href="summary.html" data-task="navLink">Summary</a>
                 </li>
 
                 <li class="nav-link">
                     <div class="img-wrapper">
                         <img src="../assets/icons/add-task.svg" alt="add-task">
                     </div>
-                    <a href="add-task.html">Add Task</a>
+                    <a href="add-task.html" data-task="navLink">Add Task</a>
                 </li>
 
                 <li class="nav-link">
                     <div class="img-wrapper">
                         <img src="../assets/icons/board.svg" alt="board">
                     </div>
-                    <a href="board.html">Board</a>
+                    <a href="board.html" data-task="navLink">Board</a>
                 </li>
                 <li class="nav-link selected">
                     <div class="img-wrapper">
                         <img src="../assets/icons/contacts.svg" alt="contacts">
                     </div>
-                    <a href="contacts.html">Contacts</a>
+                    <a href="contacts.html" data-task="navLink">Contacts</a>
                 </li>
             </ul>
             <ul class="bottom-links">
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                <li><a href="legal-notice.html">Legal Notice</a></li>
+                <li class="nav-link"><a href="privacy-policy.html" data-task="navLink">Privacy Policy</a></li>
+                <li class="nav-link"><a href="legal-notice.html" data-task="navLink">Legal Notice</a></li>
             </ul>
         </nav>
     </div>
@@ -68,7 +70,7 @@
                 </h2>
                 <div class="nav-imgs">
                     <img src="../assets/icons/help.svg" alt="help-symbol">
-                    <img class="profile-picture" src="../assets/icons/G.svg" alt="profile-picture">
+                    <p class="profile-picture"></p>
                 </div>
             </nav>
         </section>
@@ -79,18 +81,18 @@
                 <button class="add-contact-btn" onclick="openAddContactOverlay()">
                     Add new contact <img src="/assets/icons/add-person-icon.png" class="add-person-icon"></img>
                 </button>
-
+    
                 <div class="contact-group">
                     <div class="group-letter">A</div>
-                    <div class="contact">
-                        <div class="avatar" style="background-color: orange;">AM</div>
+                    <div class="contact" id="user-1">
+                        <div class="avatar" style="background-color: #FF7A00;">AM</div>
                         <div class="info">
                             <div class="name">Anton Mayer</div>
                             <div class="email">antom@gmail.com</div>
                         </div>
                     </div>
-                    <div class="contact">
-                        <div class="avatar" style="background-color: purple;">AS</div>
+                    <div class="contact" id="user-2">
+                        <div class="avatar" style="background-color: #f1c40f;">AS</div>
                         <div class="info">
                             <div class="name">Anja Schulz</div>
                             <div class="email">schulz@hotmail.com</div>
@@ -100,7 +102,7 @@
 
                 <div class="contact-group">
                     <div class="group-letter">B</div>
-                    <div class="contact">
+                    <div class="contact" id="user-3">
                         <div class="avatar" style="background-color: #715cff;">BZ</div>
                         <div class="info">
                             <div class="name">Benedikt Ziegler</div>
@@ -111,39 +113,39 @@
                 <div class="contact-group"></div>
 
                 <div class="group-letter">C</div>
-                <div class="contact">
+                <div class="contact" id="user-4">
                     <div class="avatar" style="background-color: #f1c40f;">CF</div>
                     <div class="info">
-                        <div class="name">Eva Fischer</div>
-                        <div class="email">eva@gmail.com</div>
+                        <div class="name">Christian Fischer</div>
+                        <div class="email">christian@gmail.com</div>
                     </div>
                 </div>
 
-                <div class="contact">
+                <div class="contact" id="user-5">
                     <div class="avatar" style="background-color: #1abc9c;">CM</div>
                     <div class="info">
-                        <div class="name">Emmanuel Mauer</div>
-                        <div class="email">emmanuelma@gmail.com</div>
+                        <div class="name">Celina Mauer</div>
+                        <div class="email">celinamauer@gmail.com</div>
                     </div>
                 </div>
 
-                <div class="contact">
+                <div class="contact" id="user-6">
                     <div class="avatar" style="background-color: #3498db;">CE</div>
                     <div class="info">
                         <div class="name">Caro Engel</div>
-                        <div class="email">erik.engel@example.com</div>
+                        <div class="email">caro.engel@example.com</div>
                     </div>
                 </div>
 
                 <div class="group-letter">E</div>
-                <div class="contact">
+                <div class="contact" id="user-7">
                     <div class="avatar" style="background-color: #f1c40f;">EF</div>
                     <div class="info">
                         <div class="name">Eva Fischer</div>
                         <div class="email">eva@gmail.com</div>
                     </div>
                 </div>
-                <div class="contact">
+                <div class="contact" id="user-8">
                     <div class="avatar" style="background-color: #1abc9c;">EM</div>
                     <div class="info">
                         <div class="name">Emmanuel Mauer</div>
@@ -152,7 +154,7 @@
                 </div>
 
                 <div class="group-letter">M</div>
-                <div class="contact">
+                <div class="contact" id="user-9">
                     <div class="avatar" style="background-color: #f1c40f;">MB</div>
                     <div class="info">
                         <div class="name">Marcel Bauer</div>
@@ -161,27 +163,29 @@
                 </div>
 
                 <div class="group-letter">T</div>
-                <div class="contact">
+                <div class="contact" id="user-10">
                     <div class="avatar" style="background-color: #f1c40f;">TW</div>
                     <div class="info">
                         <div class="name">Tanja Wolf</div>
                         <div class="email">tanjawolf@gmail.com</div>
                     </div>
                 </div>
-                <div class="contact">
-                    <div class="avatar" style="background-color: #1abc9c;">EM</div>
+                <div class="contact" id="user-11">
+                    <div class="avatar" style="background-color: #1abc9c;">TS</div>
                     <div class="info">
-                        <div class="name">Emmanuel Mauer</div>
-                        <div class="email">emmanuelma@gmail.com</div>
+                        <div class="name">Tobias Schmidt</div>
+                        <div class="email">tobiass@gmail.com</div>
                     </div>
                 </div>
             </div>
             <div class="contact-field">
-                <h2>Contacts</h2>
-                <div class="divider"></div>
-                <p class="contact-text-filed">Better with a team</p>
+                <div class="contact-title">
+                    <h2 class="title-text">Contacts</h2>
+                    <div class="divider"></div>
+                    <p class="contact-text-filed">Better with a team</p>
+                </div>
+                <div class="users-information"></div>
             </div>
-
         </section>
     </main>
 

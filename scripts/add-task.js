@@ -154,7 +154,9 @@ function loadUsers() {
 function initialsFromName(user) {
   let initials = "";
   const array = user.split(" ");
-  initials += array[0].charAt(0) + array[1].charAt(0);
+  array.forEach(element => {
+    initials += element.charAt(0);
+  });
   return initials;
 }
 
@@ -271,10 +273,14 @@ function clearInputError(target, error) {
   error.innerHTML = "";
 }
 
-function showError(target, name) {
-  let error = document.getElementById(`${name}Error`);
+function addErrorClasses(target) {
   target.classList.add("light-red-outline");
   target.classList.remove("blue-outline");
+}
+
+function showError(target, name) {
+  let error = document.getElementById(`${name}Error`);
+  addErrorClasses(target);
   error.innerHTML = "This field is required";
   target.addEventListener("click", () => {
     clearInputError(target, error);

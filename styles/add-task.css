@@ -74,6 +74,7 @@ button div {
 
 .input-task:focus {
   outline: transparent;
+  border-color: #29abe2;
 }
 
 .input-task::placeholder {
@@ -108,7 +109,7 @@ button div {
   font-size: 16px;
 }
 
-.dropdown-container {
+.input-container {
   height: 40px;
   width: 100%;
   padding: 0 16px 0 16px;
@@ -122,20 +123,21 @@ button div {
   cursor: pointer;
 }
 
-.dropdown-container:hover {
+.input-container:hover {
   border: 1px solid #9c9c9c;
 }
 
-.dropdown-container input {
+.input-container input {
   flex-grow: 1;
   border: none;
+  cursor: pointer;
 }
 
-.dropdown-container input:focus {
-  outline: none;
+.input-container input:focus {
+  outline: none;  
 }
 
-.dropdown-container input::placeholder {
+.input-container input::placeholder {
   color: #d1d1d1;
 }
 
