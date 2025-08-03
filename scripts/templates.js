@@ -182,9 +182,11 @@ function okBtn(taskId) {
 }
 
 function createTaskTemplate(id, task) {
-  console.log(task.category);
   return `
-    <div class="task" data-id="${id}" id="${id}" draggable="true" ondragstart="dragstartHandler(event, '${id}')" onclick="renderSelectedTask('${id}')">
+    <div class="task draggable" data-id="${id}" id="${id}" draggable="true" 
+     ondragstart="dragstartHandler(event, '${id}')" 
+     ondragend="dragendHandler(event)" 
+     onclick="renderSelectedTask('${id}')">
         <span class="tag ${createCategoryClass(task.category)}">${task.category}</span>
         <h4>${task.title}</h4>
         <p class="task-descr">${task.description}</p>
@@ -199,14 +201,20 @@ function createTaskTemplate(id, task) {
   `;
 }
 
-function createProgressTemplate(subtasks, numerus, subtaskDone) {
+function createProgressWrapper(subtasks, numerus, subtaskDone) {
   return `
-        <div class="progress-wrapper">
-        <div class="progress-bar">
-            <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
-        </div>
-        <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
+    <div class="progress-wrapper">
+      ${progessTemplate(subtasks, numerus, subtaskDone)}
     </div>
+  `;
+}
+
+function progessTemplate(subtasks, numerus, subtaskDone) {
+  return `
+    <div class="progress-bar">
+        <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
+    </div>
+    <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
   `;
 }
 
