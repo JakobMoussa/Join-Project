@@ -11,24 +11,60 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
 
 document.addEventListener("DOMContentLoaded", async () => {});
 
-function openOverlay() {
-  const overlay = document.querySelectorAll(".overlay");
-  overlay.forEach((element) => {
-    element.classList.remove("hidden");
+// function openOverlay() {
+//   const overlay = document.querySelectorAll(".overlay");
+//   overlay.forEach((element) => {
+//     element.classList.remove("hidden");
+//     setTimeout(() => {
+//       element.classList.add("visible");
+//       toggleAnimation();
+//     }, 1);
+//   });
+// }
+function openOverlay(type = "") {
+  const overlays = document.querySelectorAll(".overlay");
+  overlays.forEach((overlay) => {
+    overlay.classList.remove("hidden");
+    overlay.classList.add(`overlay-${type}`); // Klasse hinzufügen
     setTimeout(() => {
-      element.classList.add("visible");
+      overlay.classList.add("visible");
       toggleAnimation();
-    }, 1);
+    }, 10);
   });
 }
 
+// function closeOverlay() {
+//   const overlay = document.querySelectorAll(".overlay");
+//   overlay.forEach((element) => {
+//     element.classList.remove("visible");
+//     toggleAnimation();
+//     setTimeout(() => {
+//       element.classList.add("hidden");
+//     }, 250);
+//   });
+// }
+
+
 function closeOverlay() {
-  const overlay = document.querySelectorAll(".overlay");
-  overlay.forEach((element) => {
-    element.classList.remove("visible");
+  const overlays = document.querySelectorAll(".overlay");
+
+  overlays.forEach((overlay) => {
+    overlay.classList.remove("visible");
     toggleAnimation();
+
+    const classList = overlay.className.split(" ");
+    const cleanedClasses = [];
+
+    for (let i = 0; i < classList.length; i++) {
+      const className = classList[i];
+      if (!className.startsWith("overlay-") || className === "overlay") {
+        cleanedClasses.push(className);
+      }
+    }
+    overlay.className = cleanedClasses.join(" ");
+
     setTimeout(() => {
-      element.classList.add("hidden");
+      overlay.classList.add("hidden");
     }, 250);
   });
 }
@@ -100,29 +136,26 @@ function openAddContactOverlay() {
 
 
  document.addEventListener("DOMContentLoaded", async () => {
-        const users = await loadData("users"); // Holt alle User-Daten aus Firebase
+        const users = await loadData("users"); 
 
         document.querySelectorAll(".contact").forEach(contactEl => {
             contactEl.addEventListener("click", () => {
                 const name = contactEl.querySelector(".name").textContent.trim();
                 const email = contactEl.querySelector(".email").textContent.trim();
 
-                // Sucht passenden User aus Firebase (per Email oder Name)
+                
                 const userKey = Object.keys(users).find(key => 
                     users[key].email === email || users[key].name === name
                 );
 
                 if (userKey) {
                     const user = users[userKey];
-                    renderUserInfo(user);
+                    renderUserInfo(userKey, user);
                 } else {
                     console.warn("User not found in Firebase");
                 }
             });
         });
-    });
-
-
-
+});
 
 

@@ -316,7 +316,7 @@ function createSubtaskListItem(taskId, subtaskObj) {
 function getContactOverlayTemplate() {
   return `
     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
-        <div class="modal">
+        <div class="modal"> 
             <div class="modal-left">
                 <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
                 <h2>Add contact</h2>
@@ -353,32 +353,67 @@ function getContactOverlayTemplate() {
 }
 
 
-    function renderUserInfo(user) {
-        const container = document.querySelector(".users-information");
-        container.innerHTML = `
-            <div class="user-details">
-                <div class="user-name-container">
-                    <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}</div>
-                       <div class="user-name">
-                            <h3>${user.name}</h3>
-                            <div class="edit-delete-buttons">
-                                <p class="edit-field">
-                                <img src="/assets/icons/edit.svg" alt="Edit-icon" class="edit-icon">Edit</p>
-                                <p class="edit-field">
-                                <img src="/assets/icons/delete.svg" alt="Delete-icon" class="Delete-icon">Delete</p>
-                            </div>
-                        </div>
-                </div>
-                <p class="information-field">Contact Information</p>
-                <div class="users-field">
-                    <img><p class="ptage">Email</p></img>
-                    <p class="user-email">${user.email}</p>
-                    <p class="ptage">Phone</p>
-                    <p>${user.phone}</p>
+    // function renderUserInfo(user) {
+    //     const container = document.querySelector(".users-information");
+    //     container.innerHTML = `
+    //         <div class="user-details">
+    //             <div class="user-name-container">
+    //                 <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}</div>
+    //                    <div class="user-name">
+    //                         <h3>${user.name}</h3>
+    //                         <div class="edit-delete-buttons">
+    //                             <p class="edit-field">
+    //                             <img src="/assets/icons/edit.svg" alt="Edit-icon" class="edit-icon">Edit</p>
+    //                             <p class="edit-field">
+    //                             <img src="/assets/icons/delete.svg" alt="Delete-icon" class="Delete-icon">Delete</p>
+    //                         </div>
+    //                     </div>
+    //             </div>
+    //             <p class="information-field">Contact Information</p>
+    //             <div class="users-field">
+    //                 <img><p class="ptage">Email</p></img>
+    //                 <p class="user-email">${user.email}</p>
+    //                 <p class="ptage">Phone</p>
+    //                 <p>${user.phone}</p>
+    //             </div>
+    //         </div>
+    //     `;
+    // }.    
+
+    function renderUserInfo(id, user) {
+  const overlayContainer = document.querySelector(".overlay");
+  overlayContainer.innerHTML = `
+    <div class="overlay-wrapper transit">
+      <div class="users-information visible" onclick="closeOverlay()">
+        <div class="user-details" onclick="event.stopPropagation()">
+          <div class="user-name-container">
+            <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}</div>
+            <div class="user-name">
+              <h3>${user.name}</h3>
+                <div class="edit-delete-buttons">
+                    <button class="edit-field" id="">
+                        <img src="/assets/icons/edit.svg" alt="Edit icon" class="edit-icon">Edit
+                    </button>
+                    <button class="edit-field" onclick="deleteUser('users/${id}')">
+                        <img src="/assets/icons/delete.svg" alt="Delete icon" class="delete-icon">Delete
+                    </button>
                 </div>
             </div>
-        `;
-    }
+          </div>
+          <p class="information-field">Contact Information</p>
+          <div class="users-field">
+            <p class="ptage">Email</p>
+            <p class="user-email">${user.email}</p>
+            <p class="ptage">Phone</p>
+            <p>${user.phone}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  openOverlay("userinfo");
+}
 
 
 function createContactElement(user) {

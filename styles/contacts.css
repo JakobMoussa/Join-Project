@@ -82,10 +82,6 @@
 
 /* Contacts field */
 
-/* .contact-field {
-
-} */
-
 .contact-title {
   display: flex;
   gap: 16px;
@@ -167,7 +163,6 @@
   display: flex;
   width: 1212px;
   height: 592px;
-  background: white;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -415,6 +410,8 @@ h3 {
 }
 
 .edit-field {
+  border: none;
+  background: none;
   display: flex;
   cursor: pointer;
   font-weight: 300;

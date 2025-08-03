@@ -24,7 +24,7 @@ function buildUser(name, email) {
     return {
         name,
         email,
-        phone: "0152/0000000", // Standard oder später dynamisch
+        phone: "0152/0000000", 
         Avatar: getInitials(name),
         color: getRandomColor(),
         assigned: false,
@@ -34,7 +34,7 @@ function buildUser(name, email) {
 
 function initContactForm() {
     const form = document.querySelector(".contact-form");
-    if (!form) return console.warn("Formular nicht gefunden.");
+    if (!form) return console.warn("Form not found.");
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -43,7 +43,7 @@ function initContactForm() {
         const email = getValue("contact-email");
         const phone = getValue("contact-phone");
 
-        if (!name || !email || !phone) return alert("Bitte alle Felder ausfüllen!");
+        if (!name || !email || !phone) return alert("Please fill in all fields!");
 
         const user = buildUser(name, email, phone);
         await postData("users/", user);
@@ -118,5 +118,22 @@ function findOrCreateGroup(container, letter) {
         container.appendChild(group);
     }
     return group;
+}
+
+async function deleteUser(path) {
+  try {
+    await deleteData(path);         
+    closeOverlay();              
+    removeUserFromHTML(path);        
+    console.log("User gelöscht:", path);
+  } catch (error) {
+    console.error("Fehler beim Löschen:", error);
+  }
+}
+
+function removeUserFromHTML(path) {
+  const userId = path.split("/")[1]; 
+  const contactEl = document.querySelector(`[data-user-id="${userId}"]`);
+  if (contactEl) contactEl.remove();
 }
 

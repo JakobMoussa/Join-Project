@@ -215,7 +215,7 @@ Board
 Overlay
 ---------------------------------------------- */
 
-.overlay {
+/* .overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -227,15 +227,15 @@ Overlay
   z-index: 11;
   display: flex;
   justify-content: center;
-  align-items: center;
-  /* fade-in / fade-out effect */
+  align-items: center; 
+   fade-in / fade-out effect 
   opacity: 0;
   transition: opacity 250ms ease;
-}
+}*/
 
-.visible {
+/* .visible {
   opacity: 1;
-}
+} */
 
 .overlay-wrapper {
   position: absolute;
