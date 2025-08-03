@@ -4,7 +4,6 @@ let selectedPriority = "medium";
 let assignedUserArr = [];
 let taskStatus = "to-do";
 
-
 async function initAddTaskPage() {
   await loadUsersTask();
   loadTaskFormTemplate("firstTaskContainer", "secondTaskContainer");
@@ -247,11 +246,11 @@ function getFormElementsIds() {
     date: dateId,
     category: {
       span: categoryId,
-      dropdown: categoryDropdown
+      dropdown: categoryDropdown,
     },
-    description: descriptionId
-  }
-  return formIds
+    description: descriptionId,
+  };
+  return formIds;
 }
 
 function taskObjTemplate(priority = "medium", users, subtask, status = "to-do") {
@@ -264,6 +263,7 @@ function taskObjTemplate(priority = "medium", users, subtask, status = "to-do") 
     category: document.getElementById("select-category").innerHTML,
     subtask: subtask,
     status: status,
+    order: 1000,
   };
 }
 

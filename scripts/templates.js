@@ -1,5 +1,5 @@
 function subListItem(task, id) {
-    return `
+  return `
         <li class="sub-item">
             <span>•</span>
             <input type="text" value="${task}" id="sub-input-${id}" disabled>
@@ -13,7 +13,7 @@ function subListItem(task, id) {
 }
 
 function subListItemEdit(task, id) {
-    return `
+  return `
         <li class="sub-item-editing">
             <input type="text" id="sub-input-${id}" value="${task}">
             <div class="sub-btn-container">
@@ -26,7 +26,7 @@ function subListItemEdit(task, id) {
 }
 
 function singleUserContainer(style, initials, name = "XX", color = "red") {
-    return `
+  return `
         <div class="${style}" onclick="assignedUser('${name}')">
             <div class="user-icon" style="background-color: ${color};">${initials}</div>
             <span class="user-name">${name}</span>
@@ -36,13 +36,13 @@ function singleUserContainer(style, initials, name = "XX", color = "red") {
 }
 
 function userIcon(color = "red", initials = "xx", name = "xx") {
-    return `
+  return `
         <div class="user-icon" onclick="assignedUser('${name}')" style="background-color: ${color}">${initials}</div>
     `;
 }
 
 function titleTaskTpl(title = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="titleInput" class="task-name">
                 Title<span class="red-font">*</span>
@@ -54,7 +54,7 @@ function titleTaskTpl(title = "") {
 }
 
 function descriptionTaskTpl(description = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="description-input" class="task-name">Description</label>
             <textarea name="" id="description" class="textarea-description">${description}</textarea>
@@ -63,7 +63,7 @@ function descriptionTaskTpl(description = "") {
 }
 
 function dateTaskTpl(date = "") {
-    return `
+  return `
         <div class="task-container">
             <label for="date" class="task-name">
                 Due date<span class="red-font">*</span>
@@ -75,7 +75,7 @@ function dateTaskTpl(date = "") {
 }
 
 function prioTaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Priority</span>
             <div class="priority-btn-container">
@@ -97,7 +97,7 @@ function prioTaskTpl() {
 }
 
 function assignedTaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Assigned to:</span>
             <div class="input-container">
@@ -118,7 +118,7 @@ function assignedTaskTpl() {
 }
 
 function categoryTaskTpl() {
-    return `
+  return `
         <div class="task-container" id = "category-container">
             <span class="task-name">
                 Category<span class="red-font">*</span>
@@ -146,7 +146,7 @@ function categoryTaskTpl() {
 }
 
 function subtaskTpl() {
-    return `
+  return `
         <div class="task-container">
             <span class="task-name">Subtask</span>
             <div class="input-container">
@@ -164,7 +164,7 @@ function subtaskTpl() {
 }
 
 function editTaskTpl() {
-    return `
+  return `
         <div class="close-edit-conatiner">
             <button class="close-task" onclick="closeOverlay(); resetTaskData()"></button>
         </div>
@@ -173,7 +173,7 @@ function editTaskTpl() {
 }
 
 function okBtn(taskId) {
-    return `
+  return `
         <button class="btn-create" onclick="saveEditedTask('${taskId}'); resetTaskData()">
             Ok
             <img src="../assets/icons/check.svg" alt="">
@@ -182,9 +182,11 @@ function okBtn(taskId) {
 }
 
 function createTaskTemplate(id, task) {
-    console.log(task.category);
-    return `
-    <div class="task" data-id="${id}" id="${id}" draggable="true" ondragstart="dragstartHandler(event, '${id}')" onclick="renderSelectedTask('${id}')">
+  return `
+    <div class="task draggable" data-id="${id}" id="${id}" draggable="true" 
+     ondragstart="dragstartHandler(event, '${id}')" 
+     ondragend="dragendHandler(event)" 
+     onclick="renderSelectedTask('${id}')">
         <span class="tag ${createCategoryClass(task.category)}">${task.category}</span>
         <h4>${task.title}</h4>
         <p class="task-descr">${task.description}</p>
@@ -199,33 +201,39 @@ function createTaskTemplate(id, task) {
   `;
 }
 
-function createProgressTemplate(subtasks, numerus, subtaskDone) {
-    return `
-        <div class="progress-wrapper">
-        <div class="progress-bar">
-            <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
-        </div>
-        <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
+function createProgressWrapper(subtasks, numerus, subtaskDone) {
+  return `
+    <div class="progress-wrapper">
+      ${progessTemplate(subtasks, numerus, subtaskDone)}
     </div>
   `;
 }
 
+function progessTemplate(subtasks, numerus, subtaskDone) {
+  return `
+    <div class="progress-bar">
+        <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
+    </div>
+    <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
+  `;
+}
+
 function createPersonTemplate(userObj, username) {
-    return `<span class="avatar" style="background: ${userObj.color};" > ${username}</span>`;
+  return `<span class="avatar" style="background: ${userObj.color};" > ${username}</span>`;
 }
 
 function createTaskPlaceholder() {
-    return `<div class="empty">No tasks To do</div>`;
+  return `<div class="empty">No tasks To do</div>`;
 }
 
 function createTaskPlaceholderDone() {
-    return `<div class="empty">No tasks done</div>`;
+  return `<div class="empty">No tasks done</div>`;
 }
 
 // --------------------- Task-Overlay ---------------------------------------
 
 function createDetailedTaskTemplate(taskId, task) {
-    return `
+  return `
     <div id="overlay-wrapper" class="overlay-wrapper overlay-content transit" onclick="onclickProtection(event)">
         <div class="overlay-header mb-20">
             <span class="tag-overlay ${createCategoryClass(task.category)}">${task.category}</span>
@@ -271,7 +279,7 @@ function createDetailedTaskTemplate(taskId, task) {
 }
 
 function createPersonTemplateDetailView(userObj) {
-    return `
+  return `
     <div>
         <div class="section-title mb-14">Assigned to:</div>
         <ul class="assigned-list mb-20">
@@ -282,7 +290,7 @@ function createPersonTemplateDetailView(userObj) {
 }
 
 function createPersonListItem(userObj, username) {
-    return `
+  return `
     <li class="assigned-person mb-14">
         <span class="avatar" style="background: ${userObj.color};">${username}</span>
         <span>${userObj.name}</span>
@@ -291,7 +299,7 @@ function createPersonListItem(userObj, username) {
 }
 
 function createSubtaskTemplate(taskId, subtaskArr) {
-    return `
+  return `
     <div>
         <div class="section-title mb-14">Subtasks</div>
         <ul class="subtasks mb-20">
@@ -302,8 +310,8 @@ function createSubtaskTemplate(taskId, subtaskArr) {
 }
 
 function createSubtaskListItem(taskId, subtaskObj) {
-    const checkedClass = subtaskObj.edit ? " checked" : "";
-    return `
+  const checkedClass = subtaskObj.edit ? " checked" : "";
+  return `
     <li class="subtask-item mb-14" data-id="${subtaskObj.id}">
       <button class="btn-subtask btn-transparent ${checkedClass}" data-id="${subtaskObj.id}" onclick="checkInOutSubtask('${taskId}', '${subtaskObj.id}')"></button>
       <label>${subtaskObj.value}</label>
@@ -314,7 +322,7 @@ function createSubtaskListItem(taskId, subtaskObj) {
 // --------------------- Contact-Overlay ---------------------------------------
 
 function getContactOverlayTemplate() {
-    return `
+  return `
     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
         <div class="modal">
             <div class="modal-left">
@@ -352,10 +360,9 @@ function getContactOverlayTemplate() {
   `;
 }
 
-
 function renderUserInfo(user) {
-    const container = document.querySelector(".users-information");
-    container.innerHTML = `
+  const container = document.querySelector(".users-information");
+  container.innerHTML = `
             <div class="user-details">
                 <div class="user-name-container">
                     <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}</div>
@@ -380,27 +387,26 @@ function renderUserInfo(user) {
         `;
 }
 
-
 function createContactElement(user) {
-    const div = document.createElement("div");
-    div.classList.add("contact");
-    div.innerHTML = `
+  const div = document.createElement("div");
+  div.classList.add("contact");
+  div.innerHTML = `
         <div class="avatar" style="background-color: ${user.color};">${user.avatar || user.Avatar}</div>
         <div class="info">
             <div class="name">${user.name}</div>
             <div class="email">${user.email}</div>
         </div>
     `;
-    return div;
+  return div;
 }
 
 function navLink(icon, link, section) {
-    return `
+  return `
         <li class="nav-link">
             <div class="img-wrapper">
                 <img src="../assets/icons/${icon}.svg" alt="">
             </div>
             <a href="${link}" data-task="navLink">${section}</a>
         </li>
-    `
+    `;
 }
