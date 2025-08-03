@@ -9,7 +9,7 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {});
+document.addEventListener("DOMContentLoaded", async () => { });
 
 // function openOverlay() {
 //   const overlay = document.querySelectorAll(".overlay");
@@ -136,26 +136,29 @@ function openAddContactOverlay() {
 
 
  document.addEventListener("DOMContentLoaded", async () => {
-        const users = await loadData("users"); 
+        const users = await loadData("users"); // Holt alle User-Daten aus Firebase
 
-        document.querySelectorAll(".contact").forEach(contactEl => {
-            contactEl.addEventListener("click", () => {
-                const name = contactEl.querySelector(".name").textContent.trim();
-                const email = contactEl.querySelector(".email").textContent.trim();
+  document.querySelectorAll(".contact").forEach(contactEl => {
+    contactEl.addEventListener("click", () => {
+      const name = contactEl.querySelector(".name").textContent.trim();
+      const email = contactEl.querySelector(".email").textContent.trim();
 
-                
+                // Sucht passenden User aus Firebase (per Email oder Name)
                 const userKey = Object.keys(users).find(key => 
                     users[key].email === email || users[key].name === name
                 );
 
                 if (userKey) {
                     const user = users[userKey];
-                    renderUserInfo(userKey, user);
+                    renderUserInfo(user);
                 } else {
                     console.warn("User not found in Firebase");
                 }
             });
         });
-});
+    });
+
+
+
 
 

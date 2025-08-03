@@ -18,42 +18,41 @@
     <script src="../scripts/summary.js"></script>
 </head>
 
-<body>
+<body onload="initializeNavbar()">
     <div class="sidebar-wrapper">
         <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
         <nav class="nav-wrapper">
             <ul>
-
                 <li class="nav-link selected">
                     <div class="img-wrapper">
                         <img src="../assets/icons/summary.svg" alt="summary">
                     </div>
-                    <a href="summary.html">Summary</a>
+                    <a href="summary.html" data-task="navLink">Summary</a>
                 </li>
 
                 <li class="nav-link">
                     <div class="img-wrapper">
                         <img src="../assets/icons/add-task.svg" alt="add-task">
                     </div>
-                    <a href="add-task.html">Add Task</a>
+                    <a href="add-task.html" data-task="navLink">Add Task</a>
                 </li>
 
                 <li class="nav-link">
                     <div class="img-wrapper">
                         <img src="../assets/icons/board.svg" alt="board">
                     </div>
-                    <a href="board.html">Board</a>
+                    <a href="board.html" data-task="navLink">Board</a>
                 </li>
                 <li class="nav-link">
                     <div class="img-wrapper">
                         <img src="../assets/icons/contacts.svg" alt="contacts">
                     </div>
-                    <a href="contacts.html">Contacts</a>
+                    <a href="contacts.html" data-task="navLink">Contacts</a>
                 </li>
             </ul>
             <ul class="bottom-links">
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                <li><a href="legal-notice.html">Legal Notice</a></li>
+                <li class="nav-link"><a href="privacy-policy.html" data-task="navLink">Privacy Policy</a></li>
+                <li class="nav-link"><a href="legal-notice.html" data-task="navLink">Legal Notice</a></li>
             </ul>
         </nav>
     </div>
@@ -66,9 +65,16 @@
                 </h2>
                 <div class="nav-imgs">
                     <img src="../assets/icons/help.svg" alt="help-symbol">
-                    <img class="profile-picture" src="../assets/icons/G.svg" alt="profile-picture">
+                    <button class="profile-picture" onclick="toggleMenu()"></button>
                 </div>
             </nav>
+            <div class="menu-container">
+                <div class="menu" id="menu">
+                    <a href="./legal-notice.html" class="menu-item">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="menu-item">Privacy Police</a>
+                    <a href="../index.html" class="menu-item">Log out</a>
+                </div>
+            </div>
         </section>
 
         <section id="content-wrapper">
@@ -83,7 +89,7 @@
                 <section class="dashboard-summary">
                     <div class="parent">
 
-                        <a href="board.html" class="div1 metric-item">
+                        <a href="board.html" class="div1 metric-item" data-task="navLink">
                             <div class="metric-icon"></div>
                             <div>
                                 <span class="metric-count" data-task="to-do"></span>
@@ -91,7 +97,7 @@
                             </div>
                         </a>
 
-                        <a href="board.html" class="div2 metric-item">
+                        <a href="board.html" class="div2 metric-item" data-task="navLink">
                             <div class="metric-icon"></div>
                             <div>
                                 <span class="metric-count" data-task="done"></span>
@@ -99,7 +105,7 @@
                             </div>
                         </a>
 
-                        <a href="board.html" class="div3 metric-item">
+                        <a href="board.html" class="div3 metric-item" data-task="navLink">
                             <div class="metric-urgent-wrapper">
                                 <div class="metric-urgent-icon">
                                     <img src="../assets/icons/urgent.svg" alt="urgent">
@@ -116,17 +122,17 @@
                             </div>
                         </a>
 
-                        <a href="board.html" class="div4 metric-item metric-bottom-row">
+                        <a href="board.html" class="div4 metric-item metric-bottom-row" data-task="navLink">
                             <span class="metric-count" data-task="total-tasks"></span>
                             <span class="metric-label">Tasks in Board</span>
                         </a>
 
-                        <a href="board.html" class="div5 metric-item metric-bottom-row">
+                        <a href="board.html" class="div5 metric-item metric-bottom-row" data-task="navLink">
                             <span class="metric-count" data-task="in-progress"></span>
                             <span class="metric-label">Tasks in Progress</span>
                         </a>
 
-                        <a href="board.html" class="div6 metric-item metric-bottom-row">
+                        <a href="board.html" class="div6 metric-item metric-bottom-row" data-task="navLink">
                             <span class="metric-count" data-task="await-feedback"></span>
                             <span class="metric-label">Awaiting Feedback</span>
                         </a>

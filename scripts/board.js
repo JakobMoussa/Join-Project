@@ -1,15 +1,28 @@
-let currentDragElement = null;
-
 function renderBoard(tasks) {
   removeTasks();
   removePlaceholder();
 
   if (tasks) {
-    for (let task in tasks) {
-      let column = document.querySelector(`.column[data-task="${tasks[task].status}"]`);
+    let categories = {};
+    // Group tasks in categories to use forEach loop
+    let entries = Object.entries(tasks);
+
+    entries.forEach((task) => {
+      if (!categories[task[1].status]) categories[task[1].status] = [];
+      categories[task[1].status].push(task);
+    });
+
+    for (let status in categories) {
+      let column = document.querySelector(`.column[data-task="${status}"]`);
+
       if (column) {
-        let taskTemplate = createTaskTemplate(task, tasks[task]);
-        column.innerHTML += taskTemplate;
+        // "a[1].order ?? 0" means: If a[1].order is not defined or null, use 0
+        let sortedTasks = categories[status].sort((a, b) => (a[1].order ?? 0) - (b[1].order ?? 0));
+
+        sortedTasks.forEach((task) => {
+          let taskTemplate = createTaskTemplate(task[0], task[1]);
+          column.innerHTML += taskTemplate;
+        });
       }
     }
   }
@@ -37,7 +50,7 @@ columns.forEach((column) => {
 });
 
 function createCategoryClass(category) {
-  // from e.g. "Technical Task" to "technical-task" for CSS class
+  // from e.g. "Technical Task" to "technical-task" for correct CSS class
   return category.toLowerCase().split(" ").join("-");
 }
 
@@ -46,7 +59,7 @@ function checkForSubtask(subtasks) {
     let progressHTML = "";
     const numerus = subtasks.length === 1 ? "Subtask" : "Subtasks";
     const subtaskDone = subtasks.filter((subtask) => subtask.edit);
-    progressHTML += createProgressTemplate(subtasks, numerus, subtaskDone);
+    progressHTML += createProgressWrapper(subtasks, numerus, subtaskDone);
     return progressHTML;
   } else {
     return "";
@@ -133,11 +146,19 @@ async function checkInOutSubtask(taskId, subtaskId) {
   let taskObj = await loadData("tasks/" + taskId);
   let subtaskRef = document.querySelector(`.btn-subtask[data-id="${subtaskId}"]`);
   let subtask = taskObj.subtask.find((subtask) => subtask.id == subtaskId);
-
+  let selectedTask = document.getElementById(`${taskId}`);
+  let subtaskProgress = selectedTask.querySelector(".progress-wrapper");
   subtaskRef.classList.toggle("checked");
+
   if (subtask) {
     subtask.edit = !subtask.edit;
     await putData("tasks/" + taskId, taskObj);
+
+    if (subtaskProgress) {
+      const numerus = taskObj.subtask.length === 1 ? "Subtask" : "Subtasks";
+      const subtaskDone = taskObj.subtask.filter((st) => st.edit);
+      subtaskProgress.innerHTML = progessTemplate(taskObj.subtask, numerus, subtaskDone);
+    }
   }
 }
 
@@ -181,16 +202,6 @@ function checkIfNoResults(totalTaskCount, hiddenTaskElements) {
     noResultsRef.classList.add("hidden");
   }
 }
-
-async function initBoard() {
-  let taskObj = await loadData("tasks/");
-  document.getElementById("search-input").value = "";
-  renderBoard(taskObj);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  initBoard();
-});
 
 async function editTask(taskId) {
   const task = await loadData(`tasks/${taskId}`);
@@ -287,30 +298,58 @@ function clearTaskFormContainers() {
   secondBoardAddTask.innerHTML = "";
 }
 
-/*  Drag & Drop function */
+/*  Drag & Drop function  */
 
 function dragstartHandler(ev, id) {
-  // ev.dataTransfer.setData("text", ev.target.id);
   ev.dataTransfer.setData("text", id);
+  ev.target.classList.add("dragging");
+}
+
+function dragendHandler(ev) {
+  ev.target.classList.remove("dragging");
 }
 
 function dragoverHandler(ev) {
   ev.preventDefault();
+  const column = ev.target.closest(".column");
+  const afterElement = getDragAfterElement(column, ev.clientY);
+  const draggable = document.querySelector(".dragging");
+
+  if (afterElement == null) {
+    column.appendChild(draggable);
+  } else {
+    column.insertBefore(draggable, afterElement);
+  }
+}
+
+function getDragAfterElement(column, y) {
+  const draggableElements = [...column.querySelectorAll(".draggable:not(.dragging)")];
+
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element;
 }
 
 async function dropHandler(ev, category) {
   ev.preventDefault();
   const taskId = ev.dataTransfer.getData("text");
-  const taskElement = document.getElementById(taskId);
-  // const targetColumn = ev.target.closest(".column");
-  const targetColumn = document.querySelector(`.column[data-task="${category}"]`);
+  const targetColumn = ev.target.closest(".column");
   let taskObj = await loadData("tasks/" + taskId);
   taskObj.status = category;
 
   if (targetColumn) {
-    targetColumn.appendChild(taskElement);
     adjustPlaceholders();
     await putData("tasks/" + taskId, taskObj);
+    await adjustTaskOrder(targetColumn);
   }
 }
 
@@ -318,3 +357,35 @@ function adjustPlaceholders() {
   removePlaceholder();
   addPlaceholdersToEmptyColumns();
 }
+
+async function adjustTaskOrder(targetColumn) {
+  const tasksInColumn = targetColumn.querySelectorAll(".draggable");
+
+  // tasksInColumn.forEach(async (task, index) => {
+  //   const taskId = task.dataset.id;
+  //   let taskObj = await loadData("tasks/" + taskId);
+  //   taskObj.order = index;
+  //   await putData("tasks/" + taskId, taskObj);
+  // });
+
+  if (tasksInColumn.length > 0) {
+    for (let i = 0; i < tasksInColumn.length; i++) {
+      const taskId = tasksInColumn[i].dataset.id;
+      let taskObj = await loadData("tasks/" + taskId);
+      taskObj.order = i;
+      await putData("tasks/" + taskId, taskObj);
+    }
+  }
+}
+
+/*  Initializing  */
+
+async function initBoard() {
+  let taskObj = await loadData("tasks/");
+  document.getElementById("search-input").value = "";
+  renderBoard(taskObj);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initBoard();
+});

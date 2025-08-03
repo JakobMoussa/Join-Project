@@ -33,6 +33,20 @@ function checkForUrgentTasks(tasks, taskRef, deadlineRef) {
 async function initSummary() {
   let taskObj = await loadData("tasks/");
   countTasks(taskObj);
+  renderGreeting();
+}
+
+function renderGreeting() {
+  const name = loadUrlParams();
+  if (name == "Guest") return
+  const container = document.querySelector(".greeting")
+  let greetings = document.createElement("h2");
+  let nameTag = document.createElement("p");
+  greetings.innerHTML = "Good morning," 
+  nameTag.innerHTML = name;  
+  container.innerHTML = "";
+  container.appendChild(greetings);
+  container.appendChild(nameTag);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
