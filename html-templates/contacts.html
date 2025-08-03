@@ -19,7 +19,7 @@
     <script src="../scripts/templates.js"></script>
     <script src="../scripts/api.js"></script>
     <script src="../scripts/contact.js"></script>
- 
+
 </head>
 
 <body onload="initializeNavbar()">
@@ -70,9 +70,16 @@
                 </h2>
                 <div class="nav-imgs">
                     <img src="../assets/icons/help.svg" alt="help-symbol">
-                    <p class="profile-picture"></p>
+                    <button class="profile-picture" onclick="toggleMenu()"></button>
                 </div>
             </nav>
+            <div class="menu-container">
+                <div class="menu" id="menu">
+                    <a href="./legal-notice.html" class="menu-item">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="menu-item">Privacy Police</a>
+                    <a href="../index.html" class="menu-item">Log out</a>
+                </div>
+            </div>
         </section>
 
         <section id="contact-wrapper">
@@ -81,7 +88,7 @@
                 <button class="add-contact-btn" onclick="openAddContactOverlay()">
                     Add new contact <img src="/assets/icons/add-person-icon.png" class="add-person-icon"></img>
                 </button>
-    
+
                 <div class="contact-group">
                     <div class="group-letter">A</div>
                     <div class="contact" id="user-1">

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-Task</title>
+
+    <link rel="icon" type="image/x-icon" href="../assets/icons/flavicon.png" />
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/siderbar.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/add-task.css">
+
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/templates.js"></script>
+    <script src="../script.js"></script>
+</head>
+
+<body onload="initializeNavbar(); isPrivacyMessage()" class="main-flexbox">
+    <div class="sidebar-wrapper">
+        <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+        <nav class="nav-wrapper">
+            <ul>
+                <li class="nav-link">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/summary.svg" alt="summary">
+                    </div>
+                    <a href="summary.html" data-task="navLink">Summary</a>
+                </li>
+                <li class="nav-link">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/add-task.svg" alt="add-task">
+                    </div>
+                    <a href="add-task.html" data-task="navLink">Add Task</a>
+                </li>
+                <li class="nav-link">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/board.svg" alt="board">
+                    </div>
+                    <a href="board.html" data-task="navLink">Board</a>
+                </li>
+                <li class="nav-link">
+                    <div class="img-wrapper">
+                        <img src="../assets/icons/contacts.svg" alt="contacts">
+                    </div>
+                    <a href="contacts.html" data-task="navLink">Contacts</a>
+                </li>
+            </ul>
+            <ul class="bottom-links">
+                <li class="nav-link"><a href="privacy-policy.html" data-task="navLink">Privacy Policy</a></li>
+                <li class="nav-link selected"><a href="legal-notice.html" data-task="navLink">Legal Notice</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main id="right-content-wrapper" class="privacy-container">
+        <section id="navbar">
+            <nav class="navbar">
+                <h2>
+                    Kanban Project Management Tool
+                </h2>
+                <div class="nav-imgs">
+                    <img src="../assets/icons/help.svg" alt="help-symbol">
+                    <button class="profile-picture" onclick="toggleMenu()"></button>
+                </div>
+            </nav>
+            <div class="menu-container">
+                <div class="menu" id="menu">
+                    <a href="./legal-notice.html" class="menu-item">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="menu-item">Privacy Police</a>
+                    <a href="../index.html" class="menu-item">Log out</a>
+                </div>
+            </div>
+        </section>
+        <section id="privacy-en" class="privacy-section">
+            <h1 class="header-task">Impressum</h1>
+            <h2>Angaben gemäß § 5 TMG</h2>
+            <p class="spacer-bottom">
+                Henning Otte<br>
+                Steinberg 51<br>
+                31832 Springe<br>
+                Deutschland
+            </p>
+            <h2>Kontakt</h2>
+            <p class="spacer-bottom">
+                E-Mail: <a href="mailto:HenningOtte91@gmail.com">HenningOtte91@gmail.com</a>
+            </p>
+        </section>
+    </main>
+</body>
+
+</html>

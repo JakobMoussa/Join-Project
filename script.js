@@ -144,19 +144,30 @@ function createAvater(name) {
   return avatar
 }
 
-function updateNavLinksWithUserKey() {
+function updateLinksWithUserKey(target) {
   let name = loadUrlParams();
   if (!name) name = "Guest";
-  const links = document.querySelectorAll('[data-task="navLink"]');
+  const links = document.querySelectorAll(`[data-task="${target}"]`);
   links.forEach(element => {
     let newLink = element.href + `?msg=${encodeURIComponent(name)}`;
     element.href = newLink;
   });
 }
 
+function updateMenuWithUserKey() {
+  let name = loadUrlParams();
+  const menu = document.querySelector(".menu").children;
+  if (!name) name = "Guest";
+  for (let index = 0; index < menu.length; index++) {
+    if (index == 2) break    
+    let newLink = menu[index].href + `?msg=${encodeURIComponent(name)}`;
+    menu[index].href = newLink;
+  }  
+}
+
 function isPrivacyMessage() {
-  let msg = loadUrlParams();  
-  if (msg === "privacy") adjustLayoutForPrivacyView(); 
+  let msg = loadUrlParams();
+  if (msg === "privacy") adjustLayoutForPrivacyView();
 }
 
 function adjustLayoutForPrivacyView() {
@@ -164,10 +175,16 @@ function adjustLayoutForPrivacyView() {
   const navImg = document.querySelector(".nav-imgs");
   navImg.innerHTML = "";
   ul.innerHTML = "";
-  ul.innerHTML += navLink("login", "../index.html", "Log in");    
+  ul.innerHTML += navLink("login", "../index.html", "Log in");
 }
 
 function initializeNavbar() {
   renderUserIcon();
-  updateNavLinksWithUserKey();
+  updateLinksWithUserKey("navLink");
+  updateMenuWithUserKey();
+}
+
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.classList.toggle("menu-translateX");
 }

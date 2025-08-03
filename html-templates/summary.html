@@ -65,9 +65,16 @@
                 </h2>
                 <div class="nav-imgs">
                     <img src="../assets/icons/help.svg" alt="help-symbol">
-                    <p class="profile-picture"></p>
+                    <button class="profile-picture" onclick="toggleMenu()"></button>
                 </div>
             </nav>
+            <div class="menu-container">
+                <div class="menu" id="menu">
+                    <a href="./legal-notice.html" class="menu-item">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="menu-item">Privacy Police</a>
+                    <a href="../index.html" class="menu-item">Log out</a>
+                </div>
+            </div>
         </section>
 
         <section id="content-wrapper">
@@ -82,7 +89,7 @@
                 <section class="dashboard-summary">
                     <div class="parent">
 
-                        <a href="board.html" class="div1 metric-item">
+                        <a href="board.html" class="div1 metric-item" data-task="navLink">
                             <div class="metric-icon"></div>
                             <div>
                                 <span class="metric-count" data-task="to-do"></span>
@@ -90,7 +97,7 @@
                             </div>
                         </a>
 
-                        <a href="board.html" class="div2 metric-item">
+                        <a href="board.html" class="div2 metric-item" data-task="navLink">
                             <div class="metric-icon"></div>
                             <div>
                                 <span class="metric-count" data-task="done"></span>
@@ -98,7 +105,7 @@
                             </div>
                         </a>
 
-                        <a href="board.html" class="div3 metric-item">
+                        <a href="board.html" class="div3 metric-item" data-task="navLink">
                             <div class="metric-urgent-wrapper">
                                 <div class="metric-urgent-icon">
                                     <img src="../assets/icons/urgent.svg" alt="urgent">
@@ -115,17 +122,17 @@
                             </div>
                         </a>
 
-                        <a href="board.html" class="div4 metric-item metric-bottom-row">
+                        <a href="board.html" class="div4 metric-item metric-bottom-row" data-task="navLink">
                             <span class="metric-count" data-task="total-tasks"></span>
                             <span class="metric-label">Tasks in Board</span>
                         </a>
 
-                        <a href="board.html" class="div5 metric-item metric-bottom-row">
+                        <a href="board.html" class="div5 metric-item metric-bottom-row" data-task="navLink">
                             <span class="metric-count" data-task="in-progress"></span>
                             <span class="metric-label">Tasks in Progress</span>
                         </a>
 
-                        <a href="board.html" class="div6 metric-item metric-bottom-row">
+                        <a href="board.html" class="div6 metric-item metric-bottom-row" data-task="navLink">
                             <span class="metric-count" data-task="await-feedback"></span>
                             <span class="metric-label">Awaiting Feedback</span>
                         </a>
