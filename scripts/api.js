@@ -1,6 +1,6 @@
 let BASE_URL = "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app/";
 
-function createUser(name = "Unknown User", email = "unknown@example.com", phone, color = "#FF0000", assigned = false, password = false) {
+function createUser(name = "Unknown User", email = "unknown@example.com", phone = "01510000000", color = getRandomColor(), assigned = false, password = false) {
   return {
     name: name,
     email: email,
@@ -8,10 +8,16 @@ function createUser(name = "Unknown User", email = "unknown@example.com", phone,
     assigned: assigned,
     phone: phone.toString(),
     password: password.toString(),
+    avatar: createAvater(name),
   };
 }
 
-async function postUser(name, email, password, phone = "XXXXXXXXXXXX", color = "blue", assigned) {
+function getRandomColor() {
+  const colors = ["#f1c40f", "#1abc9c", "#3498db", "#e67e22", "#9b59b6"];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+async function postUser(name, email, password, phone = "01510000000", color = getRandomColor(), assigned) {
   let user = createUser(name, email, phone.trim(), color, assigned, password);
   let validate = validateUser(user);
   if (!validate) {

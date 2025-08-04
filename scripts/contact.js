@@ -56,11 +56,7 @@ function getValue(id) {
     return document.getElementById(id)?.value.trim();
 }
 
-function getRandomColor() {
-    const colors = ["#f1c40f", "#1abc9c", "#3498db", "#e67e22", "#9b59b6"];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
+// Existiert schon und bitte mit der createUser() in der api.js austauschen
 function buildUser(name, email, phone) {
     return {
         name,
@@ -73,6 +69,7 @@ function buildUser(name, email, phone) {
     };
 }
 
+// Austauschen mit der createAvater(name) in der script.js austauschen 
 function getInitials(name) {
     const trimmed = name.trim();
     const parts = trimmed.split(" ");
@@ -120,3 +117,56 @@ function findOrCreateGroup(container, letter) {
     return group;
 }
 
+async function loadContacts() {
+    let users = await loadData("users");
+    let initials = getUniqueInitials(users);
+    importContactGroups(users, initials);
+}
+loadContacts();
+
+function getUniqueInitials(users) {
+    let result = [];
+    for (const key in users) {
+        let initial = users[key].name.charAt(0).toUpperCase();
+        if (!letterExists(result, initial)) {
+            result.push(initial);
+        }
+    }
+    result.sort();
+    return result;
+}
+
+function letterExists(array, initial) {
+    return array.includes(initial);
+}
+
+function importContactGroups(users, initials) {
+    let contactsContainer = document.getElementById("contacts-container");
+    initials.forEach(letter => {
+        let contactGroup = document.createElement("div");
+        contactGroup.classList.add("contact-group");
+        contactGroup = buildLetterGroup(contactGroup, letter, users);
+        contactsContainer.appendChild(contactGroup);
+    });
+}
+
+function buildLetterGroup(contactGroup, letter, users) {
+    let groupLetter = createLetterBox(letter);
+    contactGroup.appendChild(groupLetter);
+    for (const key in users) {
+        let initial = users[key].name.charAt(0).toUpperCase();
+        if (initial === letter) {
+            contactGroup.appendChild(createContactElement(users[key]));
+        }
+    }
+    return contactGroup;
+}
+
+function createLetterBox(letter) {
+    let div = document.createElement("div");
+    let span = document.createElement("span");
+    div.classList.add("group-letter");
+    span.innerHTML = letter;
+    div.appendChild(span);
+    return div
+}
