@@ -47,15 +47,21 @@
 
 .group-letter {
   font-weight: bold;
-  margin: 10px 15px;
+  padding: 8px 0 8px 0;
+  border-bottom: 2px solid #eee;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.group-letter span {
+  margin-left: 16px;
 }
 
 .contact {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 10px 0;
-  border-bottom: 2px solid #eee;
+  margin: 8px 0 8px 16px;
   padding-bottom: 20px;
   cursor: pointer;
 }
@@ -89,6 +95,7 @@
   padding: 40px 60px;
   font-size: 50px;
 }
+
 .title-text {
   margin: 0;
   font-weight: 600;
@@ -183,6 +190,7 @@
   font-weight: bold;
   margin-bottom: 30px;
 }
+
 .modal-left .dot {
   display: inline-block;
   width: 8px;
@@ -347,24 +355,41 @@
   border-radius: 2px;
 }
 
-.users-information {
+.contact-field {
+  flex-grow: 1;
+}
+
+.info-container {
   display: flex;
   flex-direction: column;
-  padding: 0px 70px;
+  overflow-x: hidden;
+  padding-left: 60px;
   font-size: 20px;
 }
 
+.user-details {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  transform: translateX(1300px);
+  transition: transform 250ms ease-in;
+}
+
+.translatex-user {
+  transform: translateX(0px);
+}
+
 .avatar-circle {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 5px solid white;
-    font-size: 45px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.2);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid white;
+  font-size: 45px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.2);
 }
 
 .user-name-container {
@@ -389,12 +414,13 @@ h3 {
   flex-direction: column;
   gap: 20px;
 }
+
 .ptage {
   font-weight: bold;
 }
 
 .user-email {
-    color: #007bff;
+  color: #007bff;
 }
 
 .user-name {
@@ -403,10 +429,10 @@ h3 {
 }
 
 .edit-delete-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 10px;
 }
 
 .edit-field {

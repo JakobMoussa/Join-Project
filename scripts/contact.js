@@ -52,12 +52,20 @@ function getValue(id) {
     return document.getElementById(id)?.value.trim();
 }
 
-function getRandomColor() {
-    const colors = ["#f1c40f", "#1abc9c", "#3498db", "#e67e22", "#9b59b6"];
-    return colors[Math.floor(Math.random() * colors.length)];
+// Existiert schon und bitte mit der createUser() in der api.js austauschen
+function buildUser(name, email, phone) {
+    return {
+        name,
+        email,
+        phone,
+        avatar: getInitials(name),
+        color: getRandomColor(),
+        assigned: false,
+        password: false
+    };
 }
 
-
+// Austauschen mit der createAvater(name) in der script.js austauschen 
 function getInitials(name) {
     const trimmed = name.trim();
     const parts = trimmed.split(" ");
@@ -75,12 +83,9 @@ function getInitials(name) {
 function addContactToList(user) {
     const contactsBar = document.querySelector(".contacts-bar");
     const groupLetter = user.name[0].toUpperCase();
-
     let group = findOrCreateGroup(contactsBar, groupLetter);
-
     const contactHTML = createContactElement(user);
     contactHTML.addEventListener("click", () => renderUserInfo(user));
-
     group.appendChild(contactHTML);
 }
 
@@ -105,60 +110,66 @@ function findOrCreateGroup(container, letter) {
     return group;
 }
 
-async function deleteUser(path) {
-  try {
-    await deleteData(path);         
-    closeOverlay();              
-    removeUserFromHTML(path);        
-    console.log("User gelöscht:", path);
-  } catch (error) {
-    console.error("Fehler beim Löschen:", error);
-  }
+async function loadContacts() {
+    let users = await loadData("users");
+    let initials = getUniqueInitials(users);
+    importContactGroups(users, initials);
+}
+loadContacts();
+
+function getUniqueInitials(users) {
+    let result = [];
+    for (const key in users) {
+        let initial = users[key].name.charAt(0).toUpperCase();
+        if (!letterExists(result, initial)) {
+            result.push(initial);
+        }
+    }
+    result.sort();
+    return result;
 }
 
-function removeUserFromHTML(path) {
-  const userId = path.split("/")[1]; 
-  const contactEl = document.querySelector(`[data-user-id="${userId}"]`);
-  if (contactEl) contactEl.remove();
+function letterExists(array, initial) {
+    return array.includes(initial);
 }
 
-function initEditForm(user) {
-  const form = document.querySelector(".contact-form");
-
-  if (!form) {
-    console.error("Edit form not found");
-    return;
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const updatedUser = {
-      name: document.getElementById("contact-name").value,
-      email: document.getElementById("contact-email").value,
-      phone: document.getElementById("contact-phone").value,
-      color: user.color || getRandomColor(),
-      avatar: getInitials(document.getElementById("contact-name").value),
-    };
-
-    await updateUser(user.id, updatedUser); 
-    updateContactInList(user.id, updatedUser);
-    closeOverlay();
-  });
+function importContactGroups(users, initials) {
+    let contactsContainer = document.getElementById("contacts-container");
+    initials.forEach(letter => {
+        let contactGroup = document.createElement("div");
+        contactGroup.classList.add("contact-group");
+        contactGroup = buildLetterGroup(contactGroup, letter, users);
+        contactsContainer.appendChild(contactGroup);
+    });
 }
 
-function editContactById(id) {
-  const user = user[id];
-  if (!user) {
-    console.error("User not found:", id);
-    return;
-  }
-  editContactOverlay({ ...user, id }); 
+function buildLetterGroup(contactGroup, letter, users) {
+    let groupLetter = createLetterBox(letter);
+    contactGroup.appendChild(groupLetter);
+    for (const key in users) {
+        let initial = users[key].name.charAt(0).toUpperCase();
+        if (initial === letter) {
+            contactGroup.appendChild(createContactElement(users[key], key));
+        }
+    }
+    return contactGroup;
 }
 
+function createLetterBox(letter) {
+    let div = document.createElement("div");
+    let span = document.createElement("span");
+    div.classList.add("group-letter");
+    span.innerHTML = letter;
+    div.appendChild(span);
+    return div
+}
 
-
-
-
-
-
+async function openUserInfos(id) {
+    let user = await loadData(`users/${id}`);
+    const usersInfo = document.querySelector(".info-container");
+    usersInfo.innerHTML = renderUserInfo(id, user);
+    setTimeout(() => {
+        const userDetails = document.querySelector(".user-details");
+        userDetails.classList.add("translatex-user");
+    }, 100);
+}
