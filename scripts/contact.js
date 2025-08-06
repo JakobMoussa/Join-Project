@@ -24,7 +24,7 @@ function buildUser(name, email) {
     return {
         name,
         email,
-        phone: "0152/0000000", // Standard oder später dynamisch
+        phone: "0152/0000000",
         Avatar: getInitials(name),
         color: getRandomColor(),
         assigned: false,
@@ -34,7 +34,7 @@ function buildUser(name, email) {
 
 function initContactForm() {
     const form = document.querySelector(".contact-form");
-    if (!form) return console.warn("Formular nicht gefunden.");
+    if (!form) return console.warn("Form not found.");
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -43,11 +43,11 @@ function initContactForm() {
         const email = getValue("contact-email");
         const phone = getValue("contact-phone");
 
-        if (!name || !email || !phone) return alert("Bitte alle Felder ausfüllen!");
+        if (!name || !email || !phone) return alert("Please fill in all fields!");
 
         const user = buildUser(name, email, phone);
         await postData("users/", user);
-        addContactToList(user);
+        // addContactToList(user);
         closeOverlay();
     });
 }
@@ -87,12 +87,9 @@ function getInitials(name) {
 function addContactToList(user) {
     const contactsBar = document.querySelector(".contacts-bar");
     const groupLetter = user.name[0].toUpperCase();
-
     let group = findOrCreateGroup(contactsBar, groupLetter);
-
     const contactHTML = createContactElement(user);
     contactHTML.addEventListener("click", () => renderUserInfo(user));
-
     group.appendChild(contactHTML);
 }
 
@@ -156,7 +153,7 @@ function buildLetterGroup(contactGroup, letter, users) {
     for (const key in users) {
         let initial = users[key].name.charAt(0).toUpperCase();
         if (initial === letter) {
-            contactGroup.appendChild(createContactElement(users[key]));
+            contactGroup.appendChild(createContactElement(users[key], key));
         }
     }
     return contactGroup;
@@ -169,4 +166,14 @@ function createLetterBox(letter) {
     span.innerHTML = letter;
     div.appendChild(span);
     return div
+}
+
+async function openUserInfos(id) {
+    let user = await loadData(`users/${id}`);
+    const usersInfo = document.querySelector(".info-container");
+    usersInfo.innerHTML = renderUserInfo(id, user);
+    setTimeout(() => {
+        const userDetails = document.querySelector(".user-details");
+        userDetails.classList.add("translatex-user");
+    }, 100);
 }
