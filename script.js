@@ -11,63 +11,68 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
 
 document.addEventListener("DOMContentLoaded", async () => { });
 
-// function openOverlay() {
-//   const overlay = document.querySelectorAll(".overlay");
-//   overlay.forEach((element) => {
-//     element.classList.remove("hidden");
-//     setTimeout(() => {
-//       element.classList.add("visible");
-//       toggleAnimation();
-//     }, 1);
-//   });
-// }
-function openOverlay(type = "") {
-  const overlays = document.querySelectorAll(".overlay");
-  overlays.forEach((overlay) => {
-    overlay.classList.remove("hidden");
-    overlay.classList.add(`overlay-${type}`); // Klasse hinzufügen
+function openOverlay() {
+  const overlay = document.querySelectorAll(".overlay");
+  overlay.forEach((element) => {
+    element.classList.remove("hidden");
     setTimeout(() => {
-      overlay.classList.add("visible");
+      element.classList.add("visible");
       toggleAnimation();
     }, 10);
   });
+    setTimeout(() => {
+    toggleAnimation();
+  }, 50);
 }
 
-// function closeOverlay() {
-//   const overlay = document.querySelectorAll(".overlay");
-//   overlay.forEach((element) => {
-//     element.classList.remove("visible");
-//     toggleAnimation();
+
+// function openOverlay(type = "") {
+//   const overlays = document.querySelectorAll(".overlay");
+//   overlays.forEach((overlay) => {
+//     overlay.classList.remove("hidden");
+//     overlay.classList.add(`overlay-${type}`); // Klasse hinzufügen
 //     setTimeout(() => {
-//       element.classList.add("hidden");
+//       overlay.classList.add("visible");
+//       toggleAnimation();
+//     }, 10);
+//   });
+// }
+
+function closeOverlay() {
+  const overlay = document.querySelectorAll(".overlay");
+  overlay.forEach((element) => {
+    element.classList.remove("visible");
+    toggleAnimation();
+    setTimeout(() => {
+      element.classList.add("hidden");
+    }, 250);
+  });
+}
+
+
+// function closeOverlay() {
+//   const overlays = document.querySelectorAll(".overlay");
+//   overlays.forEach((overlay) => {
+//     overlay.classList.remove("visible");
+//     toggleAnimation();
+
+//     const classList = overlay.className.split(" ");
+//     const cleanedClasses = [];
+
+//     for (let i = 0; i < classList.length; i++) {
+//       const className = classList[i];
+//       if (!className.startsWith("overlay-") || className === "overlay") {
+//         cleanedClasses.push(className);
+//       }
+//     }
+//     overlay.className = cleanedClasses.join(" ");
+
+//     setTimeout(() => {
+//       overlay.classList.add("hidden");
 //     }, 250);
 //   });
 // }
 
-
-function closeOverlay() {
-  const overlays = document.querySelectorAll(".overlay");
-
-  overlays.forEach((overlay) => {
-    overlay.classList.remove("visible");
-    toggleAnimation();
-
-    const classList = overlay.className.split(" ");
-    const cleanedClasses = [];
-
-    for (let i = 0; i < classList.length; i++) {
-      const className = classList[i];
-      if (!className.startsWith("overlay-") || className === "overlay") {
-        cleanedClasses.push(className);
-      }
-    }
-    overlay.className = cleanedClasses.join(" ");
-
-    setTimeout(() => {
-      overlay.classList.add("hidden");
-    }, 250);
-  });
-}
 
 function toggleAnimation() {
   const overlayWrapper = document.querySelectorAll(".overlay-wrapper");
@@ -127,9 +132,7 @@ function openAddContactOverlay() {
   overlayRef.innerHTML = "";
   overlayRef.innerHTML += getContactOverlayTemplate();
   openOverlay();
-
   initContactForm();
-
 }
 
 //---------Call up user information------------------------

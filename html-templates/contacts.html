@@ -88,7 +88,6 @@
                 <button class="add-contact-btn" onclick="openAddContactOverlay()">
                     Add new contact <img src="/assets/icons/add-person-icon.png" class="add-person-icon"></img>
                 </button>
-
                 <div class="contact-group">
                     <div class="group-letter">A</div>
                     <div class="contact" id="user-1">
@@ -192,11 +191,13 @@
                     <p class="contact-text-filed">Better with a team</p>
                 </div>
                 <div class="users-information visible" onclick="closeOverlay()"></div>
+                
             </div>
         </section>
     </main>
 
     <div id="overlay" class="overlay hidden" onclick="closeOverlay()"></div>
+    <div id="edit-overlay" class="edit-overlay" onclick="editContactOverlay()"></div>
 
 </body>
 
