@@ -453,3 +453,12 @@ h3 {
   width: 23px;
   height: 23px;
 }
+
+.transparent {
+  background: transparent !important;
+}
+
+.edit-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 11;
+}

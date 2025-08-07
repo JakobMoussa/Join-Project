@@ -1,15 +1,29 @@
 let BASE_URL = "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app/";
 
-function createUser(name = "Unknown User", email = "unknown@example.com", phone = "01510000000", color = getRandomColor(), assigned = false, password = false) {
-  return {
-    name: name,
-    email: email,
-    color: color,
-    assigned: assigned,
+// function createUser(name = "Unknown User", email = "unknown@example.com", phone = "01510000000", color = getRandomColor(), assigned = false, password = false) {
+//   return {
+//     name: name,
+//     email: email,
+//     color: color,
+//     assigned: assigned,
+//     phone: phone.toString(),
+//     password: password.toString(),
+//   };
+// }
+async function createUser(name, email, phone, color = "#FF0000", assigned = false, password = false) {
+  const user = {
+    name,
+    email,
+    color,
+    assigned,
     phone: phone.toString(),
     password: password.toString(),
+    avatar: getInitials(name),
     avatar: createAvater(name),
   };
+
+  await postData("users", user);
+  return user;
 }
 
 function getRandomColor() {
@@ -17,7 +31,9 @@ function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-async function postUser(name, email, password, phone = "01510000000", color = getRandomColor(), assigned) {
+
+
+async function postUser(name, email, password, phone = "XXXXXXXXXXXX", color = "blue", assigned) {
   let user = createUser(name, email, phone.trim(), color, assigned, password);
   let validate = validateUser(user);
   if (!validate) {
@@ -48,7 +64,7 @@ async function postData(path, data = {}) {
   }
   let response = await fetch(BASE_URL + path + ".json", {
     method: "POST",
-    header: {
+    headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),

@@ -7,8 +7,7 @@ async function saveAllContactsToFirebaseSafely() {
         const email = contact.querySelector(".email").textContent.trim();
 
         if (!userExists(existingUsers, email)) {
-            const user = buildUser(name, email);
-            await postData("users/", user);
+          await createUser(name, email, phone);
             console.log(`Gespeichert: ${name}`);
         } else {
             console.log(`Skip (already exists): ${email}`);
@@ -20,37 +19,34 @@ function userExists(users, email) {
     return Object.values(users || {}).some(user => user.email === email);
 }
 
-function buildUser(name, email) {
-    return {
-        name,
-        email,
-        phone: "0152/0000000",
-        Avatar: getInitials(name),
-        color: getRandomColor(),
-        assigned: false,
-        password: false
-    };
-}
-
 function initContactForm() {
-    const form = document.querySelector(".contact-form");
-    if (!form) return console.warn("Form not found.");
+  const form = document.querySelector(".contact-form");
+  if (!form) {
+    console.error("Formular nicht gefunden!");
+    return;
+  }
 
-    form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        const name = getValue("contact-name");
-        const email = getValue("contact-email");
-        const phone = getValue("contact-phone");
+    const name = getValue("contact-name");
+    const email = getValue("contact-email");
+    const phone = getValue("contact-phone");
 
-        if (!name || !email || !phone) return alert("Please fill in all fields!");
+    const user = {
+      name,
+      email,
+      phone: phone.toString(),
+      avatar: getInitials(name),
+      color: getRandomColor(),
+    };
 
-        const user = buildUser(name, email, phone);
-        await postData("users/", user);
-        // addContactToList(user);
-        closeOverlay();
-    });
+    await postData("users", user);
+    addContactToList(user);
+    closeOverlay();
+  });
 }
+
 
 function getValue(id) {
     return document.getElementById(id)?.value.trim();
