@@ -322,7 +322,7 @@ function createSubtaskListItem(taskId, subtaskObj) {
 // --------------------- Contact-Overlay ---------------------------------------
 
 function getContactOverlayTemplate() {
-  return `
+    return `
     <div id="overlay-wrapper" class="overlay overlay-wrapper transit" onclick="onclickProtection(event)">
         <div class="modal"> 
             <div class="modal-left">
@@ -418,9 +418,9 @@ function navLink(icon, link, section) {
 }
 
 function editContactOverlay(user) {
-  const overlay = document.getElementById("edit-overlay");
+    const overlay = document.getElementById("edit-overlay");
 
-  overlay.innerHTML = `
+    overlay.innerHTML = `
     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
         <div class="modal"> 
             <div class="modal-left">
@@ -455,9 +455,6 @@ function editContactOverlay(user) {
         </div>
     </div>
   `;
-
-  openOverlay();
-  initEditForm(user);
+    openOverlay();
+    initEditForm(user);
 }
-
-
