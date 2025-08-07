@@ -433,7 +433,7 @@ function renderUserInfo(id, user) {
                         <button class="edit-field" id="">
                             <img src="/assets/icons/edit.svg" alt="Edit icon" class="edit-icon">Edit
                         </button>
-                        <button class="edit-field" onclick="">
+                        <button class="edit-field" onclick="deleteUser('users/${id}')">
                             <img src="/assets/icons/delete.svg" alt="Delete icon" class="delete-icon">
                             Delete
                         </button>
