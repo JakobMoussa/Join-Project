@@ -323,7 +323,7 @@ function createSubtaskListItem(taskId, subtaskObj) {
 
 function getContactOverlayTemplate() {
     return `
-    <div id="overlay-wrapper" class="overlay overlay-wrapper transit" onclick="onclickProtection(event)">
+    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
         <div class="modal"> 
             <div class="modal-left">
                 <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
@@ -360,7 +360,7 @@ function getContactOverlayTemplate() {
   `;
 }
 
-function renderUserInfo(id, user) {
+function renderUserInfo(id, user) {    
     return `
         <div class="user-details" onclick="event.stopPropagation()">
             <div class="user-name-container">
@@ -369,7 +369,7 @@ function renderUserInfo(id, user) {
                 <div class="user-name">
                     <h3>${user.name}</h3>
                     <div class="edit-delete-buttons">
-                        <button class="edit-field" id="">
+                        <button class="edit-field" id="" onclick="editContactById('${id}')">
                             <img src="/assets/icons/edit.svg" alt="Edit icon" class="edit-icon">Edit
                         </button>
                         <button class="edit-field" onclick="deleteUser('users/${id}')">
@@ -394,7 +394,7 @@ function createContactElement(user, id) {
     const div = document.createElement("div");
     div.classList.add("contact");
     div.addEventListener("click", () => {
-        openUserInfos(`${id}`);
+        openUserInfos(id);
     });
     div.innerHTML = `
         <div class="avatar" style="background-color: ${user.color};">${user.avatar || user.Avatar}</div>
@@ -418,8 +418,7 @@ function navLink(icon, link, section) {
 }
 
 function editContactOverlay(user) {
-    const overlay = document.getElementById("edit-overlay");
-
+    const overlay = document.getElementById("overlay");
     overlay.innerHTML = `
     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
         <div class="modal"> 
@@ -455,6 +454,4 @@ function editContactOverlay(user) {
         </div>
     </div>
   `;
-    openOverlay();
-    initEditForm(user);
 }
