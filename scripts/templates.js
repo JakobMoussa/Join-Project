@@ -362,8 +362,6 @@ function getContactOverlayTemplate() {
 
 function renderUserInfo(id, user) {
   return `
-function renderUserInfo(id, user) {    
-    return `
         <div class="user-details" onclick="event.stopPropagation()">
             <div class="user-name-container">
                 <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}
@@ -372,10 +370,10 @@ function renderUserInfo(id, user) {
                     <h3>${user.name}</h3>
                     <div class="edit-delete-buttons">
                         <button class="edit-field" id="" onclick="editContactById('${id}')">
-                            <img src="/assets/icons/edit.svg" alt="Edit icon" class="edit-icon">Edit
+                            <img src="../assets/icons/edit.svg" alt="Edit icon" class="edit-icon">Edit
                         </button>
                         <button class="edit-field" onclick="deleteUser('users/${id}')">
-                            <img src="/assets/icons/delete.svg" alt="Delete icon" class="delete-icon">
+                            <img src="../assets/icons/delete.svg" alt="Delete icon" class="delete-icon">
                             Delete
                         </button>
                     </div>
