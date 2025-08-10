@@ -92,7 +92,7 @@
   display: flex;
   gap: 16px;
   align-items: center;
-  padding: 40px 60px;
+  padding: 40px 0 0 60px;
   font-size: 50px;
 }
 
@@ -373,6 +373,7 @@
   flex-direction: column;
   transform: translateX(1300px);
   transition: transform 250ms ease-in;
+  padding-top: 40px;
 }
 
 .translatex-user {
@@ -390,6 +391,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.2);
+  /* filter: drop-shadow(2px 2px 16px rgba(0, 0, 0, 0.2)); */
 }
 
 .user-name-container {
@@ -452,4 +454,13 @@ h3 {
 .delete-icon {
   width: 23px;
   height: 23px;
+}
+
+.transparent {
+  background: transparent !important;
+}
+
+.edit-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 11;
 }
