@@ -32,6 +32,7 @@ function closeOverlay() {
   });
 }
 
+
 function toggleAnimation() {
   const overlayWrapper = document.querySelectorAll(".overlay-wrapper");
   overlayWrapper.forEach((element) => {
@@ -94,24 +95,24 @@ async function renderUserIcon() {
 
 function loadUrlParams() {
   const urlParams = new URLSearchParams(window.location.search);
-  const msg = urlParams.get("msg");
-  return msg;
+  const msg = urlParams.get('msg');
+  return msg
 }
 
 function createAvater(name) {
   let myArr = name.split(" ");
   let avatar = "";
-  myArr.forEach((element) => {
+  myArr.forEach(element => {
     avatar += element.charAt(0);
   });
-  return avatar;
+  return avatar
 }
 
 function updateLinksWithUserKey(target) {
   let name = loadUrlParams();
   if (!name) name = "Guest";
   const links = document.querySelectorAll(`[data-task="${target}"]`);
-  links.forEach((element) => {
+  links.forEach(element => {
     let newLink = element.href + `?msg=${encodeURIComponent(name)}`;
     element.href = newLink;
   });
@@ -122,7 +123,7 @@ function updateMenuWithUserKey() {
   const menu = document.querySelector(".menu").children;
   if (!name) name = "Guest";
   for (let index = 0; index < menu.length; index++) {
-    if (index == 2) break;
+    if (index == 2) break
     let newLink = menu[index].href + `?msg=${encodeURIComponent(name)}`;
     menu[index].href = newLink;
   }
