@@ -1,48 +1,34 @@
-async function saveAllContactsToFirebaseSafely() {
-    const contacts = document.querySelectorAll(".contact");
-    const existingUsers = await loadData("users");
-
-    for (const contact of contacts) {
-        const name = contact.querySelector(".name").textContent.trim();
-        const email = contact.querySelector(".email").textContent.trim();
-
-        if (!userExists(existingUsers, email)) {
-            await createUser(name, email, phone);
-            console.log(`Gespeichert: ${name}`);
-        } else {
-            console.log(`Skip (already exists): ${email}`);
-        }
+async function userExists(email) {
+    let users = await loadData("/users")
+    let validate = Object.values(users || {}).some(user => user.email === email.value);
+    if (validate) {
+        const error = document.querySelector('[data-field="errorEmail"]');
+        error.innerHTML = "email already exist";
+        email.style.border = "1px solid #ff8190";
+        return validate;
+    } else {
+        email.style.border = "1px solid #ccc";
+        return validate;
     }
 }
 
-function userExists(users, email) {
-    return Object.values(users || {}).some(user => user.email === email);
-}
-
-function initContactForm() {
-    const form = document.querySelector(".contact-form");
-    if (!form) {
-        console.error("Formular nicht gefunden!");
-        return;
-    }
+async function initContactForm() {
+    const form = document.querySelector("form.contact-container");
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const name = getValue("contact-name");
-        const email = getValue("contact-email");
-        const phone = getValue("contact-phone");
-        const user = {
-            name,
-            email,
-            phone: phone.toString(),
-            avatar: getInitials(name),
-            color: getRandomColor(),
-        };
-        await postData("users", user);
+        let email = document.getElementById("contact-email");
+        const newUser = createUser(
+            document.getElementById("contact-name").value,
+            email.value,
+            document.getElementById("contact-phone").value,
+        );
+        let checkEmail = await userExists(email);
+        if (checkEmail) return
+        await postData(`users`, newUser);
         loadContacts();
         closeOverlay();
     });
 }
-
 
 function getValue(id) {
     return document.getElementById(id)?.value.trim();
@@ -53,18 +39,14 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-
 function getInitials(name) {
     const trimmed = name.trim();
     const parts = trimmed.split(" ");
-
     if (parts.length === 1) {
         return parts[0][0].toUpperCase();
     }
-
     const firstInitial = parts[0][0].toUpperCase();
     const secondInitial = parts[1][0].toUpperCase();
-
     return firstInitial + secondInitial;
 }
 
@@ -106,25 +88,30 @@ function removeUserFromHTML(path) {
     if (contactEl) contactEl.remove();
 }
 
-function initEditForm(user) {
-    const form = document.querySelector(".contact-form");
-    if (!form) {
-        console.error("Edit form not found");
-        return;
-    }
+function editForm(id, user) {
+    const form = document.querySelector("form.contact-container");
+    editAvatar(user);
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const updatedUser = {
-            name: document.getElementById("contact-name").value,
-            email: document.getElementById("contact-email").value,
-            phone: document.getElementById("contact-phone").value,
-            color: user.color || getRandomColor(),
-            avatar: getInitials(document.getElementById("contact-name").value),
-        };
-        await updateUser(user.id, updatedUser);
-        updateContactInList(user.id, updatedUser);
+        const updateUser = createUser(
+            document.getElementById("contact-name").value,
+            document.getElementById("contact-email").value,
+            document.getElementById("contact-phone").value,
+            user.color,
+            user.assigned,
+            user.password
+        );
+        await putData(`users/${id}`, updateUser);
+        openUserInfos(id);
+        loadContacts();
         closeOverlay();
     });
+}
+
+function editAvatar(user) {
+    const avatar = document.getElementById("avatar-edit");
+    avatar.innerHTML = user.avatar;
+    avatar.style.backgroundColor = user.color;
 }
 
 async function loadContacts() {
@@ -203,5 +190,5 @@ async function editContactById(id) {
     const user = await loadData(`users/${id}`);
     openOverlay();
     editContactOverlay(user);
-    initEditForm(user);
+    editForm(id, user);
 }

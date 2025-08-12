@@ -1,4 +1,4 @@
-body {
+.signup-body {
   margin: 0;
   padding: 0;
   background-color: #f4f5f7;
@@ -38,7 +38,7 @@ body {
   color: #2a3e52;
 }
 
-.join-logo {
+.join-logo-signup {
   padding: 30px;
   width: 150px;
   height: 150px;
