@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
     <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+
 
     <script src="../scripts/api.js"></script>
     <script src="../scripts/templates.js"></script>
@@ -76,6 +78,23 @@
                 </div>
             </div>
         </section>
+
+        <section id="mobilie-navbartop">
+            <nav class="navbartop">
+                <img class="join-logo" src="../assets/icons/join-logo.svg" alt="join-logo">
+                <div class="nav-imgs">
+                    <button class="profile-picture" onclick="toggleMenu()"></button>
+                </div>
+            </nav>
+            <div class="menu-container">
+                <div class="menu" id="menu">
+                    <a href="./legal-notice.html" class="menu-item">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="menu-item">Privacy Police</a>
+                    <a href="../index.html" class="menu-item">Log out</a>
+                </div>
+            </div>
+        </section>
+
         <div class="create-task-container">
             <h1 class="header-task">Add Task</h1>
             <form class="tasks-form-container" action="" onsubmit="preventFromSubmit(event)">

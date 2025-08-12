@@ -1,0 +1,103 @@
+.mobile-nav {
+  display: none;
+}
+.navbartop {
+    display: none;
+}
+
+@media (max-width: 360px) {
+  .mobile-nav {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background-color: #1d2c3e;
+    justify-content: space-around;
+    padding: 20px 0;
+    z-index: 999;
+  }
+
+  .sidebar-wrapper {
+    display: none !important;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccc;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .nav-item img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    filter: brightness(0) invert(0.8);
+  }
+
+  /* Mobile Navbar Top anzeigen */
+  #mobilie-navbartop {
+    padding: 30px;
+    display: flex; /* WICHTIG: Sichtbar machen */
+    width: 100%;
+    height: 140px;
+    background-color: white; /* Weiß wie im Screenshot */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbartop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbartop .join-logo {
+    height: 50px;
+    width: 50px;
+  }
+
+  .navbartop .profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #2a3d54;
+    background: white url('../assets/icons/profile-g.svg') center/contain no-repeat;
+  }
+
+  /* Navbar Top (Desktop) verstecken */
+  .navbar, 
+  #navbar {
+    display: none !important;
+  }
+
+  .join-logo {
+     margin-block-start: 0px;
+  }
+}
+
+/* Middle page */
+
+@media (max-width: 360px) {
+.main-wrapper {
+    margin-left: 20px;
+}
+.header-title{
+    display: flow;
+}
+.header-title h1 {
+    font-size: 47px;
+}
+.header-title h2 {
+    font-size: 20px;
+}
+}
