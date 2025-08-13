@@ -1,7 +1,8 @@
 .mobile-nav {
   display: none;
 }
-.navbartop {
+
+.mobile-view, .join-logo {
     display: none;
 }
 
@@ -54,6 +55,32 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
+  .menu-container {
+    position: absolute;
+    right: 0px;
+    width: 180px;
+    display: flex;
+    top: 58px;
+    z-index: 999;
+    flex-direction: row-reverse;
+  }
+
+  .menu {
+    width: 130px;
+    right: -150px; 
+  }
+
+  
+  .menu-translateX {
+    transform: translateX(-10px);
+  }
+  .menu-item {
+    color: #ededed;
+    font-size: 14px;
+    padding-left: 25px;
+
+  }
+
   .navbartop {
     display: flex;
     justify-content: space-between;
@@ -74,14 +101,35 @@
     background: white url('../assets/icons/profile-g.svg') center/contain no-repeat;
   }
 
-  /* Navbar Top (Desktop) verstecken */
-  .navbar, 
-  #navbar {
-    display: none !important;
+  #content-wrapper {
+    padding-top: 20px !important;
+  }
+
+  .navbar h2 {
+  display: none;
+  }
+
+  .join-logo {
+    display: flex;
   }
 
   .join-logo {
      margin-block-start: 0px;
+  }
+  .help-symbol{
+    display: none;
+  }
+
+  .join-logo {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-imgs {
+    justify-content: space-between !important;
+  }
+  .navbar {
+    justify-content: space-between !important;
+    height: 75px;
   }
 }
 
@@ -89,10 +137,17 @@
 
 @media (max-width: 360px) {
 .main-wrapper {
-    margin-left: 20px;
+    margin-left: 10px !important; 
+    margin-right: 10px !important;
 }
 .header-title{
-    display: flow;
+    display: contents;
+}
+.header-title h2 {
+    font-size: 1.2rem;
+    font-weight: 200;
+    color: #050505;
+    margin: 0;
 }
 .header-title h1 {
     font-size: 47px;
@@ -100,4 +155,64 @@
 .header-title h2 {
     font-size: 20px;
 }
+
+.divider {
+    width: 75px;         
+    height: 3px;
+    background-color: #29abe2;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 12px;
+}
+
+
+#conten-wrapper {
+    padding-top: 100px;
+}
+
+.greeting {
+    display: none;
+}
+
+.parent {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    gap: 20px;
+}
+
+.div1 .metric-icon {
+    height: 32px;
+    width: 32px;
+}
+.div2 .metric-icon {
+    height: 32px;
+    width: 32px;
+}
+
+.metric-icon {
+  background-color: #2a3647;
+  padding: 20px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.metric-urgent-icon {
+  background-color: #ff3d00;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.metric-icon img,
+.metric-urgent-icon img {
+  width: 39px;
+  height: 21px;
+}
+.mobile-view {
+    display: flex;
+}
+.desktop-view {
+    display: none;
+}
+
 }

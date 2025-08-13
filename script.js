@@ -9,34 +9,17 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => { });
-
-function openOverlay() {
-  const overlay = document.querySelectorAll(".overlay");
-  overlay.forEach((element) => {
-    element.classList.remove("hidden");
+function openOverlay(type = "") {
+  const overlays = document.querySelectorAll(".overlay");
+  overlays.forEach((overlay) => {
+    overlay.classList.remove("hidden");
+    overlay.classList.add(`overlay-${type}`); // Klasse hinzufügen
     setTimeout(() => {
-      element.classList.add("visible");
+      overlay.classList.add("visible");
       toggleAnimation();
-    }, 10);
+    }, 100);
   });
-    setTimeout(() => {
-    toggleAnimation();
-  }, 50);
 }
-
-
-// function openOverlay(type = "") {
-//   const overlays = document.querySelectorAll(".overlay");
-//   overlays.forEach((overlay) => {
-//     overlay.classList.remove("hidden");
-//     overlay.classList.add(`overlay-${type}`); // Klasse hinzufügen
-//     setTimeout(() => {
-//       overlay.classList.add("visible");
-//       toggleAnimation();
-//     }, 10);
-//   });
-// }
 
 function closeOverlay() {
   const overlay = document.querySelectorAll(".overlay");
@@ -48,31 +31,6 @@ function closeOverlay() {
     }, 250);
   });
 }
-
-
-// function closeOverlay() {
-//   const overlays = document.querySelectorAll(".overlay");
-//   overlays.forEach((overlay) => {
-//     overlay.classList.remove("visible");
-//     toggleAnimation();
-
-//     const classList = overlay.className.split(" ");
-//     const cleanedClasses = [];
-
-//     for (let i = 0; i < classList.length; i++) {
-//       const className = classList[i];
-//       if (!className.startsWith("overlay-") || className === "overlay") {
-//         cleanedClasses.push(className);
-//       }
-//     }
-//     overlay.className = cleanedClasses.join(" ");
-
-//     setTimeout(() => {
-//       overlay.classList.add("hidden");
-//     }, 250);
-//   });
-// }
-
 
 function toggleAnimation() {
   const overlayWrapper = document.querySelectorAll(".overlay-wrapper");
@@ -125,41 +83,7 @@ function closeAddTask() {
   }, 250);
 }
 
-// ----------------Contact Overlay function---------------------
-
-function openAddContactOverlay() {
-  const overlayRef = document.getElementById("overlay");
-  overlayRef.innerHTML = "";
-  overlayRef.innerHTML += getContactOverlayTemplate();
-  openOverlay();
-  initContactForm();
-}
-
 //---------Call up user information------------------------
-
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   const users = await loadData("users"); // Holt alle User-Daten aus Firebase
-
-//   document.querySelectorAll(".contact").forEach(contactEl => {
-//     contactEl.addEventListener("click", () => {
-//       const name = contactEl.querySelector(".name").textContent.trim();
-//       const email = contactEl.querySelector(".email").textContent.trim();
-
-//       // Sucht passenden User aus Firebase (per Email oder Name)
-//       const userKey = Object.keys(users).find(key =>
-//         users[key].email === email || users[key].name === name
-//       );
-
-//       if (userKey) {
-//         const user = users[userKey];
-//         renderUserInfo(user);
-//       } else {
-//         console.warn("User not found in Firebase");
-//       }
-//     });
-//   });
-// });
 
 async function renderUserIcon() {
   const element = document.querySelector(".profile-picture");
@@ -170,24 +94,24 @@ async function renderUserIcon() {
 
 function loadUrlParams() {
   const urlParams = new URLSearchParams(window.location.search);
-  const msg = urlParams.get('msg');
-  return msg
+  const msg = urlParams.get("msg");
+  return msg;
 }
 
 function createAvater(name) {
   let myArr = name.split(" ");
   let avatar = "";
-  myArr.forEach(element => {
+  myArr.forEach((element) => {
     avatar += element.charAt(0);
   });
-  return avatar
+  return avatar;
 }
 
 function updateLinksWithUserKey(target) {
   let name = loadUrlParams();
   if (!name) name = "Guest";
   const links = document.querySelectorAll(`[data-task="${target}"]`);
-  links.forEach(element => {
+  links.forEach((element) => {
     let newLink = element.href + `?msg=${encodeURIComponent(name)}`;
     element.href = newLink;
   });
@@ -198,7 +122,7 @@ function updateMenuWithUserKey() {
   const menu = document.querySelector(".menu").children;
   if (!name) name = "Guest";
   for (let index = 0; index < menu.length; index++) {
-    if (index == 2) break
+    if (index == 2) break;
     let newLink = menu[index].href + `?msg=${encodeURIComponent(name)}`;
     menu[index].href = newLink;
   }
