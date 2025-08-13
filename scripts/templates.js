@@ -1,23 +1,23 @@
 function subListItem(task, id) {
-  return `
+    return `
         <li class="sub-item">
             <span>•</span>
             <input type="text" value="${task}" id="sub-input-${id}" disabled>
             <div class="sub-btn-container">
-                <button type="button" class="sub-btn-edit" onclick="editSubItem(${id}, true)"></button>
+                <button class="sub-btn-edit" onclick="editSubItem(${id}, true)"></button>
                 <div class="divider-vertical"></div>
-                <button type="button" class="sub-btn-delete" onclick="removeSubItem(${id})"></button>
+                <button class="sub-btn-delete" onclick="removeSubItem(${id})"></button>
             </div>
         </li>
     `;
 }
 
 function subListItemEdit(task, id) {
-  return `
+    return `
         <li class="sub-item-editing">
             <input type="text" id="sub-input-${id}" value="${task}">
             <div class="sub-btn-container">
-                <button type="button" class="sub-btn-editing-delete" onclick="removeSubItem(${id})"></button>
+                <button class="sub-btn-editing-delete" onclick="removeSubItem(${id})"></button>
                 <div class="divider-vertical"></div>
                 <button class="sub-btn-conf" onclick="editSubItem(${id}, false)"></button>
             </div>
@@ -26,23 +26,23 @@ function subListItemEdit(task, id) {
 }
 
 function singleUserContainer(style, initials, name = "XX", color = "red") {
-  return `
+    return `
         <div class="${style}" onclick="assignedUser('${name}')">
             <div class="user-icon" style="background-color: ${color};">${initials}</div>
             <span class="user-name">${name}</span>
-            <button type="button" class="btn-check"></button>
+            <button class="btn-check"></button>
         </div>
     `;
 }
 
 function userIcon(color = "red", initials = "xx", name = "xx") {
-  return `
+    return `
         <div class="user-icon" onclick="assignedUser('${name}')" style="background-color: ${color}">${initials}</div>
     `;
 }
 
 function titleTaskTpl(title = "") {
-  return `
+    return `
         <div class="task-container">
             <label for="titleInput" class="task-name">
                 Title<span class="red-font">*</span>
@@ -54,7 +54,7 @@ function titleTaskTpl(title = "") {
 }
 
 function descriptionTaskTpl(description = "") {
-  return `
+    return `
         <div class="task-container">
             <label for="description-input" class="task-name">Description</label>
             <textarea name="" id="description" class="textarea-description">${description}</textarea>
@@ -63,7 +63,7 @@ function descriptionTaskTpl(description = "") {
 }
 
 function dateTaskTpl(date = "") {
-  return `
+    return `
         <div class="task-container">
             <label for="date" class="task-name">
                 Due date<span class="red-font">*</span>
@@ -75,19 +75,19 @@ function dateTaskTpl(date = "") {
 }
 
 function prioTaskTpl() {
-  return `
+    return `
         <div class="task-container">
             <span class="task-name">Priority</span>
             <div class="priority-btn-container">
-                <button type="button" class="btn-priority" onclick="activePriority('urgent')" id="urgent">
+                <button class="btn-priority" onclick="activePriority('urgent')" id="urgent">
                     Urgent
                     <div class="urgent-priority-icon" id="urgent-btn-icon"></div>
                 </button>
-                <button type="button" class="btn-priority" onclick="activePriority('medium')" id="medium">
+                <button class="btn-priority" onclick="activePriority('medium')" id="medium">
                     Medium
                     <div class="medium-priority-icon" id="medium-btn-icon"></div>
                 </button>
-                <button type="button" class="btn-priority" onclick="activePriority('low')" id="low">
+                <button class="btn-priority" onclick="activePriority('low')" id="low">
                     Low
                     <div class="low-priority-icon" id="low-btn-icon"></div>
                 </button>
@@ -97,35 +97,36 @@ function prioTaskTpl() {
 }
 
 function assignedTaskTpl() {
-  return `
-        <div class="task-container" id="task-container">
+    return `
+        <div class="task-container">
             <span class="task-name">Assigned to:</span>
             <div class="input-container">
                 <input type="text" id="assignedInputSearch" placeholder="Select contacts to assign"
                     class="input-assaign">
-                <button type="button" class="btn-dropdown" id="assaign-btn" onclick="toggleAssignedDropdown()">
+                <button class="btn-dropdown" id="assaign-btn" onclick="toggleAssignedDropdown()">
                     <img src="../assets/icons/arrow_drop_down.svg" alt="">
                 </button>
             </div>
             <div class="dropdown">
-                <div class="assigned-dropdown d-none" id="assigned-dropdown" onclick="onclickProtection(event)"></div>
+                <div class="assigned-dropdown d-none" id="assigned-dropdown">
+                </div>
             </div>
             <div class="assigned-icons-container" id="icons-container">
             </div>
         </div>
-        <div class="dropdown-overlay d-none" id="assigned-dropdown-overlay" onclick="toggleAssignedDropdown()"></div>
     `;
 }
 
 function categoryTaskTpl() {
-  return `
-        <div class="task-container" id="category-container">
+    return `
+        <div class="task-container" id = "category-container">
             <span class="task-name">
                 Category<span class="red-font">*</span>
             </span>
-            <div class="input-container" id="open-category-dropdown">
+            <div class="input-container" onclick="toggleCategoryDropdown()"
+                id="open-category-dropdown">
                 <span id="select-category">Select Task category</span>
-                <button type="button" class="btn-dropdown" id="category-btn" onclick="toggleCategoryDropdown()">
+                <button class="btn-dropdown" id="category-btn">
                     <img src="../assets/icons/arrow_drop_down.svg" alt="">
                 </button>
             </div>
@@ -141,17 +142,16 @@ function categoryTaskTpl() {
             </div>
             <span id="categoryError" class="error-message"></span>
         </div>
-        <div class="dropdown-overlay d-none" id="category-dropdown-overlay" onclick="toggleCategoryDropdown()"></div>
-    `;
+        `;
 }
 
 function subtaskTpl() {
-  return `
+    return `
         <div class="task-container">
             <span class="task-name">Subtask</span>
             <div class="input-container">
-                <input type="text" id="subtask-input" placeholder="Add new subtask" maxlength="32" onkeydown="if(event.key==='Enter'){addSubtask()}">
-                <button type="button" class="btn-dropdown" id="subtask-btn" onclick="addSubtask()">
+                <input type="text" id="subtask-input" placeholder="Add new subtask" maxlength="32">
+                <button class="btn-dropdown" id="subtask-btn" onclick="addSubtask()">
                     <img src="../assets/icons/add_blue.svg" alt="">
                 </button>
             </div>
@@ -160,11 +160,11 @@ function subtaskTpl() {
                 </ul>
             </div>
         </div>
-    `;
+        `;
 }
 
 function editTaskTpl() {
-  return `
+    return `
         <div class="close-edit-conatiner">
             <button class="close-task" onclick="closeOverlay(); resetTaskData()"></button>
         </div>
@@ -173,7 +173,7 @@ function editTaskTpl() {
 }
 
 function okBtn(taskId) {
-  return `
+    return `
         <button class="btn-create" onclick="saveEditedTask('${taskId}'); resetTaskData()">
             Ok
             <img src="../assets/icons/check.svg" alt="">
@@ -182,7 +182,7 @@ function okBtn(taskId) {
 }
 
 function createTaskTemplate(id, task) {
-  return `
+    return `
     <div class="task draggable" data-id="${id}" id="${id}" draggable="true" 
      ondragstart="dragstartHandler(event, '${id}')" 
      ondragend="dragendHandler(event)" 
@@ -202,7 +202,7 @@ function createTaskTemplate(id, task) {
 }
 
 function createProgressWrapper(subtasks, numerus, subtaskDone) {
-  return `
+    return `
     <div class="progress-wrapper">
       ${progessTemplate(subtasks, numerus, subtaskDone)}
     </div>
@@ -210,7 +210,7 @@ function createProgressWrapper(subtasks, numerus, subtaskDone) {
 }
 
 function progessTemplate(subtasks, numerus, subtaskDone) {
-  return `
+    return `
     <div class="progress-bar">
         <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
     </div>
@@ -219,21 +219,21 @@ function progessTemplate(subtasks, numerus, subtaskDone) {
 }
 
 function createPersonTemplate(userObj, username) {
-  return `<span class="avatar" style="background: ${userObj.color};" > ${username}</span>`;
+    return `<span class="avatar" style="background: ${userObj.color};" > ${username}</span>`;
 }
 
 function createTaskPlaceholder() {
-  return `<div class="empty">No tasks To do</div>`;
+    return `<div class="empty">No tasks To do</div>`;
 }
 
 function createTaskPlaceholderDone() {
-  return `<div class="empty">No tasks done</div>`;
+    return `<div class="empty">No tasks done</div>`;
 }
 
 // --------------------- Task-Overlay ---------------------------------------
 
 function createDetailedTaskTemplate(taskId, task) {
-  return `
+    return `
     <div id="overlay-wrapper" class="overlay-wrapper overlay-content transit" onclick="onclickProtection(event)">
         <div class="overlay-header mb-20">
             <span class="tag-overlay ${createCategoryClass(task.category)}">${task.category}</span>
@@ -279,7 +279,7 @@ function createDetailedTaskTemplate(taskId, task) {
 }
 
 function createPersonTemplateDetailView(userObj) {
-  return `
+    return `
     <div>
         <div class="section-title mb-14">Assigned to:</div>
         <ul class="assigned-list mb-20">
@@ -290,7 +290,7 @@ function createPersonTemplateDetailView(userObj) {
 }
 
 function createPersonListItem(userObj, username) {
-  return `
+    return `
     <li class="assigned-person mb-14">
         <span class="avatar" style="background: ${userObj.color};">${username}</span>
         <span>${userObj.name}</span>
@@ -299,7 +299,7 @@ function createPersonListItem(userObj, username) {
 }
 
 function createSubtaskTemplate(taskId, subtaskArr) {
-  return `
+    return `
     <div>
         <div class="section-title mb-14">Subtasks</div>
         <ul class="subtasks mb-20">
@@ -310,8 +310,8 @@ function createSubtaskTemplate(taskId, subtaskArr) {
 }
 
 function createSubtaskListItem(taskId, subtaskObj) {
-  const checkedClass = subtaskObj.edit ? " checked" : "";
-  return `
+    const checkedClass = subtaskObj.edit ? " checked" : "";
+    return `
     <li class="subtask-item mb-14" data-id="${subtaskObj.id}">
       <button class="btn-subtask btn-transparent ${checkedClass}" data-id="${subtaskObj.id}" onclick="checkInOutSubtask('${taskId}', '${subtaskObj.id}')"></button>
       <label>${subtaskObj.value}</label>
@@ -321,47 +321,8 @@ function createSubtaskListItem(taskId, subtaskObj) {
 
 // --------------------- Contact-Overlay ---------------------------------------
 
-function getContactOverlayTemplate() {
-  return `
-    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
-        <div class="modal"> 
-            <div class="modal-left">
-                <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
-                <h2>Add contact</h2>
-                <p>Tasks are better with a team!</p>
-                <div class="underline"></div>
-            </div>
-            <div class="modal-right">
-                <button onclick="closeOverlay()" class="close-btn">&times;</button>
-                <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
-                <form class="contact-form">
-                    <div class="input-group">
-                        <input type="text" id="contact-name" placeholder="Name" required />
-                        <img class="person-icon" src="../assets/icons/person.svg">
-                    </div>
-                    <div class="input-group">
-                        <input type="email" id="contact-email" placeholder="Email" required />
-                        <img class="email-icon" src="../assets/icons/mail.svg">
-                    </div>
-                    <div class="input-group">
-                        <input type="tel" id="contact-phone" placeholder="Phone" required />
-                        <img class="phone-icon" src="../assets/icons/call.svg">
-                    </div>
-                    <div class="buttons">
-                        <button type="button" class="cancel" onclick="closeOverlay()">Cancel X</button>
-                        <button type="submit" class="create">Create contact
-                            <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-  `;
-}
-
 function renderUserInfo(id, user) {
-  return `
+    return `
         <div class="user-details" onclick="event.stopPropagation()">
             <div class="user-name-container">
                 <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}
@@ -370,10 +331,10 @@ function renderUserInfo(id, user) {
                     <h3>${user.name}</h3>
                     <div class="edit-delete-buttons">
                         <button class="edit-field" id="" onclick="editContactById('${id}')">
-                            <img src="../assets/icons/edit.svg" alt="Edit icon" class="edit-icon">Edit
+                            <img src="/assets/icons/edit.svg" alt="Edit icon" class="edit-icon">Edit
                         </button>
                         <button class="edit-field" onclick="deleteUser('users/${id}')">
-                            <img src="../assets/icons/delete.svg" alt="Delete icon" class="delete-icon">
+                            <img src="/assets/icons/delete.svg" alt="Delete icon" class="delete-icon">
                             Delete
                         </button>
                     </div>
@@ -391,23 +352,23 @@ function renderUserInfo(id, user) {
 }
 
 function createContactElement(user, id) {
-  const div = document.createElement("div");
-  div.classList.add("contact");
-  div.addEventListener("click", () => {
-    openUserInfos(id);
-  });
-  div.innerHTML = `
+    const div = document.createElement("div");
+    div.classList.add("contact");
+    div.addEventListener("click", () => {
+        openUserInfos(id);
+    });
+    div.innerHTML = `
         <div class="avatar" style="background-color: ${user.color};">${user.avatar || user.Avatar}</div>
         <div class="info">
             <div class="name">${user.name}</div>
             <div class="email">${user.email}</div>
         </div>
     `;
-  return div;
+    return div;
 }
 
 function navLink(icon, link, section) {
-  return `
+    return `
         <li class="nav-link">
             <div class="img-wrapper">
                 <img src="../assets/icons/${icon}.svg" alt="">
@@ -418,8 +379,8 @@ function navLink(icon, link, section) {
 }
 
 function editContactOverlay(user) {
-  const overlay = document.getElementById("overlay");
-  overlay.innerHTML = `
+    const overlay = document.getElementById("overlay");
+    overlay.innerHTML = `
     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
         <div class="modal"> 
             <div class="modal-left">
@@ -428,26 +389,32 @@ function editContactOverlay(user) {
                 <div class="underline"></div>
             </div>
             <div class="modal-right">
-                <button onclick="closeOverlay()" class="close-btn">&times;</button>
-                <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
-                <form class="contact-form">
-                    <div class="input-group">
-                        <input type="text" id="contact-name" placeholder="Name" value="${user.name}" required />
-                        <img class="person-icon" src="../assets/icons/person.svg">
+                <button onclick="closeOverlay()" class="close-task"></button>
+                <form class="contact-container">
+                    <div class="avatar-container">
+                        <div class="avatar-circle" id="avatar-edit" style="background-color: #9327FF;">AM</div>
                     </div>
-                    <div class="input-group">
-                        <input type="email" id="contact-email" placeholder="Email" value="${user.email}" required />
-                        <img class="email-icon" src="../assets/icons/mail.svg">
-                    </div>
-                    <div class="input-group">
-                        <input type="tel" id="contact-phone" placeholder="Phone" value="${user.phone}" required />
-                        <img class="phone-icon" src="../assets/icons/call.svg">
-                    </div>
-                    <div class="buttons">
-                        <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
-                        <button type="submit" class="create">Save changes
-                            <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
-                        </button>
+                    <div class="contact-form">
+                        <div class="input-group">
+                            <input type="text" id="contact-name" placeholder="Name" value="${user.name}" required >
+                            <img class="person-icon" src="../assets/icons/person.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorName"></p>
+                        <div class="input-group">
+                            <input type="email" id="contact-email" placeholder="Email" value="${user.email}" required >
+                            <img class="email-icon" src="../assets/icons/mail.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorEmail"></p>
+                        <div class="input-group">
+                            <input type="tel" id="contact-phone" placeholder="Phone" value="${user.phone}" required >
+                            <img class="phone-icon" src="../assets/icons/call.svg">
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
+                            <button type="submit" class="create">Save
+                                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -455,3 +422,86 @@ function editContactOverlay(user) {
     </div>
   `;
 }
+
+function getContactOverlayTemplate() {
+    return `
+    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+        <div class="modal"> 
+            <div class="modal-left">
+                <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+                <h2>Edit contact</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="modal-right">
+                <button onclick="closeOverlay()" class="close-task"></button>
+                <form class="contact-container">
+                    <div class="avatar-container">
+                        <img src="../assets/icons/Group 13.svg">
+                    </div>
+                    <div class="contact-form">
+                        <div class="input-group">
+                            <input type="text" id="contact-name" placeholder="Name" required />
+                            <img class="person-icon" src="../assets/icons/person.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorName"></p>
+                        <div class="input-group">
+                            <input type="email" id="contact-email" placeholder="Email" required />
+                            <img class="email-icon" src="../assets/icons/mail.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorEmail"></p>
+                        <div class="input-group">
+                            <input type="tel" id="contact-phone" placeholder="Phone" required />
+                            <img class="phone-icon" src="../assets/icons/call.svg">
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
+                            <button type="submit" class="create">Save
+                                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  `;
+}
+
+// function getContactOverlayTemplate() {
+//     return `
+//     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+//         <div class="modal">
+//             <div class="modal-left">
+//                 <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+//                 <h2>Add contact</h2>
+//                 <p>Tasks are better with a team!</p>
+//                 <div class="underline"></div>
+//             </div>
+//             <div class="modal-right">
+//                 <button onclick="closeOverlay()" class="close-btn">&times;</button>
+//                 <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
+//                 <form class="contact-form">
+//                     <div class="input-group">
+//                         <input type="text" id="contact-name" placeholder="Name" required />
+//                         <img class="person-icon" src="../assets/icons/person.svg">
+//                     </div>
+//                     <div class="input-group">
+//                         <input type="email" id="contact-email" placeholder="Email" required />
+//                         <img class="email-icon" src="../assets/icons/mail.svg">
+//                     </div>
+//                     <div class="input-group">
+//                         <input type="tel" id="contact-phone" placeholder="Phone" required />
+//                         <img class="phone-icon" src="../assets/icons/call.svg">
+//                     </div>
+//                     <div class="buttons">
+//                         <button type="button" class="cancel" onclick="closeOverlay()">Cancel X</button>
+//                         <button type="submit" class="create">Create contact
+//                             <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+//                         </button>
+//                     </div>
+//                 </form>
+//             </div>
+//         </div>
+//     </div>
+//   `;
+// }

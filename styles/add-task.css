@@ -134,7 +134,7 @@ button div {
 }
 
 .input-container input:focus {
-  outline: none;
+  outline: none;  
 }
 
 .input-container input::placeholder {
@@ -323,22 +323,6 @@ button div {
 .dropdown {
   position: relative;
   display: inline-block;
-}
-
-.zindex-12 {
-  z-index: 12;
-}
-
-.dropdown-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 11;
-  /* background: rgba(0, 0, 0, 0.7); */
 }
 
 .assigned-dropdown {
@@ -564,6 +548,6 @@ button div {
   background-color: #d1d1d1;
 }
 
-/* .boxshadow {
+.boxshadow {
   filter: drop-shadow(0 0 4px rgb(0, 0, 0, 0.1));
-} */
+}
