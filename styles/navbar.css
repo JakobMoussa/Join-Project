@@ -18,6 +18,7 @@
 
 .nav-imgs {
   display: flex;
+  align-items: center;
 }
 
 .profile-picture {
@@ -82,4 +83,8 @@
 
 .menu-item:hover {
   background-color: rgba(101, 99, 99, 0.132);
+}
+
+.help-symbol {
+  cursor: pointer;
 }

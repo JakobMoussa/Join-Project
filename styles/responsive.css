@@ -6,7 +6,68 @@
     display: none;
 }
 
+.intro {
+  display: none;
+}
+
 @media (max-width: 360px) {
+
+  .intro {
+    display: flex !important;
+    color: #050505;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeOut 3s ease forwards; /* Intro ausblenden */
+    animation-delay: 3s; /* Text bleibt 2 Sekunden sichtbar */
+  }
+
+  .intro h1 {
+    font-size: 30px;
+    font-weight: 300;
+    opacity: 1;
+     animation: fadeIn 1.5s ease forwards;
+     color: #050505;
+  }
+
+  .main-wrapper {
+    opacity: 0;
+    animation: showContent 1s ease forwards;
+    animation-delay: 0s; /* erscheint erst nach Intro */
+    padding: 20px;
+  }
+
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  
+  @keyframes showContent {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .intro {
+    animation: fadeOut 4s ease forwards;
+    animation-delay: 0s; /* erst nach dem Text ausblenden */
+  }
+  
+  .intro h1 {
+    animation: fadeInText 2s ease forwards;
+    animation-delay: 0s; /* sofort einblenden */
+  }
+
   .mobile-nav {
     display: flex !important;
     position: fixed;
@@ -23,7 +84,10 @@
   .sidebar-wrapper {
     display: none !important;
   }
-
+  /* #navbar {
+    display: flex;
+    width: 100%;
+  } */
   .nav-item {
     display: flex;
     flex-direction: column;
@@ -31,6 +95,12 @@
     color: #ccc;
     font-size: 12px;
     text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nav-item:hover {
+    background-color: #081931;
+    border-radius: 5px;
   }
 
   .nav-item img {
@@ -41,26 +111,13 @@
   }
 
   /* Mobile Navbar Top anzeigen */
-  #mobilie-navbartop {
-    padding: 30px;
-    display: flex; /* WICHTIG: Sichtbar machen */
-    width: 100%;
-    height: 140px;
-    background-color: white; /* Weiß wie im Screenshot */
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
 
   .menu-container {
     position: absolute;
     right: 0px;
     width: 180px;
     display: flex;
-    top: 58px;
+    top: 65px;
     z-index: 999;
     flex-direction: row-reverse;
   }
@@ -70,7 +127,6 @@
     right: -150px; 
   }
 
-  
   .menu-translateX {
     transform: translateX(-10px);
   }
@@ -78,27 +134,21 @@
     color: #ededed;
     font-size: 14px;
     padding-left: 25px;
-
   }
 
-  .navbartop {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .navbartop .join-logo {
+ .join-logo {
     height: 50px;
     width: 50px;
   }
 
-  .navbartop .profile-picture {
+  .profile-picture {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 2px solid #2a3d54;
     background: white url('../assets/icons/profile-g.svg') center/contain no-repeat;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   #content-wrapper {
@@ -121,15 +171,20 @@
   }
 
   .join-logo {
+    display: flex !important;
     width: 32px;
     height: 32px;
+    margin: 0;
   }
   .nav-imgs {
-    justify-content: space-between !important;
+    display: contents;
   }
   .navbar {
     justify-content: space-between !important;
     height: 75px;
+    display: flex !important;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 
@@ -157,36 +212,36 @@
 }
 
 .divider {
-    width: 75px;         
-    height: 3px;
-    background-color: #29abe2;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    margin-top: 12px;
+  width: 75px;         
+  height: 3px;
+  background-color: #29abe2;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-top: 12px;
 }
 
 
 #conten-wrapper {
-    padding-top: 100px;
+  padding-top: 100px;
 }
 
 .greeting {
-    display: none;
+  display: none;
 }
 
 .parent {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 100px);
-    gap: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 100px);
+  gap: 20px;
 }
 
 .div1 .metric-icon {
-    height: 32px;
-    width: 32px;
+  height: 32px;
+  width: 32px;
 }
 .div2 .metric-icon {
-    height: 32px;
-    width: 32px;
+  height: 32px;
+  width: 32px;
 }
 
 .metric-icon {

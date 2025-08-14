@@ -32,7 +32,6 @@ function closeOverlay() {
   });
 }
 
-
 function toggleAnimation() {
   const overlayWrapper = document.querySelectorAll(".overlay-wrapper");
   overlayWrapper.forEach((element) => {
@@ -152,3 +151,18 @@ function toggleMenu() {
   const menu = document.getElementById("menu");
   menu.classList.toggle("menu-translateX");
 }
+
+// Animation for mobile view
+
+window.addEventListener('load', () => {
+  const intro = document.getElementById('intro');
+  const main = document.getElementById('main');
+
+  intro.style.animation = "fadeOut 3s ease forwards";
+  intro.style.animationDelay = "2s";
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    main.classList.add("show");
+  }, 3000); 
+});
