@@ -96,12 +96,13 @@ Board
 
 .board {
   display: flex;
+  gap: 16px;
 }
 
 .column {
   flex: 1;
   min-width: 0;
-  margin: 16px;
+  margin-top: 16px;
   border-radius: 8px;
 }
 
@@ -110,15 +111,17 @@ Board
   justify-content: space-between;
   width: 100%;
   color: #42526e;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 .column-header img {
   width: 24px;
   height: 24px;
-  width: 24px;
-  height: 24px;
   cursor: pointer;
+}
+
+.task-wrapper {
+  height: 100%;
 }
 
 .task {
@@ -527,4 +530,105 @@ Edit-Task
 .close-edit-conatiner {
   display: flex;
   flex-direction: row-reverse;
+}
+
+/* -------------------------------------------
+Media queries
+---------------------------------------------- */
+
+@media (max-width: 1200px) {
+  .board-wrapper {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  .board-wrapper {
+    margin-left: 64px;
+    margin-right: 64px;
+  }
+
+  .board {
+    display: block;
+  }
+
+  .add-task-text {
+    display: none;
+  }
+
+  .add-btn {
+    padding: 12px;
+  }
+
+  .add-icon {
+    margin-left: 0;
+  }
+
+  .task-wrapper {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .task {
+    min-width: 250px;
+  }
+
+  .empty {
+    width: 100%;
+  }
+}
+
+@media (max-width: 590px) {
+  .board-header {
+    display: block;
+  }
+
+  .board-wrapper {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .add-btn-mobile {
+    display: block;
+  }
+
+  .add-btn-desktop {
+    display: none;
+  }
+
+  .search-field-wrapper-desktop {
+    display: none;
+  }
+
+  .search-field-wrapper-mobile {
+    display: block;
+    margin: 25px 0;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+
+  /* .task-wrapper {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .task {
+    min-width: 250px;
+  }
+
+  .empty {
+    width: 100%;
+  } */
 }

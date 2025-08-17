@@ -14,13 +14,14 @@
     <link rel="stylesheet" href="../styles/board.css">
     <link rel="stylesheet" href="../styles/right-content-wrapper.css">
     <link rel="stylesheet" href="../styles/add-task.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+
     <script src="../scripts/api.js"></script>
     <script src="../scripts/board.js"></script>
     <script src="../scripts/templates.js"></script>
     <script src="../scripts/add-task.js"></script>
     <script src="../script.js"></script>
 
-    <!-- <script src="../scripts/sidebar.js"></script> -->
 </head>
 
 <body onload="initializeNavbar()">
@@ -64,6 +65,7 @@
 
         <section id="navbar">
             <nav class="navbar">
+                <img class="join-logo-nav" src="../assets/icons/join-logo.svg" alt="join logo">
                 <h2>
                     Kanban Project Management Tool
                 </h2>
@@ -85,59 +87,78 @@
         </section>
 
         <section id="content-wrapper">
-
             <div class="board-wrapper">
                 <header class="board-header">
-                    <h1>Board</h1>
-                    <div>
-                        <div class="search-field-wrapper">
+                    <div class="mobile-header">
+                        <h1>Board</h1>
+                        <!-- mobile button -->
+                        <button class="add-btn add-btn-mobile hidden" id="add-task-btn-mobile"
+                            onclick="addTask('to-do')">
+                            <span class="add-task-text">Add task</span>
+                            <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
+                        </button>
+                    </div>
+                    <div style="display: flex;">
+                        <!-- desktop input -->
+                        <div class="search-field-wrapper search-field-wrapper-desktop">
                             <input type="search" placeholder="Find Task" id="search-input" class="search-field"
                                 oninput="searchTasks()">
                             <span class="search-devider"></span>
                             <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
                         </div>
-                        <button class="add-btn" id="add-task-btn" onclick="addTask('to-do')">
-                            Add task
+                        <!-- desktop button -->
+                        <button class="add-btn add-btn-desktop" id="add-task-btn" onclick="addTask('to-do')">
+                            <span class="add-task-text">Add task</span>
                             <img src="../assets/icons/add.svg" alt="Add" class="add-icon">
                         </button>
+                    </div>
+                    <!-- mobile input -->
+                    <div class="search-field-wrapper search-field-wrapper-mobile hidden">
+                        <input type="search" placeholder="Find Task" id="search-input" class="search-field"
+                            oninput="searchTasks()">
+                        <span class="search-devider"></span>
+                        <img src="../assets/icons/search.svg" alt="Search" class="search-icon">
                     </div>
                 </header>
 
                 <div class="board">
-                    <div class="column" data-task="to-do" ondrop="dropHandler(event, 'to-do')"
-                        ondragover="dragoverHandler(event)">
+                    <div class="column" data-task="to-do">
                         <div class="column-header">
                             <h3>To do</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button" onclick="addTask('to-do')">
                         </div>
+                        <div class="task-wrapper" ondrop="dropHandler(event, 'to-do')"
+                            ondragover="dragoverHandler(event)"></div>
                     </div>
 
-                    <div class="column" data-task="in-progress" ondrop="dropHandler(event, 'in-progress')"
-                        ondragover="dragoverHandler(event)">
+                    <div class="column" data-task="in-progress">
                         <div class="column-header">
                             <h3>In progress</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button"
                                 onclick="addTask('in-progress')">
                         </div>
+                        <div class="task-wrapper" ondrop="dropHandler(event, 'in-progress')"
+                            ondragover="dragoverHandler(event)"></div>
                     </div>
 
-                    <div class="column" data-task="await-feedback" ondrop="dropHandler(event, 'await-feedback')"
-                        ondragover="dragoverHandler(event)">
+                    <div class="column" data-task="await-feedback">
                         <div class="column-header">
                             <h3>Await feedback</h3>
                             <img src="../assets/icons/plus_button.svg" alt="plus-button"
                                 onclick="addTask('await-feedback')">
                         </div>
+                        <div class="task-wrapper" ondrop="dropHandler(event, 'await-feedback')"
+                            ondragover="dragoverHandler(event)"></div>
                     </div>
 
-                    <div class="column" data-task="done" ondrop="dropHandler(event, 'done')"
-                        ondragover="dragoverHandler(event)">
+                    <div class="column" data-task="done">
                         <div class="column-header">
                             <h3>Done</h3>
                         </div>
+                        <div class="task-wrapper" ondrop="dropHandler(event, 'done')"
+                            ondragover="dragoverHandler(event)"></div>
                     </div>
                 </div>
-
                 <div class="no-results hidden">No tasks found</div>
             </div>
         </section>
