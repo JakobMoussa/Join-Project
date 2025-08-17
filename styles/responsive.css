@@ -25,8 +25,8 @@
     justify-content: center;
     align-items: center;
     z-index: 999;
-    animation: fadeOut 3s ease forwards; /* Intro ausblenden */
-    animation-delay: 3s; /* Text bleibt 2 Sekunden sichtbar */
+    animation: fadeOut 3s ease forwards; 
+    animation-delay: 3s;
   }
 
   .intro h1 {
@@ -60,12 +60,12 @@
 
   .intro {
     animation: fadeOut 4s ease forwards;
-    animation-delay: 0s; /* erst nach dem Text ausblenden */
+    animation-delay: 0s; 
   }
   
   .intro h1 {
     animation: fadeInText 2s ease forwards;
-    animation-delay: 0s; /* sofort einblenden */
+    animation-delay: 0s;
   }
 
   .mobile-nav {
@@ -84,10 +84,7 @@
   .sidebar-wrapper {
     display: none !important;
   }
-  /* #navbar {
-    display: flex;
-    width: 100%;
-  } */
+
   .nav-item {
     display: flex;
     flex-direction: column;
