@@ -1,11 +1,3 @@
-.mobile-nav {
-  display: none;
-}
-
-.mobile-view, .join-logo {
-    display: none;
-}
-
 .intro {
   display: none;
 }
@@ -33,14 +25,15 @@
     font-size: 30px;
     font-weight: 300;
     opacity: 1;
-     animation: fadeIn 1.5s ease forwards;
-     color: #050505;
+    animation: fadeIn 1.5s ease forwards;
+    color: #050505;
   }
 
   .main-wrapper {
     opacity: 0;
     animation: showContent 1s ease forwards;
-    animation-delay: 0s; /* erscheint erst nach Intro */
+    animation-delay: 0s;
+    /* erscheint erst nach Intro */
     padding: 20px;
   }
 
@@ -51,7 +44,7 @@
       visibility: hidden;
     }
   }
-  
+
   @keyframes showContent {
     to {
       opacity: 1;
@@ -62,7 +55,7 @@
     animation: fadeOut 4s ease forwards;
     animation-delay: 0s; 
   }
-  
+
   .intro h1 {
     animation: fadeInText 2s ease forwards;
     animation-delay: 0s;
@@ -84,7 +77,10 @@
   .sidebar-wrapper {
     display: none !important;
   }
-
+  /* #navbar {
+    display: flex;
+    width: 100%;
+  } */
   .nav-item {
     display: flex;
     flex-direction: column;
@@ -121,21 +117,17 @@
 
   .menu {
     width: 130px;
-    right: -150px; 
+    right: -150px;
   }
 
   .menu-translateX {
     transform: translateX(-10px);
   }
+
   .menu-item {
     color: #ededed;
     font-size: 14px;
     padding-left: 25px;
-  }
-
- .join-logo {
-    height: 50px;
-    width: 50px;
   }
 
   .profile-picture {
@@ -151,120 +143,95 @@
   #content-wrapper {
     padding-top: 20px !important;
   }
-
-  .navbar h2 {
-  display: none;
-  }
-
-  .join-logo {
-    display: flex;
-  }
-
-  .join-logo {
-     margin-block-start: 0px;
-  }
-  .help-symbol{
-    display: none;
-  }
-
-  .join-logo {
-    display: flex !important;
-    width: 32px;
-    height: 32px;
-    margin: 0;
-  }
-  .nav-imgs {
-    display: contents;
-  }
-  .navbar {
-    justify-content: space-between !important;
-    height: 75px;
-    display: flex !important;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 }
 
 /* Middle page */
 
 @media (max-width: 360px) {
-.main-wrapper {
-    margin-left: 10px !important; 
+  .main-wrapper {
+    margin-left: 10px !important;
     margin-right: 10px !important;
-}
-.header-title{
+  }
+
+  .header-title {
     display: contents;
-}
-.header-title h2 {
+  }
+
+  .header-title h2 {
     font-size: 1.2rem;
     font-weight: 200;
     color: #050505;
     margin: 0;
-}
-.header-title h1 {
+  }
+
+  .header-title h1 {
     font-size: 47px;
-}
-.header-title h2 {
+  }
+
+  .header-title h2 {
     font-size: 20px;
-}
+  }
 
-.divider {
-  width: 75px;         
-  height: 3px;
-  background-color: #29abe2;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  margin-top: 12px;
-}
+  .divider {
+    width: 75px;
+    height: 3px;
+    background-color: #29abe2;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 12px;
+  }
 
 
-#conten-wrapper {
-  padding-top: 100px;
-}
+  #conten-wrapper {
+    padding-top: 100px;
+  }
 
-.greeting {
-  display: none;
-}
-
-.parent {
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 100px);
-  gap: 20px;
-}
-
-.div1 .metric-icon {
-  height: 32px;
-  width: 32px;
-}
-.div2 .metric-icon {
-  height: 32px;
-  width: 32px;
-}
-
-.metric-icon {
-  background-color: #2a3647;
-  padding: 20px;
-  border-radius: 50%;
-  margin-right: 12px;
-}
-
-.metric-urgent-icon {
-  background-color: #ff3d00;
-  padding: 10px;
-  border-radius: 50%;
-  margin-right: 12px;
-}
-
-.metric-icon img,
-.metric-urgent-icon img {
-  width: 39px;
-  height: 21px;
-}
-.mobile-view {
-    display: flex;
-}
-.desktop-view {
+  .greeting {
     display: none;
-}
+  }
+
+  .parent {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    gap: 20px;
+  }
+
+  .div1 .metric-icon {
+    height: 32px;
+    width: 32px;
+  }
+
+  .div2 .metric-icon {
+    height: 32px;
+    width: 32px;
+  }
+
+  .metric-icon {
+    background-color: #2a3647;
+    padding: 20px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+
+  .metric-urgent-icon {
+    background-color: #ff3d00;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+
+  .metric-icon img,
+  .metric-urgent-icon img {
+    width: 39px;
+    height: 21px;
+  }
+
+  .mobile-view {
+    display: flex;
+  }
+
+  .desktop-view {
+    display: none;
+  }
 
 }
