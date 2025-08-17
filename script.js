@@ -159,7 +159,8 @@ window.addEventListener("load", () => {
 
   intro.style.animation = "fadeOut 3s ease forwards";
   intro.style.animationDelay = "2s";
-
+  // console.log(intro);
+  
   setTimeout(() => {
     intro.style.display = "none";
     main.classList.add("show");
