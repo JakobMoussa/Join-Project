@@ -19,7 +19,7 @@ function subListItemEdit(task, id) {
             <div class="sub-btn-container">
                 <button type="button" class="sub-btn-editing-delete" onclick="removeSubItem(${id})"></button>
                 <div class="divider-vertical"></div>
-                <button class="sub-btn-conf" onclick="editSubItem(${id}, false)"></button>
+                <button type="button" class="sub-btn-conf" onclick="editSubItem(${id}, false)"></button>
             </div>
         </li>
     `;
@@ -30,7 +30,7 @@ function singleUserContainer(style, initials, name = "XX", color = "red") {
         <div class="${style}" onclick="assignedUser('${name}')">
             <div class="user-icon" style="background-color: ${color};">${initials}</div>
             <span class="user-name">${name}</span>
-            <button type="button" class="btn-check"></button>
+            <button type="button" type="button" class="btn-check"></button>
         </div>
     `;
 }
@@ -68,7 +68,7 @@ function dateTaskTpl(date = "") {
             <label for="date" class="task-name">
                 Due date<span class="red-font">*</span>
             </label>
-            <input type="date" class="input-task" id="date" value="${date}">
+            <input type="date" class="input-task date-field" id="date" value="${date}">
             <span id="dateError" class="error-message"></span>
         </div>
     `;
@@ -321,45 +321,6 @@ function createSubtaskListItem(taskId, subtaskObj) {
 
 // --------------------- Contact-Overlay ---------------------------------------
 
-function getContactOverlayTemplate() {
-  return `
-    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
-        <div class="modal"> 
-            <div class="modal-left">
-                <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
-                <h2>Add contact</h2>
-                <p>Tasks are better with a team!</p>
-                <div class="underline"></div>
-            </div>
-            <div class="modal-right">
-                <button onclick="closeOverlay()" class="close-btn">&times;</button>
-                <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
-                <form class="contact-form">
-                    <div class="input-group">
-                        <input type="text" id="contact-name" placeholder="Name" required />
-                        <img class="person-icon" src="../assets/icons/person.svg">
-                    </div>
-                    <div class="input-group">
-                        <input type="email" id="contact-email" placeholder="Email" required />
-                        <img class="email-icon" src="../assets/icons/mail.svg">
-                    </div>
-                    <div class="input-group">
-                        <input type="tel" id="contact-phone" placeholder="Phone" required />
-                        <img class="phone-icon" src="../assets/icons/call.svg">
-                    </div>
-                    <div class="buttons">
-                        <button type="button" class="cancel" onclick="closeOverlay()">Cancel X</button>
-                        <button type="submit" class="create">Create contact
-                            <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-  `;
-}
-
 function renderUserInfo(id, user) {
   return `
         <div class="user-details" onclick="event.stopPropagation()">
@@ -428,26 +389,32 @@ function editContactOverlay(user) {
                 <div class="underline"></div>
             </div>
             <div class="modal-right">
-                <button onclick="closeOverlay()" class="close-btn">&times;</button>
-                <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
-                <form class="contact-form">
-                    <div class="input-group">
-                        <input type="text" id="contact-name" placeholder="Name" value="${user.name}" required />
-                        <img class="person-icon" src="../assets/icons/person.svg">
+                <button onclick="closeOverlay()" class="close-task"></button>
+                <form class="contact-container">
+                    <div class="avatar-container">
+                        <div class="avatar-circle" id="avatar-edit" style="background-color: #9327FF;">AM</div>
                     </div>
-                    <div class="input-group">
-                        <input type="email" id="contact-email" placeholder="Email" value="${user.email}" required />
-                        <img class="email-icon" src="../assets/icons/mail.svg">
-                    </div>
-                    <div class="input-group">
-                        <input type="tel" id="contact-phone" placeholder="Phone" value="${user.phone}" required />
-                        <img class="phone-icon" src="../assets/icons/call.svg">
-                    </div>
-                    <div class="buttons">
-                        <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
-                        <button type="submit" class="create">Save changes
-                            <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
-                        </button>
+                    <div class="contact-form">
+                        <div class="input-group">
+                            <input type="text" id="contact-name" placeholder="Name" value="${user.name}" required >
+                            <img class="person-icon" src="../assets/icons/person.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorName"></p>
+                        <div class="input-group">
+                            <input type="email" id="contact-email" placeholder="Email" value="${user.email}" required >
+                            <img class="email-icon" src="../assets/icons/mail.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorEmail"></p>
+                        <div class="input-group">
+                            <input type="tel" id="contact-phone" placeholder="Phone" value="${user.phone}" required >
+                            <img class="phone-icon" src="../assets/icons/call.svg">
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
+                            <button type="submit" class="create">Save
+                                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -455,3 +422,86 @@ function editContactOverlay(user) {
     </div>
   `;
 }
+
+function getContactOverlayTemplate() {
+  return `
+    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+        <div class="modal"> 
+            <div class="modal-left">
+                <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+                <h2>Edit contact</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="modal-right">
+                <button onclick="closeOverlay()" class="close-task"></button>
+                <form class="contact-container">
+                    <div class="avatar-container">
+                        <img src="../assets/icons/Group 13.svg">
+                    </div>
+                    <div class="contact-form">
+                        <div class="input-group">
+                            <input type="text" id="contact-name" placeholder="Name" required />
+                            <img class="person-icon" src="../assets/icons/person.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorName"></p>
+                        <div class="input-group">
+                            <input type="email" id="contact-email" placeholder="Email" required />
+                            <img class="email-icon" src="../assets/icons/mail.svg">
+                        </div>
+                        <p class="error-signup" data-field="errorEmail"></p>
+                        <div class="input-group">
+                            <input type="tel" id="contact-phone" placeholder="Phone" required />
+                            <img class="phone-icon" src="../assets/icons/call.svg">
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
+                            <button type="submit" class="create">Save
+                                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  `;
+}
+
+// function getContactOverlayTemplate() {
+//     return `
+//     <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+//         <div class="modal">
+//             <div class="modal-left">
+//                 <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+//                 <h2>Add contact</h2>
+//                 <p>Tasks are better with a team!</p>
+//                 <div class="underline"></div>
+//             </div>
+//             <div class="modal-right">
+//                 <button onclick="closeOverlay()" class="close-btn">&times;</button>
+//                 <img class="avatar-placeholder" src="../assets/icons/Group 13.svg">
+//                 <form class="contact-form">
+//                     <div class="input-group">
+//                         <input type="text" id="contact-name" placeholder="Name" required />
+//                         <img class="person-icon" src="../assets/icons/person.svg">
+//                     </div>
+//                     <div class="input-group">
+//                         <input type="email" id="contact-email" placeholder="Email" required />
+//                         <img class="email-icon" src="../assets/icons/mail.svg">
+//                     </div>
+//                     <div class="input-group">
+//                         <input type="tel" id="contact-phone" placeholder="Phone" required />
+//                         <img class="phone-icon" src="../assets/icons/call.svg">
+//                     </div>
+//                     <div class="buttons">
+//                         <button type="button" class="cancel" onclick="closeOverlay()">Cancel X</button>
+//                         <button type="submit" class="create">Create contact
+//                             <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+//                         </button>
+//                     </div>
+//                 </form>
+//             </div>
+//         </div>
+//     </div>
+//   `;
+// }

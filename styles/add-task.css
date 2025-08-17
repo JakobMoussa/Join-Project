@@ -69,7 +69,7 @@ button div {
   border: 1px solid #d1d1d1;
   border-radius: 8px;
   background-color: white;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .input-task:focus {
@@ -96,6 +96,10 @@ button div {
   border: 1px solid #d1d1d1;
   border-radius: 8px;
   background-color: white;
+  /* cursor: pointer; */
+}
+
+.date-field {
   cursor: pointer;
 }
 
@@ -130,7 +134,7 @@ button div {
 .input-container input {
   flex-grow: 1;
   border: none;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .input-container input:focus {
@@ -567,3 +571,94 @@ button div {
 /* .boxshadow {
   filter: drop-shadow(0 0 4px rgb(0, 0, 0, 0.1));
 } */
+
+@media (max-width: 1200px) {
+  .create-task-container {
+    margin: 64px 0 0 48px;
+  }
+
+  .tasks-form-container {
+    gap: 24px;
+  }
+
+  .addTask-Container {
+    width: 316px;
+  }
+}
+
+@media (max-width: 992px) {
+  .right-content-wrapper {
+    flex-grow: 1;
+  }
+
+  .tasks-form-container {
+    gap: 16px;
+  }
+
+  .create-task-container {
+    width: 100%;
+    margin: 32px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .addTask-Container {
+    width: 300px;
+  }
+
+  .task-controls {
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+  }
+
+  .btn-priority {
+    font-size: 16px;
+  }
+
+  .urgent-priority-icon {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+@media (max-width: 680px) {
+  .create-task-container {
+    flex-grow: 1;
+    justify-content: start;
+    margin-bottom: 64px;
+  }
+
+  .tasks-form-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .addTask-Container {
+    width: 100%;
+    padding: 0 64px 0 64px;
+  }
+
+  .divider-vertical {
+    display: none;
+  }
+}
+
+@media (max-width: 590px) {
+  .task-controls {
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tasks-form-container {
+    padding: 0 32px 0 32px;
+  }
+
+  .addTask-Container {
+    padding: 0px;
+  }
+}

@@ -12,6 +12,15 @@ function createUser(name, email, phone = "01510000000", color = getRandomColor()
   };
 }
 
+function createAvater(name) {
+  let myArr = name.split(" ");
+  let avatar = "";
+  myArr.forEach(element => {
+    avatar += element.charAt(0);
+  });
+  return avatar
+}
+
 function getRandomColor() {
   const colors = ["#f1c40f", "#1abc9c", "#3498db", "#e67e22", "#9b59b6"];
   return colors[Math.floor(Math.random() * colors.length)];

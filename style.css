@@ -39,3 +39,9 @@ main {
     display: flex;
     flex-direction: row;
 }
+
+#right-content-wrapper {
+    height: 100vh; /* Gleiche Höhe wie die Sidebar */
+    overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+    overflow-x: hidden; /* Verhindert horizontales Scrollen */
+}

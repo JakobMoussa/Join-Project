@@ -3,6 +3,7 @@ Board header
 ---------------------------------------------- */
 
 .board-wrapper {
+  max-width: 1440px;
   margin-left: 40px;
   margin-right: 40px;
 }
@@ -217,7 +218,7 @@ Board
 Overlay
 ---------------------------------------------- */
 
-/* .overlay {
+.overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -229,17 +230,17 @@ Overlay
   z-index: 11;
   display: flex;
   justify-content: center;
-  align-items: center; 
-   fade-in / fade-out effect 
+  align-items: center;
+  /* fade-in / fade-out effect  */
   opacity: 0;
   transition: opacity 250ms ease;
-}*/
+}
 
-/* .visible {
+.visible {
   opacity: 1;
-} */
+}
 
-.overlay {
+/* .overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -247,9 +248,9 @@ Overlay
   left: 0;
   background: rgba(0, 0, 0, 0.7);
   z-index: 11;
+  opacity: 0;
   transition: opacity 250ms ease;
-}
-
+} */
 
 .overlay.transparent {
   background: transparent !important;
