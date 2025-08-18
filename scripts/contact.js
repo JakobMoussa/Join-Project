@@ -200,6 +200,7 @@ function hideContacts() {
     const infoContainer = document.querySelector(".info-container");
     infoContainer.innerHTML = "";
     contactField.style.display = "none";
+    toggleContactBg();
 }
 
 function opencEditMenu() {
@@ -228,7 +229,7 @@ function toggleContactBg(e) {
     contacts.forEach(contact => {
         contact.classList.remove("contact-dark-blue");
     });
-
+    if (!e) return;
     e.target.classList.add("contact-dark-blue");    
 }
 
