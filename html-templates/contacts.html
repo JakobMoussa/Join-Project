@@ -62,11 +62,14 @@
     <main id="right-content-wrapper">
         <section id="navbar">
             <nav class="navbar">
+                <img class="join-logo-nav" src="../assets/icons/join-logo.svg" alt="join logo">
                 <h2>
                     Kanban Project Management Tool
                 </h2>
                 <div class="nav-imgs">
-                    <img src="../assets/icons/help.svg" alt="help-symbol">
+                    <a href="../html-templates/help.html">
+                        <img class="help-symbol" src="../assets/icons/help.svg" alt="help-symbol">
+                    </a>
                     <button class="profile-picture" onclick="toggleMenu()"></button>
                 </div>
             </nav>
@@ -87,13 +90,15 @@
                 <div id="contacts-container"></div>
             </div>
             <div class="contact-field">
+                <button class="btn-hide-contact" onclick="hideContacts()"></button>
                 <div class="contact-title">
                     <h2 class="title-text">Contacts</h2>
                     <div class="divider"></div>
                     <p class="contact-text-filed">Better with a team</p>
+                    <div class="divider-horizontal"></div>
                 </div>
-                <div class="info-container">
-                </div>
+                <div class="info-container"></div>
+                <div class="edit-delete-container"></div>
             </div>
         </section>
     </main>

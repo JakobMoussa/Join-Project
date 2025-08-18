@@ -171,7 +171,9 @@ function createLetterBox(letter) {
 
 async function openUserInfos(id) {
     let user = await loadData(`users/${id}`);
+    const contactField = document.querySelector(".contact-field");
     const usersInfo = document.querySelector(".info-container");
+    contactField.style.display = "block";
     usersInfo.innerHTML = renderUserInfo(id, user);
     setTimeout(() => {
         const userDetails = document.querySelector(".user-details");
@@ -192,3 +194,47 @@ async function editContactById(id) {
     editContactOverlay(user);
     editForm(id, user);
 }
+
+function hideContacts() {
+    const contactField = document.querySelector(".contact-field");
+    const infoContainer = document.querySelector(".info-container");
+    infoContainer.innerHTML = "";
+    contactField.style.display = "none";
+}
+
+function opencEditMenu() {
+    const container = document.querySelector(".mobile-edit-delete");
+    container.style.display = "block";
+    setTimeout(() => {
+        toggleEditMenu();
+    }, 100)
+}
+
+function toggleEditMenu() {
+    const editMenu = document.querySelector(".user-edit-container");
+    editMenu.classList.toggle("edit-translateX");
+}
+
+function closeEditMenu() {
+    const container = document.querySelector(".mobile-edit-delete");
+    toggleEditMenu();
+    setTimeout(() => {
+        container.style.display = "none";
+    }, 100)
+}
+
+function toggleContactBg(e) {
+    const contacts = document.querySelectorAll(".contact");
+    contacts.forEach(contact => {
+        contact.classList.remove("contact-dark-blue");
+    });
+
+    e.target.classList.add("contact-dark-blue");    
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    window.addEventListener("resize", () => {
+        const contactField = document.querySelector(".contact-field");
+        contactField.style.display = window.innerWidth > 860 ?  "block" : "none";
+    });
+});

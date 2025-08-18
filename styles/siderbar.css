@@ -67,6 +67,7 @@ a {
   .sidebar-wrapper {
     min-width: none !important;
     height: auto;
+    z-index: 2;
   }
 
   .join-logo {
@@ -83,6 +84,7 @@ a {
     justify-content: center;
     gap: 16px;
     width: auto;
+    z-index: 2;
   }
 
   .nav-link {
