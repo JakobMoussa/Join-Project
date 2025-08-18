@@ -74,13 +74,11 @@
     z-index: 999;
   }
 
-  .sidebar-wrapper {
-    display: none !important;
-  }
   /* #navbar {
     display: flex;
     width: 100%;
   } */
+   
   .nav-item {
     display: flex;
     flex-direction: column;
