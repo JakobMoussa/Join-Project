@@ -9,15 +9,14 @@ async function fetchAndInsertHtml(targetId, htmlPage) {
   }
 }
 
-function openOverlay(type = "") {
-  const overlays = document.querySelectorAll(".overlay");
-  overlays.forEach((overlay) => {
-    overlay.classList.remove("hidden");
-    overlay.classList.add(`overlay-${type}`); // Klasse hinzufügen
+function openOverlay() {
+  const overlay = document.querySelectorAll(".overlay");
+  overlay.forEach((element) => {
+    element.classList.remove("hidden");
     setTimeout(() => {
-      overlay.classList.add("visible");
+      element.classList.add("visible");
       toggleAnimation();
-    }, 100);
+    }, 1);
   });
 }
 
@@ -94,24 +93,24 @@ async function renderUserIcon() {
 
 function loadUrlParams() {
   const urlParams = new URLSearchParams(window.location.search);
-  const msg = urlParams.get('msg');
-  return msg
+  const msg = urlParams.get("msg");
+  return msg;
 }
 
 function createAvater(name) {
   let myArr = name.split(" ");
   let avatar = "";
-  myArr.forEach(element => {
+  myArr.forEach((element) => {
     avatar += element.charAt(0);
   });
-  return avatar
+  return avatar;
 }
 
 function updateLinksWithUserKey(target) {
   let name = loadUrlParams();
   if (!name) name = "Guest";
   const links = document.querySelectorAll(`[data-task="${target}"]`);
-  links.forEach(element => {
+  links.forEach((element) => {
     let newLink = element.href + `?msg=${encodeURIComponent(name)}`;
     element.href = newLink;
   });
@@ -122,7 +121,7 @@ function updateMenuWithUserKey() {
   const menu = document.querySelector(".menu").children;
   if (!name) name = "Guest";
   for (let index = 0; index < menu.length; index++) {
-    if (index == 2) break
+    if (index == 2) break;
     let newLink = menu[index].href + `?msg=${encodeURIComponent(name)}`;
     menu[index].href = newLink;
   }
@@ -154,15 +153,16 @@ function toggleMenu() {
 
 // Animation for mobile view
 
-window.addEventListener('load', () => {
-  const intro = document.getElementById('intro');
-  const main = document.getElementById('main');
+window.addEventListener("load", () => {
+  const intro = document.getElementById("intro");
+  const main = document.getElementById("main");
 
   intro.style.animation = "fadeOut 3s ease forwards";
   intro.style.animationDelay = "2s";
-
+  // console.log(intro);
+  
   setTimeout(() => {
     intro.style.display = "none";
     main.classList.add("show");
-  }, 3000); 
+  }, 3000);
 });

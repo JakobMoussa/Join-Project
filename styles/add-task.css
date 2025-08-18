@@ -69,7 +69,7 @@ button div {
   border: 1px solid #d1d1d1;
   border-radius: 8px;
   background-color: white;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .input-task:focus {
@@ -96,6 +96,10 @@ button div {
   border: 1px solid #d1d1d1;
   border-radius: 8px;
   background-color: white;
+  /* cursor: pointer; */
+}
+
+.date-field {
   cursor: pointer;
 }
 
@@ -130,7 +134,7 @@ button div {
 .input-container input {
   flex-grow: 1;
   border: none;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .input-container input:focus {
@@ -323,6 +327,22 @@ button div {
 .dropdown {
   position: relative;
   display: inline-block;
+}
+
+.zindex-12 {
+  z-index: 12;
+}
+
+.dropdown-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 11;
+  /* background: rgba(0, 0, 0, 0.7); */
 }
 
 .assigned-dropdown {
@@ -548,10 +568,9 @@ button div {
   background-color: #d1d1d1;
 }
 
-.boxshadow {
+/* .boxshadow {
   filter: drop-shadow(0 0 4px rgb(0, 0, 0, 0.1));
-}
-
+} */
 
 @media (max-width: 1200px) {
   .create-task-container {
@@ -605,8 +624,7 @@ button div {
   }
 }
 
-@media (max-width: 680px) {  
-
+@media (max-width: 680px) {
   .create-task-container {
     flex-grow: 1;
     justify-content: start;
