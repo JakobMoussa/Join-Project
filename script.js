@@ -153,16 +153,15 @@ function toggleMenu() {
 
 // Animation for mobile view
 
-window.addEventListener("load", () => {
-  const intro = document.getElementById("intro");
-  const main = document.getElementById("main");
+// window.addEventListener("load", () => {
+//   const intro = document.getElementById("intro");
+//   const main = document.getElementById("main");
 
-  intro.style.animation = "fadeOut 3s ease forwards";
-  intro.style.animationDelay = "2s";
-  // console.log(intro);
+//   intro.style.animation = "fadeOut 3s ease forwards";
+//   intro.style.animationDelay = "2s";
   
-  setTimeout(() => {
-    intro.style.display = "none";
-    main.classList.add("show");
-  }, 3000);
-});
+//   setTimeout(() => {
+//     intro.style.display = "none";
+//     main.classList.add("show");
+//   }, 3000);
+// });

@@ -351,7 +351,7 @@
   }
 
   .main-wrapper {
-    margin-left: 30px !important;
+    margin-left: 5px !important;
   }
 
   .parent {
@@ -370,6 +370,14 @@
     width: 32px;
   }
 
+  .metric-label {
+    font-size: 0.8rem;
+  }
+
+  .metric-count {
+    font-size: 20px;
+  }
+
   .metric-icon {
     background-color: #2a3647;
     padding: 20px;
@@ -385,9 +393,7 @@
   .greeting {
     display: none;
   }
-  .metric-count {
-    font-size: 22px;
-  }
+
   .divider-urgent {
     margin: 0 22px;
   }

@@ -2,109 +2,67 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add-Task</title>
-
-    <link rel="icon" type="image/x-icon" href="../assets/icons/flavicon.png" />
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../styles/siderbar.css">
-    <link rel="stylesheet" href="../styles/add-task.css">
-    <link rel="stylesheet" href="../styles/navbar.css">
-    <link rel="stylesheet" href="../styles/right-content-wrapper.css">
-    <link rel="stylesheet" href="../styles/reset.css">
-    <link rel="stylesheet" href="../styles/responsive.css">
-
-
-    <script src="../scripts/api.js"></script>
-    <script src="../scripts/templates.js"></script>
-    <script src="../scripts/add-task.js"></script>
-    <script src="../script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="icon" type="image/x-icon" href="../assets/icons/flavicon.png" />
+  <link rel="stylesheet" href="../styles/add-task.css">
+  <link rel="stylesheet" href="../styles/login.css">
+  <link rel="stylesheet" href="../styles/signup.css">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="../styles/responsive.css">
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/add-task.js"></script>
+  <script src="../scripts/signup.js"></script>
+  <script src="../scripts/login.js"></script>
+  <script src="../script.js"></script>
 </head>
 
-<body onload="initAddTaskPage(); initializeNavbar()">
-    <div class="sidebar-wrapper">
-        <img class="join-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
-        <nav class="nav-wrapper">
-            <ul>
-                <li class="nav-link">
-                    <div class="img-wrapper">
-                        <img src="../assets/icons/summary.svg" alt="summary">
-                    </div>
-                    <a href="summary.html" data-task="navLink">Summary</a>
-                </li>
-                <li class="nav-link selected">
-                    <div class="img-wrapper">
-                        <img src="../assets/icons/add-task.svg" alt="add-task">
-                    </div>
-                    <a href="add-task.html" data-task="navLink">Add Task</a>
-                </li>
-                <li class="nav-link">
-                    <div class="img-wrapper">
-                        <img src="../assets/icons/board.svg" alt="board">
-                    </div>
-                    <a href="board.html" data-task="navLink">Board</a>
-                </li>
-                <li class="nav-link">
-                    <div class="img-wrapper">
-                        <img src="../assets/icons/contacts.svg" alt="contacts">
-                    </div>
-                    <a href="contacts.html" data-task="navLink">Contacts</a>
-                </li>
-            </ul>
-            <ul class="bottom-links">
-                <li class="nav-link"><a href="privacy-policy.html" data-task="navLink">Privacy Policy</a></li>
-                <li class="nav-link"><a href="legal-notice.html" data-task="navLink">Legal Notice</a></li>
-            </ul>
-        </nav>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="../assets/icons/join-logo.svg" alt="join-logo" class="join-logo">
     </div>
+    <div class="signup">
+      <span>Not a Join user?</span>
+      <a href="../html-templates/signup.html" class="signup-btn">Sign up</a>
+    </div>
+  </header>
 
-    <main id="right-content-wrapper">
-        <section id="navbar">
-            <nav class="navbar">
-                <img class="join-logo-nav" src="../assets/icons/join-logo.svg" alt="join logo">
-                <h2>
-                    Kanban Project Management Tool
-                </h2>
-                <div class="nav-imgs">
-                    <img src="../assets/icons/help.svg" alt="help-symbol">
-                    <button class="profile-picture" onclick="toggleMenu()"></button>
-                </div>
-            </nav>
-            <div class="menu-container">
-                <div class="menu" id="menu">
-                    <a href="./help.html" class="menu-item help-page">Help</a>
-                    <a href="./legal-notice.html" class="menu-item">Legal Notice</a>
-                    <a href="./privacy-policy.html" class="menu-item">Privacy Police</a>
-                    <a href="../index.html" class="menu-item">Log out</a>
-                </div>
-            </div>
-        </section>
-
-        <div class="create-task-container">
-            <h1 class="header-task">Add Task</h1>
-            <form class="tasks-form-container" action="" onsubmit="preventFromSubmit(event)">
-                <div class="addTask-Container" id="firstTaskContainer"></div>
-                <div class="divider-vertical"></div>
-                <div class="addTask-Container" id="secondTaskContainer"></div>
-            </form>
-            <div class="task-controls">
-                <p><span class="red-font">*</span>This field is required</p>
-                <div class="task-control-btns">
-                    <button class="btn-clear"
-                        onclick="loadTaskFormTemplate('firstTaskContainer', 'secondTaskContainer')">
-                        Clear
-                        <div class="clear-icon"></div>
-                    </button>
-                    <button class="btn-create" onclick="createTaskForm(); runInitIfValid()">
-                        Create Task
-                        <img src="../assets/icons/check.svg" alt="">
-                    </button>
-                </div>
-            </div>
+  <main class="main">
+    <div class="login-container">
+      <h1 class="login-title">Log in</h1>
+      <div class="underline"></div>
+      <form class="login-form" onsubmit="preventFromSubmit(event)">
+        <div class="input-container password-margin">
+          <input type="email" placeholder="Email" name="email" data-field="email" oninput="activateLogin()">
+          <img src="../assets/icons/mail.svg" alt="envelope-icon" class="signup-icon">
         </div>
-    </main>
+        <div class="error-message" id="email-error"></div>
+        <div class="success-message" id="email-success"></div>
+        <div class="input-container">
+          <input type="password" class="password-field" name="password" placeholder="Password" data-field="password"
+            oninput="toggleLockIcon(event, 'firstLock', 'firstEye'); activateLogin()">
+          <img src="../assets/icons/lock.svg" alt="lock-icon" class="signup-icon" id="firstLock">
+          <img src="../assets/icons/eye-icon.svg" alt="lock-icon" class="signup-icon" style="display: none;"
+            id="firstEye" onclick="toggleInputType(event, 'password')">
+        </div>
+        <p class="error-signup" data-field="errorPassword"></p>
+        <div class="button-group">
+          <button type="submit" class="btn primary" id="login-btn" onclick="handleLogin()" disabled>Log in</button>
+          <button type="button" class="btn secondary" onclick="guestLogin()">Guest Log in</button>
+        </div>
+      </form>
+    </div>
+  </main>
 
+  <footer>
+    <div class="Legal-texts">
+      <span class="Privacy-text">Privacy Policy</span>
+      <span class="Privacy-text">Legal notice</span>
+    </div>
+  </footer>
 </body>
 
 </html>
