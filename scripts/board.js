@@ -14,14 +14,15 @@ function renderBoard(tasks) {
 
     for (let status in categories) {
       let column = document.querySelector(`.column[data-task="${status}"]`);
+      let taskWrapper = column.querySelector(".task-wrapper");
 
-      if (column) {
+      if (taskWrapper) {
         // "a[1].order ?? 0" means: If a[1].order is not defined or null, use 0
         let sortedTasks = categories[status].sort((a, b) => (a[1].order ?? 0) - (b[1].order ?? 0));
 
         sortedTasks.forEach((task) => {
           let taskTemplate = createTaskTemplate(task[0], task[1]);
-          column.innerHTML += taskTemplate;
+          taskWrapper.innerHTML += taskTemplate;
         });
       }
     }
@@ -29,25 +30,41 @@ function renderBoard(tasks) {
   addPlaceholdersToEmptyColumns();
 }
 
+// function removeTasks() {
+//   const columns = document.querySelectorAll(".column");
+//   columns.forEach((column) => {
+//     column.querySelectorAll(".task").forEach((task) => task.remove());
+//   });
+// }
+
 function removeTasks() {
-  const columns = document.querySelectorAll(".column");
-  columns.forEach((column) => {
-    column.querySelectorAll(".task").forEach((task) => task.remove());
+  const taskWrappers = document.querySelectorAll(".task-wrapper");
+  taskWrappers.forEach((taskWrapper) => {
+    taskWrapper.querySelectorAll(".task").forEach((task) => task.remove());
   });
 }
+
+// function removePlaceholder() {
+//   const columns = document.querySelectorAll(".column");
+//   columns.forEach((column) => {
+//     column.querySelectorAll(".empty").forEach((empty) => empty.remove());
+//   });
+// }
 
 function removePlaceholder() {
-  const columns = document.querySelectorAll(".column");
-  columns.forEach((column) => {
-    column.querySelectorAll(".empty").forEach((empty) => empty.remove());
+  const taskWrappers = document.querySelectorAll(".task-wrapper");
+  taskWrappers.forEach((taskWrapper) => {
+    taskWrapper.querySelectorAll(".empty").forEach((empty) => empty.remove());
   });
 }
 
-const columns = document.querySelectorAll(".column");
-columns.forEach((column) => {
-  column.querySelectorAll(".task").forEach((task) => task.remove());
-  column.querySelectorAll(".empty").forEach((empty) => empty.remove());
-});
+// LÖSCHEN? NOCH STEHEN LASSEN
+
+// const columns = document.querySelectorAll(".column");
+// columns.forEach((column) => {
+//   column.querySelectorAll(".task").forEach((task) => task.remove());
+//   column.querySelectorAll(".empty").forEach((empty) => empty.remove());
+// });
 
 function createCategoryClass(category) {
   // from e.g. "Technical Task" to "technical-task" for correct CSS class
@@ -88,13 +105,13 @@ function createUsernameAbbreviation(userObj) {
 }
 
 function addPlaceholdersToEmptyColumns() {
-  const columns = document.querySelectorAll(".column");
-  columns.forEach((column) => {
-    if (!column.querySelector(".task") && !column.querySelector(".empty")) {
-      if (column.dataset.task === "done") {
-        column.innerHTML += createTaskPlaceholderDone();
+  const taskWrappers = document.querySelectorAll(".task-wrapper");
+  taskWrappers.forEach((taskWrapper) => {
+    if (!taskWrapper.querySelector(".task") && !taskWrapper.querySelector(".empty")) {
+      if (taskWrapper.dataset.task === "done") {
+        taskWrapper.innerHTML += createTaskPlaceholderDone();
       } else {
-        column.innerHTML += createTaskPlaceholder();
+        taskWrapper.innerHTML += createTaskPlaceholder();
       }
     }
   });
@@ -311,7 +328,7 @@ function dragendHandler(ev) {
 
 function dragoverHandler(ev) {
   ev.preventDefault();
-  const column = ev.target.closest(".column");
+  const column = ev.target.closest(".task-wrapper");
   const afterElement = getDragAfterElement(column, ev.clientY);
   const draggable = document.querySelector(".dragging");
 
@@ -342,7 +359,7 @@ function getDragAfterElement(column, y) {
 async function dropHandler(ev, category) {
   ev.preventDefault();
   const taskId = ev.dataTransfer.getData("text");
-  const targetColumn = ev.target.closest(".column");
+  const targetColumn = ev.target.closest(".task-wrapper");
   let taskObj = await loadData("tasks/" + taskId);
   taskObj.status = category;
 

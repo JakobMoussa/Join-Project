@@ -43,11 +43,29 @@ function loadTaskFormTemplate(firstTarget, secondTarget) {
   secondContainer.innerHTML += subtaskTpl();
 }
 
+function toggleAssignedDropdown() {
+  const taskContainerRef = document.getElementById("task-container");
+  const btn = document.getElementById("assaign-btn");
+  const assignedDropdown = document.getElementById("assigned-dropdown");
+  const assignedDropdownOverlay = document.getElementById("assigned-dropdown-overlay");
+
+  loadUsers();
+  taskContainerRef.classList.toggle("zindex-12");
+  assignedDropdown.classList.toggle("d-none");
+  assignedDropdownOverlay.classList.toggle("d-none");
+  btn.classList.toggle("rotate-180deg");
+}
+
 function toggleCategoryDropdown() {
+  const categoryContainerRef = document.getElementById("category-container");
   const categoryDropdown = document.getElementById("category-dropdown");
   const btn = document.getElementById("category-btn");
   const categoryContainer = document.getElementById("category-container");
+  const assignedDropdownOverlay = document.getElementById("category-dropdown-overlay");
+
+  categoryContainerRef.classList.toggle("zindex-12");
   categoryDropdown.classList.toggle("d-none");
+  assignedDropdownOverlay.classList.toggle("d-none");
   btn.classList.toggle("rotate-180deg");
   categoryContainer.classList.toggle("boxshadow");
 }
@@ -130,14 +148,6 @@ function selectCategory(e) {
   toggleCategoryDropdown();
 }
 
-function toggleAssignedDropdown() {
-  const assignedDropdown = document.getElementById("assigned-dropdown");
-  const btn = document.getElementById("assaign-btn");
-  loadUsers();
-  assignedDropdown.classList.toggle("d-none");
-  btn.classList.toggle("rotate-180deg");
-}
-
 function loadUsers() {
   const assignedDropdown = document.getElementById("assigned-dropdown");
   assignedDropdown.innerHTML = "";
@@ -154,7 +164,7 @@ function loadUsers() {
 function initialsFromName(user) {
   let initials = "";
   const array = user.split(" ");
-  array.forEach(element => {
+  array.forEach((element) => {
     initials += element.charAt(0);
   });
   return initials;
