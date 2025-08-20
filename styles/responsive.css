@@ -1,5 +1,16 @@
-.intro {
+/* .intro {
   display: none;
+}
+
+.help-page {
+  display: none;
+}
+
+.mobile-view {
+  display: none;
+}
+.desktop-view {
+  display: flex;
 }
 
 @media (max-width: 360px) {
@@ -21,6 +32,7 @@
     animation-delay: 3s;
   }
 
+
   .intro h1 {
     font-size: 30px;
     font-weight: 300;
@@ -33,10 +45,8 @@
     opacity: 0;
     animation: showContent 1s ease forwards;
     animation-delay: 0s;
-    /* erscheint erst nach Intro */
     padding: 20px;
   }
-
 
   @keyframes fadeOut {
     to {
@@ -61,26 +71,14 @@
     animation-delay: 0s;
   }
 
-  .mobile-nav {
-    display: flex !important;
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    background-color: #1d2c3e;
-    justify-content: space-around;
-    padding: 20px 0;
-    z-index: 999;
-  }
-
   .sidebar-wrapper {
     display: none !important;
   }
-  /* #navbar {
+
+  .help-page {
     display: flex;
-    width: 100%;
-  } */
+  }
+
   .nav-item {
     display: flex;
     flex-direction: column;
@@ -103,14 +101,19 @@
     filter: brightness(0) invert(0.8);
   }
 
-  /* Mobile Navbar Top anzeigen */
+  
+
+
+
+
+
 
   .menu-container {
     position: absolute;
     right: 0px;
     width: 180px;
     display: flex;
-    top: 65px;
+    top: 75px;
     z-index: 999;
     flex-direction: row-reverse;
   }
@@ -142,10 +145,17 @@
 
   #content-wrapper {
     padding-top: 20px !important;
+    flex: 1;
   }
 }
 
-/* Middle page */
+
+
+
+
+
+
+
 
 @media (max-width: 360px) {
   .main-wrapper {
@@ -226,12 +236,5 @@
     height: 21px;
   }
 
-  .mobile-view {
-    display: flex;
-  }
 
-  .desktop-view {
-    display: none;
-  }
-
-}
+} */

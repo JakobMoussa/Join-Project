@@ -25,6 +25,11 @@
 
 .nav-imgs {
   display: flex;
+  align-items: center;
+}
+
+.help-symbol {
+  cursor: pointer;
 }
 
 .profile-picture {
@@ -115,5 +120,15 @@
 
   .nav-imgs img {
     display: none;
+  }
+}
+
+.help-page {
+  display: none;
+}
+
+@media(max-width: 360px) {
+  .help-page {
+    display: flex;
   }
 }

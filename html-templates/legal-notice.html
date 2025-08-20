@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../styles/siderbar.css">
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/add-task.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
 
     <script src="../scripts/api.js"></script>
     <script src="../scripts/templates.js"></script>
@@ -61,12 +62,13 @@
                     Kanban Project Management Tool
                 </h2>
                 <div class="nav-imgs">
-                    <img src="../assets/icons/help.svg" alt="help-symbol">
-                    <button class="profile-picture" onclick="toggleMenu()"></button>
+                    <a href="../html-templates/help.html"><img class="help-symbol" src="../assets/icons/help.svg" alt="help-symbol"></a>
+                     <button class="profile-picture" onclick="toggleMenu()"></button>
                 </div>
             </nav>
             <div class="menu-container">
                 <div class="menu" id="menu">
+                    <a href="../html-templates/help.html" class="menu-item help-page">Help</a>
                     <a href="./legal-notice.html" class="menu-item">Legal Notice</a>
                     <a href="./privacy-policy.html" class="menu-item">Privacy Police</a>
                     <a href="../index.html" class="menu-item">Log out</a>
