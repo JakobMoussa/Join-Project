@@ -109,26 +109,3 @@
   }
 }
 
-@media (max-width: 590px) {
-  .navbar h2 {
-    display: none;
-  }
-
-  .join-logo-nav {
-    display: block;
-  }
-
-  .nav-imgs img {
-    display: none;
-  }
-}
-
-.help-page {
-  display: none;
-}
-
-@media(max-width: 360px) {
-  .help-page {
-    display: flex;
-  }
-}

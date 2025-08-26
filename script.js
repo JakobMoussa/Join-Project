@@ -151,17 +151,9 @@ function toggleMenu() {
   menu.classList.toggle("menu-translateX");
 }
 
-// Animation for mobile view
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => document.querySelector('.logo-overlay').classList.add('fade-out'), 2000);
+  setTimeout(() => document.querySelector('.content').classList.add('visible'), 2200);
+  setTimeout(() => document.querySelector('.logo-overlay').style.display = 'none', 2500);
+});
 
-// window.addEventListener("load", () => {
-//   const intro = document.getElementById("intro");
-//   const main = document.getElementById("main");
-
-//   intro.style.animation = "fadeOut 3s ease forwards";
-//   intro.style.animationDelay = "2s";
-  
-//   setTimeout(() => {
-//     intro.style.display = "none";
-//     main.classList.add("show");
-//   }, 3000);
-// });

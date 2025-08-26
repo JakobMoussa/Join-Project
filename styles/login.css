@@ -74,10 +74,11 @@ body {
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 40px 80px 40px 80px;
+  padding: 40px 130px 40px 130px;
   border-radius: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  width: 512px;
+  width: 650px;
+  height: 500px;
   text-align: center;
   justify-content: center;
 }
@@ -215,18 +216,169 @@ body {
   color: #7073758d;
 }
 
+.link {
+  text-decoration: none;
+  color: #7073758d;
+}
+
 .Legal-texts :hover {
   color: #28abe2;
   font-weight: 600;
 }
-
+.signup-2 {
+    display: none;
+}
 /* ------------------- */
 
+
+
+/* Overlay am Anfang */
+.logo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: opacity 1s ease-out;
+}
+
+.logo-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.logo-overlay .logo {
+  width: 200px;
+  height: 200px;
+  animation: logoAnimation 2s forwards cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+}
+
+@keyframes logoAnimation {
+  0% {
+    transform: translate(0, 0) scale(1.2);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(0, 0) scale(1.2);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(0, 0) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-42vw, -42vh) scale(0.75);
+    opacity: 1;
+  }
+}
+
+.content {
+  opacity: 0;
+  transition: opacity 0.8s ease-in;
+}
+
+.content.visible {
+  opacity: 1;
+}
+
+.header .join-logo {
+  opacity: 1;
+  transition: opacity 0.1s ease-in;
+}
+
+.header .join-logo.show {
+  opacity: 1;
+}
+
+
+/* ------------------- */
+@media(max-width: 600px) {
+  .signup {
+    display: none;
+  }
+
+  .signup-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 170px;
+    gap: 20px;
+    font-size: 25px;
+  }
+
+  .signup-btn {
+    font-weight: 500;
+  }
+
+  .login-container {
+    margin-top: 55px;
+    width: 460px;
+    padding: 40px 80px 120px 80px;
+  }
+
+  .login-title {
+    font-size: 45px !important;
+    margin-top: 30px !important;
+  }
+}
+
+@media(max-width: 500px) {
+  .login-container {
+    margin-top: 55px;
+    width: 400px;
+    padding: 40px 50px 100px 50px;
+  }
+}
+
+@media(max-width: 400px) {
+  .login-container {
+    margin-top: 55px;
+    width: 350px;
+    padding: 40px 40px 100px 40px;
+  }
+
+  .signup-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 170px;
+    gap: 20px;
+    font-size: 20px;
+  }
+  .button-group {
+    width: 140px;
+    align-items: center;
+    justify-content: center;
+    display: inline-grid;
+  }
+}
 
 @media(max-width: 360px) {
   .join-logo-signup {
     width: 84px;
     height: 84px;
     padding: 0;
+  }
+
+  .join-logo {
+    width: 130px !important;
+    height: 130px !important;
+  }
+
+  .login-container {
+    margin-top: 10px; 
+    width: 300px;
+    padding: 0px 40px 75px 40px;
+  }
+
+  .signup-2 {
+    margin-bottom: 65px;
+    font-size: 18px;
   }
 }

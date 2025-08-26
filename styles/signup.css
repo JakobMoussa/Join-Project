@@ -165,7 +165,7 @@
 }
 
 .btn:hover {
-  /* box-shadow: 5px 10px; */
+  box-shadow: 5px 10px;
 }
 
 .signup-success {
@@ -195,13 +195,14 @@
 /* ------------------- */
 
 @media(max-width: 360px) {
-  .join-logo-signup {
-    width: 130px;
-    height: 130px;
+  .join-logo {
+    width: 100px !important;
+    height: 100px !important;
+    padding: 10px;
   }
 
   .header {
-    padding: 0;
+    padding: 10px;
     margin-bottom: 40px;
   }
 

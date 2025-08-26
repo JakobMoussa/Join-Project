@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/siderbar.css">
-    <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/add-task.css">
     <link rel="stylesheet" href="../styles/responsive.css">
-    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/summary.css">
 
     <script src="../scripts/api.js"></script>
     <script src="../scripts/templates.js"></script>
@@ -65,7 +64,8 @@
                 <div class="nav-imgs">
                     <a href="../html-templates/help.html"><img class="help-symbol" src="../assets/icons/help.svg" alt="help-symbol"></a>
                      <button class="profile-picture" onclick="toggleMenu()"></button>
-                 </div>
+                     <img src="../assets/icons/join-logo.svg" alt="logo" class="logo">
+                </div>
             </nav>
             <div class="menu-container">
                 <div class="menu" id="menu">
@@ -77,7 +77,12 @@
             </div>
         </section>
         <section id="privacy-en" class="privacy-section">
-            <h1 class="header-task">Privacy Policy</h1>
+            <div class="btn-div">
+                <h1 class="header-task">Privacy Policy</h1>
+                <a href="../html-templates/summary.html">
+                    <button class="back-button">←</button>
+                </a>
+            </div>
             <h2>1. Controller</h2>
             <p class="spacer-bottom">
                 Henning Otte<br />

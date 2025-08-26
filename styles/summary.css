@@ -211,8 +211,7 @@
 
 @media (max-width: 992px) {
   body {
-    flex-direction: column-reverse;
-
+      flex-direction: column-reverse;
   }
 
   .parent {
