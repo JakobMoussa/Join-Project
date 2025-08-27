@@ -192,21 +192,51 @@
   font-weight: 600;
 }
 
+.link {
+  direction: none;
+}
+
 /* ------------------- */
 
+@media(max-width: 425px) {
+  .join-logo-signup {
+    width: 140px;
+    height: 140px;
+  }
+  .signup-container {
+    width: 350px;
+  }
+}
+
 @media(max-width: 360px) {
-  .join-logo {
-    width: 100px !important;
-    height: 100px !important;
+  .join-logo-signup {
+    width: 100px;
+    height: 100px;
     padding: 10px;
   }
-
   .header {
     padding: 10px;
     margin-bottom: 40px;
   }
-
   .signup-container {
     width: 320px;
+  }
+}
+
+@media(max-width: 340px) {
+  .join-logo-signup {
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+  }
+  .header {
+    padding: 10px;
+    margin-bottom: 40px;
+  }
+  .signup-container {
+    width: 300px;
+  }
+  .login-title {
+    font-size: 30px;
   }
 }
