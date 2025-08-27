@@ -105,6 +105,11 @@
 .help-page {
     display: none;
   }
+
+  .back-button {
+    display: none;
+  }
+
 @media(max-width: 992px) {
     .main-flexbox {
         display: flex;
@@ -121,14 +126,14 @@
         top: 0px;
          width: 100vw;
     }
+    .navbar {
+        justify-content: end !important;
+    }
   }
   
 @media (max-width: 590px) {
     .navbar h2 {
         display: none;
-    }
-    .navbar {
-        justify-content: end !important;
     }
   }
 
@@ -136,9 +141,33 @@
     .privacy-section {
         padding: 64px 64px 64px 60px;
     }
+    .back-button {
+        display: flex;
+      }
 }
-  
+
+@media(max-width: 460px) {
+    .header-task {
+        font-size: 29px;
+    }
+}
+@media(max-width: 410px) {
+    .header-task {
+        font-size: 26px;
+    }
+}
+@media (max-width: 680px) {
+    main {
+      margin-top: 96px;
+      flex-grow: 0;
+      overflow-y: scroll;
+    }
+  }
   @media(max-width: 360px) {
+
+    .menu-container {
+        display: none !important;
+    }
     .navbar h2 {
         display: none;
     }
