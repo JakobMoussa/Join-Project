@@ -652,6 +652,15 @@ button div {
     flex-direction: column-reverse;
     gap: 32px;
   }
+  .help-symbol {
+    display: none;
+  }
+  .join-logo-nav{
+    display: flex !important;
+  }
+  .navbar h2 {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {

@@ -623,6 +623,19 @@ Media queries
     width: 100%;
   }
 
+  .help-symbol {
+    display: none;
+  }
+  .join-logo-nav {
+    display: flex !important;
+  }
+  .navbar h2{
+    display: none;
+  }
+  .navbar {
+    justify-content: space-between !important;
+  }
+
   /* .task-wrapper {
     display: flex;
     gap: 10px;

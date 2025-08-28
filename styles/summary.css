@@ -399,6 +399,7 @@
   }
   .header-title {
     gap: 14px;
+    justify-content: center;
   }
   .greeting {
     display: none;
@@ -425,6 +426,13 @@
     flex-direction: row-reverse;
   }
 
+  .parent {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(2, 140px);
+    gap: 20px;
+    position: relative;
+    left: 20px;
+  }
   }
 
   @media(max-width: 400px) {
@@ -490,6 +498,7 @@
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 100px);
     gap: 20px;
+    left: 0px;
   }
   .div1 .metric-icon {
     height: 32px;
@@ -530,6 +539,7 @@
     z-index: 999;
     flex-direction: row-reverse;
   }
+
 
 /*           Animation        */
 
