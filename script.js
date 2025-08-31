@@ -38,6 +38,10 @@ function toggleAnimation() {
   });
 }
 
+function toggleMenu () {
+  const menu = document.getElementById("menu");
+}
+
 function onclickProtection(event) {
   event.stopPropagation();
 }
@@ -151,9 +155,23 @@ function toggleMenu() {
   menu.classList.toggle("menu-translateX");
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(() => document.querySelector('.logo-overlay').classList.add('fade-out'), 2000);
-  setTimeout(() => document.querySelector('.content').classList.add('visible'), 2200);
-  setTimeout(() => document.querySelector('.logo-overlay').style.display = 'none', 2500);
-});
+function toggleMenu() {
+  const container = document.querySelector('.menu-container');
+  const menu = document.querySelector('.menu');
 
+  if (container.style.display === 'flex') {
+
+    menu.classList.remove('menu-visible');
+    menu.classList.add('menu-hidden');
+
+    menu.addEventListener('animationend', function handler() {
+      container.style.display = 'none';
+      menu.removeEventListener('animationend', handler);
+    });
+  } else {
+
+    container.style.display = 'flex';
+    menu.classList.remove('menu-hidden');
+    menu.classList.add('menu-visible');
+  }
+}

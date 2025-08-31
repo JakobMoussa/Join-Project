@@ -56,12 +56,12 @@
 }
 
 .menu-container {
+  display: flex;
   overflow-x: hidden;
   position: absolute;
   width: 180px;
   top: 96px;
-  right: 0px;
-  display: flex;
+  right: 8px;
   flex-direction: row-reverse;
 }
 
@@ -100,14 +100,6 @@
     margin-left: 32px;
   }
 }
-
-/* @media (max-width: 680px) {
-  #navbar {
-    position: fixed;
-    top: 0px;
-    width: 100vw;
-  }
-} */
 
 @media (max-width: 360px) {
 

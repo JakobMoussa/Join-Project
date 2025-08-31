@@ -87,3 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 });
+
+window.addEventListener('load', () => {
+    const overlay = document.querySelector('.logo-overlay'); 
+    const content = document.querySelector('.content');
+    if (!overlay || !content) return;
+  
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+      setTimeout(() => {
+        content.classList.add('visible');
+      }, 500);
+    }, 2000);
+  });
