@@ -395,6 +395,17 @@ async function adjustTaskOrder(targetColumn) {
   }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  const button = document.querySelector('.add-btn');
+  if (button) {
+    button.addEventListener('click', function(){
+      if (window.innerWidth < 800) {
+        window.location.href = 'add-task.html';
+      }
+    });
+  }
+});
+
 /*  Initializing  */
 
 async function initBoard() {
