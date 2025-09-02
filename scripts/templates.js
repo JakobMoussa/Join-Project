@@ -435,7 +435,7 @@ function editContactOverlay(user) {
                         <div class="buttons">
                             <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
                             <button type="submit" class="create">Save
-                                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
+                                <img src="../assets/icons/check.svg" alt="check-icon" class="check-icon" />
                             </button>
                         </div>
                     </div>

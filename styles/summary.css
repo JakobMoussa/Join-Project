@@ -127,7 +127,7 @@
 .parent {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(3, 168px);
+  grid-template-rows: repeat(3, 140px);
   gap: 24px;
   margin-top: 50px;
 }
@@ -300,15 +300,6 @@
 .profile-picture:hover {
   background-color: #d1d1d1;
 }
-/* .menu-container {
-  overflow-x: hidden;
-  position: absolute;
-  width: 180px;
-  top: 96px;
-  right: 0px;
-  display: none;
-  flex-direction: row-reverse;
-} */
 
 .menu {
   display: flex;
@@ -349,12 +340,20 @@
   }
 
   .parent {
-    margin-top: 50px;
+    margin-top: 38px;
+    gap: 20px;
+    grid-template-rows: repeat(3, 125px);
   }
 
   .join-logo-nav {
     display: none;
   }
+
+  #content-wrapper {
+    padding-top: 40px;
+  }
+
+
 }
 
 @media (max-width: 750px) {
@@ -393,18 +392,15 @@
   .navbar h2{
     display: none;
   }
-  /* .navbar {
-    justify-content: end !important;
-} */
 
-.join-logo-nav {
+  .join-logo-nav {
   display: flex;
-}
+  }
 }
 
 @media (max-width: 550px) {
   #content-wrapper {
-    padding-top: 80px !important;
+    padding-top: 40px !important;
   }
   .grow-icon {
     width: 55px;
@@ -437,7 +433,7 @@
     display: none;
   }
   .header-title h1 {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 .main-wrapper {
   margin-left: 10px !important;
