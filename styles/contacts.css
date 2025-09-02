@@ -741,7 +741,7 @@ h3 {
 
   .user-edit-container {
     display: block;
-    bottom: 245px;
+    bottom: 216px;
   }
 }
 
@@ -763,6 +763,10 @@ h3 {
 
   .buttons {
     margin: 24px 0 0 0;
+  }
+
+  .open-edit-delete {
+    bottom: 100px;
   }
 }
 
@@ -786,5 +790,19 @@ h3 {
 
   .user-name h3 {
     font-size: 24px;
+  }
+  .open-edit-delete {
+    bottom: 100px;
+  }
+
+  .user-edit-container {
+    bottom: 100px;
+  }
+}
+
+@media (max-width: 360px) {
+
+  .user-edit-container {
+    bottom: 90px;
   }
 }
