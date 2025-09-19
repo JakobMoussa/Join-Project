@@ -102,7 +102,7 @@ function assignedTaskTpl() {
             <span class="task-name">Assigned to:</span>
             <div class="input-container">
                 <input type="text" id="assignedInputSearch" placeholder="Select contacts to assign"
-                    class="input-assaign">
+                    class="input-assaign" onclick="toggleAssignedDropdown()" readonly>
                 <button type="button" class="btn-dropdown" id="assaign-btn" onclick="toggleAssignedDropdown()">
                     <img src="../assets/icons/arrow_drop_down.svg" alt="">
                 </button>
@@ -123,7 +123,7 @@ function categoryTaskTpl() {
             <span class="task-name">
                 Category<span class="red-font">*</span>
             </span>
-            <div class="input-container" id="open-category-dropdown">
+            <div class="input-container" id="open-category-dropdown" onclick="toggleCategoryDropdown()">
                 <span id="select-category">Select Task category</span>
                 <button type="button" class="btn-dropdown" id="category-btn" onclick="toggleCategoryDropdown()">
                     <img src="../assets/icons/arrow_drop_down.svg" alt="">
@@ -149,15 +149,15 @@ function subtaskTpl() {
   return `
         <div class="task-container">
             <span class="task-name">Subtask</span>
-            <div class="input-container">
-                <input type="text" id="subtask-input" placeholder="Add new subtask" maxlength="32" onkeydown="if(event.key==='Enter'){addSubtask()}">
+            <div class="input-container" id="subtask-id">
+                <input type="text" id="subtask-input" placeholder="Add new subtask" maxlength="25" onkeydown="if(event.key==='Enter'){addSubtask()}">  
                 <button type="button" class="btn-dropdown" id="subtask-btn" onclick="addSubtask()">
                     <img src="../assets/icons/add_blue.svg" alt="">
                 </button>
             </div>
+            <span id="subtaskError" class="error-message"></span>
             <div class="sub-container">
-                <ul class="sub-list" id="sub-list">
-                </ul>
+                <ul class="sub-list" id="sub-list"></ul>
             </div>
         </div>
     `;
@@ -182,6 +182,7 @@ function okBtn(taskId) {
 }
 
 function createTaskTemplate(id, task) {
+    const assignedLimited = (task.assigned || []).slice(0, 3);
   return `
     <div class="task draggable" data-id="${id}" id="${id}" draggable="true" 
      ondragstart="dragstartHandler(event, '${id}')" 
@@ -191,9 +192,9 @@ function createTaskTemplate(id, task) {
         <h4>${task.title}</h4>
         <p class="task-descr">${task.description}</p>
         ${checkForSubtask(task.subtask)}
-        <div class="task-footer">
+        <div class="task-footer" id="task-footer">
             <div>
-              ${checkForAssignment(task.assigned)}
+              ${checkForAssignment(assignedLimited)}
             </div>
             <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
         </div>
@@ -242,16 +243,16 @@ function createDetailedTaskTemplate(taskId, task) {
             </button>
         </div>
 
-        <h1 class="mb-20">${task.title}</h1>
-        <p class="mb-20">${task.description}</p>
+        <h1 class="task-title mb-21">${task.title}</h1>
+        <p class="task-description mb-20">${task.description}</p>
 
         <div class="flex mb-20">
             <div>
-                <div class="section-title mb-20">Due date:</div>
+                <div class="section-title mb-22">Due date:</div>
                 <div class="section-title">Priority:</div>
             </div>
             <div>
-                <div class="mb-20">${task.date}</div>
+                <div class="mb-23">${task.date}</div>
                 <div class="overlay-prio">
                     <span class="capitalize">${task.priority}</span>
                     <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
@@ -359,10 +360,10 @@ function responsiveEditMenu(id) {
         <div class="mobile-edit-delete" hidden onclick="closeEditMenu()">
             <div class="user-edit-container">
                 <button id="" onclick="editContactById('${id}')">
-                    <img src="/assets/icons/edit.svg" alt="Edit icon">Edit
+                    <img src="../assets/icons/edit.svg" alt="Edit icon">Edit
                 </button>
                 <button onclick="deleteUser('users/${id}'); closeEditMenu(); hideContacts()">
-                    <img src="/assets/icons/delete.svg" alt="Delete icon">
+                    <img src="../assets/icons/delete.svg" alt="Delete icon">
                     Delete
                 </button>
             </div>
@@ -388,15 +389,24 @@ function createContactElement(user, id) {
 }
 
 function navLink(icon, link, section) {
-  return `
-        <li class="nav-link">
-            <div class="img-wrapper">
-                <img src="../assets/icons/${icon}.svg" alt="">
+    return `
+          <li class="nav-link">
+              <div class="img-wrapper">
+                  <img src="../assets/icons/${icon}.svg" alt="">
+              </div>
+            
+              <a href="signup.html" data-task="navLink">${section}</a>
+          </li>
+           <div class="wrapper-link-bottom">
+                    <a href="../html-templates/privacy-policy.html?msg=privacy">
+                        <span class="wrapper-link-one">Privacy Policy</span>
+                    </a>
+                    <a href="../html-templates/privacy-policy.html?msg=privacy">
+                        <span class="wrapper-link-two">Legal Notice</span>
+                    </a> 
             </div>
-            <a href="${link}" data-task="navLink">${section}</a>
-        </li>
-    `;
-}
+      `;
+  }
 
 function editContactOverlay(user) {
   const overlay = document.getElementById("overlay");
@@ -413,7 +423,7 @@ function editContactOverlay(user) {
             </div>
             <div class="modal-right">
                 <button onclick="closeOverlay()" class="close-task"></button>
-                <form class="contact-container">
+                <form class="contact-container" novalidate>
                     <div class="avatar-container">
                         <div class="avatar-circle" id="avatar-edit" style="background-color: #9327FF;">AM</div>
                     </div>
@@ -421,19 +431,20 @@ function editContactOverlay(user) {
                         <div class="input-group">
                             <input type="text" id="contact-name" placeholder="Name" value="${user.name}" required >
                             <img class="person-icon" src="../assets/icons/person.svg">
+                            <p class="error-signup" data-field="errorName"></p>
                         </div>
-                        <p class="error-signup" data-field="errorName"></p>
                         <div class="input-group">
                             <input type="email" id="contact-email" placeholder="Email" value="${user.email}" required >
                             <img class="email-icon" src="../assets/icons/mail.svg">
+                            <p class="error-signup" data-field="errorEmail"></p>
                         </div>
-                        <p class="error-signup" data-field="errorEmail"></p>
                         <div class="input-group">
                             <input type="tel" id="contact-phone" placeholder="Phone" value="${user.phone}" required >
                             <img class="phone-icon" src="../assets/icons/call.svg">
+                            <p class="error-signup" data-field="errorEmail"></p>
                         </div>
                         <div class="buttons">
-                            <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
+                            <button type="button" class="cancel" onclick="closeOverlay()">Delete</button>
                             <button type="submit" class="create">Save
                                 <img src="../assets/icons/check.svg" alt="check-icon" class="check-icon" />
                             </button>
@@ -447,48 +458,51 @@ function editContactOverlay(user) {
 }
 
 function getContactOverlayTemplate() {
-  return `
-    <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
-        <div class="modal"> 
-            <div class="modal-left">
-                 <div class="modal-left-close">
-                    <button onclick="closeOverlay()" class="close-task-white"></button>
-                </div>
-                <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
-                <h2>Edit contact</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="modal-right">
-                <button onclick="closeOverlay()" class="close-task"></button>
-                <form class="contact-container">
-                    <div class="avatar-container">
-                        <img src="../assets/icons/Group 13.svg">
-                    </div>
-                    <div class="contact-form">
-                        <div class="input-group">
-                            <input type="text" id="contact-name" placeholder="Name" required />
-                            <img class="person-icon" src="../assets/icons/person.svg">
-                        </div>
-                        <p class="error-signup" data-field="errorName"></p>
-                        <div class="input-group">
-                            <input type="email" id="contact-email" placeholder="Email" required />
-                            <img class="email-icon" src="../assets/icons/mail.svg">
-                        </div>
-                        <p class="error-signup" data-field="errorEmail"></p>
-                        <div class="input-group">
-                            <input type="tel" id="contact-phone" placeholder="Phone" required />
-                            <img class="phone-icon" src="../assets/icons/call.svg">
-                        </div>
-                        <div class="buttons">
-                            <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
-                            <button type="submit" class="create">Save
-                                <img src="/assets/icons/check.svg" alt="check-icon" class="check-icon" />
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-  `;
-}
+    return `
+      <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
+          <div class="modal"> 
+              <div class="modal-left">
+                   <div class="modal-left-close">
+                      <button onclick="closeOverlay()" class="close-task-white"></button>
+                  </div>
+                  <img class="contact-logo" src="../assets/icons/join-dark.svg" alt="join-logo">
+                  <h2>Add contact</h2>
+                  <div class="underline"></div>
+              </div>
+              <div class="modal-right">
+                  <button onclick="closeOverlay()" class="close-task"></button>
+                  <form class="contact-container" novalidate>
+                      <div class="avatar-container">
+                          <img src="../assets/icons/Group 13.svg">
+                      </div>
+                      <div class="contact-form">
+                          <div class="input-group">
+                              <input type="text" id="contact-name" placeholder="Name" maxlength="15" required />
+                              <img class="person-icon" src="../assets/icons/person.svg">
+                              <p class="error-signup" data-field="errorName"></p>
+                          </div>
+                          <div class="input-group">
+                              <input type="email" id="contact-email" placeholder="Email" maxlength="23" required />
+                              <img class="email-icon" src="../assets/icons/mail.svg">
+                              <p class="error-signup" data-field="errorEmail"></p>
+                          </div>
+                          <!-- Phone -->
+                          <div class="input-group">
+                              <input type="tel" id="contact-phone" placeholder="Phone" maxlength="12" pattern="[0-9]*" oninput="this.value = this.value.replace(/\D/g, '')" required />
+                              <img class="phone-icon" src="../assets/icons/call.svg">
+                               <p class="error-signup" data-field="errorPhone"></p>
+                          </div>
+                          <div class="buttons">
+                              <button type="button" class="cancel" onclick="closeOverlay()">Cancel</button>
+                              <button type="submit" class="create">Create contact
+                                  <img src="../assets/icons/check.svg" alt="check-icon" class="check-icon" />
+                              </button>
+                          </div>
+                       </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    `;
+  }
+

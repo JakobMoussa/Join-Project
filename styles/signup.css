@@ -11,9 +11,9 @@
 .error-signup {
   height: 12px;
   color: #e74c3c;
-  font-size: 11px;
-  margin-top: 3px;
-  margin-bottom: 8px;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 12px;
   text-align: left;
   padding-left: 16px;
 }
@@ -185,6 +185,7 @@
   align-items: center;
   gap: 30px;
   color: #7073758d;
+  text-decoration: none;
 }
 
 .Legal-texts :hover {
@@ -193,7 +194,11 @@
 }
 
 .link {
-  direction: none;
+  text-decoration: none;
+}
+
+.Privacy-text {
+  color: #7073758d;
 }
 
 /* ------------------- */

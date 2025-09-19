@@ -94,10 +94,18 @@ function prioBtnOff(btn, icon, priority) {
 function addSubtask() {
   const inputElement = document.getElementById("subtask-input");
   const subList = document.getElementById("sub-list");
-  if (inputElement.value.length == 0) return;
+
+  const value = inputElement.value.trim();
+
+  if (value === "") {
+    inputElement.focus();
+    return;
+  }
+ if (value === "") return;
+ if (inputElement.value.length == 0) return;
   let id = getNextFreeId();
-  subtask.push(createSubObj(id, inputElement.value));
-  subList.innerHTML += subListItem(inputElement.value, id);
+  subtask.push(createSubObj(id, value));
+  subList.innerHTML += subListItem(value, id);
   inputElement.value = "";
 }
 
@@ -196,12 +204,20 @@ function searchUserIndex(name) {
 function loadAssignedUserIcons() {
   const container = document.getElementById("icons-container");
   container.innerHTML = "";
-  users.forEach((user) => {
-    if (user.assigned) {
+  const assignedUsers = users.filter(user => user.assigned);
+  const maxIcons = 4;
+
+  assignedUsers.forEach((user, index) => {
+    if (index < maxIcons - 1) { 
       let initials = initialsFromName(user.name);
       container.innerHTML += userIcon(user.color, initials, user.name);
     }
   });
+
+  if (assignedUsers.length > maxIcons - 1) {
+    const remaining = assignedUsers.length - (maxIcons - 1);
+    container.innerHTML += `<div class="user-icon more">+${remaining}</div>`;
+  }
 }
 
 function removeUserFromArray(name) {
@@ -230,6 +246,8 @@ function runInitIfValid() {
 function isTaskDataValid() {
   let isValid = true;
   const formIds = getFormElementsIds();
+  const subtaskID = document.getElementById("subtask-id");
+  
   if (formIds.title.value.trim().length <= 0) {
     showError(formIds.title, "title");
     isValid = false;
@@ -241,6 +259,11 @@ function isTaskDataValid() {
   if (!formIds.date.value) {
     showError(formIds.date, "date");
     isValid = false;
+  }
+
+  if (subtask.length === 0) {
+  showError(subtaskID, "subtask");
+  isValid = false;
   }
   return isValid;
 }
@@ -302,3 +325,6 @@ function onFocusOut(e) {
   target.classList.remove("light-red-outline");
   target.classList.remove("blue-outline");
 }
+
+
+

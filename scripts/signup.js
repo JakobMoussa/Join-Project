@@ -175,3 +175,27 @@ function removeErrorReport(error, inputContainer) {
   error.innerHTML = "";
   inputContainer.classList.remove("light-red-outline");
 }
+
+function validateSignup(event) {
+    event.preventDefault(); 
+    let isValid = true;
+
+    const name = document.querySelector('input[name="name"]');
+    const email = document.querySelector('input[name="email"]');
+    const password = document.querySelector('input[name="password"]');
+    const confirmPassword = document.querySelector('input[name="confirmPassword"]');
+
+    
+    document.querySelectorAll('.error-signup').forEach(e => e.textContent = '');
+    document.querySelectorAll('input').forEach(i => i.style.borderColor = '#ccc');
+}
+
+function showError(input, message) {
+    input.style.borderColor = 'red';
+    const errorField = document.querySelector(`.error-signup[data-field="error${capitalizeFirstLetter(input.name)}"]`);
+    if (errorField) errorField.textContent = message;
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

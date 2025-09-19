@@ -30,23 +30,24 @@
             </div>
             <div class="underline"></div>
             <form class="login-form" type="submit" onsubmit="preventFromSubmit(event); addUser()">
-                <div class="input-container">
-                    <input type="text" placeholder="Name" name="name" data-field="name">
+                <div class="input-container" id="user-name">
+                    <input type="text" placeholder="Name" name="name" data-field="name" maxlength="15">
                     <img src="../assets/icons/person.svg" alt="person-icon" class="signup-icon">
                 </div>
                 <p class="error-signup" data-field="errorName"></p>
                 <div class="input-container">
-                    <input type="email" placeholder="Email" name="email" data-field="email">
+                    <input type="email" placeholder="Email" name="email" data-field="email" maxlength="24">
                     <img src="../assets/icons/mail.svg" alt="envelope-icon" class="signup-icon">
                 </div>
                 <p class="error-signup" data-field="errorEmail"></p>
                 <div class="input-container password-margin">
                     <input type="password" class="password-field" name="password" placeholder="Password"
-                        data-field="password" oninput="toggleLockIcon(event, 'firstLock', 'firstEye')">
+                        data-field="password" oninput="toggleLockIcon(event, 'firstLock', 'firstEye')" maxlength="24">
                     <img src="../assets/icons/lock.svg" alt="lock-icon" class="signup-icon" id="firstLock">
                     <img src="../assets/icons/eye-icon.svg" alt="lock-icon" class="signup-icon" style="display: none;"
                         id="firstEye" onclick="toggleInputType(event, 'password')">
                 </div>
+                <p class="error-signup" data-field="errorPassword"></p>
                 <div class="input-container">
                     <input type="password" class="password-field" name="confirmPassword" placeholder="Confirm Password"
                         data-field="confirmPassword" oninput="toggleLockIcon(event, 'secondLock', 'secondEye')">
@@ -54,7 +55,7 @@
                     <img src="../assets/icons/eye-icon.svg" alt="lock-icon" class="signup-icon" style="display: none;"
                         id="secondEye" onclick="toggleInputType(event, 'confirmPassword')">
                 </div>
-                <p class="error-signup" data-field="errorPassword"></p>
+                <p class="error-signup" data-field="errorConfirmPassword"></p>
                 <div class="checkbox-container">
                     <input type="checkbox" id="privacyCheckbox" name="vehicle1">
                     <label for="vehicle1"> I accept <btn class="privacy-text" onclick="openPrivacy()">the Privacy</btn></label>
@@ -72,7 +73,7 @@
     </div>
     <footer>
         <div class="Legal-texts">
-            <a href="./privacy-policy.html" class="link"><span class="Privacy-text">Privacy Policy</span></a>
+            <a href="../html-templates/privacy-policy.html?msg=privacy" class="link"><span class="Privacy-text">Privacy Policy</span></a>
             <a href="./legal-notice.html" class="link"><span class="Privacy-text">Legal notice</span></a>
         </div>
     </footer>

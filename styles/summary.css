@@ -466,6 +466,19 @@
     }
   }
 
+  @media(max-width: 375px){
+    #content-wrapper {
+      padding-top: 26px !important;
+    }
+    .parent {
+      margin-top: 20px;
+    }
+    .parent {
+      grid-template-rows: repeat(1, 120px);
+      gap: 10px;
+  }
+}
+
 @media(max-width: 360px){
   .header-title {
     display: contents;
@@ -513,16 +526,18 @@
     margin-top: 12px;
   }
   #content-wrapper {
-    padding-top: 30px !important;
-    padding-right: 17px;
+    padding-top: 10px !important;
   }
   .main-wrapper {
     margin-left: 5px !important;
   }
   .parent {
+    margin-top: 10px;
+  }
+  .parent {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 100px);
-    gap: 20px;
+    grid-template-rows: repeat(2, 80px);
+    gap: 15px;
     left: 0px;
   }
   .div1 .metric-icon {

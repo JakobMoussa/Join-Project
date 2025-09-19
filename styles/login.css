@@ -8,6 +8,16 @@ body {
   min-height: 100vh;
 }
 
+.content {
+  width: 1440px;
+  height: 1024px;
+  max-height: 100vh;
+  max-width: 100vw;
+  margin: 0 auto;
+  box-sizing: border-box;
+  /* overflow: hidden; */
+}
+
 /* Header design */
 .header {
   display: flex;
@@ -299,8 +309,69 @@ body {
   opacity: 1;
 }
 
-
 /* ------------------- */
+
+
+@media screen and (min-width: 1920px) {
+  .content {
+    width: 1440px;
+    transform: scale(1.1);
+    transform-origin: center; 
+  }
+}
+
+/* Desktop / Laptop (1200px - 1439px) */
+@media screen and (max-width: 1439px) and (min-width: 1200px) {
+    
+  .login-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+/* Tablet Landscape (768px - 1199px) */
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .content {
+    padding: 0 30px;
+    height: auto;
+    min-height: 100vh;
+  }
+    
+  .login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px 30px;
+  }
+  
+  .login-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+    
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+  }
+}
+
+@media(max-width: 680px) {
+  .login-container {
+    height: 400px;
+    width: 550px;
+  }
+}
+
+
 @media(max-width: 600px) {
   .signup {
     display: none;
@@ -309,7 +380,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 90px;
+    margin-bottom: 20px;
     margin-top: 50px;
     gap: 20px;
     font-size: 25px;
@@ -329,7 +400,6 @@ body {
 
 @media(max-width: 500px) {
   .login-container {
-    margin-top: 55px;
     width: 400px;
     padding: 40px 50px 100px 50px;
   }
@@ -397,6 +467,6 @@ body {
     font-size: 18px;
   }
   .Legal-texts {
-    margin-top: 160px;
+    margin-top: 60px;
   }
 }

@@ -239,7 +239,6 @@ Overlay
   display: flex;
   justify-content: center;
   align-items: center;
-  /* fade-in / fade-out effect  */
   opacity: 0;
   transition: opacity 250ms ease;
 }
@@ -247,18 +246,6 @@ Overlay
 .visible {
   opacity: 1;
 }
-
-/* .overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 11;
-  opacity: 0;
-  transition: opacity 250ms ease;
-} */
 
 .overlay.transparent {
   background: transparent !important;
@@ -274,7 +261,7 @@ Overlay
   transition: opacity 250ms ease;
 }
 
-.overlay-wrapper {
+ .overlay-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -282,7 +269,7 @@ Overlay
   /* translate(-50%, -50%) is for centering the overlay-wrapper in the correct position */
   transform: translate(-50%, -50%);
   transition: all 250ms ease-in-out;
-}
+} 
 
 .overlay-content {
   min-width: 420px;
@@ -291,33 +278,9 @@ Overlay
   padding: 48px 40px;
 }
 
-.transit {
-  transform: translate(calc(-50% + 100vw), -50%);
-}
-
 .hidden {
   display: none;
 }
-
-/* 
-Die allgemeine Regel ".overlay button" setzt alle Buttons innerhalb des Overlays auf einen neutralen, transparenten Stil zurück. 
-Das führt jedoch dazu, dass speziell gestylte Buttons (z. B. mit Hintergrundfarbe) ihr gewünschtes Aussehen verlieren.
-
-Daher wurde eine separate Klasse "btn-transparent" erstellt, 
-um gezielt nur Buttons transparent zu stylen, ohne andere globale Button-Styles zu beeinflussen.
-*/
-
-/* .overlay button {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  outline: none;
-  box-shadow: none;
-} */
 
 .btn-transparent {
   background-color: transparent;
@@ -358,6 +321,9 @@ um gezielt nur Buttons transparent zu stylen, ohne andere globale Button-Styles 
 }
 
 .assigned-list {
+  width: 400px;
+  max-height: 139px;
+  overflow-y: auto;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -577,7 +543,7 @@ Media queries
   }
 
   .task {
-    min-width: 250px;
+    min-width: 230px;
   }
 
   .empty {
@@ -636,17 +602,138 @@ Media queries
     justify-content: space-between !important;
   }
 
-  /* .task-wrapper {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-  }
-
-  .task {
-    min-width: 250px;
-  }
-
-  .empty {
-    width: 100%;
-  } */
 }
+
+@media (max-width: 530px) {
+  .mb-21 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .overlay-content {
+    min-width: 420px;
+    height: auto;
+    background-color: #fff;
+    padding: 48px 28px;
+  }
+}
+
+@media (max-width: 470px) {
+  .mb-21 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .assigned-list {
+    width: 340px;
+  }
+
+  .overlay-content {
+    min-width: 300px;
+    height: auto;
+    background-color: #fff;
+    padding: 48px 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .mb-21 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .assigned-list {
+    width: 320px;
+  }
+
+  .overlay-content {
+    min-width: 300px;
+    height: auto;
+    background-color: #fff;
+    padding: 48px 25px;
+  }
+
+}
+
+@media (max-width: 420px) {
+  .overlay-content {
+    padding: 48px 0px;
+    overflow-y: auto;
+    height: 720px;
+  }
+
+  .editTask-container {
+    margin-left: 10px;
+  }
+
+  .btn-create {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .editTask-container {
+    margin-left: 10px;
+  }
+
+  .overlay-content {
+    padding: 25px 0px;
+    overflow-y: auto;
+    height: 720px;
+  }
+
+  .btn-create {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .editTask-container {
+    width: 350px;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .editTask-container {
+    margin-left: 10px;
+  }
+
+  .btn-create {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .editTask-container {
+    width: 350px;
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .editTask-container {
+    width: 320px;
+  }
+
+}
+
+@media (max-width: 360px) {
+
+  .editTask-container {
+    width: 300px;
+  }
+
+  .overlay-content {
+    padding: 25px 0px;
+    overflow-y: auto;
+    height: 640px;
+  }
+
+}
+
+@media (max-width: 390px) {
+.btn-transparent {
+  margin-right: 10px;
+}
+}
+
+
+

@@ -138,10 +138,14 @@ function isPrivacyMessage() {
 
 function adjustLayoutForPrivacyView() {
   const ul = document.querySelector(".nav-wrapper").children[0];
-  const navImg = document.querySelector(".nav-imgs");
-  navImg.innerHTML = "";
+  const helpSymbol = document.querySelector(".help-symbol");
+  const profilePicture = document.querySelector(".profile-picture");
   ul.innerHTML = "";
   ul.innerHTML += navLink("login", "../index.html", "Log in");
+  if(profilePicture, helpSymbol) {
+    helpSymbol.remove();
+    profilePicture.remove();
+  }
 }
 
 function initializeNavbar() {
@@ -150,7 +154,7 @@ function initializeNavbar() {
   updateMenuWithUserKey();
 }
 
-function toggleMenu() {
+function toggleMenuSimple() {
   const menu = document.getElementById("menu");
   menu.classList.toggle("menu-translateX");
 }
@@ -175,3 +179,22 @@ function toggleMenu() {
     menu.classList.add('menu-visible');
   }
 }
+
+function adjustBackButtonLink () {
+  const currentUrl = window.location.href;
+  const button = document.querySelector(".back-button");
+  if(!button) return;
+
+  const backButtonLink = button.closest("a");
+  if(!backButtonLink) return;
+
+  if(currentUrl.includes("?msg=privacy")) {
+    backButtonLink.href = "../html-templates/signup.html";
+  } else {
+    backButtonLink.href = "../html-templates/summary.html";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", adjustBackButtonLink);
+
+

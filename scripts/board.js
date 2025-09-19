@@ -4,7 +4,6 @@ function renderBoard(tasks) {
 
   if (tasks) {
     let categories = {};
-    // Group tasks in categories to use forEach loop
     let entries = Object.entries(tasks);
 
     entries.forEach((task) => {
@@ -17,7 +16,6 @@ function renderBoard(tasks) {
       let taskWrapper = column.querySelector(".task-wrapper");
 
       if (taskWrapper) {
-        // "a[1].order ?? 0" means: If a[1].order is not defined or null, use 0
         let sortedTasks = categories[status].sort((a, b) => (a[1].order ?? 0) - (b[1].order ?? 0));
 
         sortedTasks.forEach((task) => {
@@ -30,26 +28,12 @@ function renderBoard(tasks) {
   addPlaceholdersToEmptyColumns();
 }
 
-// function removeTasks() {
-//   const columns = document.querySelectorAll(".column");
-//   columns.forEach((column) => {
-//     column.querySelectorAll(".task").forEach((task) => task.remove());
-//   });
-// }
-
 function removeTasks() {
   const taskWrappers = document.querySelectorAll(".task-wrapper");
   taskWrappers.forEach((taskWrapper) => {
     taskWrapper.querySelectorAll(".task").forEach((task) => task.remove());
   });
 }
-
-// function removePlaceholder() {
-//   const columns = document.querySelectorAll(".column");
-//   columns.forEach((column) => {
-//     column.querySelectorAll(".empty").forEach((empty) => empty.remove());
-//   });
-// }
 
 function removePlaceholder() {
   const taskWrappers = document.querySelectorAll(".task-wrapper");
@@ -58,16 +42,7 @@ function removePlaceholder() {
   });
 }
 
-// LÖSCHEN? NOCH STEHEN LASSEN
-
-// const columns = document.querySelectorAll(".column");
-// columns.forEach((column) => {
-//   column.querySelectorAll(".task").forEach((task) => task.remove());
-//   column.querySelectorAll(".empty").forEach((empty) => empty.remove());
-// });
-
 function createCategoryClass(category) {
-  // from e.g. "Technical Task" to "technical-task" for correct CSS class
   return category.toLowerCase().split(" ").join("-");
 }
 
@@ -378,13 +353,6 @@ function adjustPlaceholders() {
 async function adjustTaskOrder(targetColumn) {
   const tasksInColumn = targetColumn.querySelectorAll(".draggable");
 
-  // tasksInColumn.forEach(async (task, index) => {
-  //   const taskId = task.dataset.id;
-  //   let taskObj = await loadData("tasks/" + taskId);
-  //   taskObj.order = index;
-  //   await putData("tasks/" + taskId, taskObj);
-  // });
-
   if (tasksInColumn.length > 0) {
     for (let i = 0; i < tasksInColumn.length; i++) {
       const taskId = tasksInColumn[i].dataset.id;
@@ -406,8 +374,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-/*  Initializing  */
-
 async function initBoard() {
   let taskObj = await loadData("tasks/");
   document.getElementById("search-input").value = "";
@@ -417,3 +383,4 @@ async function initBoard() {
 document.addEventListener("DOMContentLoaded", () => {
   initBoard();
 });
+

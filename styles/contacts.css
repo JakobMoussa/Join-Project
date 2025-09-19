@@ -68,7 +68,7 @@
 }
 
 .contact:hover {
-  background-color: #1f2e45;
+  background-color: #1f2e45e4;
   color: white;
 }
 
@@ -256,6 +256,13 @@
   align-items: flex-end;
 }
 
+.overlay-title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #f3eeee;
+  font-weight: 400;
+}
+
 .close-btn {
   position: absolute;
   top: 15px;
@@ -280,7 +287,7 @@
 
 .avatar-container {
   height: 100%;
-  padding: 92px 56px 0 40px;
+  padding: 92px 56px 0 0px;
 }
 
 .contact-form {
@@ -309,9 +316,9 @@
 
 .person-icon {
   position: absolute;
-  top: 50%;
+  top: 17%;
   right: 14px;
-  transform: translateY(-50%);
+  /*transform: translateY(-50%); */
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -319,9 +326,9 @@
 
 .email-icon {
   position: absolute;
-  top: 50%;
+  top: 17%;
   right: 14px;
-  transform: translateY(-50%);
+  /*transform: translateY(-50%); */
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -329,9 +336,9 @@
 
 .phone-icon {
   position: absolute;
-  top: 50%;
+  top: 17%;
   right: 14px;
-  transform: translateY(-50%);
+  /*transform: translateY(-50%); */
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -340,8 +347,7 @@
 .buttons {
   display: flex;
   margin-top: 35px;
-  margin-right: 66px;
-  gap: 30px;
+  gap: 20px;
 }
 
 .cancel,
@@ -422,11 +428,23 @@
 }
 
 .edit-delete-container {
-  padding: 32px;
+  padding: 20px 8px;
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
 }
+
+input.error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+.error-signup {
+  color: red;
+  font-size: 12px;
+  margin: 4px 0 0 4px;
+}
+
 
 .open-edit-delete {
   display: none;
@@ -609,6 +627,28 @@ h3 {
   flex-direction: row-reverse;
 }
 
+input.error {
+  border: 2px solid #e74c3c;
+  background-color: #fdf2f2;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.3);
+}
+
+input.error:focus {
+  outline: none;
+  border-color: #c0392b;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+}
+
+/* Fehlermeldung Styling */
+.error-message {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
 @media (max-width: 1200px) {
   .modal {
     width: 960px;
@@ -631,7 +671,7 @@ h3 {
   .modal {
     flex-direction: column;
     width: 480px;
-    height: 720px;
+    height: 780px;
     justify-content: space-evenly;
   }
 
@@ -741,15 +781,25 @@ h3 {
 
   .user-edit-container {
     display: block;
-    bottom: 216px;
+    bottom: 122px;
   }
+  .information-field {
+    margin: 10px 0px 10px;
+  }
+  .user-details {
+    padding-top: 24px;
+  }
+  .users-field {
+    gap: 10px;
+  }
+
 }
 
 @media (max-width: 580px) {
   .modal {
     flex-direction: column;
     width: 380px;
-    height: 640px;
+    height: 700px;
     justify-content: space-evenly;
   }
 
@@ -762,7 +812,7 @@ h3 {
   }
 
   .buttons {
-    margin: 24px 0 0 0;
+    margin: 0 0 0 0;
   }
 
   .open-edit-delete {
@@ -798,11 +848,89 @@ h3 {
   .user-edit-container {
     bottom: 100px;
   }
+
+  .modal-left h2 {
+    font-size: 36px;
+  }
+  .person-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .email-icon {
+  width: 16px;
+  height: 16px;
+  }
+
+  .phone-icon {
+  width: 16px;
+  height: 16px;
+  }
+
+  .input-group input {
+  padding: 7px 7px 7px 9px !important;
+  }
+
+  #contact-name {
+    align-items: center;
+  }
+
+  .cancel {
+    display: none;
+  }
+
+  .edit-delete-container {
+    position: absolute;
+    bottom: 100px;
+  }
+
+  .user-edit-container {
+    bottom: 163px;
+  }
+}
+
+@media (max-width: 375px) {
+  .user-edit-container {
+    bottom: 118px;
+  }
 }
 
 @media (max-width: 360px) {
-
-  .user-edit-container {
-    bottom: 90px;
+  .contact-title {
+    padding: 25px 0 0 25px;
   }
+  .btn-hide-contact {
+    width: 28px;
+    height: 28px;
+  }
+  .title-text {
+    font-size: 35px;
+  }
+  .user-edit-container {
+    bottom: 115px;
+  }
+  .avatar-circle {
+    font-size: 20px;
+    width: 65px;
+    height: 65px;
+  }
+  .user-name h3 {
+    font-size: 20px;
+  }
+
+  .user-details {
+    padding-top: 20px;
+  }
+
+  .information-field {
+    margin: 10px 0px 10px;
+  }
+  .users-field {
+    gap: 12px;
+  }
+
+  .edit-delete-container {
+    padding: 0px 10px;
+    bottom: 112px;
+  }
+
 }

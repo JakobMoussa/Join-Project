@@ -1,3 +1,4 @@
+
 async function userExists(email) {
     let users = await loadData("/users")
     let validate = Object.values(users || {}).some(user => user.email === email.value);
@@ -11,20 +12,117 @@ async function userExists(email) {
         return validate;
     }
 }
+   
+function showError(fieldName, message) {
+    const errorElement = document.querySelector(`p[data-field="error${fieldName}"]`);
+    const inputElement = document.getElementById(`contact-${fieldName.toLowerCase()}`);
+    
+    if (errorElement && inputElement) {
+        errorElement.textContent = message;
+        errorElement.style.color = "red";
+        errorElement.style.display = "block";
+        inputElement.style.border = "1px solid red";
+    }
+}
 
-async function initContactForm() {
+function hideError(fieldName) {
+    const errorElement = document.querySelector(`p[data-field="error${fieldName}"]`);
+    const inputElement = document.getElementById(`contact-${fieldName.toLowerCase()}`);
+    
+    if (errorElement && inputElement) {
+        errorElement.textContent = "";
+        inputElement.style.border = "1px solid #ccc";
+    }
+}
+
+function validateContactForm() {
+    const name = document.getElementById("contact-name").value.trim();
+    const email = document.getElementById("contact-email").value.trim();
+    const phone = document.getElementById("contact-phone").value.trim();
+  
+    let isValid = true;
+    
+    if (!name) {
+        showError("Name", "This field is required");
+        isValid = false;
+    } else {
+        hideError("Name");
+    }
+    
+    if (!email) {
+        showError("Email", "This field is required");
+        isValid = false;
+    } else if (!email.includes("@") || !email.includes(".")) {
+        showError("Email", "Please enter a valid email address");
+        isValid = false;
+    } else {
+        hideError("Email");
+    }
+    if (!phone) {
+        showError("Phone", "This field is required");
+        isValid = false;
+    } else if (!/^\d{9,}$/.test(phone)) {
+        showError("Phone", "Enter the available number");
+        isValid = false;
+    } else {
+        hideError("Phone");
+    }
+    
+    
+    return isValid;
+}
+
+async function shouldCheckEmailDuplicate(isEdit, userObj) {
+    if (!isEdit) return true;
+    
+    const currentEmail = document.getElementById("contact-email").value.trim();
+    return currentEmail !== userObj?.email;
+}
+
+async function createContact() {
+    const newUser = createUser(
+        document.getElementById("contact-name").value.trim(),
+        document.getElementById("contact-email").value.trim(),
+        document.getElementById("contact-phone").value.trim()
+    );
+    await postData(`users`, newUser);
+}
+
+async function updateContact(userId, userObj) {
+    const updateUser = createUser(
+        document.getElementById("contact-name").value.trim(),
+        document.getElementById("contact-email").value.trim(),
+        document.getElementById("contact-phone").value.trim(),
+        userObj.color,
+        userObj.assigned,
+        userObj.password
+    );
+    await putData(`users/${userId}`, updateUser);
+    openUserInfos(userId);
+}
+
+function initContactFormValidation(isEdit = false, userId = null, userObj = null) {
     const form = document.querySelector("form.contact-container");
+    
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let email = document.getElementById("contact-email");
-        const newUser = createUser(
-            document.getElementById("contact-name").value,
-            email.value,
-            document.getElementById("contact-phone").value,
-        );
-        let checkEmail = await userExists(email);
-        if (checkEmail) return
-        await postData(`users`, newUser);
+        
+        if (!validateContactForm()) return;
+        
+        const emailInput = document.getElementById("contact-email");
+        const shouldCheck = await shouldCheckEmailDuplicate(isEdit, userObj);
+        
+        if (shouldCheck) {
+            const checkEmail = await userExists(emailInput);
+            if (checkEmail) return;
+        }
+        
+        if (isEdit) {
+            await updateContact(userId, userObj);
+        } else {
+            await createContact();
+        }
+        
         loadContacts();
         closeOverlay();
     });
@@ -185,14 +283,16 @@ function openAddContact() {
     const overlay = document.getElementById("overlay");
     openOverlay();
     overlay.innerHTML = getContactOverlayTemplate();
-    initContactForm();
+    initContactFormValidation(false);
 }
+
 
 async function editContactById(id) {
     const user = await loadData(`users/${id}`);
     openOverlay();
     editContactOverlay(user);
-    editForm(id, user);
+    editAvatar(user);
+    initContactFormValidation(true, id, user);
 }
 
 function hideContacts() {
