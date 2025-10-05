@@ -4,8 +4,6 @@
   display: flex;
 }
 
-/* contacts-bar style */
-
 .contacts-bar {
   width: 375px;
   overflow-y: auto;
@@ -94,10 +92,8 @@
 
 .info .email {
   color: #007bff;
-  font-size: 0.9em;
+  font-size: 16px;
 }
-
-/* Contacts field */
 
 .contact-title {
   display: flex;
@@ -190,8 +186,6 @@
   font-size: 16px;
   color: #555;
 }
-
-/* Overlay Style */
 
 .overlay-content {
   background: white;
@@ -318,7 +312,6 @@
   position: absolute;
   top: 17%;
   right: 14px;
-  /*transform: translateY(-50%); */
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -328,7 +321,6 @@
   position: absolute;
   top: 17%;
   right: 14px;
-  /*transform: translateY(-50%); */
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -338,7 +330,6 @@
   position: absolute;
   top: 17%;
   right: 14px;
-  /*transform: translateY(-50%); */
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -639,7 +630,6 @@ input.error:focus {
   box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
 }
 
-/* Fehlermeldung Styling */
 .error-message {
   color: #e74c3c;
   font-size: 0.875rem;
@@ -655,7 +645,7 @@ input.error:focus {
   }
 
   .contacts-bar {
-    padding: 40px 24px 40px 24px;
+    padding: 115px 24px 40px 24px;
   }
 
   .contact-title {

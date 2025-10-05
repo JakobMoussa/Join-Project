@@ -1,3 +1,7 @@
+/**
+ * Retrieves all form input fields
+ * @returns {Object} Object containing DOM elements for name, email, password, and confirmPassword fields
+ */
 function formFields() {
   return {
     name: document.querySelector('[data-field="name"]'),
@@ -7,6 +11,10 @@ function formFields() {
   };
 }
 
+/**
+ * Retrieves all error message elements
+ * @returns {Object} Object containing DOM elements for error messages
+ */
 function errorFields() {
   return {
     name: document.querySelector('[data-field="errorName"]'),
@@ -15,6 +23,12 @@ function errorFields() {
   }
 }
 
+/**
+ * Checks if email already exists in the user database
+ * @async
+ * @param {string} email - Email address to check
+ * @returns {Promise<boolean>} True if email is available, false if already exists
+ */
 async function checkEmailExists(email) {
   const inputContainer = document.querySelectorAll(".input-container");
   let errorElements = errorFields();
@@ -29,10 +43,21 @@ async function checkEmailExists(email) {
   return true;
 }
 
+/**
+ * Adds red outline styling to target element
+ * @param {HTMLElement} target - The element to apply red outline to
+ * @returns {void}
+ */
 function addRedOutline(target) {
   target.classList.add("light-red-outline");
 }
 
+/**
+ * Compares password and confirm password fields for match and length validation
+ * @param {HTMLInputElement} password - Password input field
+ * @param {HTMLInputElement} confirmPassword - Confirm password input field
+ * @returns {boolean} True if passwords match and meet length requirements
+ */
 function comparePasswords(password, confirmPassword) {
   const inputContainer = document.querySelectorAll(".input-container");
   let errorElements = errorFields();
@@ -52,6 +77,11 @@ function comparePasswords(password, confirmPassword) {
   return identical;
 }
 
+/**
+ * Adds a new user to the system after validation
+ * @async
+ * @returns {Promise<void>}
+ */
 async function addUser() {
   const inputs = formFields();
   let signUp = await checkFormFields();
@@ -64,6 +94,10 @@ async function addUser() {
   showSignupSuccess();
 }
 
+/**
+ * Displays success message and redirects to login page
+ * @returns {void}
+ */
 function showSignupSuccess() {
   openOverlay();
   setTimeout(() => {
@@ -72,16 +106,29 @@ function showSignupSuccess() {
   }, 2000);
 }
 
+/**
+ * Redirects to login page after delay
+ * @returns {void}
+ */
 function openLogin() {
   setTimeout(() => {
     window.location.href = "../index.html";
   }, 250);
 }
 
+/**
+ * Opens privacy policy page
+ * @returns {void}
+ */
 function openPrivacy() {
   window.location.href = "../html-templates/privacy-policy.html?msg=privacy";
 }
 
+/**
+ * Validates name field for non-empty input
+ * @param {string} userName - The name to validate
+ * @returns {boolean} True if name is valid
+ */
 function checkName(userName) {
   const inputContainer = document.querySelectorAll(".input-container");
   let errorElements = errorFields();
@@ -93,6 +140,11 @@ function checkName(userName) {
   return validate;
 }
 
+/**
+ * Validates email format using regex
+ * @param {string} email - Email address to validate
+ * @returns {boolean} True if email format is valid
+ */
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email) || !email) {
@@ -101,6 +153,10 @@ function validateEmail(email) {
   return true
 }
 
+/**
+ * Displays email validation error message
+ * @returns {void}
+ */
 function errorEmail() {
   const inputContainer = document.querySelectorAll(".input-container");
   let errorElements = errorFields();
@@ -108,6 +164,11 @@ function errorEmail() {
   addRedOutline(inputContainer[1])
 }
 
+/**
+ * Validates all form fields for signup
+ * @async
+ * @returns {Promise<boolean>} True if all fields are valid
+ */
 async function checkFormFields() {
   let inputs = formFields();
   let nameIsValid = checkName(inputs.name.value);
@@ -123,11 +184,22 @@ async function checkFormFields() {
   return true
 }
 
+/**
+ * Checks if privacy policy checkbox is checked
+ * @returns {boolean} True if checkbox is checked
+ */
 function checkPrivacy() {
   const checkbox = document.getElementById("privacyCheckbox");
   return checkbox.checked
 }
 
+/**
+ * Toggles visibility of lock and eye icons based on input content
+ * @param {Event} e - Input event
+ * @param {string} lockId - ID of lock icon element
+ * @param {string} eyeId - ID of eye icon element
+ * @returns {void}
+ */
 function toggleLockIcon(e, lockId, eyeId) {
   const lock = document.getElementById(lockId);
   const eye = document.getElementById(eyeId);
@@ -140,6 +212,12 @@ function toggleLockIcon(e, lockId, eyeId) {
   }
 }
 
+/**
+ * Toggles password input field type between text and password
+ * @param {Event} e - Click event
+ * @param {string} data - Data field attribute value
+ * @returns {void}
+ */
 function toggleInputType(e, data) {
   const input = document.querySelector(`[data-field="${data}"]`);
   const isPassword = input.type === 'password';
@@ -149,6 +227,10 @@ function toggleInputType(e, data) {
     : '../assets/icons/eye-icon.svg';
 }
 
+/**
+ * Initializes event listeners when DOM is loaded
+ * @returns {void}
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const inputs = formFields();
   const error = errorFields();
@@ -156,6 +238,13 @@ document.addEventListener("DOMContentLoaded", () => {
   addEventToInputs(inputs, error, inputContainer);
 })
 
+/**
+ * Adds click event listeners to form inputs for error clearing
+ * @param {Object} inputs - Form input elements
+ * @param {Object} error - Error message elements
+ * @param {NodeList} inputContainer - Input container elements
+ * @returns {void}
+ */
 function addEventToInputs(inputs, error, inputContainer) {
   for (const key in inputs) {
     if (!inputs[key]) return;
@@ -171,11 +260,22 @@ function addEventToInputs(inputs, error, inputContainer) {
   }
 }
 
+/**
+ * Removes error messages and styling from form fields
+ * @param {HTMLElement} error - Error message element
+ * @param {HTMLElement} inputContainer - Input container element
+ * @returns {void}
+ */
 function removeErrorReport(error, inputContainer) {
   error.innerHTML = "";
   inputContainer.classList.remove("light-red-outline");
 }
 
+/**
+ * Validates signup form (currently incomplete implementation)
+ * @param {Event} event - Form submission event
+ * @returns {void}
+ */
 function validateSignup(event) {
     event.preventDefault(); 
     let isValid = true;
@@ -190,12 +290,23 @@ function validateSignup(event) {
     document.querySelectorAll('input').forEach(i => i.style.borderColor = '#ccc');
 }
 
+/**
+ * Displays error message for specific input field
+ * @param {HTMLInputElement} input - The input element with error
+ * @param {string} message - Error message to display
+ * @returns {void}
+ */
 function showError(input, message) {
     input.style.borderColor = 'red';
     const errorField = document.querySelector(`.error-signup[data-field="error${capitalizeFirstLetter(input.name)}"]`);
     if (errorField) errorField.textContent = message;
 }
 
+/**
+ * Capitalizes the first letter of a string
+ * @param {string} string - String to capitalize
+ * @returns {string} String with first letter capitalized
+ */
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

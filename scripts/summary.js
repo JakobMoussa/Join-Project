@@ -1,3 +1,8 @@
+/**
+ * Counts and displays task statistics for the summary page
+ * @param {Object} tasks - Object containing all tasks
+ * @returns {void}
+ */
 function countTasks(tasks) {
   const taskTodoRef = document.querySelector("[data-task='to-do']");
   const taskDoneRef = document.querySelector("[data-task='done']");
@@ -15,6 +20,13 @@ function countTasks(tasks) {
   taskFeddbackRef.innerText = Object.values(tasks).filter((task) => task.status === taskFeddbackRef.dataset.task).length;
 }
 
+/**
+ * Checks for urgent tasks and displays the nearest deadline
+ * @param {Object} tasks - Object containing all tasks
+ * @param {HTMLElement} taskRef - Element to display urgent task count
+ * @param {HTMLElement} deadlineRef - Element to display nearest deadline
+ * @returns {void}
+ */
 function checkForUrgentTasks(tasks, taskRef, deadlineRef) {
   let urgentTask = Object.values(tasks).filter((task) => task.priority === "urgent" && task.status !== "done");
   let sortedTaskObj = urgentTask.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -30,12 +42,21 @@ function checkForUrgentTasks(tasks, taskRef, deadlineRef) {
   }
 }
 
+/**
+ * Initializes the summary page by loading tasks and rendering content
+ * @async
+ * @returns {Promise<void>}
+ */
 async function initSummary() {
   let taskObj = await loadData("tasks/");
   countTasks(taskObj);
   renderGreeting();
 }
 
+/**
+ * Renders personalized greeting with user name
+ * @returns {void}
+ */
 function renderGreeting() {
   const name = loadUrlParams();
   if (name == "Guest") return
@@ -49,6 +70,10 @@ function renderGreeting() {
   container.appendChild(nameTag);
 }
 
+/**
+ * Initializes summary when DOM is fully loaded
+ * @returns {void}
+ */
 document.addEventListener("DOMContentLoaded", () => {
   initSummary();
 });

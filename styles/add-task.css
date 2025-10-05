@@ -434,11 +434,9 @@ button div {
   padding: 2px;     
 }
 
-
 .error {
   border: 2px solid red;
 }
-
 
 .user-name {
   flex-grow: 1;
@@ -621,6 +619,7 @@ button div {
   .create-task-container {
     width: 100%;
     margin: 32px 0 0 0;
+    padding-top: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -702,6 +701,17 @@ button div {
 @media (max-width: 360px) {
   .task-controls {
     margin-top: 0px
+  }
+
+  .addTask-Container {
+    width: 120%;
+    padding: 0;
+  }
+
+  .ok-btn {
+   position: absolute !important; 
+    bottom: 30px;
+    left: 15px;
   }
 } 
 

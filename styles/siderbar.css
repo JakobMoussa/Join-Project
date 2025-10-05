@@ -34,6 +34,7 @@
   width: 100%;
   gap: 8px;
   padding: 10px 58px;
+  cursor: pointer;
 }
 
 .nav-link:hover {
