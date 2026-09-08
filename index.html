@@ -12,7 +12,6 @@
 </head>
 
 <body class="welcome-body">
-  <!-- Splash Logo Overlay with animation -->
   <div class="logo-overlay">
     <img src="./assets/icons/join-logo.svg" class="logo" alt="Join Logo">
   </div>
@@ -26,34 +25,24 @@
       </p>
 
       <div class="role-options">
-        <!-- Stakeholder Option -->
         <div class="role-block">
           <div class="role-header">
             <span class="role-icon">
-              <svg width="22" height="20" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="6" width="20" height="14" rx="2.5" stroke="#29ABE2" stroke-width="2"/>
-                <path d="M16 6V4C16 2.89543 15.1046 2 14 2H10C8.89543 2 8 2.89543 8 4V6" stroke="#29ABE2" stroke-width="2"/>
-              </svg>
+              <img src="assets/icons/work.svg" alt="work-icon">
             </span>
             <span>Are you a stakeholder?</span>
           </div>
-          <a href="#" class="btn-request" onclick="event.preventDefault()">Create request</a>
+          <a href="./html-templates/stakeholder-request.html" class="btn-request">Create request</a>
         </div>
 
-        <!-- Team Member Option -->
         <div class="role-block">
           <div class="role-header">
             <span class="role-icon">
-              <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 19V17.5C16 15.567 14.433 14 12.5 14H6.5C4.567 14 3 15.567 3 17.5V19" stroke="#29ABE2" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="9.5" cy="6.5" r="3.5" stroke="#29ABE2" stroke-width="2"/>
-                <path d="M21 19V17.5C20.997 15.82 19.82 14.36 18.2 14.05" stroke="#29ABE2" stroke-width="2" stroke-linecap="round"/>
-                <path d="M15 3.1C16.2 3.6 17 4.8 17 6.2C17 7.6 16.2 8.8 15 9.3" stroke="#29ABE2" stroke-width="2" stroke-linecap="round"/>
-              </svg>
+              <img src="assets/icons/Frame.svg" alt="frame-icon">
             </span>
             <span>Are you a team member?</span>
           </div>
-          <a href="#" class="btn-member" onclick="event.preventDefault()">Member log in</a>
+          <a href="./html-templates/login.html" class="btn-member">Member log in</a>
         </div>
       </div>
     </main>

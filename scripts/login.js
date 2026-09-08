@@ -32,7 +32,7 @@ async function handleLogin() {
     const users = await loadData("users/");
     let userName = isValidLogin(users);
     if (userName) {    
-        window.location.href = `./html-templates/summary.html?msg=${userName}`;
+        window.location.href = `./summary.html?msg=${userName}`;
     } else {
         failLogin();
     }
@@ -73,7 +73,7 @@ function isValidLogin(users) {
  * @returns {void}
  */
 function guestLogin() {
-    window.location.href = `./html-templates/summary.html?msg=Guest`;
+    window.location.href = `./summary.html?msg=Guest`;
 }
 
 /**

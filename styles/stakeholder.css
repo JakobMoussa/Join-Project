@@ -1,0 +1,265 @@
+* {
+  box-sizing: border-box;
+}
+
+body.stakeholder-body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  font-family: "Inter", Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #2A3647;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.stakeholder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 36px 64px 0 64px;
+  width: 100%;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.logo-link img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background-color 0.2s, transform 0.15s;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  background-color: #f0f4f8;
+  transform: translateX(-3px);
+}
+
+.back-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.request-limit-badge {
+  font-size: 16px;
+  color: #207fa6;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+
+.request-limit-badge .requests-used {
+  font-weight: 700;
+  color: #007CEE;
+  margin-right: 2px;
+}
+
+.request-limit-badge .requests-total {
+  font-weight: 700;
+  color: #207fa6;
+}
+
+.stakeholder-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stakeholder-title {
+  font-size: 52px;
+  font-weight: 700;
+  color: #2A3647;
+  text-align: center;
+  margin: 8px 0 60px 0;
+  letter-spacing: -0.5px;
+}
+
+.stakeholder-content-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 56px;
+}
+
+.stakeholder-info {
+  flex: 1.15;
+  max-width: 530px;
+}
+
+.stakeholder-headline {
+  font-size: 26px;
+  font-weight: 600;
+  color: #2A3647;
+  line-height: 1.35;
+  margin: 0 0 24px 0;
+  letter-spacing: -0.3px;
+}
+
+.stakeholder-text {
+  font-size: 15px;
+  color: #4a5768;
+  line-height: 1.55;
+  margin: 0 0 20px 0;
+}
+
+.stakeholder-text.last-paragraph {
+  margin-bottom: 38px;
+}
+
+.btn-create-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #177399;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 3px 10px rgba(23, 115, 153, 0.25);
+}
+
+.btn-create-email:hover {
+  background-color: #135e7d;
+  box-shadow: 0 5px 14px rgba(23, 115, 153, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-create-email:active {
+  transform: translateY(0);
+}
+
+.btn-create-email svg {
+  width: 17px;
+  height: 13px;
+  stroke: #ffffff;
+  flex-shrink: 0;
+}
+
+.stakeholder-illustration {
+  flex: 0.95;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustration-img {
+  max-width: 440px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.stakeholder-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 40px 0 28px 0;
+  margin-top: auto;
+}
+
+.stakeholder-footer a {
+  color: #707375;
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.stakeholder-footer a:hover {
+  color: #29ABE2;
+}
+
+@media screen and (max-width: 960px) {
+  .stakeholder-header {
+    padding: 28px 36px 0 36px;
+  }
+
+  .stakeholder-title {
+    font-size: 42px;
+    margin-bottom: 40px;
+  }
+
+  .stakeholder-content-grid {
+    gap: 36px;
+  }
+
+  .stakeholder-headline {
+    font-size: 22px;
+  }
+
+  .illustration-img {
+    max-width: 360px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .stakeholder-header {
+    padding: 20px 24px 0 24px;
+  }
+
+  .header-left {
+    gap: 16px;
+  }
+
+  .logo-link img {
+    height: 44px;
+  }
+
+  .stakeholder-title {
+    font-size: 34px;
+    margin: 20px 0 32px 0;
+  }
+
+  .stakeholder-content-grid {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .stakeholder-info {
+    max-width: 100%;
+  }
+
+  .btn-create-email {
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .illustration-img {
+    max-width: 300px;
+  }
+}
