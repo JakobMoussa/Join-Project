@@ -64,6 +64,7 @@
   top: 96px;
   right: 8px;
   flex-direction: row-reverse;
+  pointer-events: none;
 }
 
 .menu {
@@ -77,6 +78,7 @@
   transition: transform 125ms ease-in;
   z-index: 10;
   overflow: hidden;
+  pointer-events: auto;
 }
 
 .menu-translateX {

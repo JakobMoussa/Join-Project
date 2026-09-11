@@ -16,15 +16,15 @@ function subListItem(task, id) {
               </div>
           </li>
       `;
-  }
-  
-  /**
-   * Creates HTML template for a subtask list item in edit mode
-   * @param {string} task - The subtask text content
-   * @param {string|number} id - The unique identifier for the subtask
-   * @returns {string} HTML string for the editable subtask list item
-   */
-  function subListItemEdit(task, id) {
+}
+
+/**
+ * Creates HTML template for a subtask list item in edit mode
+ * @param {string} task - The subtask text content
+ * @param {string|number} id - The unique identifier for the subtask
+ * @returns {string} HTML string for the editable subtask list item
+ */
+function subListItemEdit(task, id) {
     return `
           <li class="sub-item-editing">
               <input type="text" id="sub-input-${id}" value="${task}">
@@ -35,17 +35,17 @@ function subListItem(task, id) {
               </div>
           </li>
       `;
-  }
-  
-  /**
-   * Creates HTML template for a user assignment container
-   * @param {string} style - CSS class for styling
-   * @param {string} initials - User initials for avatar
-   * @param {string} [name="XX"] - User name
-   * @param {string} [color="red"] - Background color for avatar
-   * @returns {string} HTML string for user container
-   */
-  function singleUserContainer(style, initials, name = "XX", color = "red") {
+}
+
+/**
+ * Creates HTML template for a user assignment container
+ * @param {string} style - CSS class for styling
+ * @param {string} initials - User initials for avatar
+ * @param {string} [name="XX"] - User name
+ * @param {string} [color="red"] - Background color for avatar
+ * @returns {string} HTML string for user container
+ */
+function singleUserContainer(style, initials, name = "XX", color = "red") {
     return `
           <div class="${style}" onclick="assignedUser('${name}')">
               <div class="user-icon" style="background-color: ${color};">${initials}</div>
@@ -53,27 +53,27 @@ function subListItem(task, id) {
               <button type="button" type="button" class="btn-check"></button>
           </div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for a user icon/avatar
-   * @param {string} [color="red"] - Background color for avatar
-   * @param {string} [initials="xx"] - User initials
-   * @param {string} [name="xx"] - User name
-   * @returns {string} HTML string for user icon
-   */
-  function userIcon(color = "red", initials = "xx", name = "xx") {
+}
+
+/**
+ * Creates HTML template for a user icon/avatar
+ * @param {string} [color="red"] - Background color for avatar
+ * @param {string} [initials="xx"] - User initials
+ * @param {string} [name="xx"] - User name
+ * @returns {string} HTML string for user icon
+ */
+function userIcon(color = "red", initials = "xx", name = "xx") {
     return `
           <div class="user-icon" onclick="assignedUser('${name}')" style="background-color: ${color}">${initials}</div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for task title input field
-   * @param {string} [title=""] - Pre-filled title value
-   * @returns {string} HTML string for title input container
-   */
-  function titleTaskTpl(title = "") {
+}
+
+/**
+ * Creates HTML template for task title input field
+ * @param {string} [title=""] - Pre-filled title value
+ * @returns {string} HTML string for title input container
+ */
+function titleTaskTpl(title = "") {
     return `
           <div class="task-container">
               <label for="titleInput" class="task-name">
@@ -83,28 +83,28 @@ function subListItem(task, id) {
               <span id="titleError" class="error-message"></span>
           </div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for task description textarea
-   * @param {string} [description=""] - Pre-filled description value
-   * @returns {string} HTML string for description container
-   */
-  function descriptionTaskTpl(description = "") {
+}
+
+/**
+ * Creates HTML template for task description textarea
+ * @param {string} [description=""] - Pre-filled description value
+ * @returns {string} HTML string for description container
+ */
+function descriptionTaskTpl(description = "") {
     return `
           <div class="task-container">
               <label for="description-input" class="task-name">Description</label>
               <textarea name="" id="description" class="textarea-description">${description}</textarea>
           </div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for task due date input field
-   * @param {string} [date=""] - Pre-filled date value
-   * @returns {string} HTML string for date input container
-   */
-  function dateTaskTpl(date = "") {
+}
+
+/**
+ * Creates HTML template for task due date input field
+ * @param {string} [date=""] - Pre-filled date value
+ * @returns {string} HTML string for date input container
+ */
+function dateTaskTpl(date = "") {
     return `
           <div class="task-container">
               <label for="date" class="task-name">
@@ -114,13 +114,13 @@ function subListItem(task, id) {
               <span id="dateError" class="error-message"></span>
           </div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for task priority selection buttons
-   * @returns {string} HTML string for priority selection container
-   */
-  function prioTaskTpl() {
+}
+
+/**
+ * Creates HTML template for task priority selection buttons
+ * @returns {string} HTML string for priority selection container
+ */
+function prioTaskTpl() {
     return `
           <div class="task-container">
               <span class="task-name">Priority</span>
@@ -140,13 +140,13 @@ function subListItem(task, id) {
               </div>
           </div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for task assignment section
-   * @returns {string} HTML string for assignment container
-   */
-  function assignedTaskTpl() {
+}
+
+/**
+ * Creates HTML template for task assignment section
+ * @returns {string} HTML string for assignment container
+ */
+function assignedTaskTpl() {
     return `
           <div class="task-container" id="task-container">
               <span class="task-name">Assigned to:</span>
@@ -165,13 +165,13 @@ function subListItem(task, id) {
           </div>
           <div class="dropdown-overlay d-none" id="assigned-dropdown-overlay" onclick="toggleAssignedDropdown()"></div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for task category selection
-   * @returns {string} HTML string for category selection container
-   */
-  function categoryTaskTpl() {
+}
+
+/**
+ * Creates HTML template for task category selection
+ * @returns {string} HTML string for category selection container
+ */
+function categoryTaskTpl() {
     return `
           <div class="task-container" id="category-container">
               <span class="task-name">
@@ -197,13 +197,13 @@ function subListItem(task, id) {
           </div>
           <div class="dropdown-overlay d-none" id="category-dropdown-overlay" onclick="toggleCategoryDropdown()"></div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for subtasks section
-   * @returns {string} HTML string for subtasks container
-   */
-  function subtaskTpl() {
+}
+
+/**
+ * Creates HTML template for subtasks section
+ * @returns {string} HTML string for subtasks container
+ */
+function subtaskTpl() {
     return `
           <div class="task-container">
               <span class="task-name">Subtask</span>
@@ -219,43 +219,43 @@ function subListItem(task, id) {
               </div>
           </div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for task edit overlay
-   * @returns {string} HTML string for edit task container
-   */
-  function editTaskTpl() {
+}
+
+/**
+ * Creates HTML template for task edit overlay
+ * @returns {string} HTML string for edit task container
+ */
+function editTaskTpl() {
     return `
           <div class="close-edit-conatiner">
               <button class="close-task" onclick="closeOverlay(); resetTaskData()"></button>
           </div>
           <div class="editTask-container"></div>        
       `;
-  }
-  
-  /**
-   * Creates HTML template for OK button in edit mode
-   * @param {string} taskId - The task identifier
-   * @returns {string} HTML string for OK button
-   */
-  function okBtn(taskId) {
+}
+
+/**
+ * Creates HTML template for OK button in edit mode
+ * @param {string} taskId - The task identifier
+ * @returns {string} HTML string for OK button
+ */
+function okBtn(taskId) {
     return `
           <button class="btn-create ok-btn" onclick="saveEditedTask('${taskId}'); resetTaskData()">
               Ok
               <img src="../assets/icons/check.svg" alt="">
           </button>
       `;
-  }
-  
-  /**
-   * Creates HTML template for a task card
-   * @param {string} id - The task identifier
-   * @param {Object} task - The task object containing task data
-   * @returns {string} HTML string for task card
-   */
-  function createTaskTemplate(id, task) {
-      const assignedLimited = (task.assigned || []).slice(0, 3);
+}
+
+/**
+ * Creates HTML template for a task card
+ * @param {string} id - The task identifier
+ * @param {Object} task - The task object containing task data
+ * @returns {string} HTML string for task card
+ */
+function createTaskTemplate(id, task) {
+    const assignedLimited = (task.assigned || []).slice(0, 3);
     return `
       <div class="task draggable" data-id="${id}" id="${id}" draggable="true" 
        ondragstart="dragstartHandler(event, '${id}')" 
@@ -273,74 +273,74 @@ function subListItem(task, id) {
           </div>
       </div>
     `;
-  }
-  
-  /**
-   * Creates HTML template for progress wrapper around subtasks
-   * @param {Array} subtasks - Array of subtask objects
-   * @param {string} numerus - Text label for subtask count
-   * @param {Array} subtaskDone - Array of completed subtasks
-   * @returns {string} HTML string for progress wrapper
-   */
-  function createProgressWrapper(subtasks, numerus, subtaskDone) {
+}
+
+/**
+ * Creates HTML template for progress wrapper around subtasks
+ * @param {Array} subtasks - Array of subtask objects
+ * @param {string} numerus - Text label for subtask count
+ * @param {Array} subtaskDone - Array of completed subtasks
+ * @returns {string} HTML string for progress wrapper
+ */
+function createProgressWrapper(subtasks, numerus, subtaskDone) {
     return `
       <div class="progress-wrapper">
         ${progessTemplate(subtasks, numerus, subtaskDone)}
       </div>
     `;
-  }
-  
-  /**
-   * Creates HTML template for progress bar and subtask counter
-   * @param {Array} subtasks - Array of subtask objects
-   * @param {string} numerus - Text label for subtask count
-   * @param {Array} subtaskDone - Array of completed subtasks
-   * @returns {string} HTML string for progress display
-   */
-  function progessTemplate(subtasks, numerus, subtaskDone) {
+}
+
+/**
+ * Creates HTML template for progress bar and subtask counter
+ * @param {Array} subtasks - Array of subtask objects
+ * @param {string} numerus - Text label for subtask count
+ * @param {Array} subtaskDone - Array of completed subtasks
+ * @returns {string} HTML string for progress display
+ */
+function progessTemplate(subtasks, numerus, subtaskDone) {
     return `
       <div class="progress-bar">
           <div class="progress" style="width: ${Math.round((subtaskDone.length / subtasks.length) * 100)}%;"></div>
       </div>
       <span class="subtask">${subtaskDone.length}/${subtasks.length} ${numerus}</span>
     `;
-  }
-  
-  /**
-   * Creates HTML template for a user avatar
-   * @param {Object} userObj - User object containing color and other data
-   * @param {string} username - User name for display
-   * @returns {string} HTML string for user avatar
-   */
-  function createPersonTemplate(userObj, username) {
+}
+
+/**
+ * Creates HTML template for a user avatar
+ * @param {Object} userObj - User object containing color and other data
+ * @param {string} username - User name for display
+ * @returns {string} HTML string for user avatar
+ */
+function createPersonTemplate(userObj, username) {
     return `<span class="avatar" style="background: ${userObj.color};" > ${username}</span>`;
-  }
-  
-  /**
-   * Creates HTML template for empty task list placeholder
-   * @returns {string} HTML string for empty state
-   */
-  function createTaskPlaceholder() {
+}
+
+/**
+ * Creates HTML template for empty task list placeholder
+ * @returns {string} HTML string for empty state
+ */
+function createTaskPlaceholder() {
     return `<div class="empty">No tasks To do</div>`;
-  }
-  
-  /**
-   * Creates HTML template for empty done tasks placeholder
-   * @returns {string} HTML string for empty done state
-   */
-  function createTaskPlaceholderDone() {
+}
+
+/**
+ * Creates HTML template for empty done tasks placeholder
+ * @returns {string} HTML string for empty done state
+ */
+function createTaskPlaceholderDone() {
     return `<div class="empty">No tasks done</div>`;
-  }
-  
-  // --------------------- Task-Overlay ---------------------------------------
-  
-  /**
-   * Creates HTML template for detailed task view overlay
-   * @param {string} taskId - The task identifier
-   * @param {Object} task - The task object containing task data
-   * @returns {string} HTML string for detailed task overlay
-   */
-  function createDetailedTaskTemplate(taskId, task) {
+}
+
+// --------------------- Task-Overlay ---------------------------------------
+
+/**
+ * Creates HTML template for detailed task view overlay
+ * @param {string} taskId - The task identifier
+ * @param {Object} task - The task object containing task data
+ * @returns {string} HTML string for detailed task overlay
+ */
+function createDetailedTaskTemplate(taskId, task) {
     return `
       <div id="overlay-wrapper" class="overlay-wrapper overlay-content transit task-view" onclick="onclickProtection(event)">
           <div class="overlay-header mb-20">
@@ -352,6 +352,25 @@ function subListItem(task, id) {
   
           <h1 class="task-title mb-21">${task.title}</h1>
           <p class="task-description mb-25">${task.description}</p>
+  
+          <div class="creator-row mb-20">
+              <span class="section-title">Creator:</span>
+              <span class="creator-badge">
+                  <img src="../assets/icons/Frame.svg" alt="member-icon" class="creator-badge-icon">
+                  <span>Member</span>
+              </span>
+              <span class="creator-name">${task.creator || 'Guest'}</span>
+              <a href="#" class="creator-profil-link" onclick="
+                  if('${task.creator || 'Guest'}' !== 'Guest' && '${task.creator || 'Guest'}' !== 'Unknown') {
+                      let currentUser = new URLSearchParams(window.location.search).get('msg') || 'Guest';
+                      this.href = '../html-templates/contacts.html?msg=' + encodeURIComponent(currentUser) + '&showContact=' + encodeURIComponent('${task.creator}');
+                  } else {
+                      event.preventDefault();
+                  }">
+                  <img src="../assets/icons/person-blue.svg" alt="profil-icon" class="creator-profil-icon">
+                  <span>Profil</span>
+              </a>
+          </div>
   
           <div class="flex mb-20">
               <div>
@@ -384,14 +403,14 @@ function subListItem(task, id) {
           </div>
       </div>
     `;
-  }
-  
-  /**
-   * Creates HTML template for assigned users section in detail view
-   * @param {Object} userObj - User object containing user data
-   * @returns {string} HTML string for assigned users section
-   */
-  function createPersonTemplateDetailView(userObj) {
+}
+
+/**
+ * Creates HTML template for assigned users section in detail view
+ * @param {Object} userObj - User object containing user data
+ * @returns {string} HTML string for assigned users section
+ */
+function createPersonTemplateDetailView(userObj) {
     return `
       <div>
           <div class="section-title mb-14">Assigned to:</div>
@@ -400,30 +419,30 @@ function subListItem(task, id) {
           </ul>
       </div>
     `;
-  }
-  
-  /**
-   * Creates HTML template for a single assigned user list item
-   * @param {Object} userObj - User object containing user data
-   * @param {string} username - User name for display
-   * @returns {string} HTML string for assigned user list item
-   */
-  function createPersonListItem(userObj, username) {
+}
+
+/**
+ * Creates HTML template for a single assigned user list item
+ * @param {Object} userObj - User object containing user data
+ * @param {string} username - User name for display
+ * @returns {string} HTML string for assigned user list item
+ */
+function createPersonListItem(userObj, username) {
     return `
       <li class="assigned-person mb-14">
           <span class="avatar" style="background: ${userObj.color};">${username}</span>
           <span>${userObj.name}</span>
       </li>
     `;
-  }
-  
-  /**
-   * Creates HTML template for subtasks section in detail view
-   * @param {string} taskId - The task identifier
-   * @param {Array} subtaskArr - Array of subtask objects
-   * @returns {string} HTML string for subtasks section
-   */
-  function createSubtaskTemplate(taskId, subtaskArr) {
+}
+
+/**
+ * Creates HTML template for subtasks section in detail view
+ * @param {string} taskId - The task identifier
+ * @param {Array} subtaskArr - Array of subtask objects
+ * @returns {string} HTML string for subtasks section
+ */
+function createSubtaskTemplate(taskId, subtaskArr) {
     return `
       <div>
           <div class="section-title mb-14">Subtasks</div>
@@ -432,15 +451,15 @@ function subListItem(task, id) {
           </ul>
       </div>
     `;
-  }
-  
-  /**
-   * Creates HTML template for a single subtask list item
-   * @param {string} taskId - The task identifier
-   * @param {Object} subtaskObj - Subtask object containing subtask data
-   * @returns {string} HTML string for subtask list item
-   */
-  function createSubtaskListItem(taskId, subtaskObj) {
+}
+
+/**
+ * Creates HTML template for a single subtask list item
+ * @param {string} taskId - The task identifier
+ * @param {Object} subtaskObj - Subtask object containing subtask data
+ * @returns {string} HTML string for subtask list item
+ */
+function createSubtaskListItem(taskId, subtaskObj) {
     const checkedClass = subtaskObj.edit ? " checked" : "";
     return `
       <li class="subtask-item mb-14" data-id="${subtaskObj.id}">
@@ -448,20 +467,20 @@ function subListItem(task, id) {
         <label>${subtaskObj.value}</label>
       </li>
     `;
-  }
-  
-  // --------------------- Contact-Overlay ---------------------------------------
-  
-  /**
-   * Creates HTML template for user information display in contact overlay
-   * @param {string} id - The user identifier
-   * @param {Object} user - The user object containing user data
-   * @returns {string} HTML string for user information display
-   */
-  function renderUserInfo(id, user) {
-      const editContainer = document.querySelector(".edit-delete-container");
-      editContainer.innerHTML = responsiveEditMenu(id);
-      return `
+}
+
+// --------------------- Contact-Overlay ---------------------------------------
+
+/**
+ * Creates HTML template for user information display in contact overlay
+ * @param {string} id - The user identifier
+ * @param {Object} user - The user object containing user data
+ * @returns {string} HTML string for user information display
+ */
+function renderUserInfo(id, user) {
+    const editContainer = document.querySelector(".edit-delete-container");
+    editContainer.innerHTML = responsiveEditMenu(id);
+    return `
           <div class="user-details" onclick="event.stopPropagation()">
               <div class="user-name-container">
                   <div class="avatar-circle" style="background-color: ${user.color};">${user.avatar}
@@ -488,15 +507,15 @@ function subListItem(task, id) {
               </div>            
           </div>
       `;
-  }
-  
-  /**
-   * Creates HTML template for responsive edit menu (mobile)
-   * @param {string} id - The user identifier
-   * @returns {string} HTML string for responsive edit menu
-   */
-  function responsiveEditMenu(id) {
-      return `
+}
+
+/**
+ * Creates HTML template for responsive edit menu (mobile)
+ * @param {string} id - The user identifier
+ * @returns {string} HTML string for responsive edit menu
+ */
+function responsiveEditMenu(id) {
+    return `
           <button class="open-edit-delete" onclick="opencEditMenu()"></button>
           <div class="mobile-edit-delete" hidden onclick="closeEditMenu()">
               <div class="user-edit-container">
@@ -510,22 +529,22 @@ function subListItem(task, id) {
               </div>
           </div>
       `
-  }
-  
-  /**
-   * Creates a contact element DOM node
-   * @param {Object} user - The user object containing user data
-   * @param {string} id - The user identifier
-   * @returns {HTMLElement} DOM element for contact
-   */
-  function createContactElement(user, id) {
-      const div = document.createElement("div");
-      div.classList.add("contact");
-      div.addEventListener("click", (event) => {
-          openUserInfos(id);
-          toggleContactBg(event);      
-      });
-      div.innerHTML = `
+}
+
+/**
+ * Creates a contact element DOM node
+ * @param {Object} user - The user object containing user data
+ * @param {string} id - The user identifier
+ * @returns {HTMLElement} DOM element for contact
+ */
+function createContactElement(user, id) {
+    const div = document.createElement("div");
+    div.classList.add("contact");
+    div.addEventListener("click", (event) => {
+        openUserInfos(id);
+        toggleContactBg(event);
+    });
+    div.innerHTML = `
           <div class="avatar" style="background-color: ${user.color};">${user.avatar || user.Avatar}</div>
           <div class="info">
               <div class="name">${user.name}</div>
@@ -533,17 +552,17 @@ function subListItem(task, id) {
           </div>
       `;
     return div;
-  }
-  
-  /**
-   * Creates HTML template for navigation link
-   * @param {string} icon - Icon name for the navigation link
-   * @param {string} link - URL for the navigation link
-   * @param {string} section - Display text for the navigation section
-   * @returns {string} HTML string for navigation link
-   */
-  function navLink(icon, link, section) {
-      return `
+}
+
+/**
+ * Creates HTML template for navigation link
+ * @param {string} icon - Icon name for the navigation link
+ * @param {string} link - URL for the navigation link
+ * @param {string} section - Display text for the navigation section
+ * @returns {string} HTML string for navigation link
+ */
+function navLink(icon, link, section) {
+    return `
             <li class="nav-link">
                 <div class="img-wrapper">
                     <img src="../assets/icons/${icon}.svg" alt="">
@@ -560,14 +579,14 @@ function subListItem(task, id) {
                       </a> 
               </div>
         `;
-    }
-  
-  /**
-   * Creates HTML template for contact edit overlay
-   * @param {Object} user - The user object containing user data
-   * @returns {void}
-   */
-  function editContactOverlay(user) {
+}
+
+/**
+ * Creates HTML template for contact edit overlay
+ * @param {Object} user - The user object containing user data
+ * @returns {void}
+ */
+function editContactOverlay(user) {
     const overlay = document.getElementById("overlay");
     overlay.innerHTML = `
       <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
@@ -614,14 +633,14 @@ function subListItem(task, id) {
           </div>
       </div>
     `;
-  }
-  
-  /**
-   * Creates HTML template for add contact overlay
-   * @returns {string} HTML string for add contact overlay
-   */
-  function getContactOverlayTemplate() {
-      return `
+}
+
+/**
+ * Creates HTML template for add contact overlay
+ * @returns {string} HTML string for add contact overlay
+ */
+function getContactOverlayTemplate() {
+    return `
         <div id="overlay-wrapper" class="overlay-wrapper transit" onclick="onclickProtection(event)">
             <div class="modal"> 
                 <div class="modal-left">
@@ -667,4 +686,4 @@ function subListItem(task, id) {
             </div>
         </div>
       `;
-    }
+}

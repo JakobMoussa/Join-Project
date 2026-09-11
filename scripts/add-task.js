@@ -363,6 +363,7 @@ function getFormElementsIds() {
  * @returns {Object} Task object
  */
 function taskObjTemplate(priority = "medium", users, subtask, status = "to-do") {
+  let creator = loadUrlParams() || "Guest";
   return {
     title: document.getElementById("titleInput").value,
     description: document.getElementById("description").value,
@@ -373,6 +374,7 @@ function taskObjTemplate(priority = "medium", users, subtask, status = "to-do") 
     subtask: subtask,
     status: status,
     order: 1000,
+    creator: creator,
   };
 }
 

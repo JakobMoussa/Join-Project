@@ -282,6 +282,19 @@ async function loadContacts() {
     let users = await loadData("users");
     let initials = getUniqueInitials(users);
     importContactGroups(users, initials);
+    
+    // Check if we need to auto-open a contact from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const showContactName = urlParams.get("showContact");
+    if (showContactName && users) {
+        // Find the user ID by name
+        for (const [id, user] of Object.entries(users)) {
+            if (user.name === showContactName) {
+                openUserInfos(id);
+                break;
+            }
+        }
+    }
 }
 loadContacts();
 
