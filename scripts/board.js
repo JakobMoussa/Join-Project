@@ -304,7 +304,11 @@ function renderAssignedUsers(task) {
  */
 async function saveEditedTask(taskId) {
   if (!taskId || !isTaskDataValid()) return;
-  let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus);
+  
+  let originalTask = await loadData(`tasks/${taskId}`);
+  let creator = originalTask.creator || "Guest";
+
+  let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus, creator);
   await putData("tasks/" + taskId, task);
   await initBoard();
   await renderOpenTask(taskId);

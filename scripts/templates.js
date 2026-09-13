@@ -262,6 +262,7 @@ function createTaskTemplate(id, task) {
        ondragend="dragendHandler(event)" 
        onclick="renderSelectedTask('${id}')">
           <span class="tag ${createCategoryClass(task.category)}">${task.category}</span>
+
           <h4>${task.title}</h4>
           <p class="task-descr">${task.description}</p>
           ${checkForSubtask(task.subtask)}
@@ -335,6 +336,20 @@ function createTaskPlaceholderDone() {
 // --------------------- Task-Overlay ---------------------------------------
 
 /**
+ * Returns salutation prefix based on Gender field from Firebase
+ * 'male' => 'Herr', 'female' => 'Frau', else ''
+ * @param {string} gender - Gender value from Firebase
+ * @returns {string} Salutation string
+ */
+function getCreatorSalutation(salutation) {
+  if (!salutation) return '';
+  const s = salutation.toLowerCase();
+  if (s === 'male' || s === 'männlich' || s === 'm' || s === 'herr' || s === 'mr') return 'Herr';
+  if (s === 'female' || s === 'weiblich' || s === 'f' || s === 'frau' || s === 'ms' || s === 'mrs') return 'Frau';
+  return salutation;
+}
+
+/**
  * Creates HTML template for detailed task view overlay
  * @param {string} taskId - The task identifier
  * @param {Object} task - The task object containing task data
@@ -345,9 +360,12 @@ function createDetailedTaskTemplate(taskId, task) {
       <div id="overlay-wrapper" class="overlay-wrapper overlay-content transit task-view" onclick="onclickProtection(event)">
           <div class="overlay-header mb-20">
               <span class="tag-overlay ${createCategoryClass(task.category)}">${task.category}</span>
-              <button class="btn-transparent" onclick="closeOverlay()">
-                  <img src="../assets/icons/close.svg" alt="Close">
-              </button>
+              <div style="display: flex; align-items: center; gap: 24px;">
+                  ${task.aiGenerated ? `<div style="display: flex; align-items: center; gap: 6px; color: #8a8a8a; font-size: 16px;"><img src="../assets/icons/wand_stars.svg" alt="AI Icon" style="width: 20px; height: 20px;"><span class="ai-icon">Ai-generated ticket</span></div>` : ''}
+                  <button class="btn-transparent" onclick="closeOverlay()">
+                      <img src="../assets/icons/close.svg" alt="Close">
+                  </button>
+              </div>
           </div>
   
           <h1 class="task-title mb-21">${task.title}</h1>
@@ -355,11 +373,21 @@ function createDetailedTaskTemplate(taskId, task) {
   
           <div class="creator-row mb-20">
               <span class="section-title">Creator:</span>
+              ${(task.aiGenerated === true || task.aiGenerated === 'true') ? `
+              <span class="creator-badge" style="background-color: #EBFC88;">
+                  <img src="../assets/icons/language.svg" alt="extern-icon" class="creator-badge-icon">
+                  <span>Extern</span>
+              </span>` : `
               <span class="creator-badge">
                   <img src="../assets/icons/Frame.svg" alt="member-icon" class="creator-badge-icon">
                   <span>Member</span>
-              </span>
-              <span class="creator-name">${task.creator || 'Guest'}</span>
+              </span>`}
+              <span class="creator-name">${(task.aiGenerated === true || task.aiGenerated === 'true') ? ((getCreatorSalutation(task.salutation) ? getCreatorSalutation(task.salutation) + ' ' : '') + (task.creatorName || '')) || 'Extern' : (task.creator || 'Guest')}</span>
+              ${(task.aiGenerated === true || task.aiGenerated === 'true') ? `
+              <a href="mailto:${task.creatorName || ''}" class="creator-profil-link">
+                  <img src="../assets/icons/attach_email.svg" alt="email-icon" class="creator-profil-icon">
+                  <span>E-Mail</span>
+              </a>` : `
               <a href="#" class="creator-profil-link" onclick="
                   if('${task.creator || 'Guest'}' !== 'Guest' && '${task.creator || 'Guest'}' !== 'Unknown') {
                       let currentUser = new URLSearchParams(window.location.search).get('msg') || 'Guest';
@@ -369,7 +397,7 @@ function createDetailedTaskTemplate(taskId, task) {
                   }">
                   <img src="../assets/icons/person-blue.svg" alt="profil-icon" class="creator-profil-icon">
                   <span>Profil</span>
-              </a>
+              </a>`}
           </div>
   
           <div class="flex mb-20">

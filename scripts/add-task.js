@@ -303,7 +303,8 @@ async function createTaskForm() {
   if (!validateTask) return;
   let task = taskObjTemplate(selectedPriority, assignedUserArr, subtask, taskStatus);
   await postData("tasks", task);
-  window.location.href = `./board.html`;
+  let currentUser = loadUrlParams();
+  window.location.href = currentUser ? `./board.html?msg=${encodeURIComponent(currentUser)}` : `./board.html`;
 }
 
 /**
@@ -362,8 +363,8 @@ function getFormElementsIds() {
  * @param {string} status - Task status
  * @returns {Object} Task object
  */
-function taskObjTemplate(priority = "medium", users, subtask, status = "to-do") {
-  let creator = loadUrlParams() || "Guest";
+function taskObjTemplate(priority = "medium", users, subtask, status = "to-do", taskCreator = null) {
+  let creator = taskCreator || loadUrlParams() || "Guest";
   return {
     title: document.getElementById("titleInput").value,
     description: document.getElementById("description").value,
