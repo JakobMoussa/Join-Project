@@ -256,6 +256,7 @@ function okBtn(taskId) {
  */
 function createTaskTemplate(id, task) {
     const assignedLimited = (task.assigned || []).slice(0, 3);
+    const priority = task.priority || 'medium';
     return `
       <div class="task draggable" data-id="${id}" id="${id}" draggable="true" 
        ondragstart="dragstartHandler(event, '${id}')" 
@@ -270,7 +271,7 @@ function createTaskTemplate(id, task) {
               <div>
                 ${checkForAssignment(assignedLimited)}
               </div>
-              <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
+              <img src="../assets/icons/prio-${priority}.svg" alt="Prio ${priority}">
           </div>
       </div>
     `;
@@ -314,7 +315,9 @@ function progessTemplate(subtasks, numerus, subtaskDone) {
  * @returns {string} HTML string for user avatar
  */
 function createPersonTemplate(userObj, username) {
-    return `<span class="avatar" style="background: ${userObj.color};" > ${username}</span>`;
+    let color = userObj && userObj.color ? userObj.color : "#29ABE2";
+    let display = username ? username : "";
+    return `<span class="avatar" style="background: ${color};" >${display}</span>`;
 }
 
 /**
@@ -342,11 +345,11 @@ function createTaskPlaceholderDone() {
  * @returns {string} Salutation string
  */
 function getCreatorSalutation(salutation) {
-  if (!salutation) return '';
-  const s = salutation.toLowerCase();
-  if (s === 'male' || s === 'männlich' || s === 'm' || s === 'herr' || s === 'mr') return 'Herr';
-  if (s === 'female' || s === 'weiblich' || s === 'f' || s === 'frau' || s === 'ms' || s === 'mrs') return 'Frau';
-  return salutation;
+    if (!salutation) return '';
+    const s = salutation.toLowerCase();
+    if (s === 'male' || s === 'männlich' || s === 'm' || s === 'herr' || s === 'mr') return 'Herr';
+    if (s === 'female' || s === 'weiblich' || s === 'f' || s === 'frau' || s === 'ms' || s === 'mrs') return 'Frau';
+    return salutation;
 }
 
 /**
@@ -356,12 +359,14 @@ function getCreatorSalutation(salutation) {
  * @returns {string} HTML string for detailed task overlay
  */
 function createDetailedTaskTemplate(taskId, task) {
+    const priority = task.priority || 'medium';
     return `
       <div id="overlay-wrapper" class="overlay-wrapper overlay-content transit task-view" onclick="onclickProtection(event)">
           <div class="overlay-header mb-20">
               <span class="tag-overlay ${createCategoryClass(task.category)}">${task.category}</span>
-              <div style="display: flex; align-items: center; gap: 24px;">
-                  ${task.aiGenerated ? `<div style="display: flex; align-items: center; gap: 6px; color: #8a8a8a; font-size: 16px;"><img src="../assets/icons/wand_stars.svg" alt="AI Icon" style="width: 20px; height: 20px;"><span class="ai-icon">Ai-generated ticket</span></div>` : ''}
+              <div style="display: flex; align-items: center; gap: 10px;">
+                  ${task.aiGenerated ? `<div class="ai-generated-ticket" style="display: flex; align-items: center; gap: 6px; color: #8a8a8a; font-size: 16px;"><img class="stars-icon" src="../assets/icons/wand_stars.svg" alt="AI Icon">
+                    <span class="ai-icon">Ai-generated ticket</span></div>` : ''}
                   <button class="btn-transparent" onclick="closeOverlay()">
                       <img src="../assets/icons/close.svg" alt="Close">
                   </button>
@@ -408,8 +413,8 @@ function createDetailedTaskTemplate(taskId, task) {
               <div>
                   <div class="mb-23">${task.date}</div>
                   <div class="overlay-prio">
-                      <span class="capitalize">${task.priority}</span>
-                      <img src="../assets/icons/prio-${task.priority}.svg" alt="Prio ${task.priority}">
+                      <span class="capitalize">${priority}</span>
+                      <img src="../assets/icons/prio-${priority}.svg" alt="Prio ${priority}">
                   </div>
               </div>
           </div>

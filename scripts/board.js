@@ -78,8 +78,13 @@ function checkForAssignment(assignedUserArr) {
  * @returns {string|undefined} Two-letter abbreviation
  */
 function createUsernameAbbreviation(userObj) {
-  let usernameArr = userObj.name.split(" ");
-  return usernameArr.length > 1 ? usernameArr[0][0] + usernameArr[1][0] : undefined;
+  if (!userObj) return "";
+  let name = userObj.name || (typeof userObj === 'string' ? userObj : "");
+  if (!name) return "";
+  let usernameArr = name.trim().split(" ");
+  return usernameArr.length > 1 
+    ? (usernameArr[0][0] + usernameArr[1][0]).toUpperCase() 
+    : usernameArr[0][0].toUpperCase();
 }
 
 /*** Adds placeholders to empty columns
@@ -114,7 +119,11 @@ async function renderSelectedTask(taskId) {
  * @returns {string} HTML for detail view
  */
 function checkForAssignmentDetailView(assignedUserArr) {
-  return assignedUserArr ? createPersonTemplateDetailView(assignedUserArr) : "";
+  if (!assignedUserArr) return "";
+  const arr = Array.isArray(assignedUserArr)
+    ? assignedUserArr
+    : Object.values(assignedUserArr);
+  return arr.length > 0 ? createPersonTemplateDetailView(arr) : "";
 }
 
 /**
@@ -138,7 +147,11 @@ function createPersonList(assignedUserArr) {
  * @returns {string} HTML for subtasks
  */
 function checkForSubtasksDetailView(taskId, subtaskArr) {
-  return subtaskArr ? createSubtaskTemplate(taskId, subtaskArr) : "";
+  if (!subtaskArr) return "";
+  const arr = Array.isArray(subtaskArr)
+    ? subtaskArr
+    : Object.values(subtaskArr);
+  return arr.length > 0 ? createSubtaskTemplate(taskId, arr) : "";
 }
 
 /*** Creates HTML list of subtasks

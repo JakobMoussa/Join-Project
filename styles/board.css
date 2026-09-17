@@ -272,10 +272,14 @@
 }
 
 .overlay-content {
+  display: flex;
+  flex-direction: column;
   max-height: 775px;
+  min-height: 400px;
   max-width: 525px;
   background-color: #fff;
   padding: 35px 20px;
+  overflow-y: auto;
 }
 
 .hidden {
@@ -369,9 +373,9 @@
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  position: fixed;
-  right: 15px;
-  bottom: 20px;
+  margin-top: auto;
+  padding-top: 16px;
+  background-color: #fff;
 }
 
 .overlay-footer button {
@@ -496,7 +500,7 @@
 .creator-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
@@ -567,6 +571,11 @@
   -webkit-text-fill-color: transparent;
 }
 
+.stars-icon {
+  width: 18px;
+  height: 18px;
+}
+
 @media (max-width: 1200px) {
   .board-wrapper {
     margin-left: 20px;
@@ -620,6 +629,25 @@
 
   .empty {
     width: 100%;
+  }
+
+  .tag-overlay {
+    padding: 6px 13px;
+  }
+}
+
+@media (max-width: 750px) and (min-width: 650px) {
+  .tag-overlay {
+    padding: 6px 5px;
+  }
+
+  .ai-icon {
+    font-size: 14px;
+  }
+
+  .stars-icon {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -677,6 +705,10 @@
     justify-content: space-between !important;
   }
 
+  .tag-overlay {
+    padding: 6px 13px;
+  }
+
 }
 
 @media (max-width: 530px) {
@@ -707,11 +739,15 @@
 
   .editTask-container {
     width: 350px;
-    max-height: 630px;
+    max-height: 690px;
   }
 
   .overlay-content {
     min-width: 360px;
+  }
+
+  .creator-profil-link {
+    margin-left: 0px;
   }
 }
 
@@ -721,7 +757,11 @@
   }
 
   .overlay-content {
-    height: 650px !important;
+    height: 690px !important;
+  }
+
+  .tag-overlay {
+    padding: 6px 7px;
   }
 }
 
@@ -738,12 +778,24 @@
   .overlay-content {
     max-width: 380px;
     padding: 20px;
-    max-height: 650px;
+    max-height: 690px;
   }
 
   .editTask-container {
     width: 330px;
     max-height: 540px;
+  }
+
+  .ai-icon {
+    font-size: 14px;
+  }
+
+  .technical-task {
+    padding: 6px 9px;
+  }
+
+  .creator-profil-link {
+    margin-left: 0px;
   }
 
 }
@@ -759,11 +811,19 @@
     width: 300px;
   }
 
+  .creator-profil-link {
+    margin-left: 0px;
+  }
+
 }
 
 @media (max-width: 390px) {
   .btn-transparent {
     margin-right: 10px;
+  }
+
+  .technical-task {
+    padding: 6px 7px;
   }
 }
 
@@ -781,6 +841,10 @@
     width: 100% !important;
   }
 
+  .creator-profil-link {
+    margin-left: 0px;
+  }
+
 }
 
 @media (max-width: 360px) {
@@ -789,6 +853,8 @@
     max-width: 300px;
     width: 300px;
     padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .overlay-content {
@@ -809,20 +875,19 @@
   }
 
   .mb-21 {
-    margin-left: 40px;
+    margin-left: 16px;
   }
 
   .mb-25 {
-    margin-left: 40px;
+    margin-left: 16px;
   }
 
-  .mb-20 {
-    margin-top: 26px;
-    margin-bottom: 20px;
+  .assigned-list {
+    padding: 10px 20px 10px 6px;
   }
 
   .section-title {
-    margin-left: 40px;
+    margin-left: 0px;
   }
 
   .assigned-list li {
@@ -830,14 +895,116 @@
   }
 
   .overlay-header {
-    padding-left: 16px;
+    padding-left: 5px;
+    padding-top: 15px;
   }
 
   .mb-14 {
     margin-bottom: 14px;
+    margin-left: 12px;
   }
 
   .subtask-item {
     margin-left: 14px;
+  }
+
+  .creator-badge {
+    padding: 4px 8px;
+  }
+
+  .creator-profil-link {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 330px) {
+  .close-edit-conatiner {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  .editTask-container {
+    padding-left: 20px;
+  }
+
+  .mb-21 {
+    margin-left: 16px;
+  }
+
+  .mb-25 {
+    margin-left: 16px;
+  }
+
+  .section-title {
+    margin-left: 0px;
+  }
+
+  .assigned-list li {
+    margin-left: 14px;
+  }
+
+  .overlay-header {
+    padding-left: 5px;
+    padding-top: 15px;
+  }
+
+  .mb-14 {
+    margin-bottom: 14px;
+    margin-left: 12px;
+  }
+
+  .subtask-item {
+    margin-left: 14px;
+  }
+
+  .creator-badge {
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 320px) {
+  .overlay-content {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: unset;
+    border-radius: 20px;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .overlay-wrapper {
+    width: 100vw;
+    max-width: 100vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+  }
+
+  .mb-21,
+  .mb-25 {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .stars-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .flex {
+    margin-left: 10px;
+  }
+
+  .creator-row {
+    margin-left: 10px;
+  }
+
+  .overlay-footer {
+    padding: 12px;
+  }
+
+  .creator-profil-link {
+    margin-left: 0px;
   }
 }
