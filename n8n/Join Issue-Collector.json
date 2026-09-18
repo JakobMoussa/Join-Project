@@ -1,0 +1,300 @@
+{
+  "name": "Join Issue-Collector",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "forceReconnect": 1
+        }
+      },
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        -1328,
+        112
+      ],
+      "id": "ab8ca671-d8ee-4a0c-bb4a-2a814db5fbd1",
+      "credentials": {
+        "imap": {
+          "id": "xeBE0WoAQMVK7dux",
+          "name": "IMAP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "senderEmail",
+              "type": "string",
+              "value": "={{ $json.from.match(/<(.+)>/)[1] }}"
+            },
+            {
+              "name": "senderName",
+              "type": "string",
+              "value": "={{ $json.from.split('<')[0].trim() }}"
+            },
+            {
+              "name": "subject",
+              "type": "string",
+              "value": "={{ $json.subject }}"
+            },
+            {
+              "name": "body",
+              "type": "string",
+              "value": "={{ $json.textPlain }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1104,
+        112
+      ],
+      "id": "7b6c41d0-80d5-40dc-9b3d-de5e37e60a53"
+    },
+    {
+      "parameters": {
+        "text": "=Betreff: {{ $json.subject }}\nText: {{ $json.body }}\nCC: {{ $json.cc }}\nAbsender: {{ $json.senderName }}\n\nKategorie-Regeln: Feature-Wünsche/Verbesserungen aus Nutzersicht → \"User Story\". Technische Aufgaben/Bugs/Code-Änderungen → \"Technical Task\".\nPriorität-Regeln: \"dringend\", \"asap\", \"kritisch\" → urgent.\nSalutation-Regel: Schätze anhand des Vornamens im Absender, ob \"Herr\" oder \"Frau\". Unklar → \"unbekannt\".\nDescription-Regel: NUR die Hauptbeschreibung. Beende die Description SOFORT und VOLLSTÄNDIG, sobald im Text \"Subtasks:\" oder \"Assign to:\" auftaucht — diese Zeilen und alles danach gehören NIEMALS in description, auch nicht teilweise oder umformuliert.\nSubtask-Regel: Items unter \"Subtasks:\" als Array von Objekten (id ab 0, value, edit:false, checked:false). Keine Sektion → leeres Array.\nAssigned-Regel: Namen/Emails unter \"Assign to:\" oder aus CC. Falls nur eine E-Mail ohne Namen angegeben ist (auch in Markdown-Link-Form wie [[name@domain.com](mailto:name@domain.com)]), leite den Namen aus dem Teil vor dem @ ab (Punkte durch Leerzeichen ersetzen, jedes Wort großschreiben, z.B. marc.schmidt@gmx.de → \"Marc Schmidt\"). avatar = 2 Initialen daraus, color = zufälliger Hex-Code, assigned:true. Nichts gefunden → leeres Array.\nDeadline-Regel: Datum immer im Format YYYY-MM-DD zurückgeben, auch wenn im Text DD.MM.YYYY steht (z.B. 01.03.2026 → 2026-03-01).",
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"category\": { \"type\": \"string\" },\n    \"priority\": { \"type\": \"string\" },\n    \"deadline\": { \"type\": \"string\" },\n    \"salutation\": { \"type\": \"string\" },\n    \"description\": { \"type\": \"string\" },\n    \"subtask\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"id\": { \"type\": \"number\" },\n          \"value\": { \"type\": \"string\" },\n          \"edit\": { \"type\": \"boolean\" },\n          \"checked\": { \"type\": \"boolean\" }\n        }\n      }\n    },\n    \"assigned\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"name\": { \"type\": \"string\" },\n          \"avatar\": { \"type\": \"string\" },\n          \"color\": { \"type\": \"string\" },\n          \"email\": { \"type\": \"string\" },\n          \"assigned\": { \"type\": \"boolean\" }\n        }\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "name": "Information Extractor",
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        -32
+      ],
+      "id": "e988557e-3b01-4cea-aef8-206d607cbc4f",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.6-flash",
+        "options": {}
+      },
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        272
+      ],
+      "id": "3964ef21-73b3-441a-9f00-bb94f2a61f59",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "fqsaYW2GyunTfrBo",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const aiResponse = $input.item.json.output;\n\nconst headerName = $('Edit Fields').item.json.senderName;\nconst finalCreatorName = headerName || $('Edit Fields').item.json.senderEmail;\n\n// Hilfsfunktion: filtert 'undefined'-Strings/leere Objekte raus\nconst isValid = (val) => val !== undefined && val !== null && val !== 'undefined' && val !== '';\n\nconst rawAssigned = Array.isArray(aiResponse.assigned) ? aiResponse.assigned : [];\nconst cleanAssigned = rawAssigned.filter(a => a && isValid(a.name) && isValid(a.email));\n\nconst rawSubtask = Array.isArray(aiResponse.subtask) ? aiResponse.subtask : [];\nconst cleanSubtask = rawSubtask.filter(s => s && isValid(s.value));\n\n// Deadline absichern: DD.MM.YYYY -> YYYY-MM-DD falls AI falsches Format liefert\nlet deadline = aiResponse.deadline;\nconst deMatch = /^(\\d{2})\\.(\\d{2})\\.(\\d{4})$/.exec(deadline || '');\nif (deMatch) {\n  deadline = `${deMatch[3]}-${deMatch[2]}-${deMatch[1]}`;\n}\n\n// Description absichern: Subtasks/Assign to rausschneiden, falls AI sie trotzdem reinschreibt\nlet description = aiResponse.description || '';\ndescription = description.split(/\\n?\\s*(Subtasks:|Assign to:)/i)[0].trim();\n\nreturn {\n  json: {\n    title: $('Edit Fields').item.json.subject,\n    description: description,\n    category: aiResponse.category,\n    priority: aiResponse.priority,\n    date: deadline,\n    status: 'triage',\n    order: 0,\n    creatorName: finalCreatorName,\n    creatorType: 'external',\n    aiGenerated: true,\n    salutation: aiResponse.salutation,\n    assigned: cleanAssigned,\n    subtask: cleanSubtask\n  }\n};\n"
+      },
+      "name": "Code in JavaScript",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -656,
+        112
+      ],
+      "id": "4a7b4d31-d4e9-4d2c-b5b7-aadc9c0d3058"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst today = new Date().toISOString().split('T')[0];\n\nif (staticData.date !== today) {\n  staticData.date = today;\n  staticData.count = 0;\n}\n\nconst limitReached = staticData.count >= 10;\n\nif (!limitReached) {\n  staticData.count += 1;\n}\n\nreturn {\n  json: {\n    ...$input.item.json,\n    limitReached: limitReached\n  }\n};"
+      },
+      "name": "Code in JavaScript1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        112
+      ],
+      "id": "5d3bb6a2-88b8-45c6-996d-3de7c0c82619"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond1",
+              "leftValue": "={{ $json.limitReached }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        112
+      ],
+      "id": "68538184-6df3-488d-89d4-9d310b5c6091"
+    },
+    {
+      "parameters": {
+        "fromEmail": "mo.jakob@gmx.de",
+        "toEmail": "={{ $('Edit Fields').item.json.senderEmail }}",
+        "subject": "Tageslimit erreicht",
+        "options": {}
+      },
+      "name": "Send an Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "afa69c8d-6fc2-4ced-a085-a3ceb3dc579a",
+      "webhookId": "de71e91c-4490-4511-89df-04a50a28cf18",
+      "credentials": {
+        "smtp": {
+          "id": "moGMKsk2hVPBxzIh",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {}
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        208
+      ],
+      "id": "d0c8e00f-c798-40e0-a58c-250fdbf19fbf"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2e3a0236-098d-43bc-adc5-7c0ca764adbd",
+  "meta": {
+    "instanceId": "b5e5a997b47bf728ae565fd98cdc4cf5b985c5bfdba073ebf35e86d3b94c3a3e"
+  },
+  "nodeGroups": [],
+  "id": "wsvylE8nwAJLFKmY",
+  "tags": []
+}
