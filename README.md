@@ -165,4 +165,3 @@ This project was developed collaboratively by:
 
 - Built as part of the **Developer Akademie** Frontend Developer curriculum.
 - Icons & Design inspiration provided by Developer Akademie.
-- Distributed under the MIT License. See `LICENSE` for more information if applicable.

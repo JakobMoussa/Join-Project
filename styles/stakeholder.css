@@ -149,7 +149,7 @@ body.stakeholder-body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background-color: #177399;
+  background-color: #2A3647;
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
@@ -163,7 +163,7 @@ body.stakeholder-body {
 }
 
 .btn-create-email:hover {
-  background-color: #135e7d;
+  background-color: #177DA8;
   box-shadow: 0 5px 14px rgba(23, 115, 153, 0.4);
   transform: translateY(-1px);
 }
@@ -269,9 +269,13 @@ body.stakeholder-body {
   .btn-create-email {
     justify-content: center;
     width: 100%;
-    max-width: 300px;
+    max-width: 175px;
     margin: 0 auto;
     display: flex;
+  }
+
+  .right-icon {
+    display: none;
   }
 
   .illustration-img {
@@ -280,6 +284,7 @@ body.stakeholder-body {
 }
 
 @media screen and (max-width: 499px) {
+
   .desktop-only,
   .desktop-only-block {
     display: none !important;

@@ -81,7 +81,7 @@
 .divider-urgent {
   width: 2px;
   height: 80px;
-  background-color: #d1d1d1;
+  background-color: #686666;
   border-radius: 10px;
   margin: 0 20px;
 }
@@ -584,7 +584,7 @@
 
   .divider-urgent {
     margin: 0 16px;
-    height: 60px;
+    height: 70px;
   }
 
   .metric-icon {
@@ -776,7 +776,7 @@
     opacity: 0;
     animation: showContent 1s ease forwards;
     animation-delay: 0s;
-    padding: 20px;
+    padding: 10px;
   }
 
 
