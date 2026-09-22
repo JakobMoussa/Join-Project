@@ -601,7 +601,7 @@ function navLink(icon, link, section) {
                     <img src="../assets/icons/${icon}.svg" alt="">
                 </div>
               
-                <a href="signup.html" data-task="navLink">${section}</a>
+                <a href="login.html" data-task="navLink">${section}</a>
             </li>
              <div class="wrapper-link-bottom">
                       <a href="../html-templates/privacy-policy.html?msg=privacy">

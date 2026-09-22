@@ -15,6 +15,7 @@ body.welcome-body {
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-bottom: 80px;
 }
 
 .logo-overlay {
@@ -248,7 +249,7 @@ body.welcome-body {
 @media screen and (max-width: 580px) {
   body.welcome-body {
     justify-content: flex-start;
-    padding-top: 40px;
+    padding-top: 30px;
   }
 
   .welcome-card {
@@ -281,14 +282,11 @@ body.welcome-body {
   }
 
   .welcome-footer {
-    position: static;
-    margin-top: 36px;
-    margin-bottom: 24px;
     gap: 24px;
   }
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 670px) {
   body.welcome-body {
     justify-content: flex-start;
     padding-top: 40px;
@@ -305,6 +303,7 @@ body.welcome-body {
   .mobile-txt {
     display: flex;
     color: white;
+    align-items: center;
     margin-bottom: 20px;
     gap: 10px;
   }
@@ -334,8 +333,10 @@ body.welcome-body {
   .welcome-content {
     flex: 1;
   }
+}
 
-  .welcome-footer {
-    margin-top: auto;
+@media screen and (max-width: 375px) and (max-height: 667px) {
+  .welcome-content {
+    padding: 0px 20px;
   }
 }

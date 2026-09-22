@@ -48,6 +48,10 @@
 
     <div class="stakeholder-content-grid">
       <section class="stakeholder-info">
+
+        <p class="limit-reached-msg">
+          The daily 10-request limit has been reached!
+        </p>
         <h2 class="stakeholder-headline">
           Easily create a ticket by sending an<br> email - no extra steps needed.
         </h2>
@@ -66,8 +70,7 @@
           manually reviewed by our team instead of generating AI tickets.
         </p>
 
-        <a href="mailto:mo.jakob@gmx.de?subject=New%20Task%20Request&body=Title%3A%20%5BEnter%20Task%20Title%5D%0D%0A%0D%0ADescription%3A%0D%0A%5BPlease%20describe%20your%20request%20in%20detail...%5D%0D%0A%0D%0ADeadline%3A%20%5BDate%2C%20e.g.%2031.12.2024%5D%0D%0APriority%3A%20%5BLow%20%2F%20Medium%20%2F%20Urgent%5D%0D%0ACategory%3A%20%5BUser%20Story%20%2F%20Technical%20Task%5D%0D%0A%0D%0ASubtasks%3A%0D%0A-%20%5BFirst%20step%5D%0D%0A-%20%5BSecond%20step%5D%0D%0A%0D%0AAssign%20to%3A%0D%0A%5BName%20or%20Email%20of%20the%20assignee%5D"
-          class="btn-create-email">
+        <a href="mailto:mo.jakob@gmx.de?subject=New%20Task%20Request" class="btn-create-email">
           <span>Create Request</span>
           <img class="right-icon" src="../assets/icons/check.svg" alt="check-icon">
         </a>
@@ -83,6 +86,7 @@
     <a href="./privacy-policy.html?msg=privacy">Privacy Policy</a>
     <a href="./legal-notice.html?msg=privacy">Legal notice</a>
   </footer>
+  <script src="../scripts/stakeholder.js"></script>
 </body>
 
 </html>

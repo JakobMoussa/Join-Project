@@ -106,7 +106,7 @@
 
 .metric-label {
   color: #666;
-  font-size: 0.9rem;
+  font-size: 16px;
   display: block;
 }
 
@@ -348,6 +348,16 @@
   margin-bottom: 0;
 }
 
+@media (max-width: 1030px) {
+  .divider-urgent {
+    margin: 0 10px;
+  }
+
+  .grow-icon {
+    margin-right: 10px;
+  }
+}
+
 @media (max-width: 992px) {
   body {
     flex-direction: column-reverse;
@@ -572,10 +582,6 @@
     font-size: 1.5rem;
   }
 
-  .metric-label {
-    font-size: 0.75rem;
-  }
-
   .grow-icon {
     width: 48px;
     height: 48px;
@@ -701,10 +707,6 @@
     width: 32px;
   }
 
-  .metric-label {
-    font-size: 0.8rem;
-  }
-
   .metric-count {
     font-size: 20px;
   }
@@ -803,4 +805,14 @@
     animation-delay: 0s;
   }
 
+}
+
+@media (max-width: 320px) {
+  .metric-label {
+    font-size: 14px;
+  }
+
+  .parent {
+    gap: 10px
+  }
 }

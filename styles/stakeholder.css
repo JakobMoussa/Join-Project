@@ -86,6 +86,31 @@ body.stakeholder-body {
   color: #207fa6;
 }
 
+.request-limit-badge.limit-reached {
+  color: #ff3b3b;
+}
+
+.request-limit-badge.limit-reached .requests-used,
+.request-limit-badge.limit-reached .requests-total {
+  color: #ff3b3b;
+}
+
+.limit-reached-msg {
+  color: #2A3647;
+  background-color: #FFD2D285;
+  border-radius: 7px;
+  font-weight: 600;
+  padding: 20px 0px 20px 30px;
+  font-size: 15px;
+  margin: -40px 0 40px 0;
+  text-align: start;
+  display: none;
+}
+
+.limit-reached-msg.show {
+  display: block;
+}
+
 .stakeholder-main {
   flex: 1;
   width: 100%;
@@ -320,5 +345,10 @@ body.stakeholder-body {
 
   .logo-link img {
     height: 63px;
+  }
+
+  .limit-reached-msg {
+    text-align: start;
+    margin: 10px 0 20px 0;
   }
 }

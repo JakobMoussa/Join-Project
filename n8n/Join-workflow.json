@@ -1,0 +1,132 @@
+{
+  "nodes": [
+    {
+        "id": "e4c2f14d-0e46-4493-bacd-0a01338a8537",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+            -1328,
+            -560
+        ],
+        "parameters": {
+            "width": 960,
+            "height": 400,
+            "content": "## Join – korrigierter Workflow\n1. IMAP-, Gemini- und SMTP-Zugangsdaten prüfen/auswählen. Im Gemini-Node ein für dein Konto verfügbares Modell wählen; der Modellname stammt unverändert aus deiner Vorlage.\n2. Firebase-URL stammt aus deiner Vorlage. Falls nötig Authentifizierung im HTTP-Node ergänzen. Zunächst mit einer Test-Datenbank testen.\n3. UTF-8 bleibt erhalten. HTML-E-Mails dienen als Fallback. Bereits im Posteingang beschädigte Zeichen lassen sich nicht zuverlässig rekonstruieren.\n4. Assigned behält Namen ohne E-Mail. Es gibt keinen Abgleich mit Join-Benutzerkonten. Avatar sind Initialen, Farbe ist ein Standardwert; Darstellung in deiner App prüfen.\n5. Frist wird als date gespeichert. Referenzdatum: Maildatum, sonst heute (Europe/Berlin). Ungültige KI-Ausgabe stoppt vor Firebase.\n6. Tageslimit: 10 Tickets, UTC-Tageswechsel; Zähler wird nach Firebase erhöht. Statische Workflow-Daten sind kein atomarer Zähler für parallele Ausführungen; nur als einfaches Limit gedacht. Im manuellen Test nicht als persistenten Zähler voraussetzen. KI läuft weiterhin vor der Limitprüfung.\n7. Import ist deaktiviert. Ein manueller kompletter Test schreibt nach Firebase und versendet die vorgesehenen E-Mails. Erst nach Prüfung aktivieren.\nLokal wurden JSON und Transformationscode geprüft; kein Live-Test mit Gemini, n8n oder Firebase durchgeführt."
+        }
+    }
+],
+"pinData": {},
+"connections": {
+    "Mail Empfang": {
+        "main": [
+            [
+                {
+                    "node": "Daten extrahieren",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "Daten extrahieren": {
+        "main": [
+            [
+                {
+                    "node": "KI Analyse",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "KI Analyse": {
+        "main": [
+            [
+                {
+                    "node": "Ticket Daten bauen",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "Gemini Model": {
+        "ai_languageModel": [
+            [
+                {
+                    "node": "KI Analyse",
+                    "type": "ai_languageModel",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "Ticket Daten bauen": {
+        "main": [
+            [
+                {
+                    "node": "Tageslimit Zähler",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "Tageslimit Zähler": {
+        "main": [
+            [
+                {
+                    "node": "Limit erreicht?",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "Limit erreicht?": {
+        "main": [
+            [
+                {
+                    "node": "Limit Hinweis Mail",
+                    "type": "main",
+                    "index": 0
+                }
+            ],
+            [
+                {
+                    "node": "Ticket in Firebase erstellen",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "Ticket in Firebase erstellen": {
+        "main": [
+            [
+                {
+                    "node": "Tageszähler erhöhen",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    },
+    "Tageszähler erhöhen": {
+        "main": [
+            [
+                {
+                    "node": "Bestätigungsmail",
+                    "type": "main",
+                    "index": 0
+                }
+            ]
+        ]
+    }
+},
+"active": false,
+"settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  }
+}

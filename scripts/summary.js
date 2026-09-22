@@ -11,6 +11,7 @@ function countTasks(tasks) {
   const totalTasksRef = document.querySelector("[data-task='total-tasks']");
   const taskProgressRef = document.querySelector("[data-task='in-progress']");
   const taskFeddbackRef = document.querySelector("[data-task='await-feedback']");
+  const taskEmailRef = document.querySelector("[data-task='email-requests']");
 
   taskTodoRef.innerText = Object.values(tasks).filter((task) => task.status === taskTodoRef.dataset.task).length;
   taskDoneRef.innerText = Object.values(tasks).filter((task) => task.status === taskDoneRef.dataset.task).length;
@@ -18,6 +19,9 @@ function countTasks(tasks) {
   totalTasksRef.innerText = Object.values(tasks).length;
   taskProgressRef.innerText = Object.values(tasks).filter((task) => task.status === taskProgressRef.dataset.task).length;
   taskFeddbackRef.innerText = Object.values(tasks).filter((task) => task.status === taskFeddbackRef.dataset.task).length;
+  if (taskEmailRef) {
+    taskEmailRef.innerText = Object.values(tasks).filter((task) => task.status === "triage").length;
+  }
 }
 
 /**
