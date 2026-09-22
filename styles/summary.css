@@ -674,12 +674,12 @@
     height: 3px;
     background-color: #29abe2;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 12px;
   }
 
   #content-wrapper {
-    padding-top: 30px;
+    padding-top: 97px !important;
   }
 
   .main-wrapper {
@@ -693,7 +693,7 @@
   .parent {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 80px);
-    gap: 15px;
+    gap: 7px;
     left: 0px;
   }
 

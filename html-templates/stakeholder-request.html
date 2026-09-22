@@ -86,6 +86,43 @@
     <a href="./privacy-policy.html?msg=privacy">Privacy Policy</a>
     <a href="./legal-notice.html?msg=privacy">Legal notice</a>
   </footer>
+
+  <div id="fallback-modal" class="modal-overlay d-none">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Create Request</h2>
+        <button type="button" class="btn-close" id="close-modal-btn">
+          <img src="../assets/icons/close.svg" alt="Close">
+        </button>
+      </div>
+      <form id="fallback-form">
+        <div class="form-group">
+          <label for="fb-name">User name</label>
+          <input type="text" id="fb-name" name="name" required placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">E-mail</label>
+          <input type="email" id="fb-email" name="email" required placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="fb-subject">Betreff</label>
+          <input type="text" id="fb-subject" name="subject" required placeholder="Subject">
+        </div>
+        <div class="form-group">
+          <label for="fb-message">Message</label>
+          <textarea id="fb-message" name="message" required placeholder="Your message..." rows="4"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">Submit Request</button>
+        </div>
+      </form>
+      <div id="success-msg" class="success-msg d-none">
+        <img src="../assets/icons/check_icon_white.svg" alt="Success">
+        <p>Request successfully submitted!</p>
+      </div>
+    </div>
+  </div>
+
   <script src="../scripts/stakeholder.js"></script>
 </body>
 
