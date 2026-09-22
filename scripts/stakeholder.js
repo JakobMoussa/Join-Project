@@ -41,8 +41,8 @@ function initElements() {
  */
 function initRequestData() {
     const today = new Date().toISOString().split('T')[0];
-    let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { date: today, count: 0 };
-    if (data.date !== today) {
+    let data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data || data.date !== today) {
         data = { date: today, count: 0 };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     }
@@ -63,8 +63,6 @@ function initEventListeners() {
  * @param {Event} e - The click event.
  */
 function handleCreateRequestClick(e) {
-    e.preventDefault();
-    incrementRequestCount();
     checkMailAppFallback();
 }
 
@@ -72,7 +70,8 @@ function handleCreateRequestClick(e) {
  * Increments the request count and updates the UI.
  */
 function incrementRequestCount() {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const today = new Date().toISOString().split('T')[0];
+    let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { date: today, count: 0 };
     data.count += 1;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     updateBadges(data.count);
@@ -83,11 +82,18 @@ function incrementRequestCount() {
  */
 function checkMailAppFallback() {
     let blurred = false;
-    const onBlur = () => { blurred = true; };
+    const onBlur = () => { 
+        blurred = true; 
+        incrementRequestCount(); // Assumes mail app opened
+        window.removeEventListener('blur', onBlur);
+    };
     window.addEventListener('blur', onBlur);
+    
     setTimeout(() => {
         window.removeEventListener('blur', onBlur);
-        if (!blurred && ELEMENTS.modal) ELEMENTS.modal.classList.remove('d-none');
+        if (!blurred && ELEMENTS.modal) {
+            ELEMENTS.modal.classList.remove('d-none');
+        }
     }, 1000);
 }
 
@@ -156,9 +162,10 @@ function handleFormspreeResponse(response) {
 }
 
 /**
- * Shows the success message and resets the form.
+ * Shows the success message, resets the form, and increments the counter.
  */
 function showSuccessMessage() {
+    incrementRequestCount();
     if (ELEMENTS.successMsg) ELEMENTS.successMsg.classList.remove('d-none');
     setTimeout(() => {
         ELEMENTS.form.reset();
