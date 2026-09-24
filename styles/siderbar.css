@@ -188,4 +188,8 @@ a {
   .nav-link {
     font-size: 15px;
   }
+
+  .nav-wrapper ul {
+    gap: 0;
+  }
 }

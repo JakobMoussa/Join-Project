@@ -615,6 +615,7 @@
   .parent {
     grid-template-rows: repeat(1, 120px);
     gap: 10px;
+    padding: 0px 10px 0px 0;
   }
 
   .div3.metric-item {
@@ -631,6 +632,10 @@
 
   .navbar h2 {
     display: none;
+  }
+
+  .parent {
+    padding: 0px 4px 0px 0;
   }
 
   .logo {
@@ -812,6 +817,6 @@
   }
 
   .parent {
-    gap: 10px
+    gap: 5px
   }
 }

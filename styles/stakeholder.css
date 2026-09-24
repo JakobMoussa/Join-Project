@@ -121,6 +121,7 @@ body.stakeholder-body {
   padding: 0 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .main-header-row {

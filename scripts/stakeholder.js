@@ -41,10 +41,10 @@ function initElements() {
  */
 function initRequestData() {
     const today = new Date().toISOString().split('T')[0];
-    let data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    let data = readRequestData();
     if (!data || data.date !== today) {
         data = { date: today, count: 0 };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        saveRequestData(data);
     }
     updateBadges(data.count);
 }
@@ -63,6 +63,14 @@ function initEventListeners() {
  * @param {Event} e - The click event.
  */
 function handleCreateRequestClick(e) {
+    const today = new Date().toISOString().split('T')[0];
+    const data = readRequestData();
+
+    if (data && data.date === today && data.count >= 10) {
+        e.preventDefault();
+        return;
+    }
+
     checkMailAppFallback();
 }
 
@@ -71,9 +79,10 @@ function handleCreateRequestClick(e) {
  */
 function incrementRequestCount() {
     const today = new Date().toISOString().split('T')[0];
-    let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { date: today, count: 0 };
+    let data = readRequestData();
+    if (!data || data.date !== today) data = { date: today, count: 0 };
     data.count += 1;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    saveRequestData(data);
     updateBadges(data.count);
 }
 
@@ -82,13 +91,12 @@ function incrementRequestCount() {
  */
 function checkMailAppFallback() {
     let blurred = false;
-    const onBlur = () => { 
-        blurred = true; 
-        incrementRequestCount(); // Assumes mail app opened
+    const onBlur = () => {
+        blurred = true;
         window.removeEventListener('blur', onBlur);
     };
     window.addEventListener('blur', onBlur);
-    
+
     setTimeout(() => {
         window.removeEventListener('blur', onBlur);
         if (!blurred && ELEMENTS.modal) {
@@ -110,15 +118,21 @@ function closeModal() {
  */
 async function handleFormSubmit(e) {
     e.preventDefault();
-    const btn = ELEMENTS.form.querySelector('.btn-submit');
+    if (formSending || !ELEMENTS.form.reportValidity()) return;
+    const btn = ELEMENTS.form.querySelector('.btn-submit, [type="submit"]');
+    if (!btn) return;
     const originalText = btn.textContent;
+    formSending = true;
     toggleButtonState(btn, true, 'Sending...');
-    
-    const formData = new FormData(ELEMENTS.form);
-    const data = Object.fromEntries(formData.entries());
-    
-    await sendFormspreeRequest(data);
-    toggleButtonState(btn, false, originalText);
+    try {
+        const data = buildJoinPayload(new FormData(ELEMENTS.form));
+        await sendFormspreeRequest(data);
+    } catch (error) {
+        alert(error.message || 'Die Anfrage konnte nicht gesendet werden.');
+    } finally {
+        formSending = false;
+        toggleButtonState(btn, false, originalText);
+    }
 }
 
 /**
@@ -166,6 +180,7 @@ function handleFormspreeResponse(response) {
  */
 function showSuccessMessage() {
     incrementRequestCount();
+    if (ELEMENTS.successMsg) ELEMENTS.successMsg.textContent = 'Anfrage versendet. Nach erfolgreicher Verarbeitung erhältst du eine Bestätigung per E-Mail.';
     if (ELEMENTS.successMsg) ELEMENTS.successMsg.classList.remove('d-none');
     setTimeout(() => {
         ELEMENTS.form.reset();
@@ -197,3 +212,132 @@ function toggleLimitClasses(elements, className, add) {
         else el.classList.remove(className);
     });
 }
+
+
+let formSending = false;
+
+/**
+ * Liest ein Textfeld aus dem Formular.
+ */
+function getFormText(formData, fieldName) {
+    const value = formData.get(fieldName);
+
+    if (typeof value === 'string') {
+        return value;
+    }
+
+    return '';
+}
+
+/**
+ * Prüft die Pflichtfelder und die erlaubte Textlänge.
+ */
+function validateJoinPayload(payload) {
+    const emailPattern = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/;
+
+    const fieldsAreValid =
+        payload.name !== '' &&
+        emailPattern.test(payload.email) &&
+        payload.subject.trim() !== '' &&
+        payload.message.trim() !== '';
+
+    if (!fieldsAreValid) {
+        throw new Error(
+            'Bitte Name, gültige E-Mail, Betreff und Nachricht ausfüllen. Formular-Feldnamen prüfen.'
+        );
+    }
+
+    if (payload.message.length > 50000 || payload.subject.length > 500) {
+        throw new Error('Betreff oder Nachricht ist zu lang.');
+    }
+}
+
+/**
+ * Bereitet die Formulardaten für Formspree und n8n vor.
+ */
+function buildJoinPayload(formData) {
+    const payload = {
+        version: 1,
+        name: getFormText(formData, 'name').trim(),
+        email: getFormText(formData, 'email').trim(),
+        subject: getFormText(formData, 'subject'),
+        message: getFormText(formData, 'message')
+    };
+
+    validateJoinPayload(payload);
+
+    const encodedPayload = encodeURIComponent(JSON.stringify(payload));
+    const marker =
+        'JOIN_REQUEST_V1_BEGIN' +
+        encodedPayload +
+        'JOIN_REQUEST_V1_END';
+
+    const data = Object.fromEntries(formData.entries());
+
+    data.name = payload.name;
+    data.email = payload.email;
+    data.subject = payload.subject;
+    data.message = payload.message + '\n\n' + marker;
+
+    return data;
+}
+
+/**
+ * Liest den lokal gespeicherten Anfragezähler.
+ */
+function readRequestData() {
+    try {
+        const storedData = localStorage.getItem(STORAGE_KEY);
+        const data = JSON.parse(storedData);
+
+        if (!data) {
+            return null;
+        }
+
+        if (!Number.isSafeInteger(data.count) || data.count < 0) {
+            return null;
+        }
+
+        return data;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * Speichert den Anfragezähler, sofern der Browser es erlaubt.
+ */
+function saveRequestData(data) {
+    try {
+        const storedData = JSON.stringify(data);
+        localStorage.setItem(STORAGE_KEY, storedData);
+    } catch {
+    }
+}
+
+/**
+ * Öffnet das Popup über einen zusätzlichen Formular-Button.
+ */
+function openRequestForm(event) {
+    event.preventDefault();
+    const today = new Date().toISOString().split('T')[0];
+    const data = readRequestData();
+    if (data && data.date === today && data.count >= 10) return;
+
+    if (ELEMENTS.modal) {
+        ELEMENTS.modal.classList.remove('d-none');
+    }
+}
+
+/**
+ * Verbindet zusätzliche Formular-Buttons mit dem Popup.
+ */
+function initRequestFormButtons() {
+    const buttons = document.querySelectorAll('[data-open-request-form]');
+
+    buttons.forEach(function (button) {
+        button.addEventListener('click', openRequestForm);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initRequestFormButtons);
