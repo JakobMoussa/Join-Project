@@ -7,7 +7,7 @@
   **A modern, intuitive task management web application inspired by the Kanban methodology.**  
   Streamline team workflows, track progress in real time, and collaborate seamlessly.
 
-  [Live Demo](https://jakob-moussa.developerakademie.net/6-join/index.html) &bull;
+  [Live Demo](https://jakob-moussa.developerakademie.net/Join/index.html) &bull;
 
 </div>
 

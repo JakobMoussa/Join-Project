@@ -186,6 +186,7 @@ function showSuccessMessage() {
         ELEMENTS.form.reset();
         if (ELEMENTS.successMsg) ELEMENTS.successMsg.classList.add('d-none');
         closeModal();
+        window.location.href = '../index.html';
     }, 2500);
 }
 
