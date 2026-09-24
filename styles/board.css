@@ -130,6 +130,12 @@
   cursor: pointer;
 }
 
+.task h4 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
 .tag {
   display: inline-block;
   border-radius: 8px;

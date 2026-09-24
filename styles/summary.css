@@ -87,7 +87,7 @@
 }
 
 .div3.metric-item {
-  justify-content: flex-start;
+  justify-content: center;
   padding: 16px 20px;
 }
 
@@ -348,15 +348,29 @@
   margin-bottom: 0;
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1060px) {
   .divider-urgent {
-    margin: 0 10px;
+    margin: 0 15px;
   }
 
   .grow-icon {
     margin-right: 10px;
   }
 }
+
+@media (max-width: 1030px) {
+  .divider-urgent {
+    margin: 0 10px;
+  }
+
+  .parent {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 1000px) {}
+
+
 
 @media (max-width: 992px) {
   body {
@@ -374,6 +388,22 @@
 
   #content-wrapper {
     padding-top: 114px !important;
+  }
+
+  .greeting {
+    display: none;
+  }
+
+  .dashboard-summary {
+    justify-content: center;
+  }
+
+  .header-title {
+    justify-content: center;
+  }
+
+  .main-wrapper {
+    margin-left: 0;
   }
 }
 
@@ -422,10 +452,6 @@
 
 @media (max-width: 650px) {
 
-  .main-wrapper {
-    margin-left: 30px !important;
-  }
-
   .header-title h1 {
     font-size: 2.4rem;
   }
@@ -439,7 +465,7 @@
   }
 
   .parent {
-    margin-top: 50px;
+    margin-top: 20px;
     grid-template-rows: repeat(3, 150px);
   }
 
@@ -459,6 +485,10 @@
 @media (max-width: 635px) {
   .greeting {
     margin-left: 30px;
+  }
+
+  .parent {
+    margin-top: 17px;
   }
 }
 
@@ -480,11 +510,19 @@
   .greeting {
     margin-left: 30px;
   }
+
+  .main-wrapper {
+    margin-left: 30px;
+  }
 }
 
 @media (max-width: 600px) {
   .greeting {
     display: none;
+  }
+
+  .main-wrapper {
+    margin-left: 30px;
   }
 }
 
@@ -583,13 +621,13 @@
   }
 
   .grow-icon {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     margin-right: 2px;
   }
 
   .divider-urgent {
-    margin: 0 16px;
+    margin: 0 8px;
     height: 70px;
   }
 
@@ -597,7 +635,11 @@
     height: 50px !important;
     width: 50px !important;
     padding: 14px;
-    margin-right: 8px;
+    margin-right: 5px;
+  }
+
+  .div3.metric-item {
+    padding: 16px 9px;
   }
 }
 
@@ -809,6 +851,12 @@
     animation-delay: 0s;
   }
 
+}
+
+@media (max-width: 335px) {
+  .grow-icon {
+    display: none;
+  }
 }
 
 @media (max-width: 320px) {
