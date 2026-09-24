@@ -62,27 +62,6 @@
     },
     {
       "parameters": {
-        "options": {
-          "forceReconnect": 1
-        }
-      },
-      "name": "Mail Receipt",
-      "type": "n8n-nodes-base.emailReadImap",
-      "typeVersion": 2,
-      "position": [
-        0,
-        672
-      ],
-      "id": "a6bcd01b-a982-4423-8d6f-311dfae45235",
-      "credentials": {
-        "imap": {
-          "id": "mSD9PRdx9YbnmVK8",
-          "name": "IMAP account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
         "mode": "runOnceForEachItem",
         "jsCode": "const mail = $('Extract data').item.json;\nlet ai = $json.output;\nif (typeof ai === 'string') {\n  ai = JSON.parse(ai.replace(/^```(?:json)?\\s*/i, '').replace(/\\s*```$/, ''));\n}\nif (!ai || typeof ai !== 'object' || Array.isArray(ai)) throw new Error('KI-Ausgabe fehlt oder ist kein Objekt.');\nconst clean = v => typeof v === 'string' && !['undefined','null'].includes(v.trim().toLowerCase()) ? v.trim().normalize('NFC') : '';\n\nif (ai.isTask !== true) throw new Error('Keine konkrete Aufgabenanfrage erkannt; kein Ticket angelegt.');\nif (!Array.isArray(ai.assigned) || !Array.isArray(ai.subtask)) throw new Error('KI-Listen fehlen; kein Ticket angelegt.');\nif (typeof ai.deadline !== 'string' || !['Herr','Frau',''].includes(ai.salutation)) throw new Error('KI-Pflichtfelder ungültig.');\nfor (const a of ai.assigned) {\n if (!a || !clean(a.name) || typeof a.email !== 'string') throw new Error('Ungültige zuständige Person.');\n if (a.email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(a.email)) throw new Error('Ungültige E-Mail einer zuständigen Person.');\n}\nfor (const s of ai.subtask) {\n if (!s || !clean(s.value) || !Number.isInteger(s.id) || s.id < 0 || s.edit !== false || s.checked !== false) throw new Error('Ungültige Teilaufgabe.');\n}\n\nconst title = mail.subject;\nconst body = typeof mail.body === 'string' ? mail.body : '';\nif (!Array.isArray(ai.removeFromDescription)) throw new Error('KI-Ausgabe: removeFromDescription fehlt.');\nconst ranges = [];\nfor (const fragment of new Set(ai.removeFromDescription)) {\n  if (typeof fragment !== 'string' || !fragment.trim()) throw new Error('Ungültiger Beschreibungsausschnitt.');\n  const start = body.indexOf(fragment);\n  if (start < 0 || body.indexOf(fragment, start + 1) >= 0) {\n    throw new Error('KI-Ausschnitt nicht eindeutig im Originaltext gefunden. Ausgabe prüfen; kein Ticket angelegt.');\n  }\n  ranges.push({start, end: start + fragment.length});\n}\nranges.sort((a,b) => a.start - b.start);\nlet cursor = 0;\nlet description = '';\nfor (const range of ranges) {\n  if (range.start < cursor) throw new Error('Überlappende KI-Ausschnitte; kein Ticket angelegt.');\n  description += body.slice(cursor, range.start);\n  cursor = range.end;\n}\ndescription += body.slice(cursor);\ndescription = description.trim();\nif (!description) throw new Error('Beschreibung nach Verarbeitung leer; kein Ticket angelegt.');\nif (typeof title !== 'string' || !title.trim()) throw new Error('E-Mail-Betreff fehlt.');\nif (!body.trim()) throw new Error('E-Mail-Text fehlt.');\nif (!['User Story','Technical Task'].includes(ai.category)) throw new Error('Ungültige Kategorie.');\nif (!['urgent','medium','low'].includes(ai.priority)) throw new Error('Ungültige Priorität.');\nlet date = clean(ai.deadline) || mail.referenceDate;\nconst de = /^(\\d{1,2})\\.(\\d{1,2})\\.(\\d{4})$/.exec(date);\nif (de) date = `${de[3]}-${de[2].padStart(2,'0')}-${de[1].padStart(2,'0')}`;\nif (date) {\n  const d = new Date(`${date}T00:00:00Z`);\n  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(date) || !Number.isFinite(d.getTime()) || d.toISOString().slice(0,10) !== date) {\n    throw new Error('Ungültige KI-Frist: ' + date);\n  }\n}\nconst seen = new Set();\nconst assigned = (Array.isArray(ai.assigned) ? ai.assigned : []).filter(a => a && clean(a.name)).map(a => {\n  const name = clean(a.name);\n  const candidate = clean(a.email);\n  const email = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(candidate) ? candidate : '';\n  return {name, email, avatar: name.split(/\\s+/).map(x => Array.from(x)[0]).slice(0,2).join('').toUpperCase(), color:'#4589FF', assigned:true};\n}).filter(a => {\n  const key = (a.email || a.name).toLowerCase();\n  if (seen.has(key)) return false;\n  seen.add(key); return true;\n});\nconst subtask = (Array.isArray(ai.subtask) ? ai.subtask : []).filter(s => s && clean(s.value)).map((s,id) => ({id, value:clean(s.value), edit:false, checked:false}));\nreturn {\n  json: {\n    title,\n    description,\n    category: ai.category,\n    priority: ai.priority,\n    date,\n    status: 'triage',\n    order: 0,\n    creatorName: clean(mail.senderName) || clean(mail.senderEmail),\n    creatorType: 'external',\n    aiGenerated: true,\n    salutation: ['Herr', 'Frau'].includes(ai.salutation)\n      ? ai.salutation\n      : '',\n    assigned,\n    subtask\n  }\n};"
       },
@@ -206,6 +185,27 @@
       "retryOnFail": true,
       "waitBetweenTries": 5000,
       "maxTries": 3
+    },
+    {
+      "parameters": {
+        "options": {
+          "forceReconnect": 1
+        }
+      },
+      "name": "Receiving emails",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        0,
+        672
+      ],
+      "id": "a6bcd01b-a982-4423-8d6f-311dfae45235",
+      "credentials": {
+        "imap": {
+          "id": "mSD9PRdx9YbnmVK8",
+          "name": "IMAP account 2"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -226,17 +226,6 @@
         [
           {
             "node": "Daily limit counter",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Mail Receipt": {
-      "main": [
-        [
-          {
-            "node": "Extract data",
             "type": "main",
             "index": 0
           }
@@ -304,6 +293,17 @@
           }
         ]
       ]
+    },
+    "Receiving emails": {
+      "main": [
+        [
+          {
+            "node": "Extract data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -311,7 +311,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "7fe30014-8aaf-435d-bb61-45ad2a46e474",
+  "versionId": "c3533bce-56d0-4a26-b6e7-38daedc21eb9",
   "meta": {
     "instanceId": "b5e5a997b47bf728ae565fd98cdc4cf5b985c5bfdba073ebf35e86d3b94c3a3e"
   },
