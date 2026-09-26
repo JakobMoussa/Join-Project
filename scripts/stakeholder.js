@@ -93,6 +93,7 @@ function checkMailAppFallback() {
     let blurred = false;
     const onBlur = () => {
         blurred = true;
+        incrementRequestCount();
         window.removeEventListener('blur', onBlur);
     };
     window.addEventListener('blur', onBlur);
