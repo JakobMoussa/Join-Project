@@ -1,5 +1,7 @@
-/** @const {string} STORAGE_KEY */
-const STORAGE_KEY = 'stakeholder_requests';
+/** @type {number} */
+let currentRequestCount = 0;
+/** @const {string} FIREBASE_BASE_URL */
+const FIREBASE_BASE_URL = "https://join-52020-default-rtdb.europe-west1.firebasedatabase.app/requestLimits/days/";
 
 /** @type {Object} ELEMENTS */
 const ELEMENTS = {
@@ -37,16 +39,35 @@ function initElements() {
 }
 
 /**
- * Initializes and validates daily request data from localStorage.
+ * Initializes and validates daily request data from Firebase.
  */
-function initRequestData() {
-    const today = new Date().toISOString().split('T')[0];
-    let data = readRequestData();
-    if (!data || data.date !== today) {
-        data = { date: today, count: 0 };
-        saveRequestData(data);
+async function initRequestData() {
+    const parts = new Intl.DateTimeFormat('en', {
+        timeZone: 'Europe/Berlin',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    }).formatToParts(new Date());
+
+    const getPart = type => parts.find(part => part.type === type).value;
+    const today = `${getPart('year')}-${getPart('month')}-${getPart('day')}`;
+    currentRequestCount = await readRequestDataFromFirebase(today);
+    updateBadges(currentRequestCount);
+}
+
+/*
+ * Reads the request count from Firebase for a specific date.
+ * @param {string} dateStr - The date string (YYYY-MM-DD).
+ * @returns {Promise<number>} The request count.
+ */
+async function readRequestDataFromFirebase(dateStr) {
+    try {
+        const response = await fetch(`${FIREBASE_BASE_URL}${dateStr}.json`);
+        const data = await response.json();
+        return data && typeof data.count === 'number' ? data.count : 0;
+    } catch (e) {
+        return 0;
     }
-    updateBadges(data.count);
 }
 
 /**
@@ -63,10 +84,7 @@ function initEventListeners() {
  * @param {Event} e - The click event.
  */
 function handleCreateRequestClick(e) {
-    const today = new Date().toISOString().split('T')[0];
-    const data = readRequestData();
-
-    if (data && data.date === today && data.count >= 10) {
+    if (currentRequestCount >= 10) {
         e.preventDefault();
         return;
     }
@@ -74,17 +92,7 @@ function handleCreateRequestClick(e) {
     checkMailAppFallback();
 }
 
-/**
- * Increments the request count and updates the UI.
- */
-function incrementRequestCount() {
-    const today = new Date().toISOString().split('T')[0];
-    let data = readRequestData();
-    if (!data || data.date !== today) data = { date: today, count: 0 };
-    data.count += 1;
-    saveRequestData(data);
-    updateBadges(data.count);
-}
+
 
 /**
  * Checks if a mail client opens, else shows fallback modal.
@@ -93,7 +101,6 @@ function checkMailAppFallback() {
     let blurred = false;
     const onBlur = () => {
         blurred = true;
-        incrementRequestCount();
         window.removeEventListener('blur', onBlur);
     };
     window.addEventListener('blur', onBlur);
@@ -180,7 +187,6 @@ function handleFormspreeResponse(response) {
  * Shows the success message, resets the form, and increments the counter.
  */
 function showSuccessMessage() {
-    incrementRequestCount();
     if (ELEMENTS.successMsg) ELEMENTS.successMsg.textContent = 'Anfrage versendet. Nach erfolgreicher Verarbeitung erhältst du eine Bestätigung per E-Mail.';
     if (ELEMENTS.successMsg) ELEMENTS.successMsg.classList.remove('d-none');
     setTimeout(() => {
@@ -255,66 +261,40 @@ function validateJoinPayload(payload) {
 }
 
 /**
- * Bereitet die Formulardaten für Formspree und n8n vor.
+ * Erstellt das Payload-Objekt aus den Formulardaten.
  */
-function buildJoinPayload(formData) {
-    const payload = {
+function createPayloadObject(formData) {
+    return {
         version: 1,
         name: getFormText(formData, 'name').trim(),
         email: getFormText(formData, 'email').trim(),
         subject: getFormText(formData, 'subject'),
         message: getFormText(formData, 'message')
     };
+}
 
+/**
+ * Generiert den versteckten Daten-Marker für n8n.
+ */
+function generateJoinMarker(payload) {
+    const encodedPayload = encodeURIComponent(JSON.stringify(payload));
+    return 'JOIN_REQUEST_V1_BEGIN' + encodedPayload + 'JOIN_REQUEST_V1_END';
+}
+
+/**
+ * Bereitet die Formulardaten für Formspree und n8n vor.
+ */
+function buildJoinPayload(formData) {
+    const payload = createPayloadObject(formData);
     validateJoinPayload(payload);
 
-    const encodedPayload = encodeURIComponent(JSON.stringify(payload));
-    const marker =
-        'JOIN_REQUEST_V1_BEGIN' +
-        encodedPayload +
-        'JOIN_REQUEST_V1_END';
-
     const data = Object.fromEntries(formData.entries());
-
     data.name = payload.name;
     data.email = payload.email;
     data.subject = payload.subject;
-    data.message = payload.message + '\n\n' + marker;
+    data.message = payload.message + '\n\n' + generateJoinMarker(payload);
 
     return data;
-}
-
-/**
- * Liest den lokal gespeicherten Anfragezähler.
- */
-function readRequestData() {
-    try {
-        const storedData = localStorage.getItem(STORAGE_KEY);
-        const data = JSON.parse(storedData);
-
-        if (!data) {
-            return null;
-        }
-
-        if (!Number.isSafeInteger(data.count) || data.count < 0) {
-            return null;
-        }
-
-        return data;
-    } catch {
-        return null;
-    }
-}
-
-/**
- * Speichert den Anfragezähler, sofern der Browser es erlaubt.
- */
-function saveRequestData(data) {
-    try {
-        const storedData = JSON.stringify(data);
-        localStorage.setItem(STORAGE_KEY, storedData);
-    } catch {
-    }
 }
 
 /**
@@ -322,9 +302,7 @@ function saveRequestData(data) {
  */
 function openRequestForm(event) {
     event.preventDefault();
-    const today = new Date().toISOString().split('T')[0];
-    const data = readRequestData();
-    if (data && data.date === today && data.count >= 10) return;
+    if (currentRequestCount >= 10) return;
 
     if (ELEMENTS.modal) {
         ELEMENTS.modal.classList.remove('d-none');
